@@ -10,48 +10,48 @@
 
 ## API文档
 
-The **VST 3 API** is an interface collection designed for realtime audio processing components. Such a component can be an audio effect or an audio instrument.
-**VST 3** is based on a technology called [VST Module Architecture](https://developer.steinberg.help/display/VST/VST+Module+Architecture) (**VST-MA**). Please read the [VST-MA documentation](https://developer.steinberg.help/display/VST/VST+Module+Architecture) to find out more about how the plug-in system works in general.
-The API files belonging to **VST 3** are located in the folder "*pluginterfaces/vs*t".
+**VST 3 API** 是为实时音频处理组件设计的接口集。例如音频效果或音频乐器。
+**VST 3** 基于一种称为 [VST 模块架构](https://developer.steinberg.help/display/VST/VST+Module+Architecture) (**VST-MA**) 的技术。请参考[VST-MA 文档](https://developer.steinberg.help/display/VST/VST+Module+Architecture)了解更多关于插件系统常规工作的细节信息。
+API 文档文件**VST 3**位于文件夹“*pluginterfaces/vst*”。
 
 
 
 ### 基础概念
 
-A **VST 3** audio effect or instrument basically consists of two parts: a processing part and an edit controller part.
-The corresponding interfaces are:
+一个**VST 3**音效或乐器基本上由两部分组成：处理部分和编辑控制器部分。
+对应的接口有：
 
 - Processor : [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html) + [Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html)
 - Controller : [Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html)
 
-![basic_structure](IMAGE\basic_structure.jpg)
+![基本结构](IMAGE\basic_structure.jpg)
 
 ![processorcontroller](IMAGE\processorcontroller.png)
 
-The design of **VST 3** suggests a complete separation of processor and edit controller by implementing two components. Splitting up an effect into these two parts requires some extra implementation efforts.
-However, this separation enables the host to run each component in a different context, even on different computers. Another benefit is that parameter changes can be separated when it comes to automation. While for processing these changes need to be transmitted in a sample-accurate way, the GUI part can be updated with a much lower frequency and it can be shifted by the amount that results from any delay compensation or other processing offset.
+**VST 3**插件开发可以通过实现两个组件来完全解耦处理器和编辑控制器。分开成这两部分需要一些额外的开发工作。
+但是，这种分离使主机能够在不同的上下文与计算机中更好地运行每个组件。另一个好处是，在自动化方面，参数更改可以分离。虽然进行这些更改需要以精确样本传输为代价，但 GUI 可以以很低的频率进行更新，并且可以根据任何延迟补偿或其他的量进行移动。
 
 
 
-A plug-in that supports this separation has to set the [Steinberg::Vst::kDistributable](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/namespaceSteinberg_1_1Vst.html#a626a070dcd2e025250f41b9c3f9817cda3185111648c1599241528f1a7f523396) flag in the class info of the processor component ([Steinberg::PClassInfo2::classFlags](https://steinbergmedia.github.io/vst3_doc/base/structSteinberg_1_1PClassInfo2.html#ab5ab9135185421caad5ad8ae1d758409)). Of course not every plug-in can support this, for example if it depends deeply on resources that cannot be moved easily to another computer. So when this flag is not set, the host must not try to separate the components in any way.
-Although it is not recommended, it is possible to implement both the processing part and the controller part in one component class. The host tries to query the [ Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html) interface after creating an [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html) and on success uses it as the controller.
+支持这种分离的插件必须在处理器组件的类中设置 [Steinberg::Vst::kDistributable](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/namespaceSteinberg_1_1Vst.html#a626a070dcd2e025250f41b9c3f9817cda3185111648c1599241528f1a7f523396) 标志（[Steinberg::PClassInfo2::classFlags](https://steinbergmedia.github.io/vst3_doc/base/structSteinberg_1_1PClassInfo2.html#ab5ab9135185421caad5ad8ae1d758409)）。当然不是每个插件都能做到这一点，例如，如果它非常依赖某一台特定计算机的资源。因此，当未设置此标志时，宿主不得以任何方式分离组件。
+虽然不推荐，但可以在一个组件类中同时实现处理部分和控制器部分。宿主在创建 [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html) 后尝试查询 [Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html) 接口，并在成功时将其用作控制器。
 
 
 
-> A host does not need to instantiate the controller part of a plug-in for processing it.
+> 宿主不需要实例化插件的控制器部分来处理它。
 >
-> The plug-in should be prepared for processing without having the controller part instantiated.
+> 插件应准备好被处理，而无需实例化控制器部分。
 
 
 
-#### Initialize
+#### 初始化
 
-Both [Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html) and [Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html) derive from [Steinberg::IPluginBase](https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IPluginBase.html). The purpose of this basic interface is to initialize the component and to terminate it before it is destroyed.
+[Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html) 和 [Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html) 都派生自 [Steinberg::IPluginBase](https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IPluginBase.html)。这个基本接口的目的是初始化组件并在它被销毁之前终止它。
 
 
-The context parameter passed to [Steinberg::IPluginBase::initialize](https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IPluginBase.html#a3c81be4ff2e7bbb541d3527264f26eed) should implement the interface [Steinberg::Vst::IHostApplication](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IHostApplication.html). Hosts should not call other functions before initialize is called, with the sole exception of [Steinberg::Vst::IComponent::setIoMode](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a4618e7358890d549f990010bea4a4137) which must be called before initialize. [Steinberg::Vst::IComponent::getControllerClassId](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a8aa65685068ad033af57b1497926b689) can also be called before (See [VST 3 Workflow Diagrams](https://developer.steinberg.help/display/VST/VST+3+Workflow+Diagrams)).
+传递给 [Steinberg::IPluginBase::initialize](https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IPluginBase.html#a3c81be4ff2e7bbb541d3527264f26eed) 的上下文参数应该实现接口 [Steinberg::Vst::IHostApplication](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IHostApplication.html)。主机不应在调用初始化之前调用其他函数，[Steinberg::Vst::IComponent::setIoMode](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a4618e7358890d549f990010bea4a4137) 必须在初始化之前调用。[Steinberg::Vst::IComponent::getControllerClassId](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a8aa65685068ad033af57b1497926b689)也可以在初始化之前调用（参见[VST3工作流程图](https://developer.steinberg.help/display/VST/VST+3+Workflow+Diagrams)）。
 
-**How the plug-in can access IHostApplication?**
+**插件如何访问IHostApplication？**
 
 ```c++
 tresult PLUGIN_API MyPluginProcessor::initialize (FUnknown* context)
@@ -71,9 +71,9 @@ tresult PLUGIN_API MyPluginProcessor::initialize (FUnknown* context)
 
 
 
-#### Creation and Initialize from Host point of view
+#### 从宿主的角度创建和初始化
 
-Here an example of a host implementation creating the component and its associated controller of a plug-in with a given classID:
+下面是一个宿主实现示例，它使用给定的 classID 创建组件及其关联的控制器：
 
 ```c++
 Vst::IComponent* processorComponent;
@@ -115,38 +115,38 @@ if (processorComponent && (result == kResultOk))
 
 
 
-#### Extensions
+#### 扩展
 
-The functionality of the components implementing these basic interfaces can be extended by a number of optional interfaces that only need to be implemented if this extension is required.
+这些基本接口组件的功能可以被一些可选接口进行扩展，只有在需要此扩展时才需要实现这些可选接口。
 
 - Processor Extensions:
-  - [Steinberg::Vst::IConnectionPoint](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IConnectionPoint.html)
-  - [Steinberg::Vst::IUnitData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html)
-  - [Steinberg::Vst::IProgramListData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IProgramListData.html)
+   - [Steinberg::Vst::IConnectionPoint](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IConnectionPoint.html)
+   - [Steinberg::Vst::IUnitData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html)
+   - [Steinberg::Vst::IProgramListData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IProgramListData.html)
 
 - Edit Controller Extensions:
-  - [Steinberg::Vst::IConnectionPoint](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IConnectionPoint.html)
-  - [Steinberg::Vst::IMidiMapping](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IMidiMapping.html)
-  - [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html)
+   - [Steinberg::Vst::IConnectionPoint](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IConnectionPoint.html)
+   - [Steinberg::Vst::IMidiMapping](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IMidiMapping.html)
+   - [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html)
 
 
 
-#### Persistence
+#### 持久化
 
-The host stores and restores the complete state of the processor and of the controller in project files and in preset files:
+宿主在项目文件和预设文件中存储和恢复处理器和控制器的完整状态：
 
 - [Steinberg::Vst::IComponent::getState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a10db03106be8ba89d23859fa6be5d9f6) + [Steinberg::Vst::IComponent::setState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a77ac39bcc5c4b15818b1a87de2573805)
-  store and restore the DSP model.
+   store and restore the DSP model.
 - [Steinberg::Vst::IEditController::getState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a10db03106be8ba89d23859fa6be5d9f6) + [Steinberg::Vst::IEditController::setState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a77ac39bcc5c4b15818b1a87de2573805)
-  store and restore any GUI settings that are not related to the processor (like scroll positions etc).
-- **Restore:** When the states are restored, the host passes the processor state to both the processor and the controller ([Steinberg::Vst::IEditController::setComponentState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a4c2e1cafd88143fda2767a9c7ba5d48f)). A host must always pass that state to the processor first. The controller then has to synchronize its parameters to this state (but must not perform any [IComponentHandler ](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html)callbacks).
-  After restoring a state, the host rescans the parameters (asking the controller) in order to update its internal representation.
+   store and restore any GUI settings that are not related to the processor (like scroll positions etc).
+- **Restore:** When the states are restored, the host passes the processor state to both the processor and the controller ([Steinberg::Vst::IEditController::setComponentState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a4c2e1cafd88143fda2767a9c7ba5d48f)). 宿主必须始终先将该状态传递给处理器。然后控制器必须将其参数同步到此状态（但不得执行任何 [IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html)的回调）。
+   恢复状态后，宿主重新扫描参数（通过询问控制器）以更新其内部表示。
 
 ![img](IMAGE/persistencestore.png)
 
 ![img](IMAGE/persistencerestore.png)
 
-See also
+请参考
 
 - [Steinberg::IBStream](https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IBStream.html)
 - [VST 3 Interfaces to be implemented by the Plug-in](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstIPlug.html)
@@ -154,11 +154,11 @@ See also
 
 
 
-### The Processing Part
+### 处理部分
 
 ![img](IMAGE/processorpart.png)
 
-The processing part consists of two related interfaces:[ Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html) and [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html). The reason for splitting the two is to use the basic interfaces [Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html) not only for audio plug-ins but also for other kinds of media (e.g. video processing in the future). Hence the [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html) interface represents the audio-specific part of a processing component. Let's have a closer look at the concepts.
+处理部分由两个相关接口组成：[Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html)和[Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html)。The reason for splitting the two is to use the basic interfaces [Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html) not only for audio plug-ins but also for other kinds of media (e.g. video processing in the future). Hence the [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html) interface represents the audio-specific part of a processing component. Let's have a closer look at the concepts.
 
 
 
@@ -168,27 +168,27 @@ The [Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstin
 
 1. **Edit controller association**: In order to enable the host to create the associated edit controller part, the processing component has to provide the matching class-ID. The host uses the module's class factory to create the controller component. See [Steinberg::Vst::IComponent::getControllerClassId](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a8aa65685068ad033af57b1497926b689)
 
-   
+
 
 2. The host can ask for bus configurations ([Steinberg::Vst::BusInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1BusInfo.html)). See [Steinberg::Vst::IComponent::getBusInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a41b0e971a0ff153a4eb34274750b0c91)
 
-   
+
 
 3. The host can ask for routing information ([Steinberg::Vst::RoutingInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1RoutingInfo.html)).
 
-   
+
 
 4. The host can activate or deactivate a specific bus like [side-chain](https://developer.steinberg.help/display/VST/Frequently+Asked+Questions#FrequentlyAskedQuestions-WhatisaSide-chain). A deactivated bus should be not processed by the plug-in. See [Steinberg::Vst::IComponent::activateBus](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a3ab7d06aaefe03da1fcd1819f1261050)
 
-   
+
 
 5. The host can activate or deactivate the plug-in (On/Off button). See [Steinberg::Vst::IComponent::setActive](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a0a840e8077eb74ec429b8007c7b83517)
 
-   
+
 
 6. The host can store and restore the state of the plug-in (preset and project persistence). See [Steinberg::Vst::IComponent::getState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a10db03106be8ba89d23859fa6be5d9f6),  Steinberg::Vst::IComponent::setState
 
-   
+
 
 ### IAudioProcessor
 
@@ -196,7 +196,7 @@ The [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/
 
 1. Setup:
 
-    
+
 
    The processor must be configured before processing can start. Configurations are only allowed when the processor is inactive (
 
@@ -204,7 +204,7 @@ The [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/
 
    - **Process setup**: The processor is informed about the parameters that cannot be changed while processing is active. ([Steinberg::Vst::ProcessSetup](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ProcessSetup.html)).
 
-     
+
 
    - **Dynamic Speaker Arrangements**: The host can try to change the number of channels of an audio bus. By default the speaker arrangement is defined by the plug-in. In order to adjust the plug-in to a context where a different speaker arrangement is used, the host can try to change it using [Steinberg::Vst::IAudioProcessor::setBusArrangements](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html#ad3bc7bac3fd3b194122669be2a1ecc42)
 
@@ -216,23 +216,23 @@ The [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/
 
    - **Block Size**: Processing is done in blocks. The maximum number of samples to be processed in one block is set in [Steinberg::Vst::IAudioProcessor::setupProcessing](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html#aefb5731b94dbc899a4a7e9cd1c96e6a2). The actual number of samples in a processing block is transmitted in the process call and can be different from call to call, but it must be a value between 1 and [maxSamplesPerBlock](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ProcessSetup.html#a41cd06a0c942a1b3f283092b893d0de3).
 
-     
 
-   - **Audio Buffers**: For any audio bus defined by the plug-in, the host must provide buffer data - even for inactive busses. Busses are addressed by index, so leaving out inactive busses will mix up these indices. The actual data buffer can be null though (see[ Steinberg::Vst::AudioBusBuffers](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1AudioBusBuffers.html)).
 
-     **Note:** The [channelBuffers32 ](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1AudioBusBuffers.html#abac2239417d88a091cad5b4f917dc49a)(or [channelBuffers64](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1AudioBusBuffers.html#a0bbcd9a3e75d01b547097c91f9f659cf)) buffer pointers can be the same or different for input and output: this has to be taken into account in the process function (for example not resetting the output before processing if input and output buffers are the same!). It can be the same for multiple inputs or multiple outputs (in the case of instrument plug-ins) all outputs (or inputs) can share the same buffer!
+   - **Audio Buffers**: For any audio bus defined by the plug-in, the host must provide buffer data - even for inactive busses. Busses are addressed by index, so leaving out inactive busses will mix up these indices. The actual data buffer can be null though (see[Steinberg::Vst::AudioBusBuffers](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1AudioBusBuffers.html)).
 
-     **Important**: The host can call [Steinberg::Vst::IAudioProcessor::process](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html#a6b98eb31cf38ba96a28b303c13c64e13) without buffers ([numInputs ](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ProcessData.html#a852a74fc4e461ef086bac048313d2de9)and [numOutputs ](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ProcessData.html#a1338255f88bad5cf4fb714c71f92b61a)of [Steinberg::Vst::AudioBusBuffers](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1AudioBusBuffers.html) are zeroed, [numSamples ](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ProcessData.html#aeb42971a4bd34d7baa27cff8d7e3cf26)too), in order to flush parameters (from host to plug-in). Parameters can only be flushed when the host needs to send parameter changes and no processing is called.
+      **Note:** The [channelBuffers32](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1AudioBusBuffers.html#abac2239417d88a091cad5b4f917dc49a)(or [channelBuffers64](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1AudioBusBuffers.html#a0bbcd9a3e75d01b547097c91f9f659cf)) buffer pointers can be the same or different for input and output: this has to be taken into account in the process function (for example not resetting the output before processing if input and output buffers are the same!). It can be the same for multiple inputs or multiple outputs (in the case of instrument plug-ins) all outputs (or inputs) can share the same buffer!
 
-     
+      **Important**: The host can call [Steinberg::Vst::IAudioProcessor::process](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html#a6b98eb31cf38ba96a28b303c13c64e13) without buffers ([numInputs](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ProcessData.html#a852a74fc4e461ef086bac048313d2de9)and [numOutputs](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ProcessData.html#a1338255f88bad5cf4fb714c71f92b61a)of [Steinberg::Vst::AudioBusBuffers](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1AudioBusBuffers.html) are zeroed, [numSamples](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ProcessData.html#aeb42971a4bd34d7baa27cff8d7e3cf26)too), in order to flush parameters (from host to plug-in). Parameters can only be flushed when the host needs to send parameter changes and no processing is called.
+
+
 
    - **Parameters & Automation**: Any parameter changes are transmitted in the process call through the interfaces [Steinberg::Vst::IParameterChanges](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IParameterChanges.html) and [Steinberg::Vst::IParamValueQueue](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IParamValueQueue.html). Simple parameter changes as a result of GUI interaction are transmitted exactly in the same way as automation. (see [Parameters and Automation](https://developer.steinberg.help/vst3Automation.html)).
 
-     
+
 
    - **Context:** For each processing block the host should provide information about its state. See [Steinberg::Vst::ProcessContext](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ProcessContext.html)
 
-     
+
 
    - **Events:** [Steinberg::Vst::IEventList](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEventList.html)
 
@@ -244,18 +244,18 @@ The [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/
 
 ![img](IMAGE/edit%20controller.jpg)
 
-The edit controller is responsible for the GUI aspects of the plug-in. Its standard interface is[ Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html). The host has to provide a callback interface for the edit controller named [Steinberg::Vst::IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html). The handler is essential for the communication with both the host and the processor.
+The edit controller is responsible for the GUI aspects of the plug-in. Its standard interface is[Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html). The host has to provide a callback interface for the edit controller named [Steinberg::Vst::IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html). The handler is essential for the communication with both the host and the processor.
 
 - **GUI:** Optionally, the controller can define an editor view. The method [Steinberg::Vst::IEditController::createView](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a1fa4ed10cc0979e5559045104c998b1a) allows the host to specify the type of the view by passing an id-string. Currently the only type defined is "editor" ([Steinberg::Vst::ViewType::kEditor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/namespaceSteinberg_1_1Vst_1_1ViewType.html#aaa62c4c32f0270a908eb20c7c7124dfc)), but there might be variations in future versions (e.g. "setup").
-  See also[ Steinberg::IPlugView](https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IPlugView.html).
+   See also[Steinberg::IPlugView](https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IPlugView.html).
 
-  
 
-- **Parameters:** The controller is responsible for the management of parameters. Any change to a parameter that is caused by user interaction in the plug-in GUI must be properly reported to the [Steinberg::Vst::IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html). The host is responsible for transmitting the change to the processor. In order to make recording of automation work, it is necessary to call [beginEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a8456ad739430267a12dda11a53fe9223), [performEdit ](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a135d4e76355ef0ba0a4162a0546d5f93)and [endEdit ](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#ae380206486b11f000cad7c0d9b6e877c)in the expected order! And from the **UI-Thread**!
-  With the new interface [IComponentHandler2](https://developer.steinberg.help/classSteinberg_1_1Vst_1_1IComponentHandler2.html) (since VST 3.1), the plug-in (from UI) can group parameters which should use the same time-stamp in host when writing automation, by wrapping a set of [beginEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a8456ad739430267a12dda11a53fe9223)/[performEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a135d4e76355ef0ba0a4162a0546d5f93)/[endEdit ](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#ae380206486b11f000cad7c0d9b6e877c)functions (see [IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html)) with [startGroupEdit ](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler2.html#aba339113df404a6b3c557774d4aa9102)and [finishGroupEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler2.html#adbdc10ff7ecd96fa365ad4f98d57b55e).
-  More details can be found on the page about [Parameters](https://developer.steinberg.help/display/VST/Parameters+and+Automation).
 
-  
+- **Parameters:** The controller is responsible for the management of parameters. Any change to a parameter that is caused by user interaction in the plug-in GUI must be properly reported to the [Steinberg::Vst::IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html). The host is responsible for transmitting the change to the processor. In order to make recording of automation work, it is necessary to call [beginEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a8456ad739430267a12dda11a53fe9223), [performEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a135d4e76355ef0ba0a4162a0546d5f93)and [endEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#ae380206486b11f000cad7c0d9b6e877c)in the expected order! And from the **UI-Thread**!
+   With the new interface [IComponentHandler2](https://developer.steinberg.help/classSteinberg_1_1Vst_1_1IComponentHandler2.html) (since VST 3.1), the plug-in (from UI) can group parameters which should use the same time-stamp in host when writing automation, by wrapping a set of [beginEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a8456ad739430267a12dda11a53fe9223)/[performEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a135d4e76355ef0ba0a4162a0546d5f93)/[endEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#ae380206486b11f000cad7c0d9b6e877c)functions (see [IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html)) with [startGroupEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler2.html#aba339113df404a6b3c557774d4aa9102)and [finishGroupEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler2.html#adbdc10ff7ecd96fa365ad4f98d57b55e).
+   More details can be found on the page about [Parameters](https://developer.steinberg.help/display/VST/Parameters+and+Automation).
+
+
 
 - **Plug-in structure:** If the plug-in is composed of discrete functional parts, the edit controller should publish this structure and the parameters belonging to each part by implementing the [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html) interface. More details can be found on the page about [VST 3 Units](https://developer.steinberg.help/vst3Units.html).
 
@@ -269,8 +269,8 @@ The threading model used by **VST 3** is quite simple and requires that:
 
 - all initialisation/de-initialisation are done in the UI Thread
 - all function exported by the plugin-in are called by the host in the UI Thread with the exception of:
-  - IAudioProcessor→process: which could be called in a Audio Thread (realtime thread), avoid any memory allocation!
-  - IAudioProcessor→setProcessing: which could be called in a Audio Thread (realtime thread), avoid any memory allocation!
+   - IAudioProcessor→process: which could be called in a Audio Thread (realtime thread), avoid any memory allocation!
+   - IAudioProcessor→setProcessing: which could be called in a Audio Thread (realtime thread), avoid any memory allocation!
 - all function exported by the host are called by the plug-in in the UI Thread
 
 Check the [Audio Processor Call Sequence](https://developer.steinberg.help/display/VST/Audio+Processor+Call+Sequence) and the [Edit Controller Call Sequence](https://developer.steinberg.help/display/VST/Edit+Controller+Call+Sequence)
@@ -293,7 +293,7 @@ All standard data (like parameter changes) are transmitted between processor and
 
 - The processor can transmit outgoing parameter changes to the host as well. ([Steinberg::Vst::ProcessData::outputParameterChanges](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ProcessData.html#af08c4f7dfd9e456cc98ba0eb325993ae)). These are transmitted to the edit controller by the call of [Steinberg::Vst::IEditController::setParamNormalized](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#aded549c5b0f342a23dee18cc41ece6b8).
 
-  
+
 
 ![img](IMAGE/standard_communication.jpg)
 
@@ -383,7 +383,7 @@ if (hModule)
  
     GetFactoryProc proc = (GetFactoryProc)GetProcAddress (hModule, "GetPluginFactory");
  
-    IPluginFactory* factory = proc ? proc () : 0;
+    IPluginFactory* factory = proc ?proc () : 0;
     if (factory)
     {
         for (int32 i = 0; i < factory->countClasses (); i++)
@@ -401,7 +401,7 @@ if (hModule)
     }
  
     ExitModuleProc exitProc = (ExitModuleProc)GetProcAddress (hModule, "ExitDll");
-    if (exitProc)  // This exit function is optional on Windows, not on MacOS and Linux!  
+    if (exitProc)  // This exit function is optional on Windows, not on MacOS and Linux!
          exitProc ();
  
     FreeLibrary (hModule);
@@ -556,14 +556,14 @@ Please note that it is not allowed to change this assignment at any time. In par
 Usually, the host is unaware of a parameter's semantics. However, there are a few important exceptions that the controller must announce using the [Steinberg::Vst::ParameterInfo::flags](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#a8ffba1d4311e48ae488bc118f20d7edb):
 
 - **kCanAutomate:** This means that this parameter can be automated by the host using its automation track. [**SDK 3.0.0**]
-- **kIsBypass:** If the plug-in performs bypass processing itself, it must export the corresponding parameter and flag it with kIsBypass. It is highly recommended that this bypass parameter is provided by the effect plug-in. If the plug-in does not export a bypass parameter, the host can perform bypass processing and the plug-in process call will be discontinued. Only one bypass parameter is allowed. The plug-in should save the state of this bypass parameter like other parameters (when getState and setState are used). If the plug-in does not need a bypass (like Instrument) this flag should be not used. Check this [FAQ ](https://developer.steinberg.help/display/VST/Frequently+Asked+Questions#FrequentlyAskedQuestions-HowdoesAudioProcessingBypasswork?)in order to understand how bypass processing works. [**SDK 3.0.0**]
+- **kIsBypass:** If the plug-in performs bypass processing itself, it must export the corresponding parameter and flag it with kIsBypass. It is highly recommended that this bypass parameter is provided by the effect plug-in. If the plug-in does not export a bypass parameter, the host can perform bypass processing and the plug-in process call will be discontinued. Only one bypass parameter is allowed. The plug-in should save the state of this bypass parameter like other parameters (when getState and setState are used). If the plug-in does not need a bypass (like Instrument) this flag should be not used. Check this [FAQ](https://developer.steinberg.help/display/VST/Frequently+Asked+Questions#FrequentlyAskedQuestions-HowdoesAudioProcessingBypasswork?)in order to understand how bypass processing works. [**SDK 3.0.0**]
 - **kIsReadOnly:** This means that this parameter cannot be changed from outside the plug-in, this requires that kCanAutomate is NOT set. [**SDK 3.0.0**]
 - **kIsWrapAround:** When a UI control created by the host for this parameter attempts to set its value out of the limits, this UI control will make a wrap around (useful for parameters like 360 degree rotation). [**SDK 3.0.2**]
 - **kIsList:** This means that the host will display this parameter as list in a generic editor or automation editing. [**SDK 3.1.0**]
 - **kIsHidden:** This means that this parameter will NOT be displayed and cannot be changed from outside the plug-in. This requires that kCanAutomate is NOT set and kIsReadOnly is set. [**SDK 3.7.0**]
 - **kIsProgramChange:** If the plug-in supports program lists (see [VST 3 Units](https://developer.steinberg.help/display/VST/VST+3+Units), [Program Lists](https://developer.steinberg.help/pages/viewpage.action?pageId=9798267)), each 'unit' of the plug-in needs to export a program selector parameter. Such a parameter is not allowed to be automated when the affected parameters are flagged as automatable as well. A host can display program parameters at dedicated locations of its GUI. [**SDK 3.0.0**]
 
-The controller must support the conversion to a string for any exported parameter. The conversion method [Steinberg::Vst::IEditController::getParamStringByValue ](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#aab2f0b853e75361d331b667e7893962e)must provide a result for any possible normalized parameter value.
+The controller must support the conversion to a string for any exported parameter. The conversion method [Steinberg::Vst::IEditController::getParamStringByValue](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#aab2f0b853e75361d331b667e7893962e)must provide a result for any possible normalized parameter value.
 
 > Parameter values are always transmitted in a normalized floating point (64bit double) representation **[0.0, 1.0]**.
 
@@ -576,7 +576,7 @@ Somewhere on the way from the GUI to the DSP algorithm, this transformation has 
 Does this fit into the idea of separating GUI and processing? No problem so far
 
 - it is a separation of duties, nothing more. The processor component and the controller component have to work on the same internal plug-in model. The controller knows how this model has to be presented in the GUI. The processor knows how the model has to be translated into DSP parameters.
-  The **VST 3** interfaces suggest a normalized value representation for a part of this model (the part that is exported as parameters). This means every value has to be inside the range from 0.0 to 1.0.
+   The **VST 3** interfaces suggest a normalized value representation for a part of this model (the part that is exported as parameters). This means every value has to be inside the range from 0.0 to 1.0.
 
 ### Parameter styles / 'Step Count'
 
@@ -597,13 +597,13 @@ The controller and the processor have to work with normalized parameter values.
 
 - Step count n : Discrete parameters need a little bit more care
 
-  - **Discrete Value => Normalize**
+   - **Discrete Value => Normalize**
 
-    
 
-  - **Normalize => Discrete Value (Denormalize)**
 
-    
+   - **Normalize => Discrete Value (Denormalize)**
+
+
 
 
 **Example:** Step Count 3
@@ -625,9 +625,9 @@ The prime example for this is the automation of preset changes. A preset change 
 A fix value range from 0.0 to 1.0 simplifies the handling of parameters in some ways, but there are problems:
 
 - **Non-linear scaling**
-  If the DSP representation of a value does not scale in a linear way to the exported normalized representation (which can happen when a decibel scale is used, for example), the edit controller must provide a conversion to a plain representation. This allows the host to move automation data (being in GUI representation) and keep the original value relations intact. ([Steinberg::Vst::IEditController::normalizedParamToPlain](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a849747dc98909312b4cdbdeea82dbae0) / [Steinberg::Vst::IEditController::plainParamToNormalized](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#ae9706616ae6d938bbf102954f8f2f110)).
+   If the DSP representation of a value does not scale in a linear way to the exported normalized representation (which can happen when a decibel scale is used, for example), the edit controller must provide a conversion to a plain representation. This allows the host to move automation data (being in GUI representation) and keep the original value relations intact. ([Steinberg::Vst::IEditController::normalizedParamToPlain](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a849747dc98909312b4cdbdeea82dbae0) / [Steinberg::Vst::IEditController::plainParamToNormalized](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#ae9706616ae6d938bbf102954f8f2f110)).
 - **Changes in future plug-in versions**
-  Take a discrete parameter, for example, that controls an option of three choices. If the host stores normalized values as automation data and a new version of a plug-in invented a fourth choice, the automation data will be invalid now. So either the host has to store denormalized values as automation or it must recalculate the automation data accordingly.
+   Take a discrete parameter, for example, that controls an option of three choices. If the host stores normalized values as automation data and a new version of a plug-in invented a fourth choice, the automation data will be invalid now. So either the host has to store denormalized values as automation or it must recalculate the automation data accordingly.
 
 
 
@@ -652,12 +652,12 @@ Trouble starts with the **mouse wheel**: There simply is nothing like a defined 
 
 - A plug-in implementation should call beginEdit when the first wheel event is handled and start a timer (followed by the first call to performEdit). Further wheel events that arrive inside of the timeout interval are reported with performEdit and the timer is restarted. When the timeout period has passed without further events, endEdit should be called and the timer can be removed.
 
-  
+
 
 - But since it is the host's task to record automation data, one could argue that it should be the host's task to take care of the timer in this case. This is the reason for the following exception to the rule:
 
-  - Mouse wheel events can be reported without beginEdit and endEdit to the host. The host must be prepared to receive a performEdit without a previous call of beginEdit for a parameter and handle the timeout itself.
-  - 
+   - Mouse wheel events can be reported without beginEdit and endEdit to the host. The host must be prepared to receive a performEdit without a previous call of beginEdit for a parameter and handle the timeout itself.
+   - 
 
 ### Buttons / Radio Groups / Pop-up Menus
 
@@ -743,10 +743,10 @@ The purposes of units are:
 - Organize parameters by associating them with units
 - Support program lists
 - Support handling of Complex Plug-in Structures / Multi-timbral Instruments
-  - Multiple program lists (associated with a unit)
-  - Access to program list data
-  - Associations of MIDI tracks and units
-  - Synchronization of plug-in GUI and host GUI
+   - Multiple program lists (associated with a unit)
+   - Access to program list data
+   - Associations of MIDI tracks and units
+   - Synchronization of plug-in GUI and host GUI
 
 
 
@@ -754,27 +754,27 @@ The purposes of units are:
 
 - The plug-in can define any number and any kind of units. The semantics of a unit is not important.
 
-  
+
 
 - Units are organized in a hierarchical way. Each unit can contain sub-units.
 
-  
+
 
 - The root unit of this hierarchy is always present (explicit or implicit) and has ID '**0**'. A plug-in that does not define any further units simply consist of unit '0'.
 
-  
+
 
 - The plug-in has to assign a unique ID to each further unit it defines and must provide a suitable name for it to be shown in the GUI ([Steinberg::Vst::UnitInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html)).
 
-  
+
 
 - Each unit can 'contain' parameters. All parameters of the plug-in are managed and published by the [Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html), but each parameter can be associated with a unit. ([Steinberg::Vst::ParameterInfo::unitId](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#a4d2e0574df0f6d36f26fae1ad759a14f)). A host can organize the list of parameters in a tree view reflecting the unit hierarchy as nodes.
 
-  
+
 
 - Each unit can be associated with a program list. (See [Complex Plug-in Structures / Multi-timbral Instruments](https://developer.steinberg.help/pages/viewpage.action?pageId=9798271))
 
-  
+
 
 - A unit can be associated with specific busses. There can be any kind of combination, but the VST 3 interfaces only define queries for special situations. (See [Units and Tracks](file:///C:/Users/YGrabit/Desktop/SDKs/VST3_SDKs/3.7/VST_SDK/VST3_SDK/vst3_doc/vstinterfaces/vst3Multitimbral.html#vst3UnitsTracks))
 
@@ -790,11 +790,11 @@ See also [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/v
 
 - Example of a plug-in (MultibandCompressor from **Cubase** pluginset) with structured parameters list that can be used by the host, here in **Cubase** for selecting a parameter to automate:
 
-  ![img](IMAGE/unitsexample1.jpg)
+   ![img](IMAGE/unitsexample1.jpg)
 
-- Example of a plug-in (VST Amp Rack from **Cubase** pluginset) with structured parameters list visualized in the Parameters tab of the [**PluginTestHost** ](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host)application:
+- Example of a plug-in (VST Amp Rack from **Cubase** pluginset) with structured parameters list visualized in the Parameters tab of the [**PluginTestHost**](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host)application:
 
-  ![img](IMAGE/unitsexample2.jpg)
+   ![img](IMAGE/unitsexample2.jpg)
 
 - Example of using the unit structure of **HALion Sonic SE** inside **Cakewalk** for automation selection:
    ![cakewalkUnitExample](IMAGE\cakewalkUnitExample.png)
@@ -813,11 +813,11 @@ For a simple plug-in, the data of a preset is nothing more than its state. In th
 
 - It is the job of the host to manage the preset handling for the plug-in.
 
-  
+
 
 - The plug-in itself does not need to provide any means in its GUI for loading presets at all and it does not need to define any program lists.
 
-  
+
 
 - Factory presets must be installed as files at the required location (See [Preset Locations](https://developer.steinberg.help/pages/viewpage.action?pageId=9798275#VST3Locations/Format-PresetLocations)).
 
@@ -834,7 +834,7 @@ If a plug-in uses a large pool of programs that require some kind of caching or 
 
 - If the plug-in defines a program list to be used as pool of factory presets, it must not allow the user to change these presets by the means of parameter editing. Instead, it should load the corresponding data into a kind of working memory and store possible modifications as component state. In addition, the user can be allowed to store the modifications as preset file.
 
-  
+
 
 - If the plug-in defines a program list to be used as a pool of user presets that are initially in an 'empty' state, modifications can be applied to the list items directly. This way of using program lists should only be chosen if programs do require a lot of resources that need to be cached in order to achieve fast program changes (good examples for this are sample-based plug-ins).
 
@@ -842,7 +842,7 @@ If a plug-in uses a large pool of programs that require some kind of caching or 
 
 - The plug-in can provide GUI for the selection of programs, but it must enable the host to display the list and the selected program as well. The index of the selected program in the list must be exported as program selection parameter. ([Steinberg::Vst::ParameterInfo::kIsProgramChange](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ae3a5143ca8d0e271dbc259645a4ae645a517665185bca1f4f3d77ce0a6468b8e3))
 
-  
+
 
 - The plug-in can allow the host to read and write the program data of a list item. To support this, the plug-in must implement the [Steinberg::Vst::IProgramListData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IProgramListData.html) interface as an extension of the component part.
 
@@ -857,7 +857,7 @@ All programs are always transmitted as a flat list to the host. But the plug-in 
 
 **Pitch Names**
 
-Pitch names are intended to be used with drum kit programs where the different drum sounds are addressed by note pitches. In order to display the name of the drum instrument assigned to a pitch in a drum editor, for example, the host calls [Steinberg::Vst::IUnitInfo::hasProgramPitchNames](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html#a63c02601259d4e8690f26eefaad53195) to determine if pitch names are supported and[ Steinberg::Vst::IUnitInfo::getProgramPitchName](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html#a6126c4506f7981b5e800c6b4daa1e66b) to query the pitch name of a single note.
+Pitch names are intended to be used with drum kit programs where the different drum sounds are addressed by note pitches. In order to display the name of the drum instrument assigned to a pitch in a drum editor, for example, the host calls [Steinberg::Vst::IUnitInfo::hasProgramPitchNames](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html#a63c02601259d4e8690f26eefaad53195) to determine if pitch names are supported and[Steinberg::Vst::IUnitInfo::getProgramPitchName](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html#a6126c4506f7981b5e800c6b4daa1e66b) to query the pitch name of a single note.
 
 See also [VST 3 Units Multi-timbral Program Lists](https://developer.steinberg.help/pages/viewpage.action?pageId=9798271) and check out the [pitchnames VST 3 Plug-in example](https://developer.steinberg.help/display/VST/VST+3+Plug-ins+Examples)
 
@@ -872,12 +872,12 @@ See also [VST 3 Units Multi-timbral Program Lists](https://developer.steinberg.h
 A simple VST effect plug-in usually does not cause the host too many problems. It has only one audio input and output bus and a defined set of parameters that control aspects of its sound. But a VST plug-in can be a lot more complex than this. When the plug-in implements a multi-timbral musical instrument, the host is confronted with a range of problems regarding the integration of this plug-in in its GUI. To mention a few of them:
 
 - The plug-in can define multiple event input and multiple audio outputs. How can the host know on which output a sound will emerge when a note-event is transmitted to the plug-in?
-  -> This may be of interest for the host in order to link a MIDI track to the corresponding audio channel.
+   -> This may be of interest for the host in order to link a MIDI track to the corresponding audio channel.
 
-  
+
 
 - The plug-in can define a list of programs that the user can load from the plug-in GUI. In a multi-timbral instrument, a program only affects a certain part of the plug-in (we call this part a 'unit'). How can the host know about these parts and about the plug-in defined programs that can be loaded?
-  -> This may be of interest for a host in order to provide shortcuts for this functionality in its own GUI.
+   -> This may be of interest for a host in order to provide shortcuts for this functionality in its own GUI.
 
 Since a VST plug-in unlike a hardware MIDI instrument is more than only a black box, a complex plug-in should help its host to provide a more convenient GUI integration than it is possible with hardware instruments. **VST 3** uses the concept of units to describe the internal structure of the plug-in (see [VST 3 Units](https://developer.steinberg.help/display/VST/VST+3+Units)) and a multi-timbral instrument is supposed to support the respective interfaces. But the preferred solution in **VST 3** is a reduction of this complexity with the 'simple mode'.
 
@@ -889,7 +889,7 @@ The 'VST 3 simple mode' has the (selfish) background to support the so-called 's
 
 The host will now work with multiple instances of the plug-in rather than using the same instance in a way that it contains multiple internal sections of the same kind. The **VST-MA** component model supports shared resources between multiple instances of a plug-in because usually the same module instance (dll/bundle) is used for each plug-in instance.
 
-Yet, a plug-in has the option to support both the simple and the advanced mode with the same implementation. The host tests the general ability to support the 'simple mode' by checking the processor's class flags ([Steinberg::PClassInfo2::classFlags](https://steinbergmedia.github.io/vst3_doc/base/structSteinberg_1_1PClassInfo2.html#ab5ab9135185421caad5ad8ae1d758409)) for the [Steinberg::Vst::kSimpleModeSupported](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/namespaceSteinberg_1_1Vst.html#a626a070dcd2e025250f41b9c3f9817cdabc2edc9bb281cebe9cc6dc00a7cac0ea) flag. If the plug-in is to be used in an instrument track (or whenever a host regards it more suitable) the [Steinberg::Vst::IComponent::setIoMode](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a4618e7358890d549f990010bea4a4137) method is called (before any other call!) to configure the plug-in. A mono-timbral plug-in should set this flag as well and does not need to take into account the [setIoMode ](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a4618e7358890d549f990010bea4a4137)call.
+Yet, a plug-in has the option to support both the simple and the advanced mode with the same implementation. The host tests the general ability to support the 'simple mode' by checking the processor's class flags ([Steinberg::PClassInfo2::classFlags](https://steinbergmedia.github.io/vst3_doc/base/structSteinberg_1_1PClassInfo2.html#ab5ab9135185421caad5ad8ae1d758409)) for the [Steinberg::Vst::kSimpleModeSupported](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/namespaceSteinberg_1_1Vst.html#a626a070dcd2e025250f41b9c3f9817cdabc2edc9bb281cebe9cc6dc00a7cac0ea) flag. If the plug-in is to be used in an instrument track (or whenever a host regards it more suitable) the [Steinberg::Vst::IComponent::setIoMode](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a4618e7358890d549f990010bea4a4137) method is called (before any other call!) to configure the plug-in. A mono-timbral plug-in should set this flag as well and does not need to take into account the [setIoMode](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a4618e7358890d549f990010bea4a4137)call.
 
 
 
@@ -910,9 +910,9 @@ To make this all work correctly, the plug-in must supply a valid implementation 
 Similar to the simple case, the host may want to save and load preset files. The component state of the plug-in is not useful here. A preset of a complex plug-in can be:
 
 - The state of a plug-in unit
-  -> To support this, the plug-in must implement the [Steinberg::Vst::IUnitData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html) interface in its component part.
+   -> To support this, the plug-in must implement the [Steinberg::Vst::IUnitData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html) interface in its component part.
 - The contents of an item in the program list
-  -> To support this, the plug-in must implement the[ Steinberg::Vst::IProgramListData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html) interface in its component part.
+   -> To support this, the plug-in must implement the[Steinberg::Vst::IProgramListData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html) interface in its component part.
 
 
 A plug-in can support unit presets and program list presets.
@@ -991,26 +991,26 @@ https://developer.steinberg.help/display/VST/Bus+Arrangement+Setting+Sequences
 
 On the macOS platform, **VST 3 Plug-in** is a standard macOS bundle, its file extension is "**.vst3**" and has the following folder structure:
 
-| Folder                            | Description                                                  |
+| Folder | Description |
 | :-------------------------------- | :----------------------------------------------------------- |
 | MyPlugin.vst3/Contents/Resources/ | folder contains all additional resource files useful for the plug-in |
-| MyPlugin.vst3/Contents/MacOS/     | folder contains the plug-in’s macOS universal binary (Mach-O) |
-| MyPlugin.vst3/Contents/Info.plist | the plug-in’s property list                                  |
-| MyPlugin.vst3/Contents/PkgInfo    | specifies the type and creator codes of the bundle (optional) |
+| MyPlugin.vst3/Contents/MacOS/ | folder contains the plug-in’s macOS universal binary (Mach-O) |
+| MyPlugin.vst3/Contents/Info.plist | the plug-in’s property list |
+| MyPlugin.vst3/Contents/PkgInfo | specifies the type and creator codes of the bundle (optional) |
 
 #### For the Windows platform
 
 On the Windows platform, a **VST 3 Plug-in** is organized as a bundle like package format (simple folder), its file extension is "**.vst3**" and has the following folder structure:
 
-| Folder                                          | Description                                                  |
+| Folder | Description |
 | :---------------------------------------------- | :----------------------------------------------------------- |
-| MyPlugin.vst3/Contents/Resources/               | folder contains all additional resource files useful for the plug-in |
-| MyPlugin.vst3/Contents/x86-win/MyPlugin.vst3    | folder contains the plug-in binary (32 bit dll for the i386 architecture) |
+| MyPlugin.vst3/Contents/Resources/ | folder contains all additional resource files useful for the plug-in |
+| MyPlugin.vst3/Contents/x86-win/MyPlugin.vst3 | folder contains the plug-in binary (32 bit dll for the i386 architecture) |
 | MyPlugin.vst3/Contents/x86_64-win/MyPlugin.vst3 | folder contains the plug-in binary (64 bit dll for the x86_64 architecture) |
-| MyPlugin.vst3/Contents/arm-win/MyPlugin.vst3    | Proposal: folder contains the plug-in binary (32 bit dll for the arm architecture) |
+| MyPlugin.vst3/Contents/arm-win/MyPlugin.vst3 | Proposal: folder contains the plug-in binary (32 bit dll for the arm architecture) |
 | MyPlugin.vst3/Contents/arm_64-win/MyPlugin.vst3 | Proposal: folder contains the plug-in binary (64 bit dll for the arm64 architecture) |
-| MyPlugin.vst3/desktop.ini                       | used to set custom icon in Windows Explorer                  |
-| MyPlugin.vst3/Plugin.ico                        | customized plug-in icon                                      |
+| MyPlugin.vst3/desktop.ini | used to set custom icon in Windows Explorer |
+| MyPlugin.vst3/Plugin.ico | customized plug-in icon |
 
 
 
@@ -1034,12 +1034,12 @@ and you should then change their attributes with this command line (**s** for sy
 
 On Linux, a **VST 3 Plug-in** is organized as a bundle like package format, its file extension is "**.vst3**", it follows this folder structure:
 
-| Folder                              | Description                                                  |
+| Folder | Description |
 | :---------------------------------- | :----------------------------------------------------------- |
-| MyPlugin.vst3/Contents/Resources/   | folder contains all additional resource files useful for the plug-in |
-| MyPlugin.vst3/Contents/i386-linux   | folder contains the plug-in binary (32 bit shared library .so for Kernel Architecture i386) |
+| MyPlugin.vst3/Contents/Resources/ | folder contains all additional resource files useful for the plug-in |
+| MyPlugin.vst3/Contents/i386-linux | folder contains the plug-in binary (32 bit shared library .so for Kernel Architecture i386) |
 | MyPlugin.vst3/Contents/x86_64-linux | folder contains the plug-in binary (64 bit shared library .so for Kernel Architecture x86_64) |
-| yPlugin.vst3/Contents/XXX-linux     | with XXX the architecture name based on the output of command-line "uname -m" (machine hardware) + "-linux"for example:armv3l-linuxarmv4b-linuxarmv4l-linuxarmv5tel-linuxarmv5tejl-linuxarmv6l-linuxarmv7l-linuxarmv8l-linux |
+| yPlugin.vst3/Contents/XXX-linux | with XXX the architecture name based on the output of command-line "uname -m" (machine hardware) + "-linux"for example:armv3l-linuxarmv4b-linuxarmv4l-linuxarmv5tel-linuxarmv5tejl-linuxarmv6l-linuxarmv7l-linuxarmv8l-linux |
 
 #### Merged Bundle
 
@@ -1113,12 +1113,12 @@ A **VST 3** Plug-in should be installed at specific folder location, the followi
 
 On the macOS platform, the host application expects **VST 3 Plug-ins** to be located in:
 
-| Priority | Location    | Path                                          | Comment |
+| Priority | Location | Path | Comment |
 | :------- | :---------- | :-------------------------------------------- | :------ |
-| 1        | User        | /Users/$USERNAME/Library/Audio/Plug-ins/VST3/ |         |
-| 2        | Global      | /Library/Audio/Plug-ins/VST3/                 |         |
-| 3        | Global      | /Network/Library/Audio/Plug-ins/VST3/         |         |
-| 4        | Application | $APPFOLDER/Contents/VST3/                     |         |
+| 1 | User | /Users/$USERNAME/Library/Audio/Plug-ins/VST3/ |         |
+| 2 | Global | /Library/Audio/Plug-ins/VST3/ |         |
+| 3 | Global | /Network/Library/Audio/Plug-ins/VST3/ |         |
+| 4 | Application | $APPFOLDER/Contents/VST3/ |         |
 
 > **Note:** The host recursively scans these folders at startup in this order (User/Global/Application).
 
@@ -1126,11 +1126,11 @@ On the macOS platform, the host application expects **VST 3 Plug-ins** to be loc
 
 On the Windows platform, the host application expects **VST 3 Plug-ins** to be located in:
 
-| Priority | Location    | Path                                    | Comment                                                      |
+| Priority | Location | Path | Comment |
 | :------- | :---------- | :-------------------------------------- | :----------------------------------------------------------- |
-| 1        | Global      | /Program Files/Common Files/VST3/       | FOLDERID_ProgramFilesCommonnative bitdepth:32bit Plug-in on 32bit OS,64bit on 64bit OS |
-| 1        | Global      | /Program Files (x86)/Common Files/VST3/ | 32bit Plug-ins on 64bit Windows                              |
-| 2        | Application | $APPFOLDER/VST3/                        |                                                              |
+| 1 | Global | /Program Files/Common Files/VST3/ | FOLDERID_ProgramFilesCommonnative bitdepth:32bit Plug-in on 32bit OS,64bit on 64bit OS |
+| 1 | Global | /Program Files (x86)/Common Files/VST3/ | 32bit Plug-ins on 64bit Windows |
+| 2 | Application | $APPFOLDER/VST3/ |                                                              |
 
 > **Note:** The host recursively scans these folders at startup in this order (Global/Application).
 
@@ -1138,12 +1138,12 @@ On the Windows platform, the host application expects **VST 3 Plug-ins** to be l
 
 On the Linux platform, the host application expects **VST 3 Plug-ins** to be located in:
 
-| Priority | Location    | Path                 | Comment |
+| Priority | Location | Path | Comment |
 | :------- | :---------- | :------------------- | :------ |
-| 1        | User        | $HOME/.vst3/         |         |
-| 2        | Global      | /usr/lib/vst3/       |         |
-| 3        | Global      | /usr/local/lib/vst3/ |         |
-| 4        | Application | $APPFOLDER/vst3/     |         |
+| 1 | User | $HOME/.vst3/ |         |
+| 2 | Global | /usr/lib/vst3/ |         |
+| 3 | Global | /usr/local/lib/vst3/ |         |
+| 4 | Application | $APPFOLDER/vst3/ |         |
 
 > **Note:** The host recursively scans these folders at startup in this order (User/Global/Application).
 
@@ -1156,7 +1156,7 @@ The file extension has to be **".vstpreset"**, for example: *myBestDefault.vstpr
 Specification of a **VST 3** Preset file :
 ![img](IMAGE/preset_file_format.jpg)
 
-Check the[ Steinberg::Vst::PresetFile](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1PresetFile.html#a9db1b48345e92320b0dffc446d5e3483) source code which allows to read and write such presets.
+Check the[Steinberg::Vst::PresetFile](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1PresetFile.html#a9db1b48345e92320b0dffc446d5e3483) source code which allows to read and write such presets.
 
 
 
@@ -1167,14 +1167,14 @@ Check the[ Steinberg::Vst::PresetFile](https://steinbergmedia.github.io/vst3_doc
 **VST 3** presets are located at predefined locations on the computer, depending on the operating system.
 
 - 3 levels of preset scope are defined:
-  - **User**: available only for the current logged user
-  - **Public**: available for all users of the system
-  - **Apps**: available only inside a specific audio application
+   - **User**: available only for the current logged user
+   - **Public**: available for all users of the system
+   - **Apps**: available only inside a specific audio application
 - 4 types of preset are defined:
-  - **User**: presets created by the user
-  - **User_Factory**: like **User** type, but more hidden
-  - **Shared_Factory**: factory presets installed by the plug-in installer
-  - **App_Factory**: presets installed by an audio application installer, only visible for this specific audio application
+   - **User**: presets created by the user
+   - **User_Factory**: like **User** type, but more hidden
+   - **Shared_Factory**: factory presets installed by the plug-in installer
+   - **App_Factory**: presets installed by an audio application installer, only visible for this specific audio application
 
 > **$COMPANY** and **$PLUGIN-NAME** folder names contain only allowed characters for file naming (replace characters "**\\*?/:<>|\**" by "**_**").
 
@@ -1182,39 +1182,39 @@ Check the[ Steinberg::Vst::PresetFile](https://steinbergmedia.github.io/vst3_doc
 
 #### For Mac platform
 
-| Prio | Type           | Scope  | Writable | Path                                                         | Comment                        |
+| Prio | Type | Scope | Writable | Path | Comment |
 | :--- | :------------- | :----- | :------- | :----------------------------------------------------------- | :----------------------------- |
-| 1    | User           | User   | X        | Users/$USERNAME/Library/Audio/Presets/$COMPANY/$PLUGIN-NAME/ |                                |
-| 2    | Shared_Factory | Public | -        | Library/Audio/Presets/$COMPANY/$PLUGIN-NAME/                 | Computer shared FactoryROM     |
-| 3    | Shared_Factory | Public | -        | Network/Library/Audio/Presets/$COMPANY/$PLUGIN-NAME/         | Network shared FactoryROM      |
-| 4    | App_Factory    | Apps   | -        | [$APPFOLDER]/VST3 Presets/$COMPANY/$PLUGIN-NAME/             | Host Application (Cubase, ...) |
+| 1 | User | User | X | Users/$USERNAME/Library/Audio/Presets/$COMPANY/$PLUGIN-NAME/ |                                |
+| 2 | Shared_Factory | Public | - | Library/Audio/Presets/$COMPANY/$PLUGIN-NAME/ | Computer shared FactoryROM |
+| 3 | Shared_Factory | Public | - | Network/Library/Audio/Presets/$COMPANY/$PLUGIN-NAME/ | Network shared FactoryROM |
+| 4 | App_Factory | Apps | - | [$APPFOLDER]/VST3 Presets/$COMPANY/$PLUGIN-NAME/ | Host Application (Cubase, ...) |
 
 #### For Windows XP/2000 platform
 
-| Prio | Type           | Scope  | Writable | Path                                                         | Comment                        |
+| Prio | Type | Scope | Writable | Path | Comment |
 | :--- | :------------- | :----- | :------- | :----------------------------------------------------------- | :----------------------------- |
-| 1    | User           | User   | X        | [my documents]/vst3 presets/$company/$plugin-name/           | csidl_personal                 |
-| 2    | User_Factory   | User   | X        | [documents and settings/$username/application data]/vst3 presets/$company/$plugin-name/ | csidl_appdata                  |
-| 3    | Shared_Factory | Public | -        | [documents and settings/$allusers/application data]/vst3 presets/$company/$plugin-name/ | csidl_common_appdata           |
-| 4    | App_Factory    | Apps   | -        | [$APPFOLDER]/VST3 Presets/$COMPANY/$PLUGIN-NAME/             | Host Application (Cubase, ...) |
+| 1 | User | User | X | [my documents]/vst3 presets/$company/$plugin-name/ | csidl_personal |
+| 2 | User_Factory | User | X | [documents and settings/$username/application data]/vst3 presets/$company/$plugin-name/ | csidl_appdata |
+| 3 | Shared_Factory | Public | - | [documents and settings/$allusers/application data]/vst3 presets/$company/$plugin-name/ | csidl_common_appdata |
+| 4 | App_Factory | Apps | - | [$APPFOLDER]/VST3 Presets/$COMPANY/$PLUGIN-NAME/ | Host Application (Cubase, ...) |
 
 #### For Windows Vista/7/8/10 platform
 
-| Prio | Type           | Scope  | Writable | Path                                                         | Comment                        |
+| Prio | Type | Scope | Writable | Path | Comment |
 | :--- | :------------- | :----- | :------- | :----------------------------------------------------------- | :----------------------------- |
-| 1    | User           | User   | X        | [Users/$USERNAME/Documents]/VST3 Presets/$COMPANY/$PLUGIN-NAME/ | FOLDERID_Documents             |
-| 2    | User_Factory   | User   | X        | [Users/$USERNAME/AppData/Roaming]/VST3 Presets/$COMPANY/$PLUGIN-NAME/ | FOLDERID_RoamingAppData        |
-| 3    | Shared_Factory | Public | -        | [ProgramData]/VST3 Presets/$COMPANY/$PLUGIN-NAME/            | FOLDERID_ProgramData           |
-| 4    | App_Factory    | Apps   | -        | [$APPFOLDER]/VST3 Presets/$COMPANY/$PLUGIN-NAME/             | Host Application (Cubase, ...) |
+| 1 | User | User | X | [Users/$USERNAME/Documents]/VST3 Presets/$COMPANY/$PLUGIN-NAME/ | FOLDERID_Documents |
+| 2 | User_Factory | User | X | [Users/$USERNAME/AppData/Roaming]/VST3 Presets/$COMPANY/$PLUGIN-NAME/ | FOLDERID_RoamingAppData |
+| 3 | Shared_Factory | Public | - | [ProgramData]/VST3 Presets/$COMPANY/$PLUGIN-NAME/ | FOLDERID_ProgramData |
+| 4 | App_Factory | Apps | - | [$APPFOLDER]/VST3 Presets/$COMPANY/$PLUGIN-NAME/ | Host Application (Cubase, ...) |
 
 #### For Linux platform
 
-| Prio | Type           | Scope  | Writable | Path                                                 | Comment          |
+| Prio | Type | Scope | Writable | Path | Comment |
 | :--- | :------------- | :----- | :------- | :--------------------------------------------------- | :--------------- |
-| 1    | User           | User   | X        | $HOME/.vst3/presets/$COMPANY/$PLUGIN-NAME/           |                  |
-| 2    | Shared_Factory | Public | -        | /usr/share/vst3/presets/$COMPANY/$PLUGIN-NAME/       |                  |
-| 3    | Shared_Factory | Public | -        | /usr/local/share/vst3/presets/$COMPANY/$PLUGIN-NAME/ |                  |
-| 4    | App_Factory    | Apps   | -        | [$APPFOLDER]/vst3/presets/$COMPANY/$PLUGIN-NAME/     | Host Application |
+| 1 | User | User | X | $HOME/.vst3/presets/$COMPANY/$PLUGIN-NAME/ |                  |
+| 2 | Shared_Factory | Public | - | /usr/share/vst3/presets/$COMPANY/$PLUGIN-NAME/ |                  |
+| 3 | Shared_Factory | Public | - | /usr/local/share/vst3/presets/$COMPANY/$PLUGIN-NAME/ |                  |
+| 4 | App_Factory | Apps | - | [$APPFOLDER]/vst3/presets/$COMPANY/$PLUGIN-NAME/ | Host Application |
 
 
 
@@ -1228,10 +1228,10 @@ This snapshot must have a predefined format and file name so that a host can rec
 - The image format must be PNG
 - The image needs to be located inside the bundle directory in the folder **Resources/Snapshots/**
 - The file name must start with the unique ID of the audio processor printed in the form 84E8DE5F92554F5396FAE4133C935A18 followed by the string _snapshot and optionally followed by the HiDPI scale factor _2.0x and ending with the file extension .png.
-  - For example, again's snapshot must be named:
-    - **84E8DE5F92554F5396FAE4133C935A18_snapshot.png**
-    - **84E8DE5F92554F5396FAE4133C935A18_snapshot_2.0x.png** for the 2x scaled HiDPI variant.
-  - If the HiDPI scale factor is omitted, a scale factor of 1 is used.
+   - For example, again's snapshot must be named:
+      - **84E8DE5F92554F5396FAE4133C935A18_snapshot.png**
+      - **84E8DE5F92554F5396FAE4133C935A18_snapshot_2.0x.png** for the 2x scaled HiDPI variant.
+   - If the HiDPI scale factor is omitted, a scale factor of 1 is used.
 
 
 
@@ -1241,17 +1241,17 @@ This snapshot must have a predefined format and file name so that a host can rec
 
 | ![img](https://developer.steinberg.help/download/thumbnails/9798753/84E8DE5F92554F5396FAE4133C935A18_snapshot.png?version=1&modificationDate=1589527102000&api=v2) |
 | ------------------------------------------------------------ |
-| **84E8DE5F92554F5396FAE4133C935A18_snapshot.png**            |
+| **84E8DE5F92554F5396FAE4133C935A18_snapshot.png** |
 | ![img](https://developer.steinberg.help/download/thumbnails/9798753/84E8DE5F92554F5396FAE4133C935A18_snapshot_2.0x.png?version=1&modificationDate=1589527103000&api=v2) |
-| **84E8DE5F92554F5396FAE4133C935A18_snapshot_2.0x.png**       |
+| **84E8DE5F92554F5396FAE4133C935A18_snapshot_2.0x.png** |
 
 #### 音符音调合成器
 
 | ![img](https://developer.steinberg.help/download/thumbnails/9798753/6EE65CD1B83A4AF480AA7929AEA6B8A0_snapshot.png?version=1&modificationDate=1589790883000&api=v2) |
 | ------------------------------------------------------------ |
-| **6EE65CD1B83A4AF480AA7929AEA6B8A0_snapshot.png**            |
+| **6EE65CD1B83A4AF480AA7929AEA6B8A0_snapshot.png** |
 | ![img](IMAGE/6EE65CD1B83A4AF480AA7929AEA6B8A0_snapshot_2.0x.png) |
-| **6EE65CD1B83A4AF480AA7929AEA6B8A0_snapshot_2.0x.png**       |
+| **6EE65CD1B83A4AF480AA7929AEA6B8A0_snapshot_2.0x.png** |
 
 #### How Cubase uses Snapshots
 
@@ -1273,35 +1273,35 @@ But **VST 3** offers suitable concepts that can be translated to and from MIDI u
 
 Relationship of concepts in **MIDI 1.0** to **VST 3**
 
-| MIDI 1.0                         | VST 3                                                        | Defined in                               |
+| MIDI 1.0 | VST 3 | Defined in |
 | :------------------------------- | :----------------------------------------------------------- | :--------------------------------------- |
-| Port                             | Bus of[ Steinberg::Vst::MediaType](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstBus.html#ga576e5da9bdc49812cf65f803bb303ad5), [Steinberg::Vst::MediaTypes::kEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstBus.html#gga576e5da9bdc49812cf65f803bb303ad5ae6a97de99980aeac9312e818af337d6f) | *ivstcomponent.h*                        |
-| Channel                          | Channel of a Bus, [Unit by Bus](https://developer.steinberg.help/display/VST/VST+3+Units) and Channel | *ivstcomponent.h, ivstunits.h*           |
-| Note-On                          | [Steinberg::Vst::NoteOnEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1NoteOnEvent.html) | *ivstevents.h*                           |
-| Note-Off                         | [Steinberg::Vst::NoteOffEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1NoteOffEvent.html) | *ivstevents.h*                           |
-| Poly Key Pressure                | [Steinberg::Vst::PolyPressureEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1PolyPressureEvent.html) | *ivstevents.h*                           |
-| Control Change                   | [Parameter](https://developer.steinberg.help/display/VST/Parameters+and+Automation), [IMidiMapping](https://developer.steinberg.help/display/VST/[3.0.1]+Parameter+MIDI+Mapping+Support) | *ivstcomponent.h, ivstmidicontrollers.h* |
-| Channel Pressure                 | [Parameter](https://developer.steinberg.help/display/VST/Parameters+and+Automation), [IMidiMapping](https://developer.steinberg.help/display/VST/[3.0.1]+Parameter+MIDI+Mapping+Support) | *ivstcomponent.h, ivstmidicontrollers.h* |
-| Pitch Bend                       | [Parameter](https://developer.steinberg.help/display/VST/Parameters+and+Automation), [IMidiMapping](https://developer.steinberg.help/display/VST/[3.0.1]+Parameter+MIDI+Mapping+Support) | *ivstcomponent.h, ivstmidicontrollers.h* |
-| Program Change                   | [Parameter](https://developer.steinberg.help/display/VST/Parameters+and+Automation), [kIsProgramChange](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ae3a5143ca8d0e271dbc259645a4ae645a517665185bca1f4f3d77ce0a6468b8e3), [Steinberg::Vst::ProgramListInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ProgramListInfo.html) | *ivstcomponent.h, ivstunits.h*           |
+| Port | Bus of[Steinberg::Vst::MediaType](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstBus.html#ga576e5da9bdc49812cf65f803bb303ad5), [Steinberg::Vst::MediaTypes::kEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstBus.html#gga576e5da9bdc49812cf65f803bb303ad5ae6a97de99980aeac9312e818af337d6f) | *ivstcomponent.h* |
+| Channel | Channel of a Bus, [Unit by Bus](https://developer.steinberg.help/display/VST/VST+3+Units) and Channel | *ivstcomponent.h, ivstunits.h* |
+| Note-On | [Steinberg::Vst::NoteOnEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1NoteOnEvent.html) | *ivstevents.h* |
+| Note-Off | [Steinberg::Vst::NoteOffEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1NoteOffEvent.html) | *ivstevents.h* |
+| Poly Key Pressure | [Steinberg::Vst::PolyPressureEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1PolyPressureEvent.html) | *ivstevents.h* |
+| Control Change | [Parameter](https://developer.steinberg.help/display/VST/Parameters+and+Automation), [IMidiMapping](https://developer.steinberg.help/display/VST/[3.0.1]+Parameter+MIDI+Mapping+Support) | *ivstcomponent.h, ivstmidicontrollers.h* |
+| Channel Pressure | [Parameter](https://developer.steinberg.help/display/VST/Parameters+and+Automation), [IMidiMapping](https://developer.steinberg.help/display/VST/[3.0.1]+Parameter+MIDI+Mapping+Support) | *ivstcomponent.h, ivstmidicontrollers.h* |
+| Pitch Bend | [Parameter](https://developer.steinberg.help/display/VST/Parameters+and+Automation), [IMidiMapping](https://developer.steinberg.help/display/VST/[3.0.1]+Parameter+MIDI+Mapping+Support) | *ivstcomponent.h, ivstmidicontrollers.h* |
+| Program Change | [Parameter](https://developer.steinberg.help/display/VST/Parameters+and+Automation), [kIsProgramChange](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ae3a5143ca8d0e271dbc259645a4ae645a517665185bca1f4f3d77ce0a6468b8e3), [Steinberg::Vst::ProgramListInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ProgramListInfo.html) | *ivstcomponent.h, ivstunits.h* |
 | MPE (MIDI Polyphonic Expression) | [NoteExpression](https://developer.steinberg.help/display/VST/[3.5.0]+Note+Expression+Support), [PhysicalUI](https://developer.steinberg.help/display/VST/[3.6.11]+NoteExpression+Physical+UI+Mapping+Support) | *ivstnoteexpression.h, ivstphysicalui.h* |
-| System Exclusive                 | [Steinberg::Vst::DataEvent ](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1DataEvent.html)of Type [Steinberg::Vst::DataEvent::kMidiSysEx](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1DataEvent.html#afb6eb4f28419b652027fad41104a6d22ab06d86440be6a85eccce4df100ce8e79) | *ivstevents.h*                           |
+| System Exclusive | [Steinberg::Vst::DataEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1DataEvent.html)of Type [Steinberg::Vst::DataEvent::kMidiSysEx](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1DataEvent.html#afb6eb4f28419b652027fad41104a6d22ab06d86440be6a85eccce4df100ce8e79) | *ivstevents.h* |
 
 
 Additional relationships of concepts introduced in MIDI 2.0 (<https://www.midi.org/>) to **VST 3**
 
-| MIDI 2.0                       | VST 3                                                        | Defined in / Comments                                        |
+| MIDI 2.0 | VST 3 | Defined in / Comments |
 | :----------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
-| Group (of Channels)            | Bus of [Steinberg::Vst::MediaType](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstBus.html#ga576e5da9bdc49812cf65f803bb303ad5), [Steinberg::Vst::MediaTypes::kEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstBus.html#gga576e5da9bdc49812cf65f803bb303ad5ae6a97de99980aeac9312e818af337d6f) | *ivstcomponent.h*                                            |
-| Registered Per-Note Controller | [NoteExpression](https://developer.steinberg.help/display/VST/[3.5.0]+Note+Expression+Support), [PhysicalUI](https://developer.steinberg.help/display/VST/[3.6.11]+NoteExpression+Physical+UI+Mapping+Support) | *ivstnoteexpression.h, ivstphysicalui.h*                     |
-| Assignable Per-Note Controller | [NoteExpression](https://developer.steinberg.help/display/VST/[3.5.0]+Note+Expression+Support) | *ivstnoteexpression.h*                                       |
-| System Exclusive 8-Bit         | indirect support                                             | The host can translate to 7-Bit, [Steinberg::Vst::DataEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1DataEvent.html)of Type [Steinberg::Vst::DataEvent::kMidiSysEx](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1DataEvent.html#afb6eb4f28419b652027fad41104a6d22ab06d86440be6a85eccce4df100ce8e79) |
-| Registered Controller          | not supported                                                | The host can do detailed tuning via [NoteExpression](https://developer.steinberg.help/display/VST/[3.5.0]+Note+Expression+Support) |
-| Assignable Controller          | not supported                                                | The host should offer mapping to parameters                  |
-| Relative Registered Controller | not supported                                                | The host is free to translate this to parameters             |
-| Relative Assignable Controller | not supported                                                | The host is free to translate this to parameters             |
-| Per-Note Pitch Bend            | not supported                                                | The host can do detailed tuning via [NoteExpression](https://developer.steinberg.help/display/VST/[3.5.0]+Note+Expression+Support) |
-| Mixed Data Set                 | not supported                                                | not supported                                                |
+| Group (of Channels) | Bus of [Steinberg::Vst::MediaType](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstBus.html#ga576e5da9bdc49812cf65f803bb303ad5), [Steinberg::Vst::MediaTypes::kEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstBus.html#gga576e5da9bdc49812cf65f803bb303ad5ae6a97de99980aeac9312e818af337d6f) | *ivstcomponent.h* |
+| Registered Per-Note Controller | [NoteExpression](https://developer.steinberg.help/display/VST/[3.5.0]+Note+Expression+Support), [PhysicalUI](https://developer.steinberg.help/display/VST/[3.6.11]+NoteExpression+Physical+UI+Mapping+Support) | *ivstnoteexpression.h, ivstphysicalui.h* |
+| Assignable Per-Note Controller | [NoteExpression](https://developer.steinberg.help/display/VST/[3.5.0]+Note+Expression+Support) | *ivstnoteexpression.h* |
+| System Exclusive 8-Bit | indirect support | The host can translate to 7-Bit, [Steinberg::Vst::DataEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1DataEvent.html)of Type [Steinberg::Vst::DataEvent::kMidiSysEx](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1DataEvent.html#afb6eb4f28419b652027fad41104a6d22ab06d86440be6a85eccce4df100ce8e79) |
+| Registered Controller | not supported | The host can do detailed tuning via [NoteExpression](https://developer.steinberg.help/display/VST/[3.5.0]+Note+Expression+Support) |
+| Assignable Controller | not supported | The host should offer mapping to parameters |
+| Relative Registered Controller | not supported | The host is free to translate this to parameters |
+| Relative Assignable Controller | not supported | The host is free to translate this to parameters |
+| Per-Note Pitch Bend | not supported | The host can do detailed tuning via [NoteExpression](https://developer.steinberg.help/display/VST/[3.5.0]+Note+Expression+Support) |
+| Mixed Data Set | not supported | not supported |
 
 ### MIDI 2.0 Per-Note Controllers
 
@@ -1313,12 +1313,12 @@ There are many subtle differences between **MIDI 2.0** Per-Note Controllers and 
 
 See the following tables to compare the resolution of specific values in **MIDI 1.0**, **MIDI 2.0**, and **VST 3**.
 
-| Value                                                        | MIDI 1.0         | MIDI 2.0                 | VST 3        |
+| Value | MIDI 1.0 | MIDI 2.0 | VST 3 |
 | :----------------------------------------------------------- | :--------------- | :----------------------- | :----------- |
-| Velocity (On & Off)                                          | 7 Bit integer    | 16 Bit integer           | 32 Bit float |
-| Poly Pressure                                                | 7 Bit integer    | 32 Bit integer           | 32 Bit float |
-| Channel Pressure / Parameters                                | 7 Bit integer    | 32 Bit integer           | 64 Bit float |
-| Controllers / Parameters                                     | 7-14 Bit integer | 32 Bit integer           | 64 Bit float |
-| Pitch Bend / Parameters                                      | 14 Bit integer   | 32 Bit integer           | 64 Bit float |
-| Note Attribute Tuning                                        | not available    | 16 Bit fixed point (7.9) | 32 Bit float |
-| Per-Note Controllers / [NoteExpression](https://developer.steinberg.help/display/VST/[3.5.0]+Note+Expression+Support) | not available    | 32 Bit integer           | 64 Bit float |
+| Velocity (On & Off) | 7 Bit integer | 16 Bit integer | 32 Bit float |
+| Poly Pressure | 7 Bit integer | 32 Bit integer | 32 Bit float |
+| Channel Pressure / Parameters | 7 Bit integer | 32 Bit integer | 64 Bit float |
+| Controllers / Parameters | 7-14 Bit integer | 32 Bit integer | 64 Bit float |
+| Pitch Bend / Parameters | 14 Bit integer | 32 Bit integer | 64 Bit float |
+| Note Attribute Tuning | not available | 16 Bit fixed point (7.9) | 32 Bit float |
+| Per-Note Controllers / [NoteExpression](https://developer.steinberg.help/display/VST/[3.5.0]+Note+Expression+Support) | not available | 32 Bit integer | 64 Bit float |
