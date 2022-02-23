@@ -1,0 +1,108 @@
+
+  <!DOCTYPE html>
+  <head>
+    <title>VST中文文档</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./ASSET/shared.css">
+    <link rel="stylesheet" href="./ASSET/markdown.css">
+    <link rel="stylesheet" href="./ASSET/highlight.min.css">
+    <script src="./ASSET/highlight.min.js"></script>
+    <script src="./ASSET/shared.js"></script>
+  </head>
+  <body onresize="controlMenu()" onload="init()">
+    <template id="tocTreeData" toc-tree-data='[{"name":"什么是VST","id":"gqtx0xmsa","url":"WhatIsVST.html","children":[{"name":"用例","url":"WhatIsVST.html#用例","id":"4jij71hdf","children":[]}]},{"name":"VST3的主要优点","id":"mtal3v87h","url":"MainBenefitsOfVST3.html","children":[]},{"name":"什么是VST3 SDK","id":"zcj61sxhc","url":"WhatIsTheVST3SDK.html","children":[]},{"name":"快速上手","id":"iryasrlpl","url":"GettingStarted.html","children":[{"name":"获取vst3-sdk","url":"GettingStarted.html#获取vst3-sdk","id":"b1utotc4d","children":[]},{"name":"在线文档","url":"GettingStarted.html#在线文档","id":"di362pplm","children":[]},{"name":"vst-3-forum","url":"GettingStarted.html#vst-3-forum","id":"8lh4s38d9","children":[]},{"name":"vstgui","url":"GettingStarted.html#vstgui","id":"6rmh01rtk","children":[]},{"name":"获取源代码","url":"GettingStarted.html#获取源代码","id":"otcwzw6x5","children":[]},{"name":"获取用于开发的-ide","url":"GettingStarted.html#获取用于开发的-ide","id":"6rifs95mj","children":[]},{"name":"package要求","url":"GettingStarted.html#package要求","id":"ymjq7kdif","children":[]},{"name":"获取cmake","url":"GettingStarted.html#获取cmake","id":"3oa7bcy7f","children":[]},{"name":"在-windows-上准备","url":"GettingStarted.html#在-windows-上准备","id":"hqjklarit","children":[]},{"name":"获取vst3宿主程序","url":"GettingStarted.html#获取vst3宿主程序","id":"l036l9ki6","children":[]}]},{"name":"教程","id":"68xurk99y","url":"Tutorials.html","children":[{"name":"构建sdk里面的示例项目","url":"Tutorials.html#构建sdk里面的示例项目","id":"6tdu8ah7q","children":[{"name":"part-1-获取和安装vst3-sdk","url":"Tutorials.html#part-1-获取和安装vst3-sdk","id":"i1zwj0b48","children":[]},{"name":"part-2-构建示例","url":"Tutorials.html#part-2-构建示例","id":"kld1vwx39","children":[]},{"name":"building-using-cmake-gui","url":"Tutorials.html#building-using-cmake-gui","id":"rcn10ful7","children":[]}]},{"name":"使用cmake来构建vst3插件","url":"Tutorials.html#使用cmake来构建vst3插件","id":"u67spaax3","children":[{"name":"用于构建-vst-3-插件的-cmake","url":"Tutorials.html#用于构建-vst-3-插件的-cmake","id":"ofunenenw","children":[]},{"name":"command-line-for-windows","url":"Tutorials.html#command-line-for-windows","id":"bruj95vma","children":[]},{"name":"command-line-for-macos","url":"Tutorials.html#command-line-for-macos","id":"aazwqo2jz","children":[]},{"name":"在-linux-上使用-qtcreator","url":"Tutorials.html#在-linux-上使用-qtcreator","id":"z26z47p83","children":[]},{"name":"cmake-gui-的使用","url":"Tutorials.html#cmake-gui-的使用","id":"bt6u8u8fb","children":[]},{"name":"可用的-smtg-cmake-选项","url":"Tutorials.html#可用的-smtg-cmake-选项","id":"om2ztupqp","children":[]},{"name":"使用-ide-编译示例","url":"Tutorials.html#使用-ide-编译示例","id":"2j8p5ho62","children":[]}]},{"name":"使用项目生成器生成一个新插件","url":"Tutorials.html#使用项目生成器生成一个新插件","id":"6pcg3eyhu","children":[{"name":"第-1-部分：获取和安装-vst-3-sdk","url":"Tutorials.html#第-1-部分：获取和安装-vst-3-sdk","id":"aat9i9xck","children":[]},{"name":"第-2-部分：使用vst-3-插件项目生成器应用","url":"Tutorials.html#第-2-部分：使用vst-3-插件项目生成器应用","id":"57i13aaeg","children":[]},{"name":"第-3-部分：编写你的插件","url":"Tutorials.html#第-3-部分：编写你的插件","id":"lq1l19937","children":[{"name":"添加参数-gain","url":"Tutorials.html#添加参数-gain","id":"nnggf07av","children":[]},{"name":"add-the-process-applying-the-gain","url":"Tutorials.html#add-the-process-applying-the-gain","id":"jddkf6xq9","children":[]},{"name":"添加存储恢复状态","url":"Tutorials.html#添加存储恢复状态","id":"8gzoffvcx","children":[]},{"name":"第-4-部分：高级步骤","url":"Tutorials.html#第-4-部分：高级步骤","id":"5vgz7bg4r","children":[]},{"name":"添加事件输入","url":"Tutorials.html#添加事件输入","id":"at9m2hvfj","children":[]},{"name":"添加单声道音频侧链","url":"Tutorials.html#添加单声道音频侧链","id":"pzjuii6up","children":[]}]}]},{"name":"使用vstgui设计一套用户界面","url":"Tutorials.html#使用vstgui设计一套用户界面","id":"ac5uqsf1j","children":[{"name":"第-1-部分：准备","url":"Tutorials.html#第-1-部分：准备","id":"x0r4g11zx","children":[]},{"name":"第-2-部分：打开-vstguiwyswyg-编辑器","url":"Tutorials.html#第-2-部分：打开-vstguiwyswyg-编辑器","id":"vuwkf3flv","children":[]},{"name":"第-3-部分：参数绑定","url":"Tutorials.html#第-3-部分：参数绑定","id":"mg1qs17xw","children":[]},{"name":"第-4-部分：创建自定义视图","url":"Tutorials.html#第-4-部分：创建自定义视图","id":"o30ciik7z","children":[]},{"name":"第-5-部分：展示例子","url":"Tutorials.html#第-5-部分：展示例子","id":"7x99gryz5","children":[]}]},{"name":"高级","url":"Tutorials.html#高级","id":"2omae5wvj","children":[{"name":"第-1-部分：样本精确参数处理","url":"Tutorials.html#第-1-部分：样本精确参数处理","id":"aycd4kstv","children":[]},{"name":"第-2-部分：添加-32-位和-64-位音频处理","url":"Tutorials.html#第-2-部分：添加-32-位和-64-位音频处理","id":"izn5nafg6","children":[]},{"name":"第-3-部分：线程安全状态更改","url":"Tutorials.html#第-3-部分：线程安全状态更改","id":"po99pf5g7","children":[]}]},{"name":"字符串转换工具","url":"Tutorials.html#字符串转换工具","id":"2qkme5hi4","children":[{"name":"将-string128-字符串转换为-utf-8-字符串","url":"Tutorials.html#将-string128-字符串转换为-utf-8-字符串","id":"5bdciq0l1","children":[]},{"name":"将-utf-8-字符串转换为-string128-字符串","url":"Tutorials.html#将-utf-8-字符串转换为-string128-字符串","id":"y8u796nfy","children":[]}]},{"name":"使用helloworld模板创建插件","url":"Tutorials.html#使用helloworld模板创建插件","id":"4yvuvaxlg","children":[{"name":"第-1-部分：获取和安装-vst-3-sdk-1","url":"Tutorials.html#第-1-部分：获取和安装-vst-3-sdk-1","id":"jxnd2ckhf","children":[]},{"name":"第-2-部分：使用helloworld模板","url":"Tutorials.html#第-2-部分：使用helloworld模板","id":"wf6k5966a","children":[]}]}]},{"name":"技术文档","id":"z5ngnb92b","url":"TechnicalDocumentation.html","children":[{"name":"api文档","url":"TechnicalDocumentation.html#api文档","id":"fg2p4hu92","children":[{"name":"基础概念","url":"TechnicalDocumentation.html#基础概念","id":"3q7hwavv7","children":[{"name":"初始化","url":"TechnicalDocumentation.html#初始化","id":"lpq08thbj","children":[]},{"name":"从宿主的角度创建和初始化","url":"TechnicalDocumentation.html#从宿主的角度创建和初始化","id":"rn14pjxbe","children":[]},{"name":"扩展","url":"TechnicalDocumentation.html#扩展","id":"l6drnwyu3","children":[]},{"name":"持久化","url":"TechnicalDocumentation.html#持久化","id":"6jymy3sty","children":[]}]},{"name":"处理部分","url":"TechnicalDocumentation.html#处理部分","id":"1h1ap8sfk","children":[]},{"name":"icomponent","url":"TechnicalDocumentation.html#icomponent","id":"hiaz46g3t","children":[]},{"name":"iaudioprocessor","url":"TechnicalDocumentation.html#iaudioprocessor","id":"3np20j0pk","children":[]},{"name":"the-editing-part","url":"TechnicalDocumentation.html#the-editing-part","id":"nn7upci4i","children":[]},{"name":"vst-3-threading-model","url":"TechnicalDocumentation.html#vst-3-threading-model","id":"vdb94dz2n","children":[]},{"name":"communication-between-the-components","url":"TechnicalDocumentation.html#communication-between-the-components","id":"h9pi73fde","children":[{"name":"standard-communication","url":"TechnicalDocumentation.html#standard-communication","id":"a2z6j7vmw","children":[]},{"name":"private-communication","url":"TechnicalDocumentation.html#private-communication","id":"pdlq51pu6","children":[]},{"name":"initialization-of-communication-from-host-point-of-view","url":"TechnicalDocumentation.html#initialization-of-communication-from-host-point-of-view","id":"m04skayve","children":[]}]}]},{"name":"vst模块体系","url":"TechnicalDocumentation.html#vst模块体系","id":"no2wucbg6","children":[{"name":"how-the-host-will-load-a-vst-ma-based-plug-in","url":"TechnicalDocumentation.html#how-the-host-will-load-a-vst-ma-based-plug-in","id":"iaauupvpi","children":[]},{"name":"how-to-derive-a-class-from-an-interface","url":"TechnicalDocumentation.html#how-to-derive-a-class-from-an-interface","id":"x9lbmprjt","children":[]},{"name":"interface-versions-and-inheritance","url":"TechnicalDocumentation.html#interface-versions-and-inheritance","id":"sgees7vik","children":[]}]},{"name":"parameters-and-automation","url":"TechnicalDocumentation.html#parameters-and-automation","id":"u0a7fa8iz","children":[{"name":"parameter-styles--step-count","url":"TechnicalDocumentation.html#parameter-styles--step-count","id":"txou7t2np","children":[]},{"name":"automation","url":"TechnicalDocumentation.html#automation","id":"00ro6ltdk","children":[]},{"name":"sliders--knobs","url":"TechnicalDocumentation.html#sliders--knobs","id":"h0yauxsvg","children":[]},{"name":"buttons--radio-groups--pop-up-menus","url":"TechnicalDocumentation.html#buttons--radio-groups--pop-up-menus","id":"x8bmyqtaw","children":[]},{"name":"text-input","url":"TechnicalDocumentation.html#text-input","id":"bopn615h8","children":[]},{"name":"informing-the-host-about-changes","url":"TechnicalDocumentation.html#informing-the-host-about-changes","id":"f3g4k9x3o","children":[]}]},{"name":"vst3单元","url":"TechnicalDocumentation.html#vst3单元","id":"fpu9f305l","children":[{"name":"介绍","url":"TechnicalDocumentation.html#介绍","id":"98bga19p4","children":[]},{"name":"单元细节","url":"TechnicalDocumentation.html#单元细节","id":"4gje8leg2","children":[]},{"name":"examples","url":"TechnicalDocumentation.html#examples","id":"tjgkl659i","children":[]}]},{"name":"预设和程序列表","url":"TechnicalDocumentation.html#预设和程序列表","id":"1k1taa8se","children":[{"name":"简单插件","url":"TechnicalDocumentation.html#简单插件","id":"damtqi35b","children":[]},{"name":"program-lists","url":"TechnicalDocumentation.html#program-lists","id":"5dm471c1y","children":[]}]},{"name":"复杂插件多音带乐器","url":"TechnicalDocumentation.html#复杂插件多音带乐器","id":"v0d1cl6pd","children":[{"name":"问题","url":"TechnicalDocumentation.html#问题","id":"7qg3sv0sf","children":[]},{"name":"the-simple-mode","url":"TechnicalDocumentation.html#the-simple-mode","id":"lenusotwz","children":[]},{"name":"multi-timbral-program-lists","url":"TechnicalDocumentation.html#multi-timbral-program-lists","id":"adbk7xxpg","children":[]},{"name":"units-and-tracks","url":"TechnicalDocumentation.html#units-and-tracks","id":"twkodfnne","children":[]},{"name":"routing","url":"TechnicalDocumentation.html#routing","id":"vfm1ox8uw","children":[]}]},{"name":"vst3工作流程图","url":"TechnicalDocumentation.html#vst3工作流程图","id":"m9pktgsfz","children":[{"name":"audio-processor-call-sequence","url":"TechnicalDocumentation.html#audio-processor-call-sequence","id":"h0uotswai","children":[]},{"name":"edit-controller-call-sequence","url":"TechnicalDocumentation.html#edit-controller-call-sequence","id":"czs9sjvmi","children":[]},{"name":"get-latency-call-sequences","url":"TechnicalDocumentation.html#get-latency-call-sequences","id":"3gvw3hdx5","children":[]},{"name":"resize-view-call-sequences","url":"TechnicalDocumentation.html#resize-view-call-sequences","id":"2p428g9ka","children":[]},{"name":"bus-arrangement-setting-sequences","url":"TechnicalDocumentation.html#bus-arrangement-setting-sequences","id":"20hrplb3e","children":[]}]},{"name":"vst-3-locations--format","url":"TechnicalDocumentation.html#vst-3-locations--format","id":"0v5423bjb","children":[{"name":"插件的格式结构","url":"TechnicalDocumentation.html#插件的格式结构","id":"h6m951n5p","children":[{"name":"for-the-macos-platform","url":"TechnicalDocumentation.html#for-the-macos-platform","id":"cj9vo6abv","children":[]},{"name":"for-the-windows-platform","url":"TechnicalDocumentation.html#for-the-windows-platform","id":"w7tz67m0h","children":[]},{"name":"for-the-linux-platform","url":"TechnicalDocumentation.html#for-the-linux-platform","id":"nuizqnqf8","children":[]},{"name":"merged-bundle","url":"TechnicalDocumentation.html#merged-bundle","id":"8y66z2nt3","children":[]}]}]},{"name":"插件位置","url":"TechnicalDocumentation.html#插件位置","id":"mf9r93mpo","children":[{"name":"介绍-1","url":"TechnicalDocumentation.html#介绍-1","id":"p4g2hr5dh","children":[{"name":"on-macos-platform","url":"TechnicalDocumentation.html#on-macos-platform","id":"y3cwywib3","children":[]},{"name":"on-windows-platform","url":"TechnicalDocumentation.html#on-windows-platform","id":"eq0gbniu8","children":[]},{"name":"on-linux-platform","url":"TechnicalDocumentation.html#on-linux-platform","id":"uz9ao99ig","children":[]}]}]},{"name":"预设格式","url":"TechnicalDocumentation.html#预设格式","id":"n3xz7if1u","children":[]},{"name":"预设位置","url":"TechnicalDocumentation.html#预设位置","id":"prhqzgqh4","children":[{"name":"介绍-2","url":"TechnicalDocumentation.html#介绍-2","id":"fnx6hg68a","children":[{"name":"for-mac-platform","url":"TechnicalDocumentation.html#for-mac-platform","id":"uqmtjh3i2","children":[]},{"name":"for-windows-xp2000-platform","url":"TechnicalDocumentation.html#for-windows-xp2000-platform","id":"zg1m6cizf","children":[]},{"name":"for-windows-vista7810-platform","url":"TechnicalDocumentation.html#for-windows-vista7810-platform","id":"8hov152vf","children":[]},{"name":"for-linux-platform","url":"TechnicalDocumentation.html#for-linux-platform","id":"o93pb6rtt","children":[]}]}]},{"name":"快照","url":"TechnicalDocumentation.html#快照","id":"b1u2odbsg","children":[{"name":"介绍-3","url":"TechnicalDocumentation.html#介绍-3","id":"agxrm8z85","children":[]},{"name":"examples-1","url":"TechnicalDocumentation.html#examples-1","id":"nxa1xyauo","children":[{"name":"again","url":"TechnicalDocumentation.html#again","id":"r76rek78k","children":[]},{"name":"音符音调合成器","url":"TechnicalDocumentation.html#音符音调合成器","id":"s532v5y95","children":[]},{"name":"how-cubase-uses-snapshots","url":"TechnicalDocumentation.html#how-cubase-uses-snapshots","id":"g868qpjw0","children":[]}]}]},{"name":"vst3里的midi","url":"TechnicalDocumentation.html#vst3里的midi","id":"epybz3bj2","children":[{"name":"related-concepts-in-midi-and-vst-3","url":"TechnicalDocumentation.html#related-concepts-in-midi-and-vst-3","id":"98f6pbfru","children":[]},{"name":"midi-20-per-note-controllers","url":"TechnicalDocumentation.html#midi-20-per-note-controllers","id":"j8zo4jpm9","children":[]},{"name":"midi-20-increased-resolution-compared-to-midi-10","url":"TechnicalDocumentation.html#midi-20-increased-resolution-compared-to-midi-10","id":"9i4j947as","children":[]}]}]},{"name":"常见问题","id":"arb9an0yh","url":"FrequentlyAskedQuestions.html","children":[{"name":"交流","url":"FrequentlyAskedQuestions.html#交流","id":"gjauwc09f","children":[]},{"name":"processing","url":"FrequentlyAskedQuestions.html#processing","id":"gml0rbsfe","children":[]},{"name":"gui-editor","url":"FrequentlyAskedQuestions.html#gui-editor","id":"4sy6a0u1t","children":[]},{"name":"compatibility-with-vst-2x-or-vst-1","url":"FrequentlyAskedQuestions.html#compatibility-with-vst-2x-or-vst-1","id":"gm59jy18p","children":[]},{"name":"persistence","url":"FrequentlyAskedQuestions.html#persistence","id":"nu5x4bm5r","children":[]},{"name":"miscellaneous","url":"FrequentlyAskedQuestions.html#miscellaneous","id":"mw628ez72","children":[]},{"name":"license","url":"FrequentlyAskedQuestions.html#license","id":"zok4ge2zv","children":[]}]},{"name":"VST论坛","id":"8unpqwxku","url":"VST3Forum.html","children":[]},{"name":"其他","id":"pf304d4cl","url":"Miscellaneous.html","children":[{"name":"vst3-sdk里关于版权商标的说明","url":"Miscellaneous.html#vst3-sdk里关于版权商标的说明","id":"g616cgt0m","children":[]},{"name":"术语表","url":"Miscellaneous.html#术语表","id":"you7w5vg1","children":[]}]}]'></template>
+    <div id="menu">
+      <div class="menu-box">
+        <div id="toc">
+        </div>
+      </div>
+      <div class="menu-bottom">
+        <a href="https://github.com/SamNofee/vst-cn-doc">Github</a><a href="/">首页</a>
+      </div>
+    </div>
+    <div id="ball" onclick="controlMenu(true)">
+      <div class="ball-icon"></div>
+    </div>
+    <div class="article-body">
+      <article class="markdown-body" style="padding-bottom: 100px;"><h1 id="什么是vst3-sdk">什么是VST3 SDK</h1>
+<p> <strong>VST3 SDK解释</strong></p>
+<p>VST软件开发工具包把VST开发相关的工具整合在一个包中，插件开发者可以用它开发符合VST3标准的软件，开发者还可以将它整合进诸如DAW或音频编辑器之类的宿主软件，以让宿主软件支持加载VST3插件。</p>
+<blockquote>
+<p>VST3 API文档包含在SDK的pluginterfaces/vst文件夹中，它里面有关于VST3 C++全部接口的定义与说明，通过它你可以进一步了解VST3插件和宿主之间的交互细节。</p>
+<p>注：VST3 API文档不在此中文文档的翻译范围内</p>
+</blockquote>
+<p> <strong>VST3 SDK包含以下模块</strong></p>
+<ul>
+<li>AAX, AUv3, AU and VST 2 wrappers</li>
+<li>VST 3 Plug-ins Examples</li>
+<li>VST 3 Plug-in Test Host</li>
+<li>Validator command line</li>
+<li>AudioHost</li>
+<li>EditorHost</li>
+<li>VST3 Inspector</li>
+<li>VSTGUI</li>
+<li>VST 3 Project Generator</li>
+<li>iOS Inter-App Audio support</li>
+<li>VST 3 Licensing</li>
+</ul>
+<p><strong>系统配置要求</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统</th>
+<th align="left">架构</th>
+<th align="left">编译器</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows 10</td>
+<td align="left">x86, x86_64</td>
+<td align="left">MSVC 2019, MSVC 2017</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Windows 8.1</td>
+<td align="left">x86, x86_64</td>
+<td align="left">MSVC 2019, MSVC 2017</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">macOS 10.13, 10.14, 10.15, 11.0</td>
+<td align="left">x86, x86_64, Apple Silicon</td>
+<td align="left">Xcode 7, 8, 9, 10, 11, 12.2</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">iOS 13, iOS 14</td>
+<td align="left">arm64</td>
+<td align="left">Xcode 11, 12.2</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Linux - Raspberry Pi OS (Buster)</td>
+<td align="left">arm32</td>
+<td align="left">GCC 8.3 and higher</td>
+<td align="left">Visual Studio Code</td>
+</tr>
+<tr>
+<td align="left">Linux - Ubuntu 18.04 LTS</td>
+<td align="left">x86, x86_64</td>
+<td align="left">GCC 8.3 and higher</td>
+<td align="left">Visual Studio Code, Qt Creator</td>
+</tr>
+<tr>
+<td align="left">Linux - Ubuntu 20.04 LTS</td>
+<td align="left">x86, x86_64</td>
+<td align="left">GCC 8.3 and higher</td>
+<td align="left">Visual Studio Code, Qt Creator</td>
+</tr>
+</tbody></table>
+<p><strong>下载链接</strong></p>
+<p>在这个<a href="https://developer.steinberg.help/display/VST/VST+3+Links">链接</a>里你可以下载VST的相关资料</p>
+<p><strong>更新日志</strong></p>
+<p>在这个<a href="https://developer.steinberg.help/display/VST/Change+History">链接</a>里你可以查看VST3SDK的版本变动细节</p>
+</article>
+    </div>
+  </body>
+  

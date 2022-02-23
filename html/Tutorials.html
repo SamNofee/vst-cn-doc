@@ -1,0 +1,1190 @@
+
+  <!DOCTYPE html>
+  <head>
+    <title>VST中文文档</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./ASSET/shared.css">
+    <link rel="stylesheet" href="./ASSET/markdown.css">
+    <link rel="stylesheet" href="./ASSET/highlight.min.css">
+    <script src="./ASSET/highlight.min.js"></script>
+    <script src="./ASSET/shared.js"></script>
+  </head>
+  <body onresize="controlMenu()" onload="init()">
+    <template id="tocTreeData" toc-tree-data='[{"name":"什么是VST","id":"gqtx0xmsa","url":"WhatIsVST.html","children":[{"name":"用例","url":"WhatIsVST.html#用例","id":"4jij71hdf","children":[]}]},{"name":"VST3的主要优点","id":"mtal3v87h","url":"MainBenefitsOfVST3.html","children":[]},{"name":"什么是VST3 SDK","id":"zcj61sxhc","url":"WhatIsTheVST3SDK.html","children":[]},{"name":"快速上手","id":"iryasrlpl","url":"GettingStarted.html","children":[{"name":"获取vst3-sdk","url":"GettingStarted.html#获取vst3-sdk","id":"b1utotc4d","children":[]},{"name":"在线文档","url":"GettingStarted.html#在线文档","id":"di362pplm","children":[]},{"name":"vst-3-forum","url":"GettingStarted.html#vst-3-forum","id":"8lh4s38d9","children":[]},{"name":"vstgui","url":"GettingStarted.html#vstgui","id":"6rmh01rtk","children":[]},{"name":"获取源代码","url":"GettingStarted.html#获取源代码","id":"otcwzw6x5","children":[]},{"name":"获取用于开发的-ide","url":"GettingStarted.html#获取用于开发的-ide","id":"6rifs95mj","children":[]},{"name":"package要求","url":"GettingStarted.html#package要求","id":"ymjq7kdif","children":[]},{"name":"获取cmake","url":"GettingStarted.html#获取cmake","id":"3oa7bcy7f","children":[]},{"name":"在-windows-上准备","url":"GettingStarted.html#在-windows-上准备","id":"hqjklarit","children":[]},{"name":"获取vst3宿主程序","url":"GettingStarted.html#获取vst3宿主程序","id":"l036l9ki6","children":[]}]},{"name":"教程","id":"68xurk99y","url":"Tutorials.html","children":[{"name":"构建sdk里面的示例项目","url":"Tutorials.html#构建sdk里面的示例项目","id":"6tdu8ah7q","children":[{"name":"part-1-获取和安装vst3-sdk","url":"Tutorials.html#part-1-获取和安装vst3-sdk","id":"i1zwj0b48","children":[]},{"name":"part-2-构建示例","url":"Tutorials.html#part-2-构建示例","id":"kld1vwx39","children":[]},{"name":"building-using-cmake-gui","url":"Tutorials.html#building-using-cmake-gui","id":"rcn10ful7","children":[]}]},{"name":"使用cmake来构建vst3插件","url":"Tutorials.html#使用cmake来构建vst3插件","id":"u67spaax3","children":[{"name":"用于构建-vst-3-插件的-cmake","url":"Tutorials.html#用于构建-vst-3-插件的-cmake","id":"ofunenenw","children":[]},{"name":"command-line-for-windows","url":"Tutorials.html#command-line-for-windows","id":"bruj95vma","children":[]},{"name":"command-line-for-macos","url":"Tutorials.html#command-line-for-macos","id":"aazwqo2jz","children":[]},{"name":"在-linux-上使用-qtcreator","url":"Tutorials.html#在-linux-上使用-qtcreator","id":"z26z47p83","children":[]},{"name":"cmake-gui-的使用","url":"Tutorials.html#cmake-gui-的使用","id":"bt6u8u8fb","children":[]},{"name":"可用的-smtg-cmake-选项","url":"Tutorials.html#可用的-smtg-cmake-选项","id":"om2ztupqp","children":[]},{"name":"使用-ide-编译示例","url":"Tutorials.html#使用-ide-编译示例","id":"2j8p5ho62","children":[]}]},{"name":"使用项目生成器生成一个新插件","url":"Tutorials.html#使用项目生成器生成一个新插件","id":"6pcg3eyhu","children":[{"name":"第-1-部分：获取和安装-vst-3-sdk","url":"Tutorials.html#第-1-部分：获取和安装-vst-3-sdk","id":"aat9i9xck","children":[]},{"name":"第-2-部分：使用vst-3-插件项目生成器应用","url":"Tutorials.html#第-2-部分：使用vst-3-插件项目生成器应用","id":"57i13aaeg","children":[]},{"name":"第-3-部分：编写你的插件","url":"Tutorials.html#第-3-部分：编写你的插件","id":"lq1l19937","children":[{"name":"添加参数-gain","url":"Tutorials.html#添加参数-gain","id":"nnggf07av","children":[]},{"name":"add-the-process-applying-the-gain","url":"Tutorials.html#add-the-process-applying-the-gain","id":"jddkf6xq9","children":[]},{"name":"添加存储恢复状态","url":"Tutorials.html#添加存储恢复状态","id":"8gzoffvcx","children":[]},{"name":"第-4-部分：高级步骤","url":"Tutorials.html#第-4-部分：高级步骤","id":"5vgz7bg4r","children":[]},{"name":"添加事件输入","url":"Tutorials.html#添加事件输入","id":"at9m2hvfj","children":[]},{"name":"添加单声道音频侧链","url":"Tutorials.html#添加单声道音频侧链","id":"pzjuii6up","children":[]}]}]},{"name":"使用vstgui设计一套用户界面","url":"Tutorials.html#使用vstgui设计一套用户界面","id":"ac5uqsf1j","children":[{"name":"第-1-部分：准备","url":"Tutorials.html#第-1-部分：准备","id":"x0r4g11zx","children":[]},{"name":"第-2-部分：打开-vstguiwyswyg-编辑器","url":"Tutorials.html#第-2-部分：打开-vstguiwyswyg-编辑器","id":"vuwkf3flv","children":[]},{"name":"第-3-部分：参数绑定","url":"Tutorials.html#第-3-部分：参数绑定","id":"mg1qs17xw","children":[]},{"name":"第-4-部分：创建自定义视图","url":"Tutorials.html#第-4-部分：创建自定义视图","id":"o30ciik7z","children":[]},{"name":"第-5-部分：展示例子","url":"Tutorials.html#第-5-部分：展示例子","id":"7x99gryz5","children":[]}]},{"name":"高级","url":"Tutorials.html#高级","id":"2omae5wvj","children":[{"name":"第-1-部分：样本精确参数处理","url":"Tutorials.html#第-1-部分：样本精确参数处理","id":"aycd4kstv","children":[]},{"name":"第-2-部分：添加-32-位和-64-位音频处理","url":"Tutorials.html#第-2-部分：添加-32-位和-64-位音频处理","id":"izn5nafg6","children":[]},{"name":"第-3-部分：线程安全状态更改","url":"Tutorials.html#第-3-部分：线程安全状态更改","id":"po99pf5g7","children":[]}]},{"name":"字符串转换工具","url":"Tutorials.html#字符串转换工具","id":"2qkme5hi4","children":[{"name":"将-string128-字符串转换为-utf-8-字符串","url":"Tutorials.html#将-string128-字符串转换为-utf-8-字符串","id":"5bdciq0l1","children":[]},{"name":"将-utf-8-字符串转换为-string128-字符串","url":"Tutorials.html#将-utf-8-字符串转换为-string128-字符串","id":"y8u796nfy","children":[]}]},{"name":"使用helloworld模板创建插件","url":"Tutorials.html#使用helloworld模板创建插件","id":"4yvuvaxlg","children":[{"name":"第-1-部分：获取和安装-vst-3-sdk-1","url":"Tutorials.html#第-1-部分：获取和安装-vst-3-sdk-1","id":"jxnd2ckhf","children":[]},{"name":"第-2-部分：使用helloworld模板","url":"Tutorials.html#第-2-部分：使用helloworld模板","id":"wf6k5966a","children":[]}]}]},{"name":"技术文档","id":"z5ngnb92b","url":"TechnicalDocumentation.html","children":[{"name":"api文档","url":"TechnicalDocumentation.html#api文档","id":"fg2p4hu92","children":[{"name":"基础概念","url":"TechnicalDocumentation.html#基础概念","id":"3q7hwavv7","children":[{"name":"初始化","url":"TechnicalDocumentation.html#初始化","id":"lpq08thbj","children":[]},{"name":"从宿主的角度创建和初始化","url":"TechnicalDocumentation.html#从宿主的角度创建和初始化","id":"rn14pjxbe","children":[]},{"name":"扩展","url":"TechnicalDocumentation.html#扩展","id":"l6drnwyu3","children":[]},{"name":"持久化","url":"TechnicalDocumentation.html#持久化","id":"6jymy3sty","children":[]}]},{"name":"处理部分","url":"TechnicalDocumentation.html#处理部分","id":"1h1ap8sfk","children":[]},{"name":"icomponent","url":"TechnicalDocumentation.html#icomponent","id":"hiaz46g3t","children":[]},{"name":"iaudioprocessor","url":"TechnicalDocumentation.html#iaudioprocessor","id":"3np20j0pk","children":[]},{"name":"the-editing-part","url":"TechnicalDocumentation.html#the-editing-part","id":"nn7upci4i","children":[]},{"name":"vst-3-threading-model","url":"TechnicalDocumentation.html#vst-3-threading-model","id":"vdb94dz2n","children":[]},{"name":"communication-between-the-components","url":"TechnicalDocumentation.html#communication-between-the-components","id":"h9pi73fde","children":[{"name":"standard-communication","url":"TechnicalDocumentation.html#standard-communication","id":"a2z6j7vmw","children":[]},{"name":"private-communication","url":"TechnicalDocumentation.html#private-communication","id":"pdlq51pu6","children":[]},{"name":"initialization-of-communication-from-host-point-of-view","url":"TechnicalDocumentation.html#initialization-of-communication-from-host-point-of-view","id":"m04skayve","children":[]}]}]},{"name":"vst模块体系","url":"TechnicalDocumentation.html#vst模块体系","id":"no2wucbg6","children":[{"name":"how-the-host-will-load-a-vst-ma-based-plug-in","url":"TechnicalDocumentation.html#how-the-host-will-load-a-vst-ma-based-plug-in","id":"iaauupvpi","children":[]},{"name":"how-to-derive-a-class-from-an-interface","url":"TechnicalDocumentation.html#how-to-derive-a-class-from-an-interface","id":"x9lbmprjt","children":[]},{"name":"interface-versions-and-inheritance","url":"TechnicalDocumentation.html#interface-versions-and-inheritance","id":"sgees7vik","children":[]}]},{"name":"parameters-and-automation","url":"TechnicalDocumentation.html#parameters-and-automation","id":"u0a7fa8iz","children":[{"name":"parameter-styles--step-count","url":"TechnicalDocumentation.html#parameter-styles--step-count","id":"txou7t2np","children":[]},{"name":"automation","url":"TechnicalDocumentation.html#automation","id":"00ro6ltdk","children":[]},{"name":"sliders--knobs","url":"TechnicalDocumentation.html#sliders--knobs","id":"h0yauxsvg","children":[]},{"name":"buttons--radio-groups--pop-up-menus","url":"TechnicalDocumentation.html#buttons--radio-groups--pop-up-menus","id":"x8bmyqtaw","children":[]},{"name":"text-input","url":"TechnicalDocumentation.html#text-input","id":"bopn615h8","children":[]},{"name":"informing-the-host-about-changes","url":"TechnicalDocumentation.html#informing-the-host-about-changes","id":"f3g4k9x3o","children":[]}]},{"name":"vst3单元","url":"TechnicalDocumentation.html#vst3单元","id":"fpu9f305l","children":[{"name":"介绍","url":"TechnicalDocumentation.html#介绍","id":"98bga19p4","children":[]},{"name":"单元细节","url":"TechnicalDocumentation.html#单元细节","id":"4gje8leg2","children":[]},{"name":"examples","url":"TechnicalDocumentation.html#examples","id":"tjgkl659i","children":[]}]},{"name":"预设和程序列表","url":"TechnicalDocumentation.html#预设和程序列表","id":"1k1taa8se","children":[{"name":"简单插件","url":"TechnicalDocumentation.html#简单插件","id":"damtqi35b","children":[]},{"name":"program-lists","url":"TechnicalDocumentation.html#program-lists","id":"5dm471c1y","children":[]}]},{"name":"复杂插件多音带乐器","url":"TechnicalDocumentation.html#复杂插件多音带乐器","id":"v0d1cl6pd","children":[{"name":"问题","url":"TechnicalDocumentation.html#问题","id":"7qg3sv0sf","children":[]},{"name":"the-simple-mode","url":"TechnicalDocumentation.html#the-simple-mode","id":"lenusotwz","children":[]},{"name":"multi-timbral-program-lists","url":"TechnicalDocumentation.html#multi-timbral-program-lists","id":"adbk7xxpg","children":[]},{"name":"units-and-tracks","url":"TechnicalDocumentation.html#units-and-tracks","id":"twkodfnne","children":[]},{"name":"routing","url":"TechnicalDocumentation.html#routing","id":"vfm1ox8uw","children":[]}]},{"name":"vst3工作流程图","url":"TechnicalDocumentation.html#vst3工作流程图","id":"m9pktgsfz","children":[{"name":"audio-processor-call-sequence","url":"TechnicalDocumentation.html#audio-processor-call-sequence","id":"h0uotswai","children":[]},{"name":"edit-controller-call-sequence","url":"TechnicalDocumentation.html#edit-controller-call-sequence","id":"czs9sjvmi","children":[]},{"name":"get-latency-call-sequences","url":"TechnicalDocumentation.html#get-latency-call-sequences","id":"3gvw3hdx5","children":[]},{"name":"resize-view-call-sequences","url":"TechnicalDocumentation.html#resize-view-call-sequences","id":"2p428g9ka","children":[]},{"name":"bus-arrangement-setting-sequences","url":"TechnicalDocumentation.html#bus-arrangement-setting-sequences","id":"20hrplb3e","children":[]}]},{"name":"vst-3-locations--format","url":"TechnicalDocumentation.html#vst-3-locations--format","id":"0v5423bjb","children":[{"name":"插件的格式结构","url":"TechnicalDocumentation.html#插件的格式结构","id":"h6m951n5p","children":[{"name":"for-the-macos-platform","url":"TechnicalDocumentation.html#for-the-macos-platform","id":"cj9vo6abv","children":[]},{"name":"for-the-windows-platform","url":"TechnicalDocumentation.html#for-the-windows-platform","id":"w7tz67m0h","children":[]},{"name":"for-the-linux-platform","url":"TechnicalDocumentation.html#for-the-linux-platform","id":"nuizqnqf8","children":[]},{"name":"merged-bundle","url":"TechnicalDocumentation.html#merged-bundle","id":"8y66z2nt3","children":[]}]}]},{"name":"插件位置","url":"TechnicalDocumentation.html#插件位置","id":"mf9r93mpo","children":[{"name":"介绍-1","url":"TechnicalDocumentation.html#介绍-1","id":"p4g2hr5dh","children":[{"name":"on-macos-platform","url":"TechnicalDocumentation.html#on-macos-platform","id":"y3cwywib3","children":[]},{"name":"on-windows-platform","url":"TechnicalDocumentation.html#on-windows-platform","id":"eq0gbniu8","children":[]},{"name":"on-linux-platform","url":"TechnicalDocumentation.html#on-linux-platform","id":"uz9ao99ig","children":[]}]}]},{"name":"预设格式","url":"TechnicalDocumentation.html#预设格式","id":"n3xz7if1u","children":[]},{"name":"预设位置","url":"TechnicalDocumentation.html#预设位置","id":"prhqzgqh4","children":[{"name":"介绍-2","url":"TechnicalDocumentation.html#介绍-2","id":"fnx6hg68a","children":[{"name":"for-mac-platform","url":"TechnicalDocumentation.html#for-mac-platform","id":"uqmtjh3i2","children":[]},{"name":"for-windows-xp2000-platform","url":"TechnicalDocumentation.html#for-windows-xp2000-platform","id":"zg1m6cizf","children":[]},{"name":"for-windows-vista7810-platform","url":"TechnicalDocumentation.html#for-windows-vista7810-platform","id":"8hov152vf","children":[]},{"name":"for-linux-platform","url":"TechnicalDocumentation.html#for-linux-platform","id":"o93pb6rtt","children":[]}]}]},{"name":"快照","url":"TechnicalDocumentation.html#快照","id":"b1u2odbsg","children":[{"name":"介绍-3","url":"TechnicalDocumentation.html#介绍-3","id":"agxrm8z85","children":[]},{"name":"examples-1","url":"TechnicalDocumentation.html#examples-1","id":"nxa1xyauo","children":[{"name":"again","url":"TechnicalDocumentation.html#again","id":"r76rek78k","children":[]},{"name":"音符音调合成器","url":"TechnicalDocumentation.html#音符音调合成器","id":"s532v5y95","children":[]},{"name":"how-cubase-uses-snapshots","url":"TechnicalDocumentation.html#how-cubase-uses-snapshots","id":"g868qpjw0","children":[]}]}]},{"name":"vst3里的midi","url":"TechnicalDocumentation.html#vst3里的midi","id":"epybz3bj2","children":[{"name":"related-concepts-in-midi-and-vst-3","url":"TechnicalDocumentation.html#related-concepts-in-midi-and-vst-3","id":"98f6pbfru","children":[]},{"name":"midi-20-per-note-controllers","url":"TechnicalDocumentation.html#midi-20-per-note-controllers","id":"j8zo4jpm9","children":[]},{"name":"midi-20-increased-resolution-compared-to-midi-10","url":"TechnicalDocumentation.html#midi-20-increased-resolution-compared-to-midi-10","id":"9i4j947as","children":[]}]}]},{"name":"常见问题","id":"arb9an0yh","url":"FrequentlyAskedQuestions.html","children":[{"name":"交流","url":"FrequentlyAskedQuestions.html#交流","id":"gjauwc09f","children":[]},{"name":"processing","url":"FrequentlyAskedQuestions.html#processing","id":"gml0rbsfe","children":[]},{"name":"gui-editor","url":"FrequentlyAskedQuestions.html#gui-editor","id":"4sy6a0u1t","children":[]},{"name":"compatibility-with-vst-2x-or-vst-1","url":"FrequentlyAskedQuestions.html#compatibility-with-vst-2x-or-vst-1","id":"gm59jy18p","children":[]},{"name":"persistence","url":"FrequentlyAskedQuestions.html#persistence","id":"nu5x4bm5r","children":[]},{"name":"miscellaneous","url":"FrequentlyAskedQuestions.html#miscellaneous","id":"mw628ez72","children":[]},{"name":"license","url":"FrequentlyAskedQuestions.html#license","id":"zok4ge2zv","children":[]}]},{"name":"VST论坛","id":"8unpqwxku","url":"VST3Forum.html","children":[]},{"name":"其他","id":"pf304d4cl","url":"Miscellaneous.html","children":[{"name":"vst3-sdk里关于版权商标的说明","url":"Miscellaneous.html#vst3-sdk里关于版权商标的说明","id":"g616cgt0m","children":[]},{"name":"术语表","url":"Miscellaneous.html#术语表","id":"you7w5vg1","children":[]}]}]'></template>
+    <div id="menu">
+      <div class="menu-box">
+        <div id="toc">
+        </div>
+      </div>
+      <div class="menu-bottom">
+        <a href="https://github.com/SamNofee/vst-cn-doc">Github</a><a href="/">首页</a>
+      </div>
+    </div>
+    <div id="ball" onclick="controlMenu(true)">
+      <div class="ball-icon"></div>
+    </div>
+    <div class="article-body">
+      <article class="markdown-body" style="padding-bottom: 100px;"><h1 id="教程">教程</h1>
+<h2 id="构建sdk里面的示例项目">构建SDK里面的示例项目</h2>
+<p>本教程介绍了如何设置计算机，为<strong>VST 3</strong>内置的音频插件示例项目创建编译环境 ，内置的插件包括简单的 DSP 效果（增益、压缩器、延迟等）插件、合成器乐器插件等。通过这些操作你可以了解插件是如何实现某些特定的<strong>VST 3</strong>功能的。（音符表达、程序更改、频道信息上下文等）</p>
+<p>它们可以加载到支持 <strong>VST 3</strong> 的宿主中，例如 Cubase、WaveLab、...</p>
+<h3 id="part-1-获取和安装vst3-sdk"><strong>Part 1: 获取和安装VST3 SDK</strong></h3>
+<p>关于下载SDK，你可以参阅这部分：&quot;<a href="https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3">如何为VST3设置我的系统</a>&quot;</p>
+<p>从以下位置下载 cmake：<a href="https://cmake.org/download/">https://cmake.org/download/</a> 或为你的操作系统使用包管理器。</p>
+<h3 id="part-2-构建示例">Part 2: 构建示例</h3>
+<p><strong>在Windows上构建示例</strong></p>
+<ul>
+<li>为了构建示例，你需要新建一个文件夹，并移动到这个文件夹（使用cd命令）：</li>
+</ul>
+<pre><code>mkdir build
+cd build
+</code></pre>
+<ul>
+<li>生成解决方案/项目：指定CMakeLists.txt所在项目的路径：</li>
+</ul>
+<pre><code>cmake.exe -G &quot;Visual Studio 16 2019&quot; -A x64 ../vst3sdk
+  or without symbolic links
+cmake.exe -G &quot;Visual Studio 16 2019&quot; -A x64 ../vst3sdk -SMTG_CREATE_PLUGIN_LINK=0
+</code></pre>
+<p>注意：你可以在 cmake 在线文档 (<a href="https://cmake.org/documentation/">https://cmake.org/documentation/</a>) 中找到不同于 Visual Studio 生成器的命令。</p>
+<ul>
+<li>构建插件 (你也可以使用Visual Studio):</li>
+</ul>
+<pre><code>msbuild.exe vstsdk.sln
+ (or alternatively for example for release)
+ 
+cmake --build . --config Release
+</code></pre>
+<p><strong>在macOS上构建项目</strong></p>
+<ul>
+<li>为了构建示例，你需要新建一个文件夹，并移动到这个文件夹（使用cd命令）：</li>
+</ul>
+<pre><code>mkdir build
+cd build
+</code></pre>
+<ul>
+<li>生成解决方案/项目：指定CMakeLists.txt所在项目的路径：
+ For XCode:</li>
+</ul>
+<pre><code>cmake -GXcode ../vst3sdk
+</code></pre>
+<p>Without XCode (here debug variant):</p>
+<pre><code>cmake -DCMAKE_BUILD_TYPE=Debug ../
+</code></pre>
+<ul>
+<li>Build the plug-in (you can use XCode too):</li>
+</ul>
+<pre><code class="language-shell">xcodebuild
+ (or alternatively for example for release)
+ 
+cmake --build . --config Release
+</code></pre>
+<p><strong>在 Linux 上构建示例</strong></p>
+<ul>
+<li>安装所需的软件包：<a href="https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3#HowtosetupmysystemforVST3-setup_linux">所需的包</a></li>
+<li>为了构建示例，你需要新建一个文件夹，并移动到这个文件夹（使用cd命令）：</li>
+</ul>
+<pre><code>mkdir build
+cd build
+</code></pre>
+<ul>
+<li>生成解决方案/项目：指定CMakeLists.txt所在项目的路径：</li>
+</ul>
+<pre><code>cmake ../vst3sdk
+</code></pre>
+<ul>
+<li>Build the plug-in:</li>
+</ul>
+<pre><code class="language-shell">make
+(or alternatively for example for release)
+ 
+cmake --build . --config Release
+</code></pre>
+<h3 id="building-using-cmake-gui">Building using cmake-gui</h3>
+<ul>
+<li>启动 cmake-gui 应用程序，它是 cmake 安装包的一部分 (<a href="https://cmake.org/download/">https://cmake.org/download/</a>)</li>
+</ul>
+<p><img src="IMAGE/cmakeguipng.png" alt="img"></p>
+<ul>
+<li>&quot;<strong>Browse Source...</strong>&quot;: select the folder VST3_SDK</li>
+<li>&quot;<em><strong>Browse Build...</strong></em>&quot;: select a folder where the outputs (projects/...) will be created. Typically a folder named &quot;build&quot;</li>
+<li>you can check the <em><strong>SMTG</strong> Options</em></li>
+<li>Press &quot;<em><strong>Configure</strong></em>&quot; and choose the generator in the window that opens: for example &quot;<strong>Visual Studio 16 2019</strong>&quot;</li>
+</ul>
+<p><img src="IMAGE/setup.png" alt="img"></p>
+<ul>
+<li>Press &quot;<em><strong>Generate</strong></em>&quot; to create the project</li>
+<li>Open your targeted IDE, and compile the solution/project.</li>
+</ul>
+<h2 id="使用cmake来构建vst3插件">使用Cmake来构建VST3插件</h2>
+<h3 id="用于构建-vst-3-插件的-cmake">用于构建 VST 3 插件的 CMake</h3>
+<p>SDK 提供了一组 cmake 文件，它帮你编译SKD里面的示例和开发新插件。</p>
+<ul>
+<li>从以下位置下载 cmake：<a href="https://cmake.org/"> https://cmake.org</a>或为你的操作系统使用包管理器（请参阅<a href="https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3">如何为 VST 3 设置我的系统</a>）。</li>
+<li>您可以使用命令行或 cmake 编辑器 (<a href="https://cmake.org/download/">cmake-gui</a>)。</li>
+</ul>
+<h3 id="command-line-for-windows">Command line for Windows</h3>
+<p>Example for building &quot;<strong>Microsoft Studio 16 2019</strong>&quot; solution:</p>
+<pre><code class="language-shell">// go in to the folder where you extracted the VST 3 SDK
+mkdir build
+cd build
+cmake.exe -G &quot;Visual Studio 16 2019&quot; -A x64 &quot;..\vst3sdk&quot;
+//  or without symbolic links
+cmake.exe -G &quot;Visual Studio 16 2019&quot; -A x64 &quot;..\vst3sdk&quot; -SMTG_CREATE_PLUGIN_LINK=0
+ 
+// note: you can find the string definition for different Visual Studio Generators in the cmake online documentation
+</code></pre>
+<h3 id="command-line-for-macos">Command line for macOS</h3>
+<p>Example for building <strong>Xcode</strong> project:</p>
+<pre><code>// go in to the folder where you extracted the VST 3 SDK
+mkdir build
+cd build
+/Applications/CMake.app/Content/bin/cmake -G&quot;Xcode&quot; &quot;../vst3sdk&quot;
+</code></pre>
+<h3 id="在-linux-上使用-qtcreator">在 Linux 上使用 QtCreator</h3>
+<p>您可以使用 <strong>QtCreator</strong> 2.3.1（或更高版本）</p>
+<pre><code>启动 QtCreator 2.3.2
+打开位于 VST 3 SDK 文件夹的 CMakeLists.txt
+点击菜单 Build-&gt;Run CMake
+</code></pre>
+<h3 id="cmake-gui-的使用">cmake-gui 的使用</h3>
+<pre><code>start the CMake (cmake-gui) application
+set &quot;Where is the source code&quot; to the location of the &quot;VST3_SDK&quot; folder
+set &quot;Where to build the binaries&quot; to a build folder of your choice
+click on &quot;Configure&quot;
+click on &quot;Generate&quot; for creating project/solution
+</code></pre>
+<p><img src="IMAGE/cmakeGui.jpg" alt="img"></p>
+<p>Windows 上的 cmakegui 应用程序示例</p>
+<ul>
+<li>使用cmake命令行编译</li>
+</ul>
+<pre><code>cd build
+cmake --build
+</code></pre>
+<ul>
+<li>Choose a specific compiler with cmake (command line on Linux)</li>
+</ul>
+<pre><code>cmake -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++
+or
+cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++
+</code></pre>
+<h3 id="可用的-smtg-cmake-选项">可用的 SMTG cmake 选项</h3>
+<ul>
+<li><strong>SMTG_AAX_SDK_PATH</strong>: Here you can define where the AAX SDK is located (if needed)</li>
+<li><strong>SMTG_ADD_VST3_HOSTING_SAMPLES</strong>: Add VST3 hosting samples to the solution (default ON)</li>
+<li><strong>SMTG_ADD_VST3_PLUGINS_SAMPLES</strong>: Add VST3 plug-in samples to the project (default ON)</li>
+<li><strong>SMTG_ADD_VSTGUI</strong>: Add VSTGUI support (default ON)</li>
+<li><strong>SMTG_BUILD_UNIVERSAL_BINARY</strong>: Build universal binary (32 &amp; 64 bit) (Mac only)</li>
+<li><strong>SMTG_COREAUDIO_SDK_PATH</strong>: Here you can define where the COREAUDIO SDK is located (Mac only, if needed)</li>
+<li><strong>SMTG_CREATE_BUNDLE_FOR_WINDOWS</strong>: Create bundle on Windows for the <a href="file:///C:/Users/YGrabit/Desktop/SDKs/VST3_SDKs/3.7/VST_SDK/VST3_SDK/vst3_doc/vstsdk/namespaceVST3.html">VST3</a> plug-ins (new since 3.6.10! Windows only) (default ON)</li>
+<li><strong>SMTG_CREATE_PLUGIN_LINK</strong>: Create symbolic link for each <a href="file:///C:/Users/YGrabit/Desktop/SDKs/VST3_SDKs/3.7/VST_SDK/VST3_SDK/vst3_doc/vstsdk/namespaceVST3.html">VST3</a> plug-in in ${VST3_FOLDER_NAME} folder (you need to have Administrator rights on Windows or change the Local Group Policy to allow the creation of symbolic links) (default ON)</li>
+<li><strong>SMTG_CREATE_VST2_AGAIN_SAMPLE_VERSION</strong>: Allows you to create the VST2 version of the Sample Plug-in AGain, be sure that you have copied the VST2 interfaces into the folder VST_SDK/VST3_SDK/pluginterfaces/vst2.x (default OFF)</li>
+<li><strong>SMTG_CUSTOM_BINARY_LOCATION</strong>: Customize output location for binaries</li>
+<li><strong>SMTG_CXX_STANDARD</strong>: C++ standard version used for plugins: 14, 17, 20</li>
+<li><strong>SMTG_ENABLE_ADDRESS_SANITIZER</strong>: Enable Address Sanitizer</li>
+<li><strong>SMTG_ENABLE_TARGET_VARS_LOG</strong>: Enables to log target variables for debugging (new since 3.6.11!) (default OFF)</li>
+<li><strong>SMTG_ENABLE_USE_OF_JACK</strong>: Allows you to create the audiohost application using Jack (default OFF)</li>
+<li><strong>SMTG_MDA_VST3_VST2_COMPATIBLE</strong>: Build the MDA examples as a replacement for their VST2 counterpart (default ON)</li>
+<li><strong>SMTG_IOS_DEVELOPMENT_TEAM</strong>: Needed for building the InterAppAudio and AUv3 examples for iOS (Mac only)</li>
+<li><strong>SMTG_MYPLUGINS_SRC_PATH</strong>: Here you can add your VST3 plug-ins folder</li>
+<li><strong>SMTG_PLUGIN_TARGET_PATH</strong>: Here you can redefine the VST3 plug-ins folder</li>
+<li><strong>SMTG_RENAME_ASSERT</strong>: Rename ASSERT to SMTG_ASSERT to avoid conflicts with 3rd party libraries (default ON)</li>
+<li><strong>SMTG_RUN_VST_VALIDATOR</strong>: Run the VST validator on VST3 plug-ins each time they are built (default ON)</li>
+<li><strong>SMTG_USE_STATIC_CRT</strong>: Use static CRuntime on Windows (option /MT) (default OFF) (Windows only)</li>
+</ul>
+<p><strong>在 Windows 上准备</strong></p>
+<p>使用 SDK 中包含的 <a href="https://cmake.org/">cmake</a> 生成的 VST3 Microsoft Visual Studio 项目将默认为 <a href="https://developer.steinberg.help/display/VST/Plug-in+Locations">官方 VST3 文件夹</a>中的每个内置插件创建symbolic链接，为了在 Windows 上运行，您必须调整 Windows 的组策略。看 <a href="https://developer.steinberg.help/display/VST/Preparation+on+Windows">这里</a>!</p>
+<p>如果您不想创建此链接，请使用此参数调用 <a href="https://cmake.org/">cmake</a>：</p>
+<pre><code>-SMTG_CREATE_PLUGIN_LINK=0
+</code></pre>
+<h3 id="使用-ide-编译示例">使用 IDE 编译示例</h3>
+<ul>
+<li>solution/project (vstsdk.sln/vstsdk.xcodeproj) is generated in the &quot;build&quot; folder.</li>
+<li>the created plug-ins are located in the &quot;build&quot; folder, in sub-folders <em><strong>/VST3/Release</strong></em> or <em><strong>/VST3/Debug</strong></em>.</li>
+<li>In order to allow a DAW to find these plug-ins you have to create links from the official <a href="https://developer.steinberg.help/pages/viewpage.action?pageId=9798275">VST3 Locations</a> to them.</li>
+</ul>
+<h2 id="使用项目生成器生成一个新插件">使用项目生成器生成一个新插件</h2>
+<h3 id="第-1-部分：获取和安装-vst-3-sdk">第 1 部分：获取和安装 VST 3 SDK</h3>
+<p>SDK的下载请参见“<a href="https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3">如何为 VST 3 设置我的系统</a>”。</p>
+<p>你可以通过以下方式开始一个新项目：</p>
+<ul>
+<li>你可以使用 <strong>VST SDK</strong> 中包含的 <a href="https://developer.steinberg.help/display/VST/Creating+a+plug-in+from+the+Helloworld+template"><strong>helloworld</strong> 模板</a> 并将该文件夹复制到一个新文件夹中。修改注释中提到的每个文件。</li>
+<li>使用 <strong>VST SDK 中包含的 <strong>VST3 Project Generator</strong> 应用程序来开发会更简单和值得推荐。</strong>以下步骤显示了如何使用它。</li>
+</ul>
+<hr>
+<h3 id="第-2-部分：使用vst-3-插件项目生成器应用">第 2 部分：使用<a href="https://developer.steinberg.help/display/VST/VST+3+Project+Generator">VST 3 插件<strong>项目生成器</strong></a>应用</h3>
+<p><strong>VST SDK</strong> 中包含的 <a href="https://developer.steinberg.help/display/VST/VST+3+Project+Generator"><strong>VST3 Project Generator</strong></a> 应用程序可用于 Windows 和 macOS。</p>
+<p>启动位于 <strong>VST SDK</strong>的 <em>VST3_Project_Generator</em> 文件夹中的应用程序。</p>
+<p>检查<strong>Preferences</strong>选项卡是否具有所需的信息：请参阅<a href="https://developer.steinberg.help/display/VST/VST+3+Project+Generator#VST3ProjectGenerator-SettingthePreferences">Setting the Preferences</a>。</p>
+<p>在 <strong>Create Plug-in Project</strong> 选项卡中，您必须输入要创建插件的相关信息：</p>
+<p><img src="IMAGE/createproject.PNG" alt="img"></p>
+<p>查看<a href="https://developer.steinberg.help/display/VST/VST+3+Project+Generator">Create Plug-in Project</a> 对话框的<a href="https://developer.steinberg.help/display/VST/VST+3+Project+Generator#VST3ProjectGenerator-CreatePlug-inProject">VST 3 Project Generator</a> 选项卡以获取更详细的文档。</p>
+<p>输入所有信息后，单击<strong>创建</strong>这会启动一个脚本，这个脚本会用已更改的文件创建一个项目并输出到Output文件夹。进行这一步之后, IDE (<a href="https://visualstudio.microsoft.com/">Visual Studio</a> or <a href="https://developer.apple.com/xcode/">XCode</a>) 就会启动。</p>
+<p>编译项目并测试您的新插件。该插件在<em>Output文件夹</em>中创建，为了使其对<strong>VST 3</strong>宿主可见，你可能需要将其复制或链接到&lt; g3&gt;VST 3 Locations / Format](<a href="https://developer.steinberg.help/pages/viewpage.action?pageId=9798275)%E3%80%82">https://developer.steinberg.help/pages/viewpage.action?pageId=9798275)。</a></p>
+<p>例如，如果你选择<strong>音效</strong>创建了一个简单的 Stereo→Stereo 插件。</p>
+<p>了解 <strong>VST 3</strong> 插件如何工作的一个好方法是在处理器和控制器文件的每个函数中添加断点：</p>
+<pre><code>tresult PLUGIN_API MyPluginController::initialize (FUnknown* context);
+tresult PLUGIN_API MyPluginController::terminate ();
+//...
+tresult PLUGIN_API MyPluginProcessor::initialize (FUnknown* context);
+//...
+</code></pre>
+<p>并且启动一个基于调试器的<strong>VST 3</strong>主机。</p>
+<h3 id="第-3-部分：编写你的插件">第 3 部分：编写你的插件</h3>
+<p>现在你有一个自动生成的插件框架。以下部分解释了如何添加新参数、相关联的处理算法以及其他特定功能，例如保存/加载项目或预设、创建专属用户界面等。</p>
+<p><strong>VST 3</strong> 插件包含两个主要类： <em>PlugProcessor</em>（进行处理和持久化）和它的 <em>PlugController</em>（负责与DAW交互、处理参数和 UI）。</p>
+<h4 id="添加参数-gain">添加参数: Gain</h4>
+<p>在这个基本插件示例中，我们将添加一个Gain参数，该参数可以修改传输进来的音频音量。</p>
+<p>为此，<strong>VST 3</strong>参数需要一个唯一的标识符（一个数字）。</p>
+<ol>
+<li>打开文件 pluginids.h 并输入一个新的 ID <em>kParamGainId。</em> 在本例中，分配唯一编号 102。</li>
+</ol>
+<p><strong>plugids.h</strong></p>
+<pre><code class="language-c++">#include &quot;pluginterfaces/vst/vsttypes.h&quot;
+ 
+enum GainParams : Steinberg::Vst::ParamID
+{
+    kParamGainId = 102, // should be an unique id...
+};
+</code></pre>
+<ol start="2">
+<li>Open the plugcontroller.cpp file, and add the gain parameter with the <em>parameters.addParameter</em></li>
+</ol>
+<p><strong>plugcontroller.cpp</strong></p>
+<pre><code class="language-c++">#include &quot;myplugincids.h&quot;
+ 
+//-----------------------------------------------------------------------------
+tresult PLUGIN_API PlugController::initialize (FUnknown* context)
+{
+    tresult result = EditController::initialize (context);
+    if (result != kResultOk)
+    {
+        return result;
+    }
+ 
+    //---Create Parameters------------
+    parameters.addParameter (STR16 (&quot;Gain&quot;), STR16 (&quot;dB&quot;), 0, .5, Vst::ParameterInfo::kCanAutomate, GainParams::kParamGainId, 0);
+ 
+    return kResultTrue;
+}
+</code></pre>
+<blockquote>
+<p>Note</p>
+<ul>
+<li>我们添加标志：<a href="https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ae3a5143ca8d0e271dbc259645a4ae645af38562ef6dde00a339d67f9be4ec3a31"><em>kCanAutomate</em></a>，它会通知 DAW/宿主这个参数可以自动化。</li>
+<li><strong>VST 3</strong> 参数总是标准化的（它的值是一个介于 [0到1]之间的浮点值），这里它的默认值设置为 0.5。</li>
+</ul>
+</blockquote>
+<ol start="3">
+<li>现在为这个新参数修改处理器。打开文件 <em>plugprocessor.h</em> 并添加增益值 <strong>Vst::ParamValue mGain</strong>。该值用于Gain的处理。</li>
+</ol>
+<p><strong>plugprocessor.h</strong></p>
+<pre><code class="language-c++">// ... 
+static FUnknown* createInstance (void*)
+{
+    return (Steinberg::Vst::IAudioProcessor*)new PlugProcessor ();
+}
+protected:
+    Steinberg::Vst::ParamValue mGain = 1.;
+// ...
+</code></pre>
+<h4 id="add-the-process-applying-the-gain">Add the process applying the gain</h4>
+<ol>
+<li>我们需要设置我们的内部<strong>mGain</strong>，其值来自宿主。这是处理方法的第一步。解析结构体中来自宿主的参数变化<em>data.inputParameterChanges</em>用于当前要处理的音频块。Be sure that you have added at top of the file plugprocessor.cpp <strong>&quot;#include &quot;public.sdk/source/vst/vstaudioprocessoralgo.h&quot;</strong>!This includes some helpers to access audio buffer.</li>
+</ol>
+<p><strong>plugprocessor.cpp</strong></p>
+<pre><code class="language-c++">#include &quot;pluginterfaces/vst/ivstparameterchanges.h&quot;
+#include &quot;public.sdk/source/vst/vstaudioprocessoralgo.h&quot;
+ 
+//-----------------------------------------------------------------------------
+tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData&amp; data)
+{
+    //--- First : Read inputs parameter changes-----------
+    if (data.inputParameterChanges)
+    {
+        // for each parameter defined by its ID
+        int32 numParamsChanged = data.inputParameterChanges-&gt;getParameterCount ();
+        for (int32 index = 0; index &lt; numParamsChanged; index++)
+        {
+            // for this parameter we could iterate the list of value changes (could 1 per audio block or more!)
+            // in this example we get only the last value (getPointCount - 1)
+            Vst::IParamValueQueue* paramQueue = data.inputParameterChanges-&gt;getParameterData (index);
+            if (paramQueue)
+            {
+                Vst::ParamValue value;
+                int32 sampleOffset;
+                int32 numPoints = paramQueue-&gt;getPointCount ();
+                switch (paramQueue-&gt;getParameterId ())
+                {
+                    case GainParams::kParamGainId:
+                        if (paramQueue-&gt;getPoint (numPoints - 1, sampleOffset, value) == kResultTrue)
+                            mGain = value;
+                        break;
+                }
+            }
+        }
+    }
+    // ....
+}
+</code></pre>
+<blockquote>
+<p><strong>data.inputParameterChanges</strong> can include more than <strong>1</strong> change for the same parameter inside a processing audio block. Here we take only the last change in the list and apply it our <strong>mGain</strong>.</p>
+</blockquote>
+<ol start="2">
+<li>The real processing part:</li>
+</ol>
+<p><strong>plugprocessor.cpp</strong></p>
+<pre><code class="language-c++">// ...
+ 
+//-- Flush case: we only need to update parameter, no processing possible
+if (data.numInputs == 0 || data.numSamples == 0)
+    return kResultOk;
+ 
+//--- Here you have to implement your processing
+int32 numChannels = data.inputs[0].numChannels;
+ 
+//---get audio buffers using helper-functions (vstaudioprocessoralgo.h)-------------
+uint32 sampleFramesSize = getSampleFramesSizeInBytes (processSetup, data.numSamples);
+void** in = getChannelBuffersPointer (processSetup, data.inputs[0]);
+void** out = getChannelBuffersPointer (processSetup, data.outputs[0]);
+ 
+// Here could check the silent flags
+// now we will produce the output
+// mark our outputs has not silent
+data.outputs[0].silenceFlags = 0;
+ 
+float gain = mGain;
+// for each channel (left and right)
+for (int32 i = 0; i &lt; numChannels; i++)
+{
+    int32 samples = data.numSamples;
+    Vst::Sample32* ptrIn = (Vst::Sample32*)in[i];
+    Vst::Sample32* ptrOut = (Vst::Sample32*)out[i];
+    Vst::Sample32 tmp;
+    // for each sample in this channel
+    while (--samples &gt;= 0)
+    {
+        // apply gain
+        tmp = (*ptrIn++) * gain;
+        (*ptrOut++) = tmp;
+    }
+}
+//...
+</code></pre>
+<ol start="3">
+<li><strong>VST 3</strong>包含一种宿主让插件静音的方式（使用<strong>VST 3</strong><a href="https://developer.steinberg.help/display/VST/Frequently+Asked+Questions">的静音标志</a>)：</li>
+</ol>
+<p><strong>plugprocessor.cpp</strong></p>
+<pre><code class="language-c++">    // Here could check the silent flags
+    //---check if silence---------------
+    // normally we have to check each channel (simplification)
+    if (data.inputs[0].silenceFlags != 0)
+    {
+        // mark output silence too
+        data.outputs[0].silenceFlags = data.inputs[0].silenceFlags;
+ 
+        // the Plug-in has to be sure that if it sets the flags silence that the output buffer are clear
+        for (int32 i = 0; i &lt; numChannels; i++)
+        {
+           // do not need to be cleared if the buffers are the same (in this case input buffer are
+            // already cleared by the host)
+            if (in[i] != out[i])
+            {
+                memset (out[i], 0, sampleFramesSize);
+            }
+        }
+        // nothing to do at this point
+        return kResultOk;
+    }
+</code></pre>
+<h4 id="添加存储恢复状态">添加存储/恢复状态</h4>
+<p><em>Processor</em>代表插件的状态，所以它的工作是实现<strong>getState</strong>/<strong>setState</strong>，用于保存/加载项目和预设。</p>
+<ol>
+<li>在<em>plugprocessor.cpp</em>中给宿主提供的状态流添加<strong>mGain</strong>值，getState方法会将其另存为项目或预设。</li>
+</ol>
+<p><strong>plugprocessor.cpp</strong></p>
+<pre><code class="language-c++">//------------------------------------------------------------------------
+tresult PLUGIN_API PlugProcessor::getState (IBStream* state)
+{
+    // here we need to save the model (preset or project)
+    float toSaveParam1 = mGain;
+    IBStreamer streamer (state, kLittleEndian);
+    streamer.writeFloat (toSaveParam1);
+    return kResultOk;
+}
+</code></pre>
+<ol start="2">
+<li>In the <strong>setState</strong> () method, the plug-in receives a new state (called after a project or preset is loaded) from the host.</li>
+</ol>
+<p><strong>plugprocessor.cpp</strong></p>
+<pre><code class="language-c++">//------------------------------------------------------------------------
+tresult PLUGIN_API PlugProcessor::setState (IBStream* state)
+{
+    if (!state)
+        return kResultFalse;
+    // called when we load a preset or project, the model has to be reloaded
+    IBStreamer streamer (state, kLittleEndian);
+    float savedParam1 = 0.f;
+    if (streamer.readFloat (savedParam1) == false)
+        return kResultFalse;
+    mGain = savedParam1;
+ 
+    return kResultOk;
+}
+</code></pre>
+<hr>
+<h4 id="第-4-部分：高级步骤">第 4 部分：高级步骤</h4>
+<h4 id="添加事件输入">添加事件输入</h4>
+<p>在我们的示例中，我们希望使用“MIDI”事件 (noteOn) 来修改当前的增益系数。</p>
+<ol>
+<li>如果你需要在你的插件中接收音频和事件(如 MIDI)，你需要添加一个事件输入。For this you just have to add in , in order to do this call in the <strong>initialize()</strong> method of the processor <a href="https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1AudioEffect.html#a98a16757564b1a077d82e2b2decc2ad8">addEventInput</a>:</li>
+</ol>
+<p><strong>plugprocessor.cpp</strong></p>
+<pre><code class="language-c++">//------------------------------------------------------------------------
+tresult PLUGIN_API PlugProcessor::initialize (FUnknown* context)
+{
+    //---always initialize the parent-------
+    tresult result = AudioEffect::initialize (context);
+    // if everything Ok, continue
+    if (result != kResultOk)
+    {
+        return result;
+    }
+ 
+    //....
+
+    //---create Event In/Out busses (1 bus with only 1 channel)------
+    addEventInput (STR16 (&quot;Event In&quot;), 1);
+ 
+    return kResultOk;
+}
+</code></pre>
+<blockquote>
+<p>在本例中，我们添加了 1 个输入事件总线，仅在 1 个通道上接收。如果你需要接收来自不同的通道的差异化事件，只需像这样改变它：</p>
+</blockquote>
+<p>addEventInput (STR16 (&quot;Event In&quot;), 4); // here 4 channels</p>
+<ol start="2">
+<li>我们创建了一个新的内部值 mGainReduction（不导出到宿主），该值会根据传入的 noteOn 的力度而改变，因此你击打MIDI音符面板越用力，增益削减就越厉害（这就是我们在这里想要的）：</li>
+</ol>
+<p><strong>plugprocessor.h</strong></p>
+<pre><code class="language-c++">// ... 
+static FUnknown* createInstance (void*)
+{
+    return (Steinberg::Vst::IAudioProcessor*)new PlugProcessor ();
+}
+protected:
+    Steinberg::Vst::ParamValue mGain= 1.;
+    Steinberg::Vst::ParamValue mGainReduction = 0.;
+ 
+// ...
+</code></pre>
+<ol start="3">
+<li>Now we have to receive the event changes in the process method:</li>
+</ol>
+<p><strong>plugprocessor.cpp</strong></p>
+<pre><code class="language-c++">//------------------------------------------------------------------------
+tresult PLUGIN_API PlugProcessor::process (ProcessData&amp; data)
+{
+    //--- First : Read inputs parameter changes-----------
+    //...
+ 
+    //---Second : Read input events-------------
+    // get the list of all event changes
+    Vst::IEventList* eventList = data.inputEvents;
+    if (eventList)
+    {
+        int32 numEvent = eventList-&gt;getEventCount ();
+        for (int32 i = 0; i &lt; numEvent; i++)
+        {
+            Vst::Event event;
+            if (eventList-&gt;getEvent (i, event) == kResultOk)
+            {
+                // here we do not take care of the channel info of the event
+                switch (event.type)
+                {
+                    //----------------------
+                    case Vst::Event::kNoteOnEvent:
+                        // use the velocity as gain modifier: a velocity max (1) will lead to silent audio
+                        mGainReduction = event.noteOn.velocity; // value between 0 and 1
+                        break;
+                     
+                    //----------------------
+                    case Vst::Event::kNoteOffEvent:
+                        // noteOff reset the gain modifier
+                        mGainReduction = 0.f;
+                        break;
+                }
+            }
+        }
+    }
+</code></pre>
+<ol start="4">
+<li>在我们的处理中使用这个 mGainReduction：</li>
+</ol>
+<p><strong>plugprocessor.cpp</strong></p>
+<pre><code class="language-c++">//-----------------------------------------------------------------------------
+tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData&amp; data)
+{
+    //....
+
+    float gain = mGain - mGainReduction;
+    if (gain &lt; 0.f)  // gain should always positive or zero
+        gain = 0.f;
+ 
+    // for each channel (left and right)
+    for (int32 i = 0; i &lt; numChannels; i++)
+    {
+        int32 samples = data.numSamples;
+        Vst::Sample32* ptrIn = (Vst::Sample32*)in[i];
+        Vst::Sample32* ptrOut = (Vst::Sample32*)out[i];
+        Vst::Sample32 tmp;
+        // for each sample in this channel
+        while (--samples &gt;= 0)
+        {
+            // apply gain
+            tmp = (*ptrIn++) * gain;
+            (*ptrOut++) = tmp;
+        }
+    }
+    //...
+}
+</code></pre>
+<h4 id="添加单声道音频侧链">添加单声道音频<a href="https://developer.steinberg.help/display/VST/Frequently+Asked+Questions#FrequentlyAskedQuestions-WhatisaSide-chain">侧链</a></h4>
+<p>在我们的例子中，我们想用一个<a href="https://developer.steinberg.help/display/VST/Frequently+Asked+Questions#FrequentlyAskedQuestions-WhatisaSide-chain">侧链</a>音频输入调制主音频输入。</p>
+<ol>
+<li>首先添加一个新的侧链音频输入（busType：<em><strong>kAux</strong></em>) 到我们的初始化调用中：</li>
+</ol>
+<p><strong>plugprocessor.cpp</strong></p>
+<pre><code class="language-c++">//------------------------------------------------------------------------
+tresult PLUGIN_API PlugProcessor::initialize (FUnknown* context)
+{
+    //---always initialize the parent-------
+    tresult result = AudioEffect::initialize (context);
+    // if everything Ok, continue
+    if (result != kResultOk)
+    {
+        return result;
+    }
+ 
+    //....
+
+    //---create Event In/Out busses (1 bus with only 1 channel)------
+    addEventInput (STR16 (&quot;Event In&quot;), 1);
+ 
+    // create a Mono SideChain input bus
+    addAudioInput (STR16 (&quot;Mono Aux In&quot;), Steinberg::Vst::SpeakerArr::kMono, Steinberg::Vst::kAux, 0);
+ 
+    return kResultOk;
+}
+</code></pre>
+<ol start="2">
+<li>我们要确保我们的侧链作为单声道输入处理。为此，我们需要重写 AudioEffect::setBusArrangements 函数：</li>
+</ol>
+<p><strong>plugprocessor.h</strong></p>
+<pre><code class="language-c++">//------------------------------------------------------------------------
+class PlugProcessor: public AudioEffect
+{
+public:
+    PlugProcessor();
+     
+    //...
+    // overwrite this function
+    Steinberg::tresult PLUGIN_API setBusArrangements (Steinberg::Vst::SpeakerArrangement* inputs,
+                                                      Steinberg::int32 numIns,
+                                                      Steinberg::Vst::SpeakerArrangement* outputs,
+                                                      Steinberg::int32 numOuts) SMTG_OVERRIDE;
+    //...
+};
+</code></pre>
+<p><strong>plugprocessor.cpp</strong></p>
+<pre><code class="language-c++">
+//------------------------------------------------------------------------
+tresult PLUGIN_API PlugProcessor::setBusArrangements (Vst::SpeakerArrangement* inputs, int32 numIns,
+                                                      Vst::SpeakerArrangement* outputs,
+                                                      int32 numOuts)
+{
+    // the first input is the Main Input and the second is the SideChain Input
+    // be sure that we have 2 inputs and 1 output
+    if (numIns == 2 &amp;&amp; numOuts == 1)
+    {
+        // we support only when Main input has the same number of channel than the output
+        if (Vst::SpeakerArr::getChannelCount (inputs[0]) != Vst::SpeakerArr::getChannelCount (outputs[0]))
+            return kResultFalse;
+ 
+        // we are agree with all arrangement for Main Input and output
+        // then apply them
+        getAudioInput (0)-&gt;setArrangement (inputs[0]);
+        getAudioOutput (0)-&gt;setArrangement (outputs[0]);
+ 
+        // Now check if sidechain is mono (we support in our example only mono Side-chain)
+        if (Vst::SpeakerArr::getChannelCount (inputs[1]) != 1)
+            return kResultFalse;
+ 
+        // OK the Side-chain is mono, we accept this by returning kResultTrue
+        return kResultTrue;
+    }
+ 
+    // we do not accept what the host wants : return kResultFalse !
+    return kResultFalse;
+}
+</code></pre>
+<ol start="3">
+<li>Adapt our process using the side-chain input as modulation:</li>
+</ol>
+<pre><code class="language-c++">//------------------------------------------------------------------------
+tresult PLUGIN_API PlugProcessor::process (ProcessData&amp; data)
+{
+    //--- First : Read inputs parameter changes-----------
+    //...
+ 
+    //---Second : Read input events-------------
+    //...
+ 
+    float gain = mGain - mGainReduction;
+    if (gain &lt; 0.f)  // gain should always positive or zero
+        gain = 0.f;
+ 
+    void** auxIn = nullptr;
+     
+    // Check if the Side-chain input is activated
+    bool auxActive = false;
+    if (getAudioInput (1)-&gt;isActive ())
+    {
+        auxIn = getChannelBuffersPointer (processSetup, data.inputs[1]);
+        auxActive = true;
+    }
+    if (auxActive)
+    {
+        // for each channel (left and right)
+        for (int32 i = 0; i &lt; numChannels; i++)
+        {
+            int32 samples = data.numSamples;
+            Vst::Sample32* ptrIn = (Vst::Sample32*)in[i];
+            Vst::Sample32* ptrOut = (Vst::Sample32*)out[i];
+            // Side-chain is mono, so take auxIn[0]: index 0
+            Vst::Sample32* ptrAux = (Vst::Sample32*)auxIn[0];
+            Vst::Sample32 tmp;
+ 
+            // for each sample in this channel
+            while (--samples &gt;= 0)
+            {
+                // apply modulation and gain
+                tmp = (*ptrIn++) * (*ptrAux++) * gain;
+                (*ptrOut++) = tmp;
+            }
+        }
+    }
+    else
+    {
+        // for each channel (left and right)
+        for (int32 i = 0; i &lt; numChannels; i++)
+        {
+            int32 samples = data.numSamples;
+            Vst::Sample32* ptrIn = (Vst::Sample32*)in[i];
+            Vst::Sample32* ptrOut = (Vst::Sample32*)out[i];
+            Vst::Sample32 tmp;
+            // for each sample in this channel
+            while (--samples &gt;= 0)
+            {
+                // apply gain
+                tmp = (*ptrIn++) * gain;
+                (*ptrOut++) = tmp;
+            }
+        }
+    }
+</code></pre>
+<p>这样就可以了</p>
+<h2 id="使用vstgui设计一套用户界面">使用VSTGUI设计一套用户界面</h2>
+<h3 id="第-1-部分：准备">第 1 部分：准备</h3>
+<p>如果你使用 <a href="https://developer.steinberg.help/display/VST/VST+3+Project+Generator">VST 3 Project Generator</a> 创建了你的项目并选择了“<strong>Use VSTGUI</strong>”，你可以直接跳到本教程的第 2 部分。</p>
+<p>在使用内置 UI 编辑器之前，你必须确保使用 <a href="https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1EditController.html">Steinberg::Vst::EditController</a> 类作为编辑控制器的基础，并且你已经使用了 <a href="https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1Parameter.html">Steinberg:: Vst::Parameter</a> 类或它的任何子类作为你的参数。
+否则内置 UI 编辑器将无法正常工作。</p>
+<p>接下来，你必须将 vstgui 添加到你的项目中。对于 <em>cmake</em> 用户，你只需将 vstgui_support 库添加到你的target：</p>
+<pre><code>target_link_libraries(${target} PRIVATE vstgui_support)
+</code></pre>
+<p>如果你不使用 cmake，则必须手动将以下源文件放到你的项目中：</p>
+<ul>
+<li>vstgui/vstgui_[ios/mac/linux/win32].[cpp/mm]</li>
+<li>vstgui/vstgui_uidescription.cpp</li>
+<li>vstgui/plugin-bindings/vst3editor.cpp</li>
+</ul>
+<p>之后，你必须更改项目设置以将预处理器定义添加到调试构建中：</p>
+<ul>
+<li><strong>VSTGUI_LIVE_EDITING=1</strong></li>
+</ul>
+<p>With <em>cmake,</em> this would look like this:</p>
+<pre><code>target_compile_definitions(${target} PUBLIC $&lt;$&lt;CONFIG:Debug&gt;:VSTGUI_LIVE_EDITING=1&gt;)
+</code></pre>
+<p>最后，你必须修改编辑控制器类以重写 createView() 方法：</p>
+<pre><code class="language-c++">#include &quot;vstgui/plugin-bindings/vst3editor.h&quot;
+ 
+IPlugView* PLUGIN_API MyEditController::createView (FIDString name)
+{
+    if (strcmp (name, ViewType::kEditor) == 0)
+    {
+        return new VSTGUI::VST3Editor (this, &quot;view&quot;, &quot;myEditor.uidesc&quot;);
+    }
+    return 0;
+}
+</code></pre>
+<p>当然也确保添加了头文件：vst3editor.h </p>
+<p>现在你可以构建你的插件并启动你喜欢的 <strong>VST 3</strong> 宿主来开始设计你的用户界面。</p>
+<h3 id="第-2-部分：打开-vstguiwyswyg-编辑器">第 2 部分：打开 VSTGUI/WYSWYG 编辑器</h3>
+<p>如果你现在打开插件编辑器，你将看到一个空白的编辑器。要进入 UI 编辑器，请右键单击它并选择“<strong>打开 UIDescription 编辑器</strong>”。</p>
+<p>在你第一次编辑后，必须添加<em>uidesc</em>到你已保存的项目中（如果你使用<a href="https://developer.steinberg.help/display/VST/VST+3+Project+Generator"> VST 3 项目生成器</a>，它会帮你完成这步)。此外你要在更改 <em>uidesc</em> 文件后才能构建你的项目。</p>
+<h3 id="第-3-部分：参数绑定">第 3 部分：参数绑定</h3>
+<p>如果你使用了 <strong>VST 3 SDK</strong>提供的 Parameter 类，你将获得自动参数绑定，它会将编辑器控件与 VST 编辑控制器中的参数绑定起来。</p>
+<p>你唯一需要做的就是在标签编辑器中将参数的 ID 声明为标签（或使用工具栏编辑菜单中的“同步参数标签”命令）并将控件的标签设置为这些 ID。当更改控件时，你的 VST 编辑控制器会收到 beginEdit(..)/performEdit(..)/endEdit(..) 回调。如果宿主使参数自动化，则控件也会反映这些改变。</p>
+<p>此外，你可以修改你的 VST 编辑控制器以在 getParameterObject(int32 paramID) 方法中返回特定参数，只有UI 需要这个这些参数，这些不是你 VST 音频处理器的参数。通过这种方式，你可以存储视图设置（例如当用户关闭编辑器，在用户再次打开编辑器时可以恢复它）。你可以查看包含的“uidescription test”项目的来源，以获取有关其工作原理的更多信息。</p>
+<h3 id="第-4-部分：创建自定义视图">第 4 部分：创建自定义视图</h3>
+<p>如果需要创建自定义视图，你可以在编辑控制器类中实现 VSTGUI::VST3EditorDelegate 接口。如果你在其中的一个视图中设置了“custom-view-name”属性，createCustomView方法会被调用</p>
+<p>使用你自己的视图的另一种方法是在运行时使用 UIViewFactory 注册它们。这种方法产生更多的工作量，但有一个优点，即视图会像内置视图一样列出，并且可以动态更改属性。参见 VSTGUI::IViewCreator。</p>
+<h3 id="第-5-部分：展示例子">第 5 部分：展示例子</h3>
+<p>这是在为 Cubase 的著名 Grungelizer 插件创建新用户界面时录制的示例视频，该插件从 <strong>VST 2.4</strong> 移植到 <strong>VST 3</strong>。</p>
+<p><img src="IMAGE/grungelizer.png" alt="img"></p>
+<p><strong>Create the VST 3 Grungelizer UI in 15 minutes with the UIDescriptionEditor of VSTGUI</strong></p>
+<p><a href="https://youtu.be/0zFT6bo2Dig">https://youtu.be/0zFT6bo2Dig</a></p>
+<h2 id="高级">高级</h2>
+<h3 id="第-1-部分：样本精确参数处理">第 1 部分：样本精确参数处理</h3>
+<p>我们将首先看一下这个处理函数：</p>
+<pre><code class="language-c++">void MyEffect::process (ProcessData&amp; data)
+{
+    handleParameterChanges (data.inputParameterChanges);
+ 
+    // get the gain value for this block
+    ParamValue gain = gainParameter.getValue ();
+ 
+    // process audio
+    AudioBusBuffers* inputs = data.inputs;
+    AudioBusBuffers* outputs = data.outputs;
+    for (auto channelIndex = 0; channelIndex &lt; inputs[0].numChannels; ++channelIndex)
+    {
+        for (auto sampleIndex = 0; sampleIndex &lt; data.numSamples; ++sampleIndex)
+        {
+            auto sample = inputs[0].channelBuffers32[channelIndex][sampleIndex];
+            outputs[0].channelBuffers32[channelIndex][sampleIndex] = sample * gain;
+        }
+    }
+}
+</code></pre>
+<p>这很简单，我们在函数 <code>handleParameterChanges</code>中处理参数变化，我们稍后会看到。然后我们得到最后一个 <code>gain</code> 参数值并迭代输入缓冲区，从那里复制样本到输出缓冲区，并应用 <code>gain</code> factor。</p>
+<p>我们看一下 handleParameterChanges 函数：</p>
+<pre><code class="language-c++">void MyEffect::handleParameterChanges (IParameterChanges* changes)
+{
+    if (!changes)
+        return;
+    int32 changeCount = changes-&gt;getParameterCount ();
+    for (auto i = 0; i &lt; changeCount; ++i)
+    {
+        if (auto queue = changes-&gt;getParameterData (i))
+        {
+            auto paramID = queue-&gt;getParameterId ();
+            if (paramID == ParameterID::Gain)
+            {
+                int32 pointCount = queue-&gt;getPointCount ();
+                if (pointCount &gt; 0)
+                {
+                    int32 sampleOffset;
+                    ParamValue value;
+                    if (queue-&gt;getPoint (pointCount - 1, sampleOffset, value) == kResultTrue)
+                        gainParameter.setValue (value);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p>我们看到<code>Gain</code>参数仅使用最后一个点作为增益值。</p>
+<p>如果我们现在想使用所有<code>Gain</code>参数的点，我们可以使用 SDK 中的两个实体类。</p>
+<p>第一个是<code>ProcessDataSlicer</code>它将音频块切成更小的部分。</p>
+<pre><code class="language-c++">void MyEffect::process (ProcessData&amp; data)
+{
+    handleParameterChanges (data.inputParameterChanges);
+ 
+    ProcessDataSlicer slicer (8);
+     
+    auto doProcessing = [this] (ProcessData&amp; data) {
+        // get the gain value for this block
+        ParamValue gain = gainParameter.getValue ();
+ 
+        // process audio
+        AudioBusBuffers* inputs = data.inputs;
+        AudioBusBuffers* outputs = data.outputs;
+        for (auto channelIndex = 0; channelIndex &lt; inputs[0].numChannels; ++channelIndex)
+        {
+            for (auto sampleIndex = 0; sampleIndex &lt; data.numSamples; ++sampleIndex)
+            {
+                auto sample = inputs[0].channelBuffers32[channelIndex][sampleIndex];
+                outputs[0].channelBuffers32[channelIndex][sampleIndex] = sample * gain;
+            }
+        }
+    }
+     
+    slicer.process&lt;SymbolicSampleSizes::kSample32&gt; (data, doProcessing);
+}
+</code></pre>
+<p>如你所见，我们已将算法部分移动到 lambda <code>doProcessing</code> 中，它会通过 <code>slicer.process</code>。这个 lambda 现在被多次调用，每次调用最多 8 个样本，直到处理完整个缓冲区。这并没有给我们更好的参数解析，但我们现在可以使用第二个实体类来处理这个问题。</p>
+<p>首先我们看一下<code>gainParameter</code>变量，这是我们的下一个实体类：</p>
+<pre><code>SampleAccurate::Parameter gainParameter;
+</code></pre>
+<p>我们必须改变<code>handleParameterChanges</code>函数：</p>
+<pre><code class="language-c++">void MyEffect::handleParameterChanges (IParameterChanges* inputParameterChanges)
+{
+    int32 changeCount = inputParameterChanges-&gt;getParameterCount ();
+    for (auto i = 0; i &lt; changeCount; ++i)
+    {
+        if (auto queue = changes-&gt;getParameterData (i))
+        {
+            auto paramID = queue-&gt;getParameterId ();
+            if (paramID == ParameterID::Gain)
+            {
+                gainParameter.beginChanges (queue);
+            }
+        }
+    }
+     
+}
+</code></pre>
+<p>将参数更改的处理委托给<code>gainParameter</code>。</p>
+<p>现在我们只需要对 lambda 进行另一个小的更改，以使用样本精确的 <code>gain</code> 值。我们必须调用 <code>gainParameter</code> 对象来<code>advance</code> 参数值：</p>
+<pre><code class="language-c++">auto doProcessing = [this] (ProcessData&amp; data) {
+    // get the gain value for this block
+    ParamValue gain = gainParameter.advance (data.numSamples);
+ 
+    // process audio
+    AudioBusBuffers* inputs = data.inputs;
+    AudioBusBuffers* outputs = data.outputs;
+    for (auto channelIndex = 0; channelIndex &lt; inputs[0].numChannels; ++channelIndex)
+    {
+        for (auto sampleIndex = 0; sampleIndex &lt; data.numSamples; ++sampleIndex)
+        {
+            auto sample = inputs[0].channelBuffers32[channelIndex][sampleIndex];
+            outputs[0].channelBuffers32[channelIndex][sampleIndex] = sample * gain;
+        }
+    }
+}
+</code></pre>
+<p>最后我们必须做一些<code>gainParameter</code>的清理，在最后<code>process</code>会调用函数<code>gainParameter.endChanges</code> .</p>
+<pre><code class="language-c++">void MyEffect::process (ProcessData&amp; data)
+{
+    handleParameterChanges (data.inputParameterChanges);
+ 
+    ProcessDataSlicer slicer (8);
+     
+    auto doProcessing = [this] (ProcessData&amp; data) {
+        // get the gain value for this block
+        ParamValue gain = gainParameter.advance (data.numSamples);
+ 
+        // process audio
+        AudioBusBuffers* inputs = data.inputs;
+        AudioBusBuffers* outputs = data.outputs;
+        for (auto channelIndex = 0; channelIndex &lt; inputs[0].numChannels; ++channelIndex)
+        {
+            for (auto sampleIndex = 0; sampleIndex &lt; data.numSamples; ++sampleIndex)
+            {
+                auto sample = inputs[0].channelBuffers32[channelIndex][sampleIndex];
+                outputs[0].channelBuffers32[channelIndex][sampleIndex] = sample * gain;
+            }
+        }
+    }
+     
+    slicer.process&lt;SymbolicSampleSizes::kSample32&gt; (data, doProcessing);
+     
+    gainParameter.endChanges ();
+}
+</code></pre>
+<p>现在，我们在此示例中拥有精确参数更改的支持。每获 取8 个样本，<code>gain</code> 参数将会更新为正确的值。</p>
+<p>使这个样本100%准确非常简单，请查看<strong>再次精确采样</strong>SDK 中的示例。</p>
+<h3 id="第-2-部分：添加-32-位和-64-位音频处理">第 2 部分：添加 32 位和 64 位音频处理</h3>
+<p>该示例目前仅支持 32 位处理器。现在我们将添加 64 位处理。</p>
+<p>正如你可能已经注意到的<code>ProcessDataSlicer</code>为其过程函数使用模板参数。这个模板参数的<code>SampleSize</code>在<code>ProcessData</code>结构体中定义了音频缓冲区的位深度。目前硬编码为<code>SymbolicSampleSizes::kSample32</code> </p>
+<p>为了支持<code>SymbolicSampleSizes::kSample64</code>我们只需要对代码进行一些更改。首先，我们通过算法引入一种新的模板化方法来达到我们的效果：</p>
+<pre><code class="language-c++">template &lt;SymbolicSampleSizes SampleSize&gt;
+void MyEffect::process (ProcessData&amp; data)
+{
+}
+</code></pre>
+<p>除了处理参数变化的代码外，我们大多只是将代码从原来过程方法移到这个方法中：</p>
+<pre><code class="language-c++">template &lt;SymbolicSampleSizes SampleSize&gt;
+void MyEffect::process (ProcessData&amp; data)
+{
+    ProcessDataSlicer slicer (8);
+     
+    auto doProcessing = [this] (ProcessData&amp; data) {
+        // get the gain value for this block
+        ParamValue gain = gainParameter.advance (data.numSamples);
+ 
+        // process audio
+        AudioBusBuffers* inputs = data.inputs;
+        AudioBusBuffers* outputs = data.outputs;
+        for (auto channelIndex = 0; channelIndex &lt; inputs[0].numChannels; ++channelIndex)
+        {
+            for (auto sampleIndex = 0; sampleIndex &lt; data.numSamples; ++sampleIndex)
+            {
+                auto sample = inputs[0].channelBuffers32[channelIndex][sampleIndex];
+                outputs[0].channelBuffers32[channelIndex][sampleIndex] = sample * gain;
+            }
+        }
+    }
+     
+    slicer.process&lt;SampleSize&gt; (data, doProcessing);
+}
+</code></pre>
+<p>我们只是将 <code>ProcessDataSlicer</code> 的 <code>process</code> 方法的模板参数 <code>SampleSize</code> 更改为与我们自己过程函数相同的模板参数。</p>
+<p>这还不能正常工作，因为我们仍在 <code>doProcessing</code> lambda 中使用 32 位音频缓冲区。In order to fix this we have to introduce two more templated functions <code>getChannelBuffers</code> that will choose the correct audio buffers depending on the <code>SampleSize</code> template parameter, which can either be <code>SymbolicSampleSizes::kSample32</code> or <code>SymbolicSampleSizes::kSample64</code>:</p>
+<pre><code class="language-c++">template &lt;SymbolicSampleSizes SampleSize,
+          typename std::enable_if&lt;SampleSize == SymbolicSampleSizes::kSample32&gt;::type* = nullptr&gt;
+inline Sample32** getChannelBuffers (AudioBusBuffers&amp; buffer)
+{
+    return buffer.channelBuffers32;
+}
+ 
+template &lt;SymbolicSampleSizes SampleSize,
+          typename std::enable_if&lt;SampleSize == SymbolicSampleSizes::kSample64&gt;::type* = nullptr&gt;
+inline Sample64** getChannelBuffers (AudioBusBuffers&amp; buffer)
+{
+    return buffer.channelBuffers64;
+}
+</code></pre>
+<p>Now we can change our <code>doProcessing</code> algorithm to use these functions:</p>
+<pre><code class="language-c++">template &lt;SymbolicSampleSizes SampleSize&gt;
+void MyEffect::process (ProcessData&amp; data)
+{
+    ProcessDataSlicer slicer (8);
+     
+    auto doProcessing = [this] (ProcessData&amp; data) {
+        // get the gain value for this block
+        ParamValue gain = gainParameter.advance (data.numSamples);
+ 
+        // process audio
+        AudioBusBuffers* inputs = data.inputs;
+        AudioBusBuffers* outputs = data.outputs;
+        for (auto channelIndex = 0; channelIndex &lt; inputs[0].numChannels; ++channelIndex)
+        {
+            auto inputBuffers = getChannelBuffers&lt;SampleSize&gt; (inputs[0])[channelIndex];
+            auto outputBuffers = getChannelBuffers&lt;SampleSize&gt; (outputs[0])[channelIndex];
+            for (auto sampleIndex = 0; sampleIndex &lt; data.numSamples; ++sampleIndex)
+            {
+                auto sample = inputBuffers[sampleIndex];
+                outputBuffers[sampleIndex] = sample * gain;
+            }
+        }
+    };
+     
+    slicer.process&lt;SampleSize&gt; (data, doProcessing);
+}
+</code></pre>
+<p>最后一步，我们现在需要从普通的 <code>process</code> 函数调用模板化的 <code>process&lt;...&gt;</code> 函数：</p>
+<pre><code class="language-c++">void MyEffect::process (ProcessData&amp; data)
+{
+    handleParameterChanges (data.inputParameterChanges);
+ 
+    if (processSetup.symbolicSampleSize == SymbolicSampleSizes::kSample32)
+        process&lt;SymbolicSampleSizes::kSample32&gt; (data);
+    else
+        process&lt;SymbolicSampleSizes::kSample64&gt; (data);
+     
+    gainParameter.endChanges ();
+}
+</code></pre>
+<p>取决于<code>processSetup.symbolicSampleSize</code>，我们要么使用 32 位<code>过程</code>函数要么使用 64 位<code>过程</code>函数。</p>
+<p>我们只需要通知宿主我们可以处理 64 位：</p>
+<pre><code class="language-c++">tresult PLUGIN_API MyEffect::canProcessSampleSize (int32 symbolicSampleSize)
+{
+    return (symbolicSampleSize == SymbolicSampleSizes::kSample32 ||
+            symbolicSampleSize == SymbolicSampleSizes::kSample64) ?
+               kResultTrue :
+               kResultFalse;
+}
+</code></pre>
+<p>现在我们有精确参数更改和 32 位/64 位音频处理。</p>
+<h3 id="第-3-部分：线程安全状态更改">第 3 部分：线程安全状态更改</h3>
+<p>预设或 DAW 项目的插件状态由宿主从非实时线程设置是一个常见的问题。</p>
+<p>如果我们想改变我们的内部数据模型来使用这个状态，我们必须把这个状态转移到实时线程。这应该以实时线程安全的方式完成，否则模型可能无法反映正确的状态，因为在实时线程中调度的参数更改和另一个线程上的状态数据集将以未定义状态结束。</p>
+<p>对于这种情况，我们有另一个实体类：<code>RTTransferT</code></p>
+<p>这个类需要有一个模板参数<code>StateModel</code>来描述状态数据。We create a simple struct as data model:</p>
+<pre><code class="language-c++">struct StateModel
+{
+    double gain;
+};
+ 
+using RTTransfer = RTTransferT&lt;StateModel&gt;;
+</code></pre>
+<p>We use <code>RTTransfer</code> now as a member for our <code>MyEffect</code> class:</p>
+<pre><code class="language-c++">class MyEffect : ....
+{
+    RTTransfer stateTransfer;
+};
+</code></pre>
+<p>If we now get a new <code>state</code> from the host, we create a new <code>StateModel</code> and write the <code>stateGain</code> value into <code>model-&gt;gain</code> and pass it to the utility class <code>stateTransfer</code>:</p>
+<pre><code class="language-c++">tresult PLUGIN_API MyEffect::setState (IBStream* state)
+{
+    double stateGain = ... // read this out of the state stream
+     
+    StateModel model = std::make_unique&lt;StateModel&gt; ();
+    model-&gt;gain = stateGain;
+     
+    stateTransfer.transferObject_ui (std::move (model));
+     
+    return kResultTrue;
+}
+</code></pre>
+<p>To get the <code>stateModel</code> into our realtime thread we have to change the <code>process</code> function like this:</p>
+<pre><code class="language-c++">void MyEffect::process (ProcessData&amp; data)
+{
+    stateTransfer.accessTransferObject_rt ([this] (const auto&amp; stateModel) {
+        gainParameter.setValue (stateModel.gain);
+    });
+     
+    handleParameterChanges (data.inputParameterChanges);
+ 
+    if (processSetup.symbolicSampleSize == SymbolicSampleSizes::kSample32)
+        process&lt;SymbolicSampleSizes::kSample32&gt; (data);
+    else
+        process&lt;SymbolicSampleSizes::kSample64&gt; (data);
+     
+    gainParameter.endChanges ();
+    return kResultTrue;
+}
+</code></pre>
+<p><code>accessTransferObject_rt</code>函数将检查是否存在新的模型状态，如果存在，将调用lambda，然后我们可以将<code>gainParameter</code>设置为<code>stateModel.gain</code>。</p>
+<p>要释放<code>stateTransfer</code>对象中的内存，我们必须调用它的<code>clear_ui</code>方法。在这种情况下，我们只有一个 double 作为状态模型，可以保留它直到设置下一个状态或直到效果终止。So we just add it to the <code>terminate</code> method of the plugin:</p>
+<pre><code class="language-c++">tresult PLUGIN_API MyEffect::terminate ()
+{
+    stateTransfer.clear_ui ();
+    return AudioEffect::terminate ();
+}
+</code></pre>
+<p>如果模型数据使用更多内存并且你想更早地释放它，则必须使用计时器或类似方法调用 <code>clear_ui</code> 方法，它要在<code>setState</code> 方法被调用后调用。但这不是本教程的范围。</p>
+<p>现在就是这样。完整的源代码可以在这里找到：</p>
+<pre><code>public.sdk/samples/vst/again_sampleaccurate/source/tutorial.cpp
+</code></pre>
+<p>如果要使用实体类，可以在此处找到它们：</p>
+<pre><code>public.sdk/source/vst/utility/processdataslicer.h
+public.sdk/source/vst/utility/sampleaccurate.h
+public.sdk/source/vst/utility/rttransfer.h
+</code></pre>
+<p>That´s it!</p>
+<h2 id="字符串转换工具">字符串转换工具</h2>
+<h3 id="将-string128-字符串转换为-utf-8-字符串">将 String128 字符串转换为 UTF-8 字符串</h3>
+<pre><code class="language-c++">#include &quot;public.sdk/source/vst/utility/stringconvert.h&quot;
+ 
+//...
+FUnknownPtr&lt;IHostApplication&gt; hostApp (hostContext);
+if (hostApp)
+{
+    Vst::String128 name;
+    if (hostApp-&gt;getName (name) == kResultTrue)
+    {
+        // Here we convert a Vst::String128 to a std::string (UTF8)
+        std::string str = VST3::StringConvert::convert (name);
+        //...
+    }
+}
+</code></pre>
+<h3 id="将-utf-8-字符串转换为-string128-字符串">将 UTF-8 字符串转换为 String128 字符串</h3>
+<pre><code>#include &quot;public.sdk/source/vst/utility/stringconvert.h&quot;
+ 
+//...
+std::string str (&quot;My Title&quot;);
+Vst::String128 vstStr;
+VST3::StringConvert::convert (str, vstStr);
+</code></pre>
+<h2 id="使用helloworld模板创建插件">使用Helloworld模板创建插件</h2>
+<h3 id="第-1-部分：获取和安装-vst-3-sdk-1">第 1 部分：获取和安装 VST 3 SDK</h3>
+<p>SDK的下载请参见“<a href="https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3">如何为 VST 3 设置我的系统</a>”。</p>
+<p>你可以通过以下方式开始一个新项目：</p>
+<ul>
+<li>你可以使用 <strong>VST SDK</strong> 中包含的 <a href="https://developer.steinberg.help/display/VST/Creating+a+plug-in+from+the+Helloworld+template"><strong>helloworld</strong> 模板</a> 并将该文件夹复制到一个新文件夹中。修改注释中提到的每个文件。</li>
+<li>使用 <strong>VST SDK 中包含的 <strong>VST3 Project Generator</strong> 应用程序来开发会更简单和值得推荐。</strong>以下步骤显示了如何使用它。</li>
+</ul>
+<h3 id="第-2-部分：使用helloworld模板">第 2 部分：使用<strong>helloworld</strong>模板</h3>
+<p>SDK 提供了一个 HelloWorld 示例，你可以使用它来创建一个新的<strong>VST 3 插件</strong>：</p>
+<ul>
+<li><p>只需将包含 HelloWorld 示例的文件夹 VST_SDK/my_plugins 复制到你的开发文件夹中。</p>
+</li>
+<li><p>For example: copy <strong>VST_SDK/my_plugins</strong> to D:/Users/Me/Desktop/development/my_plugins</p>
+</li>
+<li><p>现在你要用 cmake 将此新位置添加到项目中。有3种可能：</p>
+<ul>
+<li>Search in VST3_SDK/CMakeLists.txt for the comment &quot;# Here you can add your VST3 Plug-ins folder&quot; and specify the path to the folder, for example:<ul>
+<li><strong>set(SMTG_MYPLUGINS_SRC_PATH &quot;D:/Users/Me/Desktop/development/my_plugins&quot;)</strong></li>
+</ul>
+</li>
+<li>或者，在使用 <strong>CMake GUI App</strong>，你可以使用浏览器为变量 <strong>SMTG_MYPLUGINS_SRC_PATH</strong>指定新位置。</li>
+</ul>
+</li>
+<li><ul>
+<li>或者使用选项调用cmake<ul>
+<li><strong>-DSMTG_MYPLUGINS_SRC_PATH=D:/Users/Me/Desktop/development/my_plugins</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>你可以重命名 helloworld 文件夹，例如：</p>
+</li>
+<li><p>copy <em><strong>D:/Users/Me/Desktop/development/my_plugins/helloworld</strong></em> to <strong>D:/Users/Me/Desktop/development/my_plugins/MyDelayPlugin</strong></p>
+</li>
+<li><p>相应地</p>
+<p> CMakeLists.txt files:</p>
+<ul>
+<li>Open the plug-in <strong>CMakeLists.txt</strong> file with a text editor: <strong>D:/Users/Me/Desktop/development/my_plugins/MyDelayPlugin/CMakeLists.txt</strong></li>
+<li>更改目标名称<ul>
+<li><em><strong>set(target helloworld)</strong></em> =&gt; <strong>set(target MyDelay)</strong></li>
+</ul>
+</li>
+<li>使用文本编辑器打开位于 my_plugins 中的文件夹 CMakeLists.txt 文件，以便将你的插件添加到项目中：<ul>
+<li>D:/Users/Me/Desktop/development/my_plugins/CMakeLists.txt</li>
+</ul>
+</li>
+<li>添加此条（在你新建的文件夹中）：<ul>
+<li><em><strong>add_subdirectory(MyDelayPlugin)</strong></em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>使用命令行或 cmake 编辑器 (cmake-gui) 生成项目，如下所述：如何使用 cmake 构建 VST 3 插件。之后你的新插件应该会出现在项目中。</p>
+</li>
+<li><p>现在你必须调整一些 <strong>uids</strong> 和命名以使你的插件独一无二（而不是 helloworld 的副本！）</p>
+<ol>
+<li><p>例如，将插件的所有字符串从 <em>HelloWorld</em> 重命名为 MyDelay：</p>
+<ul>
+<li><strong>HelloWorldProcessor::HelloWorldProcessor</strong> to <em><strong>MyDelayProcessor::MyDelayProcessor</strong></em></li>
+</ul>
+</li>
+<li><p>打开文件<em>MyDelayPlugin/include/plugids.h</em>并创造新的<strong>uids</strong>对于处理器和控制器：你可以使用 GUID 创建工具，例如</p>
+<ul>
+<li>static const FUID MyProcessorUID (0x2A0CC26C, 0xBF88964C, 0xB0BFFCB0, 0x554AF523);</li>
+<li>static const FUID MyControllerUID (0xB9DBBD64, 0xF7C40A4C, 0x9C8BFB33, 0x8761E244);</li>
+</ul>
+</li>
+<li><p>打开文件<strong>version.h</strong>并像这样调整字符串：</p>
+<pre><code>#define stringPluginName &quot;My First Delay&quot;
+#define stringOriginalFilename &quot;MyDelay.vst3&quot;
+</code></pre>
+</li>
+<li><p>重命名调整 <strong>my_plugins/MyDelayPlugin/resource/info.plist</strong>：</p>
+<pre><code>&lt;string&gt;helloworld&lt;/string&gt; =&gt; &lt;string&gt;mydelay&lt;/string&gt;
+&lt;string&gt;com.steinberg.vst3.helloworld&lt;/string&gt; =&gt; &lt;string&gt;com.steinberg.vst3.mydelay&lt;/string&gt;
+</code></pre>
+</li>
+</ol>
+</li>
+<li><p>现在你可以开始编写你的效果器或插件了（请参阅</p>
+<p> 使用项目生成器生成一个新插件</p>
+<p> 跟着步骤来）</p>
+<ol>
+<li>在plugcontroller.cpp中添加参数</li>
+<li>在 plugprocessor.cpp 中调整你的过程算法</li>
+<li>plugprocessor.cpp 中进行持久化</li>
+<li>添加UI（使用<a href="file:///C:/Users/YGrabit/Desktop/SDKs/VST3_SDKs/3.7/VST_SDK/VST3_SDK/vst3_doc/vstsdk/namespaceVSTGUI.html">VSTGUI</a>）</li>
+</ol>
+</li>
+<li><p>祝编码愉快！</p>
+</li>
+</ul>
+</article>
+    </div>
+  </body>
+  

@@ -1,0 +1,141 @@
+html {
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+.article-body {
+  width: 100%;
+  max-width: 920px;
+  padding: 40px 18px;
+  box-sizing: border-box;
+}
+
+#menu {
+  display: none;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
+
+#ball {
+  position: fixed;
+  bottom: 30px;
+  left: 15px;
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.ball-icon {
+  width: 25px;
+  height: 25px;
+  background-size: 100% 100%;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNjQ1NDU4MTg3OTY1IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwNjMwIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTk0OC4zMTMwNDMgNDQyLjk5MTMwNGwtMzY5LjUzMDQzNSAwIDAtMzY5LjUzMDQzNWMwLTM3Ljg0MzQ3OC0zMS4xNjUyMTctNjkuMDA4Njk2LTY5LjAwODY5Ni02OS4wMDg2OTYtMzcuODQzNDc4IDAtNjkuMDA4Njk2IDMxLjE2NTIxNy02OS4wMDg2OTYgNjkuMDA4Njk2bDAgMzY5LjUzMDQzNS0zNjkuNTMwNDM1IDBjLTM3Ljg0MzQ3OCAwLTY5LjAwODY5NiAzMS4xNjUyMTctNjkuMDA4Njk2IDY5LjAwODY5NiAwIDM3Ljg0MzQ3OCAzMS4xNjUyMTcgNjkuMDA4Njk2IDY5LjAwODY5NiA2OS4wMDg2OTZsMzY5LjUzMDQzNSAwIDAgMzY5LjUzMDQzNWMwIDM3Ljg0MzQ3OCAzMS4xNjUyMTcgNjkuMDA4Njk2IDY5LjAwODY5NiA2OS4wMDg2OTYgMzcuODQzNDc4IDAgNjkuMDA4Njk2LTMxLjE2NTIxNyA2OS4wMDg2OTYtNjkuMDA4Njk2bDAtMzY5LjUzMDQzNSAzNjkuNTMwNDM1IDBjMzcuODQzNDc4IDAgNjkuMDA4Njk2LTMxLjE2NTIxNyA2OS4wMDg2OTYtNjkuMDA4Njk2QzEwMTcuMzIxNzM5IDQ3NC4xNTY1MjIgOTg4LjM4MjYwOSA0NDIuOTkxMzA0IDk0OC4zMTMwNDMgNDQyLjk5MTMwNHoiIHAtaWQ9IjEwNjMxIiBmaWxsPSIjMmMyYzJjIj48L3BhdGg+PC9zdmc+');
+}
+
+#menu ::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+  color: transparent;
+}
+
+.menu-box {
+  overflow-y: scroll;
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  height: calc(100% - 100px);
+  box-sizing: border-box;
+  padding: 25px;
+}
+
+.fold {
+  height: 30px;
+  width: 30px;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fold-icon {
+  width: 18px;
+  height: 18px;
+  background-size: 100% 100%;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNjQ1NTMxMjMyODEwIiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI2ODYiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj48L3N0eWxlPjwvZGVmcz48cGF0aCBkPSJNNzYxLjA1NiA1MzIuMTI4YzAuNTEyLTAuOTkyIDEuMzQ0LTEuODI0IDEuNzkyLTIuODQ4IDguOC0xOC4zMDQgNS45Mi00MC43MDQtOS42NjQtNTUuNDI0TDM5OS45MzYgMTM5Ljc0NGMtMTkuMjY0LTE4LjIwOC00OS42MzItMTcuMzQ0LTY3Ljg3MiAxLjg4OC0xOC4yMDggMTkuMjY0LTE3LjM3NiA0OS42MzIgMS44ODggNjcuODcybDMxNi45NiAyOTkuODQtMzE1LjcxMiAzMDQuMjg4Yy0xOS4wNzIgMTguNC0xOS42NDggNDguNzY4LTEuMjQ4IDY3Ljg3MiA5LjQwOCA5Ljc5MiAyMS45ODQgMTQuNjg4IDM0LjU2IDE0LjY4OCAxMiAwIDI0LTQuNDggMzMuMzEyLTEzLjQ0bDM1MC4wNDgtMzM3LjM3NmMwLjY3Mi0wLjY3MiAwLjkyOC0xLjYgMS42LTIuMzA0IDAuNTEyLTAuNDggMS4wNTYtMC44MzIgMS41NjgtMS4zNDRDNzU3Ljc2IDUzOC44OCA3NTkuMiA1MzUuMzkyIDc2MS4wNTYgNTMyLjEyOHoiIHAtaWQ9IjI2ODciIGZpbGw9IiNiZmJmYmYiPjwvcGF0aD48L3N2Zz4=');
+}
+
+.toc-item {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  cursor: pointer;
+  width: 100%;
+  min-height: 30px;
+  line-height: 30px;
+}
+
+.toc-item .toc-item {
+  margin-left: 10px;
+}
+
+.toc-name {
+  box-sizing: border-box;
+  width: calc(100% - 60px);
+  word-wrap: break-word;
+  text-decoration: none;
+  color: #444;
+}
+
+.toc-name:hover {
+  text-decoration: underline;
+  color: #000;
+  font-weight: bold;
+}
+
+.menu-bottom {
+  line-height: 65px;
+  width: 100%;
+  height: 65px;
+  position: absolute;
+  padding-right: 30px;
+  bottom: 0px;
+  background-color: rgba(73, 73, 73, 0.9);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.menu-bottom a{
+  color: #fff;
+  margin: 0px 10px;
+}
+
+@media screen and (min-width: 1280px) {
+  .article-body {
+    width: 60%;
+    margin-left: 20%;
+  }
+
+  #menu {
+    width: 26%;
+  }
+}
