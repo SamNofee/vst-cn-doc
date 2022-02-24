@@ -1,5 +1,7 @@
 html {
   height: 100%;
+  margin: 0px;
+  padding: 0px;
 }
 
 body {
@@ -8,6 +10,8 @@ body {
   display: flex;
   justify-content: center;
   overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
 }
 
 .article-body {
