@@ -16,14 +16,14 @@ const Path = require('path')
 const Config = {
   title: "VST中文文档",
   tocRenderUseFourTags: ['h2', 'h3', 'h4', 'h5'],
-  inputFolder: Path.resolve("./doc/"),
-  outputFolder: Path.resolve("./html/"),
+  inputFolder: Path.resolve("./md/"),
+  outputFolder: Path.resolve("./docs/"),
   copy: [{
-    source: Path.resolve("./doc/IMAGE/"),
-    target: Path.resolve("./html/IMAGE/")
+    source: Path.resolve("./md/IMAGE/"),
+    target: Path.resolve("./docs/IMAGE/")
   }, {
-    source: Path.resolve("./doc/ASSET/"),
-    target: Path.resolve("./html/ASSET/")
+    source: Path.resolve("./md/ASSET/"),
+    target: Path.resolve("./docs/ASSET/")
   }],
   encoding: "utf-8",
   pagesOrder: {
