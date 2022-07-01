@@ -1,12 +1,12 @@
 # VST中文文档
 
-**该中文文档主要由[Sam Nofee](https://github.com/SamNofee)翻译并开源在[github仓库](https://github.com/SamNofee/vst-cn-doc)，方便大陆/中文母语者学习VST。对于文档翻译有错漏或有补充的地方欢迎issue指出。**
+**该中文文档主要由[Sam Nofee](https://github.com/SamNofee)翻译并开源在[github仓库](https://github.com/SamNofee/vst-cn-doc)，方便中文母语者学习VST。对于文档翻译有错漏或有补充的地方欢迎issue指出。**
 
 
 
 ## 链接
 
-VST中文文档链接（墙内）：[vst.nofee.fun](vst.nofee.fun)
+VST中文文档链接（墙内）：[https://nofee.fun/vst-cn-doc/](https://nofee.fun/vst-cn-doc/)
 
 VST中文文档链接（墙外）：[https://samnofee.github.io/vst-cn-doc/](https://samnofee.github.io/vst-cn-doc/)
 

@@ -93,7 +93,7 @@ cd build
 cmake ../vst3sdk
 ```
 
-- Build the plug-in:
+- 构建插件:
 
 ```shell
 make
@@ -104,38 +104,38 @@ cmake --build . --config Release
 
 
 
-### Building using cmake-gui
+### 使用cmake-gui构建
 
-- 启动 cmake-gui 应用程序，它是 cmake 安装包的一部分 (<https://cmake.org/download/>)
+- 启动 cmake-gui 应用程序，它是 cmake 的一部分 (<https://cmake.org/download/>)
 
 ![img](IMAGE/cmakeguipng.png)
 
-- "**Browse Source...**": select the folder VST3_SDK
-- "***Browse Build...***": select a folder where the outputs (projects/...) will be created. Typically a folder named "build"
-- you can check the ***SMTG** Options*
-- Press "***Configure***" and choose the generator in the window that opens: for example "**Visual Studio 16 2019**"
+- "**Browse Source...**": 选择VST3_SDK文件夹
+- "***Browse Build...***": 选择一个输出文件夹。一般这个文件夹名字叫"build"
+- 你可以勾上SMTG选项
+- 点击 "***Configure***" 然后在新窗口中选择**生成器(generator)**，例如"**Visual Studio 16 2019**"
 
 ![img](IMAGE/setup.png)
 
-- Press "***Generate***" to create the project
-- Open your targeted IDE, and compile the solution/project.
+- 点击 "***Generate***" 以创建项目
+- 打开你喜欢的IDE，编译生成的项目
 
 
 
-## 使用Cmake来构建VST3插件
+## 使用Cmake(命令行)来构建VST3插件
 
 ### 用于构建 VST 3 插件的 CMake
 
 SDK 提供了一组 cmake 文件，它帮你编译SKD里面的示例和开发新插件。
 
-- 从以下位置下载 cmake：[ https://cmake.org](https://cmake.org/)或为你的操作系统使用包管理器（请参阅[如何为 VST 3 设置我的系统](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3)）。
-- 您可以使用命令行或 cmake 编辑器 ([cmake-gui](https://cmake.org/download/))。
+- 从以下位置下载 cmake：[ https://cmake.org](https://cmake.org/)，或为你的操作系统使用包管理器（请参阅[如何为 VST 3 设置我的系统](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3)）。
+- 您可以使用命令行或 cmake 界面工具([cmake-gui](https://cmake.org/download/))。
 
 
 
-### Command line for Windows
+### Windows命令行
 
-Example for building "**Microsoft Studio 16 2019**" solution:
+使用 "**Microsoft Studio 16 2019**" 解决方案:
 
 ```shell
 // go in to the folder where you extracted the VST 3 SDK
@@ -150,9 +150,9 @@ cmake.exe -G "Visual Studio 16 2019" -A x64 "..\vst3sdk" -SMTG_CREATE_PLUGIN_LIN
 
 
 
-### Command line for macOS
+### MacOS命令行
 
-Example for building **Xcode** project:
+使用Xcode构建项目:
 
 ```
 // go in to the folder where you extracted the VST 3 SDK
@@ -197,7 +197,7 @@ cd build
 cmake --build
 ```
 
-- Choose a specific compiler with cmake (command line on Linux)
+- 你可以在使用cmake时指定编译器，例如g++或clang++
 
 ```
 cmake -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++
@@ -209,15 +209,15 @@ cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++
 
 ### 可用的 SMTG cmake 选项
 
-- **SMTG_AAX_SDK_PATH**: Here you can define where the AAX SDK is located (if needed)
-- **SMTG_ADD_VST3_HOSTING_SAMPLES**: Add VST3 hosting samples to the solution (default ON)
-- **SMTG_ADD_VST3_PLUGINS_SAMPLES**: Add VST3 plug-in samples to the project (default ON)
-- **SMTG_ADD_VSTGUI**: Add VSTGUI support (default ON)
-- **SMTG_BUILD_UNIVERSAL_BINARY**: Build universal binary (32 & 64 bit) (Mac only)
-- **SMTG_COREAUDIO_SDK_PATH**: Here you can define where the COREAUDIO SDK is located (Mac only, if needed)
-- **SMTG_CREATE_BUNDLE_FOR_WINDOWS**: Create bundle on Windows for the [VST3](file:///C:/Users/YGrabit/Desktop/SDKs/VST3_SDKs/3.7/VST_SDK/VST3_SDK/vst3_doc/vstsdk/namespaceVST3.html) plug-ins (new since 3.6.10! Windows only) (default ON)
-- **SMTG_CREATE_PLUGIN_LINK**: Create symbolic link for each [VST3](file:///C:/Users/YGrabit/Desktop/SDKs/VST3_SDKs/3.7/VST_SDK/VST3_SDK/vst3_doc/vstsdk/namespaceVST3.html) plug-in in ${VST3_FOLDER_NAME} folder (you need to have Administrator rights on Windows or change the Local Group Policy to allow the creation of symbolic links) (default ON)
-- **SMTG_CREATE_VST2_AGAIN_SAMPLE_VERSION**: Allows you to create the VST2 version of the Sample Plug-in AGain, be sure that you have copied the VST2 interfaces into the folder VST_SDK/VST3_SDK/pluginterfaces/vst2.x (default OFF)
+- **SMTG_AAX_SDK_PATH**: 指定AAX SDK路径 
+- **SMTG_ADD_VST3_HOSTING_SAMPLES**:添加Hosting Samples到项目
+- **SMTG_ADD_VST3_PLUGINS_SAMPLES**: 添加VST3 plug-in samples到项目，默认ON
+- **SMTG_ADD_VSTGUI**: 添加GUI支持，默认ON
+- **SMTG_BUILD_UNIVERSAL_BINARY**: 构建UNIVERSAL二进制文件
+- **SMTG_COREAUDIO_SDK_PATH**: 指定COREAUDIO SDK路径
+- **SMTG_CREATE_BUNDLE_FOR_WINDOWS**: 为Windows插件创建Bundle
+- **SMTG_CREATE_PLUGIN_LINK**: 为VST3创建符号链接，默认开启
+- **SMTG_CREATE_VST2_AGAIN_SAMPLE_VERSION**: 允许你创建增益插件的VST2版本，但是要确保你已经把VST2接口复制到了VST_SDK/VST3_SDK/pluginterfaces/vst2.x文件夹，默认关闭
 - **SMTG_CUSTOM_BINARY_LOCATION**: Customize output location for binaries
 - **SMTG_CXX_STANDARD**: C++ standard version used for plugins: 14, 17, 20
 - **SMTG_ENABLE_ADDRESS_SANITIZER**: Enable Address Sanitizer

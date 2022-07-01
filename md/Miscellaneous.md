@@ -12,7 +12,6 @@
 - **Microsoft**, **Windows** are either registered trademarks or trademarks of Microsoft Corporation in the United States and/or other countries.
 - **Pro Tools** is a trademark or registered trademark of Avid Technology, Inc. or its subsidiaries in the United States and/or other countries.
 - **VST**, **Cubase**, **Nuendo** and **WaveLab** are trademarks of [Steinberg Media Technologies GmbH](http://www.steinberg.net/), registered in Europe and other countries.
-- 其他公司名称、产品名称、LOGO都是它们所有者的商标或已注册商标
 
 
 
