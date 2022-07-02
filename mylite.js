@@ -4,38 +4,20 @@
  * No SSR
  * No Conceal
  * No Chunk
- * Just run mylite.js with Node.js
+ * Just run mylite.js with node
  * Then we can transform markdown 2 html
  * Without limit
  *
  * Mylite.js, Copyright (c) 2021-2022, Sam Nofee. (BSD Licensed)
  */
-
-const Marked = require('./marked.js')
 const Fs = require('fs')
 const Path = require('path')
-
-/*
- * Usage
- * 1. Copy mylite.js to you work folder
- * 2. Modify Config in mylite.js
- * 3. run " node mylite.js "
- */
-
+const Marked = require('./marked.js')
 const Config = {
-  // The title of your document
   title: "VST中文文档",
-
-  // Which tags will be rendered into table of contents
   tocRenderUseFourTags: ['h2', 'h3', 'h4', 'h5'],
-
-  // The folder where markdown file store
   inputFolder: Path.resolve("./md/"),
-
-  // The folder where html file store
   outputFolder: Path.resolve("./docs/"),
-
-  // The folders will be copied directly and the item should contain source and target attribute
   copy: [{
     source: Path.resolve("./md/IMAGE/"),
     target: Path.resolve("./docs/IMAGE/")
@@ -43,8 +25,7 @@ const Config = {
     source: Path.resolve("./md/ASSET/"),
     target: Path.resolve("./docs/ASSET/")
   }],
-
-  // Which markdown file will be generated and the title of this file
+  encoding: "utf-8",
   pagesOrder: {
     "WhatIsVST": "什么是VST",
     "MainBenefitsOfVST3": "VST3的主要优点",
@@ -56,10 +37,6 @@ const Config = {
     "VST3Forum": "VST论坛",
     "Miscellaneous": "其他"
   },
-
-  // The template of generation process and the `{{?}}` of mdHtmlTemp will be replaced by the string of "Config[?]" which is customizable
-  // {{tocTreeData}} is a json string will be generated while a markdown file to html file
-  // {{md2html}} is the result string will be generated while a markdown file to html file
   mdHtmlTemp: `
   <!DOCTYPE html>
   <head>
@@ -71,6 +48,7 @@ const Config = {
     <link rel="stylesheet" href="./ASSET/highlight.min.css">
     <script src="./ASSET/highlight.min.js"></script>
     <script src="./ASSET/shared.js"></script>
+    <style>html{font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";}</style>
   </head>
   <body onresize="controlMenu()" onload="init()">
     <template id="tocTreeData" toc-tree-data='{{tocTreeData}}'></template>
@@ -91,16 +69,13 @@ const Config = {
     </div>
   </body>
   `,
-
-  // The index page html template and the `{{?}}` of indexHtmlTemp will be replaced by the string of "Config[?]" which is customizable
-  // {{firstPage}} is the url of the page that first declare in `pagesOrder` 
-  indexHtmlTemp: `
+  indexHtml: `
   <!DOCTYPE html>
   <head>
     <title>{{title}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>html{height: 100%;margin: 0px;padding: 0px;}</style>
+    <style>html{height: 100%;margin: 0px;padding: 0px;font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";}</style>
   </head>
   <body style="margin: 0px;padding: 0px;align-items: center;overflow: hidden;min-width: 290px;width: 100%;height: 100%;display: flex;justify-content: center;">
     <div style="width: 290px;display: flex;flex-wrap: wrap;justify-content: space-between;">
@@ -113,38 +88,29 @@ const Config = {
   </body>`,
 }
 
-// Mylite namespace var
-let Mylite = {
-
-}
-
-// MAIN
+//MAIN
 const MAIN = () => {
-  isRunUnitTest()
-  handleConfigObj()
   initOutputFolder()
+  console.log("1. Init output folder: Success!")
   copyToOutputFolder()
+  console.log("2. Copy files to output folder: Success!")
   let inputFolderStateTree = getStateTree(Config.inputFolder, { isGetFileContent: true, isGetChildren: false })
   let pagesStateTree = orderStateTreeByConfig(inputFolderStateTree[0].children)
   pagesStateTree = parseHtmlByStateTree(pagesStateTree)
+  console.log("3. Parse markdown format to html: Success!")
   let tocTreeData = genTocTreeDataByStateTree(pagesStateTree)
+  console.log("4. Build toc: Success!")
   pagesStateTree = genHtmlContentByStateTree(pagesStateTree, tocTreeData)
+  console.log("5. Replace template: Success!")
   for (let i = 0; i < pagesStateTree.length; i++) {
-    Fs.writeFileSync(Path.resolve(Config.outputFolder, pagesStateTree[i].basename + ".html"), pagesStateTree[i].content, "utf-8")
+    Fs.writeFileSync(Path.resolve(Config.outputFolder, pagesStateTree[i].basename + ".html"), pagesStateTree[i].content, Config.encoding)
   }
-  Fs.writeFileSync(Path.resolve(Config.outputFolder, "index.html"), replaceTemplateByObj(Config.indexHtmlTemp, {
+  console.log("6. Generate html file: Success!")
+  Fs.writeFileSync(Path.resolve(Config.outputFolder, "index.html"), replaceTemplateByObj(Config.indexHtml, {
     title: Config.title,
     firstPage: Object.keys(Config.pagesOrder)[0] + ".html"
-  }), "utf-8")
-  console.log("Success!")
-}
-
-const isRunUnitTest = () => {
-  //
-}
-
-const handleConfigObj = () => {
-  //
+  }), Config.encoding)
+  console.log("7. Generate index html file: Success!")
 }
 
 const initOutputFolder = () => {
@@ -267,7 +233,7 @@ const getState = (path, { isGetFileContent } = { isGetFileContent: false }) => {
     const stat = Fs.statSync(path)
     state = {}
     state.type = stat.isFile() ? "file" : "folder"
-    state.content = (stat.isFile() && isGetFileContent) ? Fs.readFileSync(path, "utf-8") : ""
+    state.content = (stat.isFile() && isGetFileContent) ? Fs.readFileSync(path, Config.encoding) : ""
     state.path = path
     state.extension = Path.extname(path)
     state.basename = Path.basename(path, state.extension)
@@ -300,18 +266,11 @@ const getStateTree = (path, { isGetFileContent, isGetChildren } = { isGetFileCon
   return tree
 }
 
-// @.T("{{demo}}",{demo:"demo"})=="demo").E(false)
 const replaceTemplateByObj = (template, obj) => {
   return template.replace(/{{.*?}}/g, (word) => {
     const key = word.slice(2, -2)
     return obj[key]
   })
 }
-const replaceTemplateByObjTest = () => {
-  if(replaceTemplateByObj("{{demo}}",{demo:"demo"})=="demo") throw "replaceTemplateByObj can not work"
-}
 
-
-
-//MAIN()
-replaceTemplateByObjTest()
+MAIN()

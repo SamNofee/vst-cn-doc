@@ -218,18 +218,18 @@ cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++
 - **SMTG_CREATE_BUNDLE_FOR_WINDOWS**: 为Windows插件创建Bundle
 - **SMTG_CREATE_PLUGIN_LINK**: 为VST3创建符号链接，默认开启
 - **SMTG_CREATE_VST2_AGAIN_SAMPLE_VERSION**: 允许你创建增益插件的VST2版本，但是要确保你已经把VST2接口复制到了VST_SDK/VST3_SDK/pluginterfaces/vst2.x文件夹，默认关闭
-- **SMTG_CUSTOM_BINARY_LOCATION**: Customize output location for binaries
-- **SMTG_CXX_STANDARD**: C++ standard version used for plugins: 14, 17, 20
-- **SMTG_ENABLE_ADDRESS_SANITIZER**: Enable Address Sanitizer
-- **SMTG_ENABLE_TARGET_VARS_LOG**: Enables to log target variables for debugging (new since 3.6.11!) (default OFF)
-- **SMTG_ENABLE_USE_OF_JACK**: Allows you to create the audiohost application using Jack (default OFF)
-- **SMTG_MDA_VST3_VST2_COMPATIBLE**: Build the MDA examples as a replacement for their VST2 counterpart (default ON)
-- **SMTG_IOS_DEVELOPMENT_TEAM**: Needed for building the InterAppAudio and AUv3 examples for iOS (Mac only)
-- **SMTG_MYPLUGINS_SRC_PATH**: Here you can add your VST3 plug-ins folder
-- **SMTG_PLUGIN_TARGET_PATH**: Here you can redefine the VST3 plug-ins folder
-- **SMTG_RENAME_ASSERT**: Rename ASSERT to SMTG_ASSERT to avoid conflicts with 3rd party libraries (default ON)
-- **SMTG_RUN_VST_VALIDATOR**: Run the VST validator on VST3 plug-ins each time they are built (default ON)
-- **SMTG_USE_STATIC_CRT**: Use static CRuntime on Windows (option /MT) (default OFF) (Windows only)
+- **SMTG_CUSTOM_BINARY_LOCATION**: 为二进制文件自定义输出位置
+- **SMTG_CXX_STANDARD**: 插件的C++版本
+- **SMTG_ENABLE_ADDRESS_SANITIZER**: 打开Address Sanitizer
+- **SMTG_ENABLE_TARGET_VARS_LOG**: 在Debug时打印目标变量
+- **SMTG_ENABLE_USE_OF_JACK**: 允许使用Jack，默认OFF
+- **SMTG_MDA_VST3_VST2_COMPATIBLE**: 构建MDA示例以代替VST2 counterpart，默认ON
+- **SMTG_IOS_DEVELOPMENT_TEAM**: 需要为IOS构建InterAppAudio和AUv3
+- **SMTG_MYPLUGINS_SRC_PATH**: 你可以添加VST3插件文件夹
+- **SMTG_PLUGIN_TARGET_PATH**: 你可以重新指定VST3插件文件夹
+- **SMTG_RENAME_ASSERT**: 重命名ASSERT成SMTG_ASSERT以避免第三方带来的冲突，默认ON
+- **SMTG_RUN_VST_VALIDATOR**: 在每次构建时在VST3插件上运行VST校验器，默认ON
+- **SMTG_USE_STATIC_CRT**: 在Windows上使用Static CRuntime，默认OFF
 
 
 
@@ -247,9 +247,9 @@ cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++
 
 ### 使用 IDE 编译示例
 
-- solution/project (vstsdk.sln/vstsdk.xcodeproj) is generated in the "build" folder.
-- the created plug-ins are located in the "build" folder, in sub-folders ***/VST3/Release*** or ***/VST3/Debug***.
-- In order to allow a DAW to find these plug-ins you have to create links from the official [VST3 Locations](https://developer.steinberg.help/pages/viewpage.action?pageId=9798275) to them.
+- solution/project (vstsdk.sln/vstsdk.xcodeproj)会被生成在"build"文件夹
+- 被创建的插件会被放在build文件夹下面的 ***/VST3/Release***或 ***/VST3/Debug***
+- 为了允许DAW找到这些插件你需要创建链接（参考[VST3 Locations](https://developer.steinberg.help/pages/viewpage.action?pageId=9798275))
 
 
 
@@ -333,7 +333,7 @@ enum GainParams : Steinberg::Vst::ParamID
 
 
 
-2. Open the plugcontroller.cpp file, and add the gain parameter with the *parameters.addParameter*
+2. 打开plugcontroller.cpp文件, 添加parameters.addParameter
 
 **plugcontroller.cpp**
 
@@ -358,9 +358,9 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 
 
 
-> Note
+> 注意
 >
-> - 我们添加标志：[*kCanAutomate*](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ae3a5143ca8d0e271dbc259645a4ae645af38562ef6dde00a339d67f9be4ec3a31)，它会通知 DAW/宿主这个参数可以自动化。
+> - 我们添加标志：[*kCanAutomate*](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ae3a5143ca8d0e271dbc259645a4ae645af38562ef6dde00a339d67f9be4ec3a31)，它会通知 DAW/宿主这个参数是可以自动化的。
 > - **VST 3** 参数总是标准化的（它的值是一个介于 [0到1]之间的浮点值），这里它的默认值设置为 0.5。
 
 
@@ -384,7 +384,7 @@ protected:
 
 #### Add the process applying the gain
 
-1. 我们需要设置我们的内部**mGain**，其值来自宿主。这是处理方法的第一步。解析结构体中来自宿主的参数变化*data.inputParameterChanges*用于当前要处理的音频块。Be sure that you have added at top of the file plugprocessor.cpp **"#include "public.sdk/source/vst/vstaudioprocessoralgo.h"**!This includes some helpers to access audio buffer.
+1. 我们需要设置我们的内部**mGain**，其值来自宿主。这是处理方法的第一步。解析结构体中来自宿主的参数变化*data.inputParameterChanges*用于当前要处理的音频块。在plugprocessor.cpp文件上方添加#include "public.sdk/source/vst/vstaudioprocessoralgo.h"，这个头文件会提供一些必要的帮助工具
 
 **plugprocessor.cpp**
 
@@ -426,7 +426,7 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 
 > **data.inputParameterChanges** can include more than **1** change for the same parameter inside a processing audio block. Here we take only the last change in the list and apply it our **mGain**.
 
-2. The real processing part:
+2. 真正的处理部分代码:
 
 **plugprocessor.cpp**
 
@@ -469,7 +469,7 @@ for (int32 i = 0; i < numChannels; i++)
 //...
 ```
 
-3. **VST 3**包含一种宿主让插件静音的方式（使用**VST 3**[的静音标志](https://developer.steinberg.help/display/VST/Frequently+Asked+Questions))：
+3. **VST 3**有一种宿主让插件静音的方式（使用**VST 3**[的静音标志](https://developer.steinberg.help/display/VST/Frequently+Asked+Questions))：
 
 **plugprocessor.cpp**
 
@@ -519,7 +519,7 @@ tresult PLUGIN_API PlugProcessor::getState (IBStream* state)
 }
 ```
 
-2. In the **setState** () method, the plug-in receives a new state (called after a project or preset is loaded) from the host.
+2. 在**setState**方法中, 插件会从宿主中收到一个新的状态
 
 **plugprocessor.cpp**
 
@@ -548,7 +548,7 @@ tresult PLUGIN_API PlugProcessor::setState (IBStream* state)
 
 在我们的示例中，我们希望使用“MIDI”事件 (noteOn) 来修改当前的增益系数。
 
-1. 如果你需要在你的插件中接收音频和事件(如 MIDI)，你需要添加一个事件输入。For this you just have to add in , in order to do this call in the **initialize()** method of the processor [addEventInput](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1AudioEffect.html#a98a16757564b1a077d82e2b2decc2ad8):
+1. 如果你需要在你的插件中接收音频和事件(如 MIDI)，你需要添加一个事件输入[addEventInput](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1AudioEffect.html#a98a16757564b1a077d82e2b2decc2ad8):
 
 **plugprocessor.cpp**
 
@@ -573,11 +573,13 @@ tresult PLUGIN_API PlugProcessor::initialize (FUnknown* context)
 }
 ```
 
+在本例中，我们添加了 1 个输入事件总线，仅在 1 个通道上接收。如果你需要接收来自不同的通道的差异化事件，只需像这样改变它：
 
-
-> 在本例中，我们添加了 1 个输入事件总线，仅在 1 个通道上接收。如果你需要接收来自不同的通道的差异化事件，只需像这样改变它：
-
+```c++
 addEventInput (STR16 ("Event In"), 4); // here 4 channels
+```
+
+
 
 2. 我们创建了一个新的内部值 mGainReduction（不导出到宿主），该值会根据传入的 noteOn 的力度而改变，因此你击打MIDI音符面板越用力，增益削减就越厉害（这就是我们在这里想要的）：
 
@@ -596,7 +598,7 @@ protected:
 // ...
 ```
 
-3. Now we have to receive the event changes in the process method:
+3. 现在我们需要在process函数里处理事件:
 
 **plugprocessor.cpp**
 
@@ -763,7 +765,7 @@ tresult PLUGIN_API PlugProcessor::setBusArrangements (Vst::SpeakerArrangement* i
 
 
 
-3. Adapt our process using the side-chain input as modulation:
+3. 使用侧链输入作为调制来调整我们的流程:
 
 ```c++
 //------------------------------------------------------------------------
@@ -829,7 +831,7 @@ tresult PLUGIN_API PlugProcessor::process (ProcessData& data)
     }
 ```
 
-这样就可以了
+
 
 
 
@@ -1152,7 +1154,7 @@ void MyEffect::process (ProcessData& data)
 
 我们只是将 `ProcessDataSlicer` 的 `process` 方法的模板参数 `SampleSize` 更改为与我们自己过程函数相同的模板参数。
 
-这还不能正常工作，因为我们仍在 `doProcessing` lambda 中使用 32 位音频缓冲区。In order to fix this we have to introduce two more templated functions `getChannelBuffers` that will choose the correct audio buffers depending on the `SampleSize` template parameter, which can either be `SymbolicSampleSizes::kSample32` or `SymbolicSampleSizes::kSample64`:
+这还不能正常工作，因为我们仍在 `doProcessing` lambda 中使用 32 位音频缓冲区。为了解决这个问题，我们必须引入另外两个模板函数 `getChannelBuffers`，它们将根据 `SampleSize` 模板参数选择正确的音频缓冲区，可以是 `SymbolicSampleSizes::kSample32` 或 `SymbolicSampleSizes::kSample64`：
 
 ```c++
 template <SymbolicSampleSizes SampleSize,
@@ -1170,7 +1172,7 @@ inline Sample64** getChannelBuffers (AudioBusBuffers& buffer)
 }
 ```
 
-Now we can change our `doProcessing` algorithm to use these functions:
+现在我们可以改变 `doProcessing` 算法来使用这些函数：
 
 ```c++
 template <SymbolicSampleSizes SampleSize>
@@ -1201,7 +1203,7 @@ void MyEffect::process (ProcessData& data)
 }
 ```
 
-最后一步，我们现在需要从普通的 `process` 函数调用模板化的 `process<...>` 函数：
+最后一步，我们现在需要在 `process` 函数调用模板化的 `process<...>` 函数：
 
 ```c++
 void MyEffect::process (ProcessData& data)
@@ -1243,7 +1245,7 @@ tresult PLUGIN_API MyEffect::canProcessSampleSize (int32 symbolicSampleSize)
 
 对于这种情况，我们有另一个实体类：`RTTransferT`
 
-这个类需要有一个模板参数`StateModel`来描述状态数据。We create a simple struct as data model:
+这个类需要有一个模板参数`StateModel`来描述状态数据。我们创建一个简单的结构体作为数据模型：
 
 ```c++
 struct StateModel
@@ -1254,7 +1256,7 @@ struct StateModel
 using RTTransfer = RTTransferT<StateModel>;
 ```
 
-We use `RTTransfer` now as a member for our `MyEffect` class:
+我们现在使用 `RTTransfer` 作为 `MyEffect` 类的成员：
 
 ```c++
 class MyEffect : ....
@@ -1263,7 +1265,7 @@ class MyEffect : ....
 };
 ```
 
-If we now get a new `state` from the host, we create a new `StateModel` and write the `stateGain` value into `model->gain` and pass it to the utility class `stateTransfer`:
+如果我们现在从宿主获得一个新的 `state`，我们可以创建一个新的 `StateModel` 并将 `stateGain` 值写入 `model->gain` 中，并将其传递给实用程序类 `stateTransfer`：
 
 ```c++
 tresult PLUGIN_API MyEffect::setState (IBStream* state)
@@ -1279,7 +1281,7 @@ tresult PLUGIN_API MyEffect::setState (IBStream* state)
 }
 ```
 
-To get the `stateModel` into our realtime thread we have to change the `process` function like this:
+为了让`stateModel`进入实时线程，我们必须像这样修改`process`函数：
 
 ```c++
 void MyEffect::process (ProcessData& data)
@@ -1327,8 +1329,6 @@ public.sdk/source/vst/utility/processdataslicer.h
 public.sdk/source/vst/utility/sampleaccurate.h
 public.sdk/source/vst/utility/rttransfer.h
 ```
-
-That´s it!
 
 
 
@@ -1400,7 +1400,7 @@ SDK 提供了一个 HelloWorld 示例，你可以使用它来创建一个新的*
 
 - 你可以重命名 helloworld 文件夹，例如：
 
-- copy ***D:/Users/Me/Desktop/development/my_plugins/helloworld*** to **D:/Users/Me/Desktop/development/my_plugins/MyDelayPlugin**
+- 复制 ***D:/Users/Me/Desktop/development/my_plugins/helloworld*** 到**D:/Users/Me/Desktop/development/my_plugins/MyDelayPlugin**
 
 - 相应地
 
@@ -1445,13 +1445,8 @@ SDK 提供了一个 HelloWorld 示例，你可以使用它来创建一个新的*
 
 
 
-- 现在你可以开始编写你的效果器或插件了（请参阅
+- 现在你可以开始编写你的效果器或插件了
 
-   使用项目生成器生成一个新插件
-
-
-
-   跟着步骤来）
 
    1. 在plugcontroller.cpp中添加参数
    2. 在 plugprocessor.cpp 中调整你的过程算法
