@@ -20,9 +20,9 @@ API 文档文件**VST 3**位于文件夹“*pluginterfaces/vst*”。
 - 处理器 : [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html) + [Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html)
 - 控制器 : [Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html)
 
-![基本结构](IMAGE\basic_structure.jpg)
+![基本结构](Image\basic_structure.jpg)
 
-![processorcontroller](IMAGE\processorcontroller.png)
+![processorcontroller](Image\processorcontroller.png)
 
 **VST 3**插件开发可以通过实现两个组件来完全解耦处理器和编辑控制器。分开成这两部分需要一些额外的开发工作。
 但是，这种分离使主机能够在不同的上下文与计算机中更好地运行每个组件。另一个好处是，在自动化方面，参数更改可以分离。虽然进行这些更改需要以精确样本传输为代价，但 GUI 可以以很低的频率进行更新，并且可以根据任何延迟补偿或其他的量进行移动。
@@ -138,9 +138,9 @@ if (processorComponent && (result == kResultOk))
 - **Restore:** 当状态恢复时，宿主将状态传递给处理器和控制器([Steinberg::Vst::IEditController::setComponentState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a4c2e1cafd88143fda2767a9c7ba5d48f)). 宿主必须始终先将该状态传递给处理器。然后控制器必须将其参数同步到此状态（但不得执行任何 [IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html)的回调）。
    恢复状态后，宿主重新扫描参数（通过询问控制器）以更新其内部表示。
 
-![img](IMAGE/persistencestore.png)
+![img](Image/persistencestore.png)
 
-![img](IMAGE/persistencerestore.png)
+![img](Image/persistencerestore.png)
 
 请参考
 
@@ -152,7 +152,7 @@ if (processorComponent && (result == kResultOk))
 
 ### 处理部分
 
-![img](IMAGE/processorpart.png)
+![img](Image/processorpart.png)
 
 处理部分由两个相关接口组成：[Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html)和[Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html)。将两者分开的原因是为了使用基础接口 [Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html) ，它不仅用于音频插件，还用于其他类型的媒体（例如未来的视频处理）。因此，[Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html) 接口表示处理组件的音频部分。让我们仔细看看这些概念。
 
@@ -210,13 +210,13 @@ if (processorComponent && (result == kResultOk))
 
    - **事件:** [Steinberg::Vst::IEventList](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEventList.html)
 
-![img](IMAGE/processorinterfaces.png)
+![img](Image/processorinterfaces.png)
 
 
 
 ### 编辑部分
 
-![img](IMAGE/edit%20controller.jpg)
+![img](Image/edit%20controller.jpg)
 
 编辑控制器负责插件的 GUI 方面。它的标准接口是[Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html)。宿主必须由[Steinberg::Vst::IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html) 编辑控制器提供回调接口。处理程序主要用于宿主和处理器之间的通信。
 
@@ -228,7 +228,7 @@ if (processorComponent && (result == kResultOk))
 
 - **插件结构:** 如果插件由离散的功能部分组成，编辑控制器应该通过[Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc)来实现这个结构和实现属于每个部分的参数接口。更多细节可以在[VST 3 Units](https://developer.steinberg.help/vst3Units.html)的页面上找到
 
-![img](IMAGE/controllerinterface.png)
+![img](Image/controllerinterface.png)
 
 
 
@@ -265,7 +265,7 @@ if (processorComponent && (result == kResultOk))
 
 
 
-![img](IMAGE/standard_communication.jpg)
+![img](Image/standard_communication.jpg)
 
 #### Private通信
 
@@ -280,7 +280,7 @@ if (processorComponent && (result == kResultOk))
 
 
 
-![img](IMAGE/communication.png)
+![img](Image/communication.png)
 
 #### 从宿主的角度初始化通信
 
@@ -578,7 +578,7 @@ The controller and the processor have to work with normalized parameter values.
 
 **Example:** Step Count 3
 
-![img](IMAGE/valuerange.jpg)
+![img](Image/valuerange.jpg)
 
 ### Automation
 
@@ -651,7 +651,7 @@ In **VST 3**, automation playback is the task of the plug-in and it is the host'
 
 The need to perform all transformations, from the normalized GUI representation to the DSP representation, produces some overhead. Performing sample accurate automation requires even more overhead, because the DSP value must be calculated for each single sample. While this cannot be avoided entirely, it is the choice of the plug-in implementation how much processing time to spend on automation accuracy. The host always transmits value changes in a way that allows a sample accurate reconstruction of the underlying automation curve. The plug-in is responsible for the realization.
 
-![img](IMAGE/automation.jpg)
+![img](Image/automation.jpg)
 
 The processor gets the automation data in the processing call by using queue of parameter changes for each parameter having automation data:
 
@@ -748,7 +748,7 @@ The purposes of units are:
 
 - A unit can be associated with specific busses. There can be any kind of combination, but the VST 3 interfaces only define queries for special situations. (See [Units and Tracks](file:///C:/Users/YGrabit/Desktop/SDKs/VST3_SDKs/3.7/VST_SDK/VST3_SDK/vst3_doc/vstinterfaces/vst3Multitimbral.html#vst3UnitsTracks))
 
-![img](IMAGE/unit.png)
+![img](Image/unit.png)
 
 Most things of interest in regard to units are GUI related, so the access interface [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html) needs to be implemented as extension of the edit controller.
 
@@ -760,14 +760,14 @@ See also [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/v
 
 - 宿主可以使用带有结构化参数列表的插件示例（来自 **Cubase** 插件集的 MultibandCompressor），在 **Cubase** 中用于选择要自动化的参数：
 
-   ![img](IMAGE/unitsexample1.jpg)
+   ![img](Image/unitsexample1.jpg)
 
 - 在 [PluginTestHost](https://developer.steinberg.help/display/VST) 的“参数”选项卡中显示结构化参数列表的插件示例（来自 **Cubase** 插件集的 VST Amp Rack）/VST+3+插件+测试+主机）应用：
 
-   ![img](IMAGE/unitsexample2.jpg)
+   ![img](Image/unitsexample2.jpg)
 
 - 在 **Cakewalk** 中使用 **HALion Sonic SE** 单元结构进行自动化选择的示例：
-   ![cakewalkUnitExample](IMAGE\cakewalkUnitExample.png)
+   ![cakewalk_unit_example](Image\cakewalk_unit_example.png)
 
 
 
@@ -775,7 +775,7 @@ See also [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/v
 
 ### 简单插件
 
-![presetsimple](IMAGE\presetsimple.png)
+![presetsimple](Image\presetsimple.png)
 
 For a simple plug-in, the data of a preset is nothing more than its state. In this case:
 
@@ -800,7 +800,7 @@ If a plug-in uses a large pool of programs that require some kind of caching or 
 
 - If the plug-in defines a program list to be used as a pool of user presets that are initially in an 'empty' state, modifications can be applied to the list items directly. This way of using program lists should only be chosen if programs do require a lot of resources that need to be cached in order to achieve fast program changes (good examples for this are sample-based plug-ins).
 
-![img](IMAGE/single_program_list.jpg)
+![img](Image/single_program_list.jpg)
 
 - The plug-in can provide GUI for the selection of programs, but it must enable the host to display the list and the selected program as well. The index of the selected program in the list must be exported as program selection parameter. ([Steinberg::Vst::ParameterInfo::kIsProgramChange](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ae3a5143ca8d0e271dbc259645a4ae645a517665185bca1f4f3d77ce0a6468b8e3))
 
@@ -876,7 +876,7 @@ Similar to the simple case, the host may want to save and load preset files. The
 
 
 A plug-in can support unit presets and program list presets.
-![img](IMAGE/program_lists.jpg)
+![img](Image/program_lists.jpg)
 
 See also [Presets & Program Lists](https://developer.steinberg.help/pages/viewpage.action?pageId=9798267), [Steinberg::Vst::IProgramListData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html), [Steinberg::Vst::IUnitData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html)
 
@@ -903,7 +903,7 @@ In general, the host needs to know about any input to output routing of the plug
 
 - [Steinberg::Vst::IComponent::getRoutingInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#aa0ffeccad3c44364a199ce56365a4c12) : find out the output of a given input
 
-![img](IMAGE/routing.jpg)
+![img](Image/routing.jpg)
 
 
 
@@ -1000,8 +1000,8 @@ MyPlugin.vst3/
     |_ Contents/
     |   |__ Resources/
     |   |   |__ Snapshots/
-    |   |   |   |__ 84E8DE5F92554F5396FAE4133C935A18_snapshot.png
-    |   |   |   |__ 84E8DE5F92554F5396FAE4133C935A18_snapshot_2.0x.png
+    |   |   |   |__ snapshot_2.png
+    |   |   |   |__ snapshot_2_2.0x.png
     |   |   |__ Documentation/
     |   |   |   |__ Manual.pdf
     |   |   |   |__ WhatsNew.pdf
@@ -1100,7 +1100,7 @@ On the Linux platform, the host application expects **VST 3 Plug-ins** to be loc
 ## 预设格式
 
 文件扩展名必须是**".vstpreset"**，例如：*myBestDefault.vstpreset*，指定**VST 3** Preset 文件：
-![img](IMAGE/preset_file_format.jpg)
+![img](Image/preset_file_format.jpg)
 
 检查 [Steinberg::Vst::PresetFile](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1PresetFile.html#a9db1b48345e92320b0dffc446d5e3483) 源代码，它允许读取和写入此类预设。
 
@@ -1174,8 +1174,8 @@ On the Linux platform, the host application expects **VST 3 Plug-ins** to be loc
 - 图像需要位于文件夹 **Resources/Snapshots/** 中的捆绑目录内
 - 文件名必须以 84E8DE5F92554F5396FAE4133C935A18 形式打印的音频处理器的唯一 ID 开头，后跟字符串 _snapshot，可选地后跟 HiDPI 比例因子 _2.0x，并以文件扩展名 .png 结尾。
    - 例如，again 的快照必须命名为：
-      - **84E8DE5F92554F5396FAE4133C935A18_snapshot.png**
-      - **84E8DE5F92554F5396FAE4133C935A18_snapshot_2.0x.png** for the 2x scaled HiDPI variant.
+      - **snapshot_2.png**
+      - **snapshot_2_2.0x.png** for the 2x scaled HiDPI variant.
    - 如果省略 HiDPI 比例，则使用比例1。
 
 
@@ -1184,11 +1184,11 @@ On the Linux platform, the host application expects **VST 3 Plug-ins** to be loc
 
 #### 音符音调合成器
 
-![img](IMAGE/6EE65CD1B83A4AF480AA7929AEA6B8A0_snapshot_2.0x.png)
+![img](Image/snapshot_1_2.0x.png)
 
 #### Cubase 如何使用快照
 
-![img](IMAGE/snapshotCubase.png)
+![img](Image/snapshot_cubase.png)
 
 在媒体选项卡下的右侧区域中，用户可以使用快照选择 FX 和乐器。
 
@@ -1198,7 +1198,7 @@ On the Linux platform, the host application expects **VST 3 Plug-ins** to be loc
 
 与 **VST 2** 不同，**MIDI** 不包含在 **VST 3** 中。但是 **VST 3** 提供了可以使用 [Event](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1Event.html) 与 MIDI 相互转换的方法：
 
-![img](IMAGE/event.png)
+![img](Image/event.png)
 
 ### MIDI 和 VST3 中的相关概念
 

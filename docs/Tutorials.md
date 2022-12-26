@@ -108,14 +108,14 @@ cmake --build . --config Release
 
 - 启动 cmake-gui 应用程序，它是 cmake 的一部分 (<https://cmake.org/download/>)
 
-![img](IMAGE/cmakeguipng.png)
+![img](Image/cmakeguipng.png)
 
 - "**Browse Source...**": 选择VST3_SDK文件夹
 - "***Browse Build...***": 选择一个输出文件夹。一般这个文件夹名字叫"build"
 - 你可以勾上SMTG选项
 - 点击 "***Configure***" 然后在新窗口中选择**生成器(generator)**，例如"**Visual Studio 16 2019**"
 
-![img](IMAGE/setup.png)
+![img](Image/setup.png)
 
 - 点击 "***Generate***" 以创建项目
 - 打开你喜欢的IDE，编译生成的项目
@@ -186,7 +186,7 @@ click on "Generate" for creating project/solution
 ```
 
 
-![img](IMAGE/cmakeGui.jpg)
+![img](Image/cmake_gui.jpg)
 
 Windows 上的 cmakegui 应用程序示例
 
@@ -280,7 +280,7 @@ SDK的下载请参见“[如何为 VST 3 设置我的系统](https://developer.s
 
 
 
-![img](IMAGE/createproject.PNG)
+![img](Image/createproject.png)
 
 查看[Create Plug-in Project](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) 对话框的[VST 3 Project Generator](https://developer.steinberg.help/display/VST/VST+3+Project+Generator#VST3ProjectGenerator-CreatePlug-inProject) 选项卡以获取更详细的文档。
 
@@ -917,7 +917,7 @@ IPlugView* PLUGIN_API MyEditController::createView (FIDString name)
 
 这是在为 Cubase 的著名 Grungelizer 插件创建新用户界面时录制的示例视频，该插件从 **VST 2.4** 移植到 **VST 3**。
 
-![img](IMAGE/grungelizer.png)
+![img](Image/grungelizer.png)
 
 **Create the VST 3 Grungelizer UI in 15 minutes with the UIDescriptionEditor of VSTGUI**
 

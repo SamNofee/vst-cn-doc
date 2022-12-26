@@ -19,4 +19,4 @@ VST SDK Github链接：https://github.com/steinbergmedia/vst3sdk
 - VST3Licensing、[VST版本更新历史](https://developer.steinberg.help/display/VST/Change+History)不做翻译。
 - 文档开源，遵循[**GPL3.0**](www.gnu.org/licenses/gpl-3.0.html)协议。
 - 翻译力求准确，但有些地方为了让句间逻辑更符合中文习惯而对原文档做了一定的修改，如有不当请指出，谢谢。
-- 翻译不易需要鼓励，您可通过打赏给予支持，谢谢。(支付宝：zhangengru@163.com 、Paypal：zhangengru@163.com）
+- 翻译不易需要鼓励，您可通过打赏给予支持，谢谢。(支付宝 or Paypal：zhangengru@163.com）

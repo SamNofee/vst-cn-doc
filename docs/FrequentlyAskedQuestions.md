@@ -466,7 +466,7 @@ Here's an overview of the main defined speaker locations (Check enum Speakers an
 const SpeakerArrangement kStereo = kSpeakerL | kSpeakerR;
 => representing in hexadecimal 0x03 and in binary 0011.
 
-![vst3_speaker_types](IMAGE\vst3_speaker_types.jpg)
+![vst3_speaker_types](Image\vst3_speaker_types.jpg)
 
 
 
@@ -551,7 +551,7 @@ Navigate to
 
 Here you can set which users can create symbolic links:
 
-![windowseditgrouppolicy](IMAGE\windowseditgrouppolicy.png)
+![windowseditgrouppolicy](Image\windowseditgrouppolicy.png)
 
 ## License
 

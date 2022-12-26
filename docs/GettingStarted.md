@@ -1,36 +1,36 @@
 # 快速上手
 
-## 获取VST3 SDK
+## 获取 VST3 SDK
 
-| Component | [as zip package](https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-aszip) | [as GitHub repository](https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-repository) |
+| 组件 | [as zip package](https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-aszip) | [as GitHub repository](https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-repository) |
 | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
-| [VSTGUI](https://developer.steinberg.help/display/VST/VSTGUI) | ![(滴答)](IMAGE/check.svg) | ![(滴答)](IMAGE/check.svg) |
-| [VST 3 Project Generator](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) (exe only) | ![(滴答)](IMAGE/check.svg) | ![(出错)](IMAGE/error.svg) |
-| [VST 3 Plug-ins Examples](https://developer.steinberg.help/display/VST/VST+3+Plug-ins+Examples) | ![(滴答)](IMAGE/check.svg) | ![(滴答)](IMAGE/check.svg) |
-| [VST 3 Plug-in Test Host](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) (exe only) | ![(滴答)](IMAGE/check.svg) | ![(出错)](IMAGE/error.svg) |
-| [VST 3 Licensing](https://developer.steinberg.help/display/VST/VST+3+Licensing) | ![(滴答)](IMAGE/check.svg)Proprietary+ [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) | ![(出错)](IMAGE/error.svg)only [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) |
-| [VST 3 API](https://developer.steinberg.help/display/VST/VST+3+API+Documentation) | ![(滴答)](IMAGE/check.svg) | ![(滴答)](IMAGE/check.svg) |
-| [VST3 Inspector](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-VST3Inspector) | ![(滴答)](IMAGE/check.svg) | ![(滴答)](IMAGE/check.svg) |
-| [Validator command line](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-validator) | ![(滴答)](IMAGE/check.svg) | ![(滴答)](IMAGE/check.svg) |
-| [iOS Inter-App Audio support](https://developer.steinberg.help/display/VST/iOS+Inter-App+Audio+support) | ![(滴答)](IMAGE/check.svg) | ![(滴答)](IMAGE/check.svg) |
-| [Helpers classes](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-Helpersclasses) | ![(滴答)](IMAGE/check.svg) | ![(滴答)](IMAGE/check.svg) |
-| [EditorHost](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-EditorHost) | ![(滴答)](IMAGE/check.svg) | ![(滴答)](IMAGE/check.svg) |
-| [AudioAudioHost](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-AudioHost) | ![(滴答)](IMAGE/check.svg) | ![(滴答)](IMAGE/check.svg) |
-| [AAX, AUv3, AU and VST 2 wrappers](https://developer.steinberg.help/display/VST/AAX%2C+AUv3%2C+AU+and+VST+2+wrappers) | ![(滴答)](IMAGE/check.svg) | ![(滴答)](IMAGE/check.svg) |
+| [VSTGUI](https://developer.steinberg.help/display/VST/VSTGUI) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
+| [VST 3 Project Generator](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) (exe only) | ![(滴答)](Image/check.svg) | ![(出错)](Image/error.svg) |
+| [VST 3 Plug-ins Examples](https://developer.steinberg.help/display/VST/VST+3+Plug-ins+Examples) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
+| [VST 3 Plug-in Test Host](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) (exe only) | ![(滴答)](Image/check.svg) | ![(出错)](Image/error.svg) |
+| [VST 3 Licensing](https://developer.steinberg.help/display/VST/VST+3+Licensing) | ![(滴答)](Image/check.svg)Proprietary+ [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) | ![(出错)](Image/error.svg)only [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) |
+| [VST 3 API](https://developer.steinberg.help/display/VST/VST+3+API+Documentation) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
+| [VST3 Inspector](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-VST3Inspector) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
+| [Validator command line](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-validator) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
+| [iOS Inter-App Audio support](https://developer.steinberg.help/display/VST/iOS+Inter-App+Audio+support) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
+| [Helpers classes](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-Helpersclasses) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
+| [EditorHost](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-EditorHost) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
+| [AudioAudioHost](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-AudioHost) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
+| [AAX, AUv3, AU and VST 2 wrappers](https://developer.steinberg.help/display/VST/AAX%2C+AUv3%2C+AU+and+VST+2+wrappers) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
 
 
 
-**下载完整的VST3压缩包**
+**下载完整的 VST3 压缩包**
 
-下载完整的 **VST 3 SDK** 包，其中包含构建 **VST 3** 插件或宿主所需的一切。使用 [VST 3 Plug-in Test Host](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) 实时并自动化测试你的VST3插件:
+下载完整的 **VST 3 SDK** 包，其中包含构建 **VST 3** 插件或宿主所需的一切代码。使用 [VST 3 Plug-in Test Host](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) 实时并自动化测试你的VST3插件:
 
-<https://www.steinberg.net/vst3sdk> (zip文件链接, 101 MB)
+<https://www.steinberg.net/vst3sdk>  (zip 文件, 101 MB)
 
 **从 GitHub 克隆 VST 3 存储库**
 
 从 **GitHub** 克隆 **VST 3 SDK** 存储库，以便轻松集成到您的工作区：
 
-> 独立于 **VST 3 SDK** 的下载源，请确保遵守许可协议（查看 [VST 3 的许可选项是什么？](https://developer.steinberg.help/pages/viewpage.action?pageId=9797944)）
+> 请确保遵守许可协议（参考 [VST 3 的许可选项是什么？](https://developer.steinberg.help/pages/viewpage.action?pageId=9797944)）
 
 
 
@@ -134,7 +134,7 @@ sudo apt-get install qtcreator
 
 您可以将其用作命令行工具或带有 GUI 的 cmake 可执行文件。cmake-gui包含在cmake包里面:
 
-![img](IMAGE/cmakeGui.jpg)
+![img](Image/cmake_gui.jpg)
 
 
 
@@ -152,13 +152,13 @@ sudo apt-get install qtcreator
 
 - 计算机配置 => Windows 设置 => 安全设置 => 本地策略 => 用户权限分配 => 创建符号链接
 
-![StartLocalGroupPolicyEditor](IMAGE\StartLocalGroupPolicyEditor.jpg)
+![StartLocalGroupPolicyEditor](Image\start_local_group_policy_editor.jpg)
 
 - 导航：
 
    计算机配置 => Windows 设置 => 安全设置 => 本地策略 => 用户权限分配 => 创建符号链接
 
-   ![LocalGroupPolicyEditor](IMAGE\LocalGroupPolicyEditor.jpg)
+   ![LocalGroupPolicyEditor](Image\local_group_policy_editor.jpg)
 
 您可以在此处设置哪些用户可以创建符号链接。
 
