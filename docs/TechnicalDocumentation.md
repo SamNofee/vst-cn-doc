@@ -20,9 +20,9 @@ API 文档文件**VST 3**位于文件夹“*pluginterfaces/vst*”。
 - 处理器 : [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html) + [Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html)
 - 控制器 : [Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html)
 
-![基本结构](Image\basic_structure.jpg)
+![基本结构](Image/basic_structure.jpg)
 
-![processorcontroller](Image\processorcontroller.png)
+![processorcontroller](Image/processorcontroller.png)
 
 **VST 3**插件开发可以通过实现两个组件来完全解耦处理器和编辑控制器。分开成这两部分需要一些额外的开发工作。
 但是，这种分离使主机能够在不同的上下文与计算机中更好地运行每个组件。另一个好处是，在自动化方面，参数更改可以分离。虽然进行这些更改需要以精确样本传输为代价，但 GUI 可以以很低的频率进行更新，并且可以根据任何延迟补偿或其他的量进行移动。
@@ -216,7 +216,7 @@ if (processorComponent && (result == kResultOk))
 
 ### 编辑部分
 
-![img](Image/edit%20controller.jpg)
+![img](Image/edit_controller.jpg)
 
 编辑控制器负责插件的 GUI 方面。它的标准接口是[Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html)。宿主必须由[Steinberg::Vst::IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html) 编辑控制器提供回调接口。处理程序主要用于宿主和处理器之间的通信。
 
@@ -510,126 +510,108 @@ public:
 
 ## 参数和自动化
 
-Description of how parameters are defined and used in **VST 3**
-
-Parameters
-
-A plug-in requires parameters in order to control its DSP algorithm, for example, a Frequency parameter for a filter. The plug-in can export these parameters in order to make them visible to the host and allow the host to control/change/automate/remote/visualize them. Some parameters can be defined for private use only (not visible to the user) or as read-only, such as parameters associated to VU Meters.
-
-[Steinberg::Vst::IEditController::getParameterCount](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#ab6ffbb8e3bf6f4829ab1c9c23fe935a1) allows the host to to identify the number of parameters that are exported by the plug-in.
-The plug-in must assign a unique 32-bit identifier (ID) to each exported parameter.
-
-> Up to 2^31 parameters can be exported with ID range **[0, 2147483648]** (the range [2147483649, 429496729] is reserved for host application).
-
-Please note that it is not allowed to change this assignment at any time. In particular, a plug-in must not perform any reconfigurations that lead to a different set of automatable parameters. The only allowed variation is the adding or removing of parameters in a future plug-in version. However, keep in mind that automation data can get lost when parameters are removed.
-
-Usually, the host is unaware of a parameter's semantics. However, there are a few important exceptions that the controller must announce using the [Steinberg::Vst::ParameterInfo::flags](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#a8ffba1d4311e48ae488bc118f20d7edb):
-
-- **kCanAutomate:** This means that this parameter can be automated by the host using its automation track. [**SDK 3.0.0**]
-- **kIsBypass:** If the plug-in performs bypass processing itself, it must export the corresponding parameter and flag it with kIsBypass. It is highly recommended that this bypass parameter is provided by the effect plug-in. If the plug-in does not export a bypass parameter, the host can perform bypass processing and the plug-in process call will be discontinued. Only one bypass parameter is allowed. The plug-in should save the state of this bypass parameter like other parameters (when getState and setState are used). If the plug-in does not need a bypass (like Instrument) this flag should be not used. Check this [FAQ](https://developer.steinberg.help/display/VST/Frequently+Asked+Questions#FrequentlyAskedQuestions-HowdoesAudioProcessingBypasswork?)in order to understand how bypass processing works. [**SDK 3.0.0**]
-- **kIsReadOnly:** This means that this parameter cannot be changed from outside the plug-in, this requires that kCanAutomate is NOT set. [**SDK 3.0.0**]
-- **kIsWrapAround:** When a UI control created by the host for this parameter attempts to set its value out of the limits, this UI control will make a wrap around (useful for parameters like 360 degree rotation). [**SDK 3.0.2**]
-- **kIsList:** This means that the host will display this parameter as list in a generic editor or automation editing. [**SDK 3.1.0**]
-- **kIsHidden:** This means that this parameter will NOT be displayed and cannot be changed from outside the plug-in. This requires that kCanAutomate is NOT set and kIsReadOnly is set. [**SDK 3.7.0**]
-- **kIsProgramChange:** If the plug-in supports program lists (see [VST 3 Units](https://developer.steinberg.help/display/VST/VST+3+Units), [Program Lists](https://developer.steinberg.help/pages/viewpage.action?pageId=9798267)), each 'unit' of the plug-in needs to export a program selector parameter. Such a parameter is not allowed to be automated when the affected parameters are flagged as automatable as well. A host can display program parameters at dedicated locations of its GUI. [**SDK 3.0.0**]
-
-The controller must support the conversion to a string for any exported parameter. The conversion method [Steinberg::Vst::IEditController::getParamStringByValue](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#aab2f0b853e75361d331b667e7893962e)must provide a result for any possible normalized parameter value.
-
-> Parameter values are always transmitted in a normalized floating point (64bit double) representation **[0.0, 1.0]**.
-
-**Representation of parameter values**
-
-A plug-in parameter usually has more than one representation. The GUI of a plug-in can display something that appears to be a single parameter, but might control multiple processing parameters at the same time. Or the GUI representation displays a scale-transformed representation of a DSP-Parameter.
-
-Somewhere on the way from the GUI to the DSP algorithm, this transformation has to be performed. The host does not need information about DSP parameters, but it is responsible for reporting parameter changes to the processor. According to this, the processor is the only place where a transformation can happen and all parameters always have to match the GUI representation.
-
-Does this fit into the idea of separating GUI and processing? No problem so far
-
-- it is a separation of duties, nothing more. The processor component and the controller component have to work on the same internal plug-in model. The controller knows how this model has to be presented in the GUI. The processor knows how the model has to be translated into DSP parameters.
-   The **VST 3** interfaces suggest a normalized value representation for a part of this model (the part that is exported as parameters). This means every value has to be inside the range from 0.0 to 1.0.
-
-### Parameter styles / 'Step Count'
-
-Although values are transmitted in a normalized format, the host needs to know some details of the parameter's displayed GUI representation. When editing automation data, for example, the host must know the nature of a parameter expressed in its 'step count' (see [Steinberg::Vst::ParameterInfo::stepCount](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ac1efeff62e4ba9aea101c3327e0b5c4d)).
-
-**Step count semantics** :
-
-- **0** : A *continuous* parameter. Any normalized value has an exact mapping (0 = there are no steps between the values)
-- **1** : A *discrete* parameter with 2 states like [on/off] [yes/no] etc. (1 = there is one step between these states)
-- **2** : A *discrete* parameter with 3 states [0,1,2] or [3,5,7] (2 = there are two steps between these states)
-- **3** : etc...
-
-**Conversion of normalized values**
-
-The controller and the processor have to work with normalized parameter values.
-
-- Step count 0 : Continuous parameters simply need to be mapped accordingly
-
-- Step count n : Discrete parameters need a little bit more care
-
-   - **Discrete Value => Normalize**
+**VST 3** 中如何定义和使用参数？
 
 
+
+#### 参数
+
+插件需要参数来控制 DSP 算法，例如滤波器的频率参数。插件可以导出这些参数，以使它们对宿主可见，并允许宿主控制/更改/自动化/远程/可视化它们。某些参数可以定义为私有（用户不可见）或只读，例如与 VU 表关联的参数。
+
+[Steinberg::Vst::IEditController::getParameterCount](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#ab6ffbb8e3bf6f4829ab1c9c23fe935a1) 允许宿主识别插件导出的参数数量。插件必须为每个导出的参数分配一个 32 位的唯一标识符 (ID)。
+
+> 最多可以导出 2^31 个 ID 范围为 **[0, 2.147.483.648]** 的参数（范围 [2.147.483.649, 4.294.967.296] 为主机应用程序保留）
+
+请注意，任何时候都不允许更改这种分配方式。插件不得重新配置可自动化参数集，以免造成数据不一致。唯一允许的改动是在未来的插件版本中添加或删除参数。但是，请记住，删除参数后，自动化数据可能会丢失。
+
+宿主不知道参数的语义。控制器必须使用 [Steinberg::Vst::ParameterInfo::flags](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a8ffba1d4311e48ae488bc118f20d7edb) 声明一些重要的异常：
+
+- **kCanAutomate:** 这意味着该参数可以由宿主自动化其自动化轨道。**[SDK 3.0.0]** 
+- **kIsBypass:** 如果插件需要进行 bypass processing，则必须导出相应的参数并用 kIsBypass 标记。强烈建议此参数由效果插件提供。如果插件没有导出旁路参数，宿主机可以进行旁路处理，插件进程调用将中断。插件应像其他参数一样保存此旁路参数的状态（使用 getState 和 setState ）。如果插件不需要旁路（如 Instrument），则不应使用此标志。查看此[常见问题解答](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/FAQ/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)以了解 bypass processing 的工作原理。**[SDK 3.0.0]**
+- **kIsReadOnly:** 这意味着不能从插件外部更改此参数，同时不能设置 kCanAutomate。**[SDK 3.0.0]**
+- **kIsWrapAround:** 当宿主为此参数创建 UI 控件，并尝试将其值设置为超出限制时，此 UI 控件将被旋转（对于 360 度旋转等参数很有用）**[SDK 3.0.2]**
+- **kIsList:** 这意味着宿主将在通用编辑器或自动编辑中会将此参数显示为列表。**[SDK 3.1.0]**
+- **kIsHidden:** 这意味着该参数将不会显示，并且不能从插件外部更改。同时不能设置 kCanAutomate 和 kIsReadOnly。**[SDK 3.7.0]**
+- **kIsProgramChange:** 如果插件支持程序列表（请参阅 [VST 3 单元](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/VST+3+Units/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)，[程序列表](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/Presets+Program+Lists/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)），插件的每个“单元”都需要导出一个程序选择器参数。当受影响的参数也被标记为可自动执行时，就不允许自动执行此类参数。宿主可以在其 GUI 的特定位置显示程序参数。**[SDK 3.0.0]**
+
+控制器必须支持将任何导出参数转换为字符串。转换方法 [Steinberg::Vst::IEditController::getParamStringByValue](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#aab2f0b853e75361d331b667e7893962e) 必须为任何可能的规范化参数值提供结果值
+
+> 参数值始终以规范化浮点（64 位双精度）表示 **[0.0, 1.0]** 传输。
+
+**参数值表示**
+
+一个插件参数通常有不止表示一个参数。插件的 GUI 可以显示单个参数的内容，但可同时控制多个处理参数。
+
+在从 GUI 到 DSP 算法的某个地方，必须执行此转换。宿主不需要有关 DSP 参数的信息，但它负责向处理器报告参数变化。据此，处理器是唯一可以发生转换的地方，所有参数必须始终与 GUI 表示相匹配。 
+
+这符合分离式 GUI 和处理的想法吗？目前没问题
+
+- 这是职责分离，仅此而已。处理器组件和控制器组件必须在相同的内部插件模型上工作。控制器知道该模型如何在 GUI 中呈现。处理器知道模型必须如何转换为 DSP 参数。**VST 3** 接口建议对此模型的一部分（作为参数导出的部分）使用规范化值表示，这意味着每个值都必须在 0.0 到 1.0 的范围内。
+
+### 参数样式 / '步数'
+
+虽然值以规范化格式传输，但主机需要知道参数显示的 GUI 表示的一些细节。例如，在编辑自动化数据时，主机必须知道以其 “步数” 表示的参数的性质（参见 [Steinberg::Vst::ParameterInfo::stepCount](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#ac1efeff62e4ba9aea101c3327e0b5c4d)）
+
+**步数语义** :
+
+- **0** : 连续参数。任何规范化的值都有一个精确的映射（0 = 值之间没有阶梯）
+- **1** : 具有 2 个状态的离散参数，例如（开/关）（是/否）等（1 = 这些状态之间有一个步骤）
+- **2** : 具有 3 个状态 (0,1,2) 或 (3,5,7) 的离散参数（2 = 这些状态之间有两个步骤）
+- **3** : 等等...
+
+**标准化转换**
+
+控制器和处理器必须使用标准化参数值
+
+- 步骤计数 0：连续参数只需要一一对应映射
+
+- 步数 n：离散参数需要多加注意
+
+   - **离散值 => 归一化**
+
+​		`double normalized = discreteValue / (double)stepCount;`
 
    - **Normalize => Discrete Value (Denormalize)**
 
+​		`int discreteValue = min (stepCount, normalized *(stepCount + 1));`
 
-
-
-**Example:** Step Count 3
+**例如:** 步数 3
 
 ![img](Image/valuerange.jpg)
 
-### Automation
+### 自动化
 
-A host that supports parameter automation is dependent on a proper cooperation of the component owning these parameters. One intention in the design of the **VST 3** interfaces was to reduce the amount of possible mistakes for an implementation. The separation of processor and controller enforces that all parameter changes have to be handled by the host in a defined way. Additionally, this allows the host to store the changes as automation data. Nevertheless, there are some more things to consider:
+支持参数自动化的宿主依赖于拥有这些参数的组件。**VST 3** 界面设计的一个意图是减少实施中可能出现的错误。处理器和控制器的分离强制所有参数更改必须由宿主以定义的方式处理。此外，这允许宿主将更改存储为自动化数据。尽管如此，还有一些事情需要考虑：
 
-No automated parameter must influence another automated parameter!
+任何自动化参数都不得影响另一个自动化参数！
 
-The prime example for this is the automation of preset changes. A preset change can lead to the change of all 'normal' parameters. So if automation data already has been recorded for these parameters and the preset change is recorded as well: who wins? This question cannot be answered and the problem can only be resolved by avoiding it. This is why automation of preset changes is not allowed by default.
-
-
-
-**Problems**
-
-A fix value range from 0.0 to 1.0 simplifies the handling of parameters in some ways, but there are problems:
-
-- **Non-linear scaling**
-   If the DSP representation of a value does not scale in a linear way to the exported normalized representation (which can happen when a decibel scale is used, for example), the edit controller must provide a conversion to a plain representation. This allows the host to move automation data (being in GUI representation) and keep the original value relations intact. ([Steinberg::Vst::IEditController::normalizedParamToPlain](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a849747dc98909312b4cdbdeea82dbae0) / [Steinberg::Vst::IEditController::plainParamToNormalized](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#ae9706616ae6d938bbf102954f8f2f110)).
-- **Changes in future plug-in versions**
-   Take a discrete parameter, for example, that controls an option of three choices. If the host stores normalized values as automation data and a new version of a plug-in invented a fourth choice, the automation data will be invalid now. So either the host has to store denormalized values as automation or it must recalculate the automation data accordingly.
+这方面的主要例子是预设更改的自动化。预设更改可能会导致所有 “正常” 参数的更改。因此，如果已经为这些参数记录了自动化数据，并且也记录了预设更改：应该偏向哪个？这个问题无法回答，只能通过回避来解决问题。这就是默认情况下不允许自动更改预设的原因。
 
 
 
-**Automation Recording**
+**自动化录制**
 
-Automation recording is performed by the host. In doing so, it is essential for the host to know the start and the end of a manipulation. Therefore, the plug-in must operate the [Steinberg::Vst::IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html) interface in the following way and in the **UI Thread**!:
+自动录制由宿主执行。这样做时，宿主必须知道操作的开始和结束。因此，插件必须在 **UI Thread** 中以如下方式操作 [Steinberg::Vst::IComponentHandler](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)
 
-- The begin of a manipulation must be signaled via [Steinberg::Vst::IComponentHandler::beginEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a8456ad739430267a12dda11a53fe9223)
-- Changes of parameters are reported via [Steinberg::Vst::IComponentHandler::performEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a135d4e76355ef0ba0a4162a0546d5f93)
-- The end of a manipulation must be signaled via [Steinberg::Vst::IComponentHandler::endEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#ae380206486b11f000cad7c0d9b6e877c)
+- 开始操作时使用该方法发出信号： [Steinberg::Vst::IComponentHandler::beginEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a8456ad739430267a12dda11a53fe9223)
+- 通过该方法反馈参数变化： [Steinberg::Vst::IComponentHandler::performEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a135d4e76355ef0ba0a4162a0546d5f93)
+- 操作结束时通过该方法发出信号： [Steinberg::Vst::IComponentHandler::endEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#ae380206486b11f000cad7c0d9b6e877c)
 
-The plug-in must stick to the order of these callbacks. Otherwise, automation recording cannot work correctly. However, the implementation can bring up difficulties. Each type of GUI control and the way it is operated along with the nature of the controlled parameter requires specific considerations.
-To address the most common cases:
+插件必须遵守这些回调的顺序。否则，自动录制无法正常工作。然而，实践起来可能会遇到一些困难。每种类型的 GUI 控件、其操作方式、受控参数的性质都需要具体考虑。要解决最下面这些常见的情况：
 
+##### 滑块和按钮
 
+这种控件通常控制连续的参数，通常用鼠标操作。这种常见情况最容易处理：鼠标单击向下调用 beginEdit（当控件允许跳转时，随后调用 performEdit），鼠标拖动调用 performEdit，鼠标单击向上调用 endEdit。
 
-### Sliders & Knobs
+麻烦始于**鼠标滚轮**：操作滚轮时根本没有定义的开始或结束 - 每个滚轮事件 “突然” 到达。在这种情况下启用正确的自动记录的唯一方法是使用计时器。
 
-These kind of controls usually control continuous parameters and they are usually operated with the mouse. This common case is the most simple to handle: On mouse-click-down call beginEdit (followed by performEdit when the control allows a jump), on mouse-drag call performEdit and on mouse-click-up call endEdit.
+- 插件应在处理第一个滚轮事件时调用 beginEdit ，并启动计时器（随后是对 performEdit 的第一次调用）。使用 performEdit 报告在超时间隔内到达的更多车轮事件，并重新启动计时器。当超时期限已过且没有其他事件发生时，应调用 endEdit 并删除计时器
 
-Trouble starts with the **mouse wheel**: There simply is nothing like a defined start or end when the wheel is operated - each wheel event arrives 'out of the blue'. The only way to enable proper automation recording in this case is the usage of a timer.
+- 但由于记录自动化数据是宿主的任务，有人可能会争辩说，在这种情况下，宿主的任务应该是处理计时器。这就是规则出现以下例外情况的原因
 
-- A plug-in implementation should call beginEdit when the first wheel event is handled and start a timer (followed by the first call to performEdit). Further wheel events that arrive inside of the timeout interval are reported with performEdit and the timer is restarted. When the timeout period has passed without further events, endEdit should be called and the timer can be removed.
+   - 鼠标滚轮事件可以不用 beginEdit 和 endEdit 上报给宿主。宿主必须准备好接收 performEdit，而无需先前为参数调用 beginEdit ，并自行处理超时
 
-
-
-- But since it is the host's task to record automation data, one could argue that it should be the host's task to take care of the timer in this case. This is the reason for the following exception to the rule:
-
-   - Mouse wheel events can be reported without beginEdit and endEdit to the host. The host must be prepared to receive a performEdit without a previous call of beginEdit for a parameter and handle the timeout itself.
-   - 
-
-### Buttons / Radio Groups / Pop-up Menus
+##### 按钮 / 单选组 / 弹出菜单
 
 These kind of controls usually control discrete parameters and simply switch the state of something. A proper handling is to call beginEdit, performEdit and endEdit in a row. The affected parameter has to be exported to the host with the correct step count because discrete parameters are handled differently than continuous parameters in regard to automation.
 
@@ -767,7 +749,7 @@ See also [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/v
    ![img](Image/unitsexample2.jpg)
 
 - 在 **Cakewalk** 中使用 **HALion Sonic SE** 单元结构进行自动化选择的示例：
-   ![cakewalk_unit_example](Image\cakewalk_unit_example.png)
+   ![cakewalk_unit_example](Image/cakewalk_unit_example.png)
 
 
 
@@ -775,7 +757,7 @@ See also [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/v
 
 ### 简单插件
 
-![presetsimple](Image\presetsimple.png)
+![presetsimple](Image/presetsimple.png)
 
 For a simple plug-in, the data of a preset is nothing more than its state. In this case:
 

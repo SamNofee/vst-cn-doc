@@ -1,16 +1,16 @@
 # 教程
 
-## 构建SDK里面的示例项目
+## 构建 SDK 里面的示例项目
 
-本教程介绍了如何设置计算机，为**VST 3**内置的音频插件示例项目创建编译环境 ，内置的插件包括简单的 DSP 效果（增益、压缩器、延迟等）插件、合成器乐器插件等。通过这些操作你可以了解插件是如何实现某些特定的**VST 3**功能的。（音符表达、程序更改、频道信息上下文等）
+本教程介绍了如何设置计算机，为 **VST 3** 内置的音频插件示例项目创建编译环境 ，内置的插件包括简单的 DSP 效果（增益、压缩器、延迟等）插件、合成器乐器插件等。通过这些操作你可以了解插件是如何实现某些特定的 **VST 3** 功能的（音符表达、程序更改、频道信息上下文等）
 
 它们可以加载到支持 **VST 3** 的宿主中，例如 Cubase、WaveLab、...
 
 
 
-### **Part 1: 获取和安装VST3 SDK**
+### **Part 1: 获取和安装 VST3 SDK**
 
-关于下载SDK，你可以参阅这部分："[如何为VST3设置我的系统](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3)"
+关于下载 SDK，你可以参阅这部分："[如何为VST3设置我的系统](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3)"
 
 从以下位置下载 cmake：<https://cmake.org/download/> 或为你的操作系统使用包管理器。
 
@@ -18,26 +18,26 @@
 
 ### Part 2: 构建示例
 
-**在Windows上构建示例**
+**在 Windows 上构建示例**
 
-- 为了构建示例，你需要新建一个文件夹，并移动到这个文件夹（使用cd命令）：
+- 为了构建示例，你需要新建一个文件夹，并移动到这个文件夹（使用 cd 命令）：
 
 ```
 mkdir build
 cd build
 ```
 
-- 生成解决方案/项目：指定CMakeLists.txt所在项目的路径：
+- 生成解决方案/项目：指定 CMakeLists.txt 所在项目的路径：
 
 ```
 cmake.exe -G "Visual Studio 16 2019" -A x64 ../vst3sdk
-  or without symbolic links
+or without symbolic links
 cmake.exe -G "Visual Studio 16 2019" -A x64 ../vst3sdk -SMTG_CREATE_PLUGIN_LINK=0
 ```
 
 注意：你可以在 cmake 在线文档 (<https://cmake.org/documentation/>) 中找到不同于 Visual Studio 生成器的命令。
 
-- 构建插件 (你也可以使用Visual Studio):
+- 构建插件 (你也可以使用 Visual Studio):
 
 ```
 msbuild.exe vstsdk.sln
@@ -46,7 +46,9 @@ msbuild.exe vstsdk.sln
 cmake --build . --config Release
 ```
 
-**在macOS上构建项目**
+
+
+**在macOS上构建示例**
 
 - 为了构建示例，你需要新建一个文件夹，并移动到这个文件夹（使用cd命令）：
 
@@ -55,20 +57,19 @@ mkdir build
 cd build
 ```
 
-- 生成解决方案/项目：指定CMakeLists.txt所在项目的路径：
-   For XCode:
+- 生成解决方案/项目：指定CMakeLists.txt所在项目的路径：使用XCode:
 
 ```
 cmake -GXcode ../vst3sdk
 ```
 
-Without XCode (here debug variant):
+不使用 XCode (使用 Debug 变量):
 
 ```
 cmake -DCMAKE_BUILD_TYPE=Debug ../
 ```
 
-- Build the plug-in (you can use XCode too):
+- 构建插件 (你也可以使用 Xcode):
 
 ```shell
 xcodebuild
@@ -76,6 +77,8 @@ xcodebuild
  
 cmake --build . --config Release
 ```
+
+
 
 **在 Linux 上构建示例**
 
@@ -110,19 +113,19 @@ cmake --build . --config Release
 
 ![img](Image/cmakeguipng.png)
 
-- "**Browse Source...**": 选择VST3_SDK文件夹
-- "***Browse Build...***": 选择一个输出文件夹。一般这个文件夹名字叫"build"
-- 你可以勾上SMTG选项
-- 点击 "***Configure***" 然后在新窗口中选择**生成器(generator)**，例如"**Visual Studio 16 2019**"
+- "**Browse Source...**": 选择 VST3_SDK 文件夹
+- "***Browse Build...***": 选择一个输出文件夹。一般这个文件夹名字叫 "build"
+- 你可以勾上 SMTG 选项
+- 点击 "***Configure***" 然后在新窗口中选择**生成器( generator )**，例如 "**Visual Studio 16 2019**"
 
 ![img](Image/setup.png)
 
 - 点击 "***Generate***" 以创建项目
-- 打开你喜欢的IDE，编译生成的项目
+- 打开你喜欢的 IDE，编译生成的项目
 
 
 
-## 使用Cmake(命令行)来构建VST3插件
+## 使用 Cmake (命令行)来构建 VST3 插件
 
 ### 用于构建 VST 3 插件的 CMake
 
@@ -152,7 +155,7 @@ cmake.exe -G "Visual Studio 16 2019" -A x64 "..\vst3sdk" -SMTG_CREATE_PLUGIN_LIN
 
 ### MacOS命令行
 
-使用Xcode构建项目:
+使用 Xcode 构建项目:
 
 ```
 // go in to the folder where you extracted the VST 3 SDK
@@ -235,7 +238,7 @@ cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++
 
 **在 Windows 上准备**
 
-使用 SDK 中包含的 [cmake](https://cmake.org/) 生成的 VST3 Microsoft Visual Studio 项目将默认为 [官方 VST3 文件夹](https://developer.steinberg.help/display/VST/Plug-in+Locations)中的每个内置插件创建symbolic链接，为了在 Windows 上运行，您必须调整 Windows 的组策略。看 [这里](https://developer.steinberg.help/display/VST/Preparation+on+Windows)!
+使用 SDK 中包含的 [cmake](https://cmake.org/) 生成的 VST3 Microsoft Visual Studio 项目将默认为 [官方 VST3 文件夹](https://developer.steinberg.help/display/VST/Plug-in+Locations)中的每个内置插件创建 symbolic 链接，为了在 Windows 上运行，您必须调整 Windows 的组策略。看 [这里](https://developer.steinberg.help/display/VST/Preparation+on+Windows)!
 
 如果您不想创建此链接，请使用此参数调用 [cmake](https://cmake.org/)：
 
@@ -247,8 +250,8 @@ cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++
 
 ### 使用 IDE 编译示例
 
-- solution/project (vstsdk.sln/vstsdk.xcodeproj)会被生成在"build"文件夹
-- 被创建的插件会被放在build文件夹下面的 ***/VST3/Release***或 ***/VST3/Debug***
+- solution/project (vstsdk.sln/vstsdk.xcodeproj) 会被生成在 "build" 文件夹
+- 被创建的插件会被放在build文件夹下面的 **/VST3/Release **或 ***/VST3/Debug***
 - 为了允许DAW找到这些插件你需要创建链接（参考[VST3 Locations](https://developer.steinberg.help/pages/viewpage.action?pageId=9798275))
 
 
@@ -262,19 +265,19 @@ SDK的下载请参见“[如何为 VST 3 设置我的系统](https://developer.s
 你可以通过以下方式开始一个新项目：
 
 - 你可以使用 **VST SDK** 中包含的 [**helloworld** 模板](https://developer.steinberg.help/display/VST/Creating+a+plug-in+from+the+Helloworld+template) 并将该文件夹复制到一个新文件夹中。修改注释中提到的每个文件。
-- 使用 **VST SDK 中包含的 **VST3 Project Generator** 应用程序来开发会更简单和值得推荐。**以下步骤显示了如何使用它。
+- 使用 **VST SDK 中包含的 VST3 Project Generator** 应用程序来开发会更简单和值得推荐。以下步骤介绍如何使用它。
 
 
 
 ------
 
-### 第 2 部分：使用[VST 3 插件**项目生成器**](https://developer.steinberg.help/display/VST/VST+3+Project+Generator)应用
+### 第 2 部分：使用 [VST 3 插件**项目生成器**](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) 应用
 
 **VST SDK** 中包含的 [**VST3 Project Generator**](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) 应用程序可用于 Windows 和 macOS。
 
-启动位于 **VST SDK**的 *VST3_Project_Generator* 文件夹中的应用程序。
+启动位于 **VST SDK** 的 *VST3_Project_Generator* 文件夹中的应用程序。
 
-检查**Preferences**选项卡是否具有所需的信息：请参阅[Setting the Preferences](https://developer.steinberg.help/display/VST/VST+3+Project+Generator#VST3ProjectGenerator-SettingthePreferences)。
+检查 **Preferences** 选项卡是否具有所需的信息：请参阅 [Setting the Preferences](https://developer.steinberg.help/display/VST/VST+3+Project+Generator#VST3ProjectGenerator-SettingthePreferences)。
 
 在 **Create Plug-in Project** 选项卡中，您必须输入要创建插件的相关信息：
 
@@ -282,11 +285,11 @@ SDK的下载请参见“[如何为 VST 3 设置我的系统](https://developer.s
 
 ![img](Image/createproject.png)
 
-查看[Create Plug-in Project](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) 对话框的[VST 3 Project Generator](https://developer.steinberg.help/display/VST/VST+3+Project+Generator#VST3ProjectGenerator-CreatePlug-inProject) 选项卡以获取更详细的文档。
+查看 [Create Plug-in Project](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) 对话框的 [VST 3 Project Generator](https://developer.steinberg.help/display/VST/VST+3+Project+Generator#VST3ProjectGenerator-CreatePlug-inProject) 选项卡以获取更详细的文档。
 
-输入所有信息后，单击**创建**这会启动一个脚本，这个脚本会用已更改的文件创建一个项目并输出到Output文件夹。进行这一步之后, IDE ([Visual Studio](https://visualstudio.microsoft.com/) or [XCode](https://developer.apple.com/xcode/)) 就会启动。
+输入所有信息后，单击**创建**这会启动一个脚本，这个脚本会用已更改的文件创建一个项目并输出到 Output 文件夹。进行这一步之后, IDE ([Visual Studio](https://visualstudio.microsoft.com/) or [XCode](https://developer.apple.com/xcode/)) 就会启动。
 
-编译项目并测试您的新插件。该插件在*Output文件夹*中创建，为了使其对**VST 3**宿主可见，你可能需要将其复制或链接到< g3>VST 3 Locations / Format](https://developer.steinberg.help/pages/viewpage.action?pageId=9798275)。
+编译项目并测试您的新插件。该插件在 *Output文件夹* 中创建，为了使其对 **VST 3** 宿主可见，你可能需要将其复制或链接到 [VST 3 Locations / Format](https://developer.steinberg.help/pages/viewpage.action?pageId=9798275)。
 
 例如，如果你选择**音效**创建了一个简单的 Stereo→Stereo 插件。
 
@@ -300,7 +303,7 @@ tresult PLUGIN_API MyPluginProcessor::initialize (FUnknown* context);
 //...
 ```
 
-并且启动一个基于调试器的**VST 3**主机。
+并且启动一个基于调试器的 **VST 3** 主机。
 
 
 
@@ -333,7 +336,7 @@ enum GainParams : Steinberg::Vst::ParamID
 
 
 
-2. 打开plugcontroller.cpp文件, 添加parameters.addParameter
+2. 打开 plugcontroller.cpp 文件, 添加 parameters.addParameter
 
 **plugcontroller.cpp**
 
@@ -356,16 +359,14 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 }
 ```
 
-
-
 > 注意
 >
-> - 我们添加标志：[*kCanAutomate*](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ae3a5143ca8d0e271dbc259645a4ae645af38562ef6dde00a339d67f9be4ec3a31)，它会通知 DAW/宿主这个参数是可以自动化的。
-> - **VST 3** 参数总是标准化的（它的值是一个介于 [0到1]之间的浮点值），这里它的默认值设置为 0.5。
+> - 我们添加标志：[*kCanAutomate*](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ae3a5143ca8d0e271dbc259645a4ae645af38562ef6dde00a339d67f9be4ec3a31)，它会通知 DAW 宿主这个参数是可以自动化的。
+> - **VST 3** 参数总是标准化的（它的值是一个介于 0 到 1 之间的浮点值），这里它的默认值设置为 0.5。
 
 
 
-3. 现在为这个新参数修改处理器。打开文件 *plugprocessor.h* 并添加增益值 **Vst::ParamValue mGain**。该值用于Gain的处理。
+3. 现在为这个新参数修改处理器。打开文件 *plugprocessor.h* 并添加增益值 **Vst::ParamValue mGain**。该值用于 Gain 的处理。
 
 **plugprocessor.h**
 
@@ -384,7 +385,7 @@ protected:
 
 #### Add the process applying the gain
 
-1. 我们需要设置我们的内部**mGain**，其值来自宿主。这是处理方法的第一步。解析结构体中来自宿主的参数变化*data.inputParameterChanges*用于当前要处理的音频块。在plugprocessor.cpp文件上方添加#include "public.sdk/source/vst/vstaudioprocessoralgo.h"，这个头文件会提供一些必要的帮助工具
+1. 我们需要设置我们的内部 **mGain**，其值来自宿主。这是处理方法的第一步。解析结构体中来自宿主的参数变化 *data.inputParameterChanges* 用于当前要处理的音频块。在 plugprocessor.cpp 文件上方添加 #include "public.sdk/source/vst/vstaudioprocessoralgo.h"，这个头文件会提供一些必要的帮助工具
 
 **plugprocessor.cpp**
 
@@ -424,7 +425,7 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 }
 ```
 
-> **data.inputParameterChanges** can include more than **1** change for the same parameter inside a processing audio block. Here we take only the last change in the list and apply it our **mGain**.
+> **data.inputParameterChanges** 可以在处理音频块中进行超过 **1** 个参数的更改。在这里，我们只采用列表中的最后一个更改并将其应用到我们的 **mGain**。
 
 2. 真正的处理部分代码:
 
@@ -501,9 +502,9 @@ for (int32 i = 0; i < numChannels; i++)
 
 #### 添加存储/恢复状态
 
-*Processor*代表插件的状态，所以它的工作是实现**getState**/**setState**，用于保存/加载项目和预设。
+*Processor*代表插件的状态，所以它的工作是实现 **getState**/**setState**，用于保存/加载项目和预设。
 
-1. 在*plugprocessor.cpp*中给宿主提供的状态流添加**mGain**值，getState方法会将其另存为项目或预设。
+1. 在 *plugprocessor.cpp* 中给宿主提供的状态流添加 **mGain** 值，getState 方法会将其另存为项目或预设。
 
 **plugprocessor.cpp**
 
@@ -519,7 +520,7 @@ tresult PLUGIN_API PlugProcessor::getState (IBStream* state)
 }
 ```
 
-2. 在**setState**方法中, 插件会从宿主中收到一个新的状态
+2. 在 **setState** 方法中, 插件会从宿主中收到一个新的状态
 
 **plugprocessor.cpp**
 
@@ -548,7 +549,7 @@ tresult PLUGIN_API PlugProcessor::setState (IBStream* state)
 
 在我们的示例中，我们希望使用“MIDI”事件 (noteOn) 来修改当前的增益系数。
 
-1. 如果你需要在你的插件中接收音频和事件(如 MIDI)，你需要添加一个事件输入[addEventInput](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1AudioEffect.html#a98a16757564b1a077d82e2b2decc2ad8):
+1. 如果你需要在你的插件中接收音频和事件 (如 MIDI)，你需要添加一个事件输入 [addEventInput](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1AudioEffect.html#a98a16757564b1a077d82e2b2decc2ad8):
 
 **plugprocessor.cpp**
 
@@ -581,7 +582,7 @@ addEventInput (STR16 ("Event In"), 4); // here 4 channels
 
 
 
-2. 我们创建了一个新的内部值 mGainReduction（不导出到宿主），该值会根据传入的 noteOn 的力度而改变，因此你击打MIDI音符面板越用力，增益削减就越厉害（这就是我们在这里想要的）：
+2. 我们创建了一个新的内部值 mGainReduction（不导出到宿主），该值会根据传入的 noteOn 的力度而改变，因此你击打 MIDI 音符面板越用力，增益削减就越厉害（这就是我们在这里想要的）：
 
 **plugprocessor.h**
 
@@ -598,7 +599,7 @@ protected:
 // ...
 ```
 
-3. 现在我们需要在process函数里处理事件:
+3. 现在我们需要在 process 函数里处理事件:
 
 **plugprocessor.cpp**
 
@@ -679,7 +680,7 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 
 在我们的例子中，我们想用一个[侧链](https://developer.steinberg.help/display/VST/Frequently+Asked+Questions#FrequentlyAskedQuestions-WhatisaSide-chain)音频输入调制主音频输入。
 
-1. 首先添加一个新的侧链音频输入（busType：***kAux***) 到我们的初始化调用中：
+1. 首先添加一个新的侧链音频输入到我们的初始化调用中：
 
 **plugprocessor.cpp**
 
@@ -835,16 +836,16 @@ tresult PLUGIN_API PlugProcessor::process (ProcessData& data)
 
 
 
-## 使用VSTGUI设计一套用户界面
+## 使用 VSTGUI 设计一套用户界面
 
 ### 第 1 部分：准备
 
-如果你使用 [VST 3 Project Generator](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) 创建了你的项目并选择了“**Use VSTGUI**”，你可以直接跳到本教程的第 2 部分。
+如果你使用 [VST 3 Project Generator](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) 创建了你的项目并选择了 “**Use VSTGUI**”，你可以直接跳到本教程的第 2 部分。
 
 在使用内置 UI 编辑器之前，你必须确保使用 [Steinberg::Vst::EditController](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1EditController.html) 类作为编辑控制器的基础，并且你已经使用了 [Steinberg:: Vst::Parameter](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1Parameter.html) 类或它的任何子类作为你的参数。
 否则内置 UI 编辑器将无法正常工作。
 
-接下来，你必须将 vstgui 添加到你的项目中。对于 *cmake* 用户，你只需将 vstgui_support 库添加到你的target：
+接下来，你必须将 vstgui 添加到你的项目中。对于 *cmake* 用户，你只需将 vstgui_support 库添加到你的 target 变量：
 
 ```
 target_link_libraries(${target} PRIVATE vstgui_support)
@@ -860,7 +861,7 @@ target_link_libraries(${target} PRIVATE vstgui_support)
 
 - **VSTGUI_LIVE_EDITING=1**
 
-With *cmake,* this would look like this:
+如果使用 cmake：
 
 ```
 target_compile_definitions(${target} PUBLIC $<$<CONFIG:Debug>:VSTGUI_LIVE_EDITING=1>)
@@ -901,15 +902,15 @@ IPlugView* PLUGIN_API MyEditController::createView (FIDString name)
 
 你唯一需要做的就是在标签编辑器中将参数的 ID 声明为标签（或使用工具栏编辑菜单中的“同步参数标签”命令）并将控件的标签设置为这些 ID。当更改控件时，你的 VST 编辑控制器会收到 beginEdit(..)/performEdit(..)/endEdit(..) 回调。如果宿主使参数自动化，则控件也会反映这些改变。
 
-此外，你可以修改你的 VST 编辑控制器以在 getParameterObject(int32 paramID) 方法中返回特定参数，只有UI 需要这个这些参数，这些不是你 VST 音频处理器的参数。通过这种方式，你可以存储视图设置（例如当用户关闭编辑器，在用户再次打开编辑器时可以恢复它）。你可以查看包含的“uidescription test”项目的来源，以获取有关其工作原理的更多信息。
+此外，你可以修改你的 VST 编辑控制器以在 getParameterObject(int32 paramID) 方法中返回特定参数，只有UI 需要这个这些参数，这些不是你 VST 音频处理器的参数。通过这种方式，你可以存储视图设置（例如当用户关闭编辑器，在用户再次打开编辑器时可以恢复它）。你可以查看包含的 “uidescription test” 项目的来源，以获取有关其工作原理的更多信息。
 
 
 
 ### 第 4 部分：创建自定义视图
 
-如果需要创建自定义视图，你可以在编辑控制器类中实现 VSTGUI::VST3EditorDelegate 接口。如果你在其中的一个视图中设置了“custom-view-name”属性，createCustomView方法会被调用
+如果需要创建自定义视图，你可以在编辑控制器类中实现 VSTGUI::VST3EditorDelegate 接口。如果你在其中的一个视图中设置了 “custom-view-name” 属性，createCustomView 方法会被调用
 
-使用你自己的视图的另一种方法是在运行时使用 UIViewFactory 注册它们。这种方法产生更多的工作量，但有一个优点，即视图会像内置视图一样列出，并且可以动态更改属性。参见 VSTGUI::IViewCreator。
+使用你自己的视图的另一种方法是在运行时使用 UIViewFactory 注册它们。这种方法需要更多工作量，但有一个优点，即视图会像内置视图一样列出，并且可以动态更改属性。参见 VSTGUI::IViewCreator。
 
 
 
@@ -953,7 +954,7 @@ void MyEffect::process (ProcessData& data)
 }
 ```
 
-这很简单，我们在函数 `handleParameterChanges`中处理参数变化，我们稍后会看到。然后我们得到最后一个 `gain` 参数值并迭代输入缓冲区，从那里复制样本到输出缓冲区，并应用 `gain` factor。
+这很简单，我们在函数 `handleParameterChanges `中处理参数变化，我们稍后会看到。然后我们得到最后一个 `gain` 参数值并迭代输入缓冲区，从那里复制样本到输出缓冲区，并应用 `gain` factor。
 
 我们看一下 handleParameterChanges 函数：
 
@@ -984,11 +985,11 @@ void MyEffect::handleParameterChanges (IParameterChanges* changes)
 }
 ```
 
-我们看到`Gain`参数仅使用最后一个点作为增益值。
+我们看到 `Gain `参数仅使用最后一个点作为增益值。
 
-如果我们现在想使用所有`Gain`参数的点，我们可以使用 SDK 中的两个实体类。
+如果我们现在想使用所有 `Gain` 参数的点，我们可以使用 SDK 中的两个实体类。
 
-第一个是`ProcessDataSlicer`它将音频块切成更小的部分。
+第一个是 `ProcessDataSlicer` 它将音频块切成更小的部分。
 
 ```c++
 void MyEffect::process (ProcessData& data)
@@ -1018,15 +1019,15 @@ void MyEffect::process (ProcessData& data)
 }
 ```
 
-如你所见，我们已将算法部分移动到 lambda `doProcessing` 中，它会通过 `slicer.process`。这个 lambda 现在被多次调用，每次调用最多 8 个样本，直到处理完整个缓冲区。这并没有给我们更好的参数解析，但我们现在可以使用第二个实体类来处理这个问题。
+如你所见，我们已将算法部分移动到  `doProcessing`  中，它会传给  `slicer.process`。这个 lambda 现在被多次调用，每次调用最多 8 个样本，直到处理完整个缓冲区。这并没有给我们更好的参数解析，但我们现在可以使用第二个实体类来处理这个问题。
 
-首先我们看一下`gainParameter`变量，这是我们的下一个实体类：
+首先我们看一下 `gainParameter` 变量，这是我们的下一个实体类：
 
 ```
 SampleAccurate::Parameter gainParameter;
 ```
 
-我们必须改变`handleParameterChanges`函数：
+我们必须改变 `handleParameterChanges` 函数：
 
 ```c++
 void MyEffect::handleParameterChanges (IParameterChanges* inputParameterChanges)
@@ -1047,7 +1048,7 @@ void MyEffect::handleParameterChanges (IParameterChanges* inputParameterChanges)
 }
 ```
 
-将参数更改的处理委托给`gainParameter`。
+将参数更改的处理委托给 `gainParameter`。
 
 现在我们只需要对 lambda 进行另一个小的更改，以使用样本精确的 `gain` 值。我们必须调用 `gainParameter` 对象来`advance` 参数值：
 
@@ -1070,7 +1071,7 @@ auto doProcessing = [this] (ProcessData& data) {
 }
 ```
 
-最后我们必须做一些`gainParameter`的清理，在最后`process`会调用函数`gainParameter.endChanges` .
+最后我们必须做一些 `gainParameter `的清理，在最后 `process` 会调用函数 `gainParameter.endChanges` .
 
 ```c++
 void MyEffect::process (ProcessData& data)
@@ -1102,9 +1103,9 @@ void MyEffect::process (ProcessData& data)
 }
 ```
 
-现在，我们在此示例中拥有精确参数更改的支持。每获 取8 个样本，`gain` 参数将会更新为正确的值。
+现在，我们在此示例中拥有精确参数更改的支持。每获取 8 个样本，`gain` 参数将会更新为正确的值。
 
-使这个样本100%准确非常简单，请查看**再次精确采样**SDK 中的示例。
+使这个样本 100% 准确非常简单，请查看 SDK 中的示例。
 
 
 
@@ -1112,9 +1113,9 @@ void MyEffect::process (ProcessData& data)
 
 该示例目前仅支持 32 位处理器。现在我们将添加 64 位处理。
 
-正如你可能已经注意到的`ProcessDataSlicer`为其过程函数使用模板参数。这个模板参数的`SampleSize`在`ProcessData`结构体中定义了音频缓冲区的位深度。目前硬编码为`SymbolicSampleSizes::kSample32` 
+正如你可能已经注意到的 `ProcessDataSlicer` 为其过程函数使用模板参数。这个模板参数的 `SampleSize` 在 `ProcessData` 结构体中定义了音频缓冲区的位深度。目前硬编码为 `SymbolicSampleSizes::kSample32` 
 
-为了支持`SymbolicSampleSizes::kSample64`我们只需要对代码进行一些更改。首先，我们通过算法引入一种新的模板化方法来达到我们的效果：
+为了支持 `SymbolicSampleSizes::kSample64` 我们只需要对代码进行一些更改。首先，我们通过算法引入一种新的模板化方法来达到我们的效果：
 
 ```c++
 template <SymbolicSampleSizes SampleSize>
@@ -1233,7 +1234,7 @@ tresult PLUGIN_API MyEffect::canProcessSampleSize (int32 symbolicSampleSize)
 }
 ```
 
-现在我们有精确参数更改和 32 位/64 位音频处理。
+现在我们有精确参数更改和 32 位 / 64 位音频处理。
 
 
 
@@ -1245,7 +1246,7 @@ tresult PLUGIN_API MyEffect::canProcessSampleSize (int32 symbolicSampleSize)
 
 对于这种情况，我们有另一个实体类：`RTTransferT`
 
-这个类需要有一个模板参数`StateModel`来描述状态数据。我们创建一个简单的结构体作为数据模型：
+这个类需要有一个模板参数 `StateModel` 来描述状态数据。我们创建一个简单的结构体作为数据模型：
 
 ```c++
 struct StateModel
@@ -1302,9 +1303,9 @@ void MyEffect::process (ProcessData& data)
 }
 ```
 
-`accessTransferObject_rt`函数将检查是否存在新的模型状态，如果存在，将调用lambda，然后我们可以将`gainParameter`设置为`stateModel.gain`。
+`accessTransferObject_rt `函数将检查是否存在新的模型状态，如果存在，将调用 lambda，然后我们可以将`gainParameter` 设置为 `stateModel.gain`。
 
-要释放`stateTransfer`对象中的内存，我们必须调用它的`clear_ui`方法。在这种情况下，我们只有一个 double 作为状态模型，可以保留它直到设置下一个状态或直到效果终止。So we just add it to the `terminate` method of the plugin:
+要释放`stateTransfer`对象中的内存，我们必须调用它 的`clear_ui` 方法。在这种情况下，我们只有一个 double 作为状态模型，可以保留它直到设置下一个状态或直到效果终止。所以我们只需要在插件添加 `terminate` 方法：
 
 ```c++
 tresult PLUGIN_API MyEffect::terminate ()
@@ -1377,7 +1378,7 @@ SDK的下载请参见“[如何为 VST 3 设置我的系统](https://developer.s
 你可以通过以下方式开始一个新项目：
 
 - 你可以使用 **VST SDK** 中包含的 [**helloworld** 模板](https://developer.steinberg.help/display/VST/Creating+a+plug-in+from+the+Helloworld+template) 并将该文件夹复制到一个新文件夹中。修改注释中提到的每个文件。
-- 使用 **VST SDK 中包含的 **VST3 Project Generator** 应用程序来开发会更简单和值得推荐。**以下步骤显示了如何使用它。
+- 使用 **VST SDK 中包含的 VST3 Project Generator** 应用程序来开发会更简单和值得推荐。以下步骤显示了如何使用它。
 
 
 
@@ -1387,10 +1388,10 @@ SDK 提供了一个 HelloWorld 示例，你可以使用它来创建一个新的*
 
 - 只需将包含 HelloWorld 示例的文件夹 VST_SDK/my_plugins 复制到你的开发文件夹中。
 
-- For example: copy **VST_SDK/my_plugins** to D:/Users/Me/Desktop/development/my_plugins
+- 复制 **VST_SDK/my_plugins** 到 D:/Users/Me/Desktop/development/my_plugins
 
 - 现在你要用 cmake 将此新位置添加到项目中。有3种可能：
-   - Search in VST3_SDK/CMakeLists.txt for the comment "# Here you can add your VST3 Plug-ins folder" and specify the path to the folder, for example:
+   - 在 VST3_SDK/CMakeLists.txt 中找到这一行 "# Here you can add your VST3 Plug-ins folder" 然后制定为你的文件夹:
       - **set(SMTG_MYPLUGINS_SRC_PATH "D:/Users/Me/Desktop/development/my_plugins")**
    - 或者，在使用 **CMake GUI App**，你可以使用浏览器为变量 **SMTG_MYPLUGINS_SRC_PATH**指定新位置。
 
@@ -1404,7 +1405,7 @@ SDK 提供了一个 HelloWorld 示例，你可以使用它来创建一个新的*
 
 - 相应地
 
-   CMakeLists.txt files:
+   CMakeLists.txt 文件:
 
    - Open the plug-in **CMakeLists.txt** file with a text editor: **D:/Users/Me/Desktop/development/my_plugins/MyDelayPlugin/CMakeLists.txt**
    - 更改目标名称
@@ -1422,7 +1423,7 @@ SDK 提供了一个 HelloWorld 示例，你可以使用它来创建一个新的*
 
       - **HelloWorldProcessor::HelloWorldProcessor** to ***MyDelayProcessor::MyDelayProcessor***
 
-   2. 打开文件*MyDelayPlugin/include/plugids.h*并创造新的**uids**对于处理器和控制器：你可以使用 GUID 创建工具，例如
+   2. 打开文件 *MyDelayPlugin/include/plugids.h* 并创造新的**uids**对于处理器和控制器：你可以使用 GUID 创建工具，例如
 
       - static const FUID MyProcessorUID (0x2A0CC26C, 0xBF88964C, 0xB0BFFCB0, 0x554AF523);
       - static const FUID MyControllerUID (0xB9DBBD64, 0xF7C40A4C, 0x9C8BFB33, 0x8761E244);
@@ -1433,17 +1434,14 @@ SDK 提供了一个 HelloWorld 示例，你可以使用它来创建一个新的*
       #define stringPluginName "My First Delay"
       #define stringOriginalFilename "MyDelay.vst3"
       ```
-
-
-
-   4. 重命名调整 **my_plugins/MyDelayPlugin/resource/info.plist**：
-
-      ```
-      <string>helloworld</string> => <string>mydelay</string>
-      <string>com.steinberg.vst3.helloworld</string> => <string>com.steinberg.vst3.mydelay</string>
-      ```
-
-
+   
+      4. 重命名调整 **my_plugins/MyDelayPlugin/resource/info.plist**：
+   
+         ```
+         <string>helloworld</string> => <string>mydelay</string>
+         <string>com.steinberg.vst3.helloworld</string> => <string>com.steinberg.vst3.mydelay</string>
+         ```
+   
 
 - 现在你可以开始编写你的效果器或插件了
 

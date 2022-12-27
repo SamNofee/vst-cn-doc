@@ -1,6 +1,8 @@
 # 其他的
 
-## VST3 SDK里关于版权/商标的说明
+
+
+## VST 3 SDK 里关于版权/商标的说明
 
 - **AAX** by Avid Technology, Inc.
 - **Apple** and **macOS** are either registered trademarks or trademarks of Apple Computer, Inc. registered in the U.S. and other countries.
@@ -17,7 +19,7 @@
 
 ## 术语表
 
-| Abbr.   | Meaning                                                      | Comment                                                      |
+| 简写    | 全称                                                         | 备注                                                         |
 | :------ | :----------------------------------------------------------- | :----------------------------------------------------------- |
 | AAX     | Avid Audio Extension                                         | <https://www.avid.com/alliance-partner-program/aax-connectivity-toolkit> |
 | ADC     | Audio Developer Conference                                   | <https://juce.com/adc>                                       |
@@ -44,7 +46,7 @@
 | URL     | Uniform Resource Locator                                     | <https://en.wikipedia.org/wiki/URL>                          |
 | UTF-16  | Unicode Transformation Format 16bit                          | String representation used by **VST 3** for exchanging with the host.<https://en.wikipedia.org/wiki/UTF-16> |
 | VST     | Virtual Studio Technology™                                   | A trademark of [Steinberg](http://www.steinberg.net/en/home.html) for their interface standard for integrating software plug-ins with DAWs. |
-| VST-MA  | Virtual Studio Technology - Module Architecture              | This is the base architecture for **VST 3**                  |
+| VST-MA  | Virtual Studio Technology - Module Architecture              | **VST 3**的基础架构                                          |
 | VSTGUI  | Virtual Studio Technology - Graphical User Interface         | <https://github.com/steinbergmedia/vstgui>                   |
 | Vtable  | Virtual method table                                         | <https://en.wikipedia.org/wiki/Virtual_method_table>         |
 | WYSIWYG | What You See Is What You Get                                 |                                                              |

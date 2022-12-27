@@ -1,20 +1,16 @@
-# 什么是 VST3 SDK
+# 什么是 VST 3 SDK
 
 
 
- **VST3 SDK 解释**
+ **VST 3 SDK 解释**
 
-VST软件开发工具包把VST开发相关的工具整合在一个包中，插件开发者可以用它开发符合VST3标准的软件，开发者还可以将它整合进诸如DAW或音频编辑器之类的宿主软件，以让宿主软件支持加载VST3插件。
+VST 软件开发工具包把 VST 开发相关的工具整合在一个包中，插件开发者可以用它开发符合VST3标准的软件，开发者还可以将它整合进诸如 DAW 或音频编辑器之类的宿主软件，以让宿主软件支持加载VST3插件。
 
-
-
-> VST3 API文档包含在SDK的pluginterfaces/vst文件夹中，它里面有关于VST3 C++全部接口的定义与说明，通过它你可以进一步了解VST3插件和宿主之间的交互细节。
+> VST 3 API文档包含在SDK的 pluginterfaces/vst 文件夹中，它里面有关于 VST 3 C++全部接口的定义与说明，通过它你可以进一步了解 VST 3 插件和宿主之间的交互细节。
 >
-> 注：VST3 API文档不在此中文文档的翻译范围内
+> 注：VST 3 API文档不在此中文文档的翻译范围内
 
-
-
- **VST3 SDK包含以下模块**
+ **VST3 SDK 包含以下模块**
 
 - AAX, AUv3, AU and VST 2 wrappers
 - VST 3 Plug-ins Examples

@@ -1,5 +1,7 @@
 # 快速上手
 
+
+
 ## 获取 VST3 SDK
 
 | 组件 | [as zip package](https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-aszip) | [as GitHub repository](https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-repository) |
@@ -26,6 +28,8 @@
 
 <https://www.steinberg.net/vst3sdk>  (zip 文件, 101 MB)
 
+
+
 **从 GitHub 克隆 VST 3 存储库**
 
 从 **GitHub** 克隆 **VST 3 SDK** 存储库，以便轻松集成到您的工作区：
@@ -36,7 +40,7 @@
 
 ## 在线文档
 
-浏览包含 **API** 参考和示例代码的VST3 SDK在线文档：
+浏览包含 **API** 参考和示例代码的 VST3 SDK 在线文档：
 
 https://steinbergmedia.github.io/vst3_doc
 
@@ -82,15 +86,15 @@ git clone --recursive https://github.com/steinbergmedia/vst3sdk.git
 
 **For MacOS**
 
-在 MacOS 上，首选是 **Xcode**（在此处 <https://developer.apple.com/xcode/>可用）。
+在 MacOS 上，首选是 **Xcode**（ <https://developer.apple.com/xcode/>）。
 
 **For Linux**
 
 为了成功构建 SDK，您需要一个基于 Ubuntu 的 **Linux** 发行版。其他的发行版也可能生效，但未经过测试。
 
-1. Download Linux: [http://www.ubuntu.com](http://www.ubuntu.com/) or [https://www.linuxmint.com](https://www.linuxmint.com/)
+1. 下载 Linux: [http://www.ubuntu.com](http://www.ubuntu.com/) or [https://www.linuxmint.com](https://www.linuxmint.com/)
 2. 直接安装或在 Parallels 等虚拟机中安装
-   我们在 Ubuntu 20.04 LTS 上使用和测试。
+   教程是在 Ubuntu 20.04 LTS 上使用和测试。
 
 
 
@@ -104,7 +108,7 @@ git clone --recursive https://github.com/steinbergmedia/vst3sdk.git
 sudo apt-get install cmake gcc "libstdc++6" libx11-xcb-dev libxcb-util-dev libxcb-cursor-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev libfontconfig1-dev libcairo2-dev libgtkmm-3.0-dev libsqlite3-dev libxcb-keysyms1-dev
 ```
 
-> On Raspbian/Debian, replace "libxcb-util-dev" with "libxcb-util0-dev"
+> 在 Raspbian/Debian 系统, 使用 "libxcb-util0-dev" 替代 "libxcb-util-dev"
 
 可选的:
 
@@ -112,7 +116,7 @@ sudo apt-get install cmake gcc "libstdc++6" libx11-xcb-dev libxcb-util-dev libxc
 sudo apt-get install subversion git ninja-build
 ```
 
-推荐的IDE (optional): **QTCreator**
+推荐的 IDE (可选的): **QTCreator**
 
 ```
 sudo apt-get install qtcreator
@@ -120,19 +124,19 @@ sudo apt-get install qtcreator
 
 > 你还可以使用 VST3_SDK/tools 文件夹中包含的 bash 文件 "***setup_linux_packages_for_vst3sdk.sh***"
 
-- [代替](https://www.gtkmm.org/)[**gcc**](https://gcc.gnu.org/install/)编译器，[**clang**](https://clang.llvm.org/)[编译器的最新版本也可以使用！](https://www.gtkmm.org/)
-- [VSTGUI](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3#HowtosetupmysystemforVST3-VSTGUI)和 [editorhost](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3#HowtosetupmysystemforVST3-editorhost)示例需要[libgtkmm3](https://www.gtkmm.org/)！
-- [audiohost](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3#HowtosetupmysystemforVST3-audiohost)示例需要[Jack Audio](http://www.jackaudio.org/) ([http://www.jackaudio.org](http://www.jackaudio.org/))！
+- 可使用 [**gcc**](https://gcc.gnu.org/install/) 编译器，也可以使用 [clang](https://clang.llvm.org/) 编译器的最新版本
+- [VSTGUI](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3#HowtosetupmysystemforVST3-VSTGUI) 和 [editorhost](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3#HowtosetupmysystemforVST3-editorhost) 示例需要 [libgtkmm3](https://www.gtkmm.org/)
+- [audiohost](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3#HowtosetupmysystemforVST3-audiohost) 示例需要 [Jack Audio](http://www.jackaudio.org/) ([http://www.jackaudio.org](http://www.jackaudio.org/))
 
 
 
-## 获取cmake
+## 获取 cmake
 
-为了控制编译过程和创建IDE项目，**VST 3 SDK**使用了开源跨平台工具[cmake。](https://cmake.org/)
+为了控制编译过程和创建 IDE 项目，**VST 3 SDK **使用了开源跨平台工具 [cmake](https://cmake.org/)
 
 可以在此处下载 cmake：<https://cmake.org/download/> 或使用你操作系统 (Linux) 的包管理器。
 
-您可以将其用作命令行工具或带有 GUI 的 cmake 可执行文件。cmake-gui包含在cmake包里面:
+您可以将其用作命令行工具或带有 GUI 的 cmake 可执行文件。cmake-gui 包含在cmake包里面:
 
 ![img](Image/cmake_gui.jpg)
 
@@ -140,7 +144,7 @@ sudo apt-get install qtcreator
 
 ## 在 Windows 上准备
 
-使用 SDK 中包含的 [cmake](https://cmake.org/) 生成的 VST3 Microsoft Visual Studio 项目将默认为 [官方 VST3 文件夹](https://developer.steinberg.help/display/VST/Plug-in+Locations)中的每个内置插件创建symbolic链接，为了在 Windows 上运行，您必须调整 Windows 的组策略。看 [这里](https://developer.steinberg.help/display/VST/Preparation+on+Windows)!
+使用 SDK 中包含的 [cmake](https://cmake.org/) 生成的 VST3 Microsoft Visual Studio 项目将默认为 [官方 VST3 文件夹](https://developer.steinberg.help/display/VST/Plug-in+Locations)中的每个内置插件创建 symbolic 链接，为了在 Windows 上运行，您必须调整 Windows 的组策略。看 [这里](https://developer.steinberg.help/display/VST/Preparation+on+Windows)!
 
 如果您不想创建此链接，请使用此参数调用 [cmake](https://cmake.org/)：
 
@@ -152,13 +156,13 @@ sudo apt-get install qtcreator
 
 - 计算机配置 => Windows 设置 => 安全设置 => 本地策略 => 用户权限分配 => 创建符号链接
 
-![StartLocalGroupPolicyEditor](Image\start_local_group_policy_editor.jpg)
+![StartLocalGroupPolicyEditor](Image/start_local_group_policy_editor.jpg)
 
 - 导航：
 
    计算机配置 => Windows 设置 => 安全设置 => 本地策略 => 用户权限分配 => 创建符号链接
 
-   ![LocalGroupPolicyEditor](Image\local_group_policy_editor.jpg)
+   ![LocalGroupPolicyEditor](Image/local_group_policy_editor.jpg)
 
 您可以在此处设置哪些用户可以创建符号链接。
 
@@ -166,4 +170,4 @@ sudo apt-get install qtcreator
 
 ## 获取VST3宿主程序
 
-您可以使用您最喜欢的 **VST 3** 宿主应用程序，请参阅[此处](https://developer.steinberg.help/display/VST/Use+cases#Usecases-VST3Hosts)以获得一些示例，或者您可以使用 [VST 3 插件测试主机](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) 应用程序已包含在 **VST 3 SDK**中。
+您可以使用您最喜欢的 **VST 3** 宿主应用程序，请参阅[此处](https://developer.steinberg.help/display/VST/Use+cases#Usecases-VST3Hosts)以获得一些示例，或者您可以使用 [VST 3 插件测试主机](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) 应用程序（已包含在  **VST 3 SDK** 中）。
