@@ -8,13 +8,13 @@
 
 **VST 3 API** 是为实时音频处理组件设计的接口集。例如音频效果或音频乐器。
 **VST 3** 基于一种称为 [VST 模块架构](https://developer.steinberg.help/display/VST/VST+Module+Architecture) (**VST-MA**) 的技术。请参考[VST-MA 文档](https://developer.steinberg.help/display/VST/VST+Module+Architecture)了解更多关于插件系统常规工作的细节信息。
-API 文档文件**VST 3**位于文件夹“*pluginterfaces/vst*”。
+API 文档文件 **VST 3** 位于文件夹 `pluginterfaces/vst`。
 
 
 
 ### 基础概念
 
-一个**VST 3**音效或乐器基本上由两部分组成：处理部分和编辑控制器部分。
+一个 **VST 3** 音效或乐器基本上由两部分组成：处理部分和编辑控制器部分。
 对应的接口有：
 
 - 处理器 : [Steinberg::Vst::IAudioProcessor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html) + [Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html)
@@ -25,7 +25,7 @@ API 文档文件**VST 3**位于文件夹“*pluginterfaces/vst*”。
 ![processorcontroller](Image/processorcontroller.png)
 
 **VST 3**插件开发可以通过实现两个组件来完全解耦处理器和编辑控制器。分开成这两部分需要一些额外的开发工作。
-但是，这种分离使主机能够在不同的上下文与计算机中更好地运行每个组件。另一个好处是，在自动化方面，参数更改可以分离。虽然进行这些更改需要以精确样本传输为代价，但 GUI 可以以很低的频率进行更新，并且可以根据任何延迟补偿或其他的量进行移动。
+但是，这种分离使宿主能够在不同的上下文与计算机中更好地运行每个组件。另一个好处是，在自动化方面，参数更改可以分离。虽然进行这些更改需要以精确样本传输为代价，但 GUI 可以以很低的频率进行更新，并且可以根据任何延迟补偿或其他的量进行移动。
 
 
 
@@ -45,7 +45,7 @@ API 文档文件**VST 3**位于文件夹“*pluginterfaces/vst*”。
 [Steinberg::Vst::IComponent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html) 和 [Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html) 都派生自 [Steinberg::IPluginBase](https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IPluginBase.html)。这个基本接口的目的是初始化组件并在它被销毁之前终止它。
 
 
-传递给 [Steinberg::IPluginBase::initialize](https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IPluginBase.html#a3c81be4ff2e7bbb541d3527264f26eed) 的上下文参数应该实现接口 [Steinberg::Vst::IHostApplication](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IHostApplication.html)。主机不应在调用初始化之前调用其他函数，[Steinberg::Vst::IComponent::setIoMode](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a4618e7358890d549f990010bea4a4137) 必须在初始化之前调用。[Steinberg::Vst::IComponent::getControllerClassId](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a8aa65685068ad033af57b1497926b689)也可以在初始化之前调用（参见[VST3工作流程图](https://developer.steinberg.help/display/VST/VST+3+Workflow+Diagrams)）。
+传递给 [Steinberg::IPluginBase::initialize](https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IPluginBase.html#a3c81be4ff2e7bbb541d3527264f26eed) 的上下文参数应该实现接口 [Steinberg::Vst::IHostApplication](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IHostApplication.html)。宿主不应在调用初始化之前调用其他函数，[Steinberg::Vst::IComponent::setIoMode](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a4618e7358890d549f990010bea4a4137) 必须在初始化之前调用。[Steinberg::Vst::IComponent::getControllerClassId](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a8aa65685068ad033af57b1497926b689)也可以在初始化之前调用（参见 [VST 3工作流程图](https://developer.steinberg.help/display/VST/VST+3+Workflow+Diagrams)）。
 
 **插件如何访问IHostApplication？**
 
@@ -189,7 +189,7 @@ if (processorComponent && (result == kResultOk))
 
 2. 配置处理器时，它必须被激活([Steinberg::Vst::IComponent::setActive](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a0a840e8077eb74ec429b8007c7b83517)). 被调用即表示所有配置都已完成。
 
-3. 除此之外，处理器还有一个“处理状态”。在宿主开始执行处理调用之前，它必须通过调用 [IAudioProcessor::setProcessing](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html#af252fd721b195b793f3a5dfffc069401)(true)来发出信号。当宿主停止处理时，它必须在最后一次处理调用之后调用 [IAudioProcessor::setProcessing](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html#af252fd721b195b793f3a5dfffc069401)(false)。另请参阅：[VST 3 工作流程图](https://developer.steinberg.help/display/VST/VST+3+Workflow+Diagrams)
+3. 除此之外，处理器还有一个 `处理状态`。在宿主开始执行处理调用之前，它必须通过调用 [IAudioProcessor::setProcessing](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html#af252fd721b195b793f3a5dfffc069401)(true)来发出信号。当宿主停止处理时，它必须在最后一次处理调用之后调用 [IAudioProcessor::setProcessing](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html#af252fd721b195b793f3a5dfffc069401)(false)。另请参阅：[VST 3 工作流程图](https://developer.steinberg.help/display/VST/VST+3+Workflow+Diagrams)
 
 4. Process:Steinberg::Vst::IAudioProcessor::process 是真正的处理函数。处理所需的任何数据都以Steinberg::Vst::ProcessData传递给它。这可一定程度上避免线程同步，因为处理通常在单独的线程中执行。
 
@@ -220,7 +220,7 @@ if (processorComponent && (result == kResultOk))
 
 编辑控制器负责插件的 GUI 方面。它的标准接口是[Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html)。宿主必须由[Steinberg::Vst::IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html) 编辑控制器提供回调接口。处理程序主要用于宿主和处理器之间的通信。
 
-- **GUI：** 控制器可以选择自定义编辑器视图。 [Steinberg::Vst::IEditController::createView](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a1fa4ed10cc0979e5559045104c998b1a) 函数允许宿主传递一个 id字符串。目前只可定义类型“编辑器”（[Steinberg::Vst::ViewType::kEditor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/namespaceSteinberg_1_1Vst_1_1ViewType.html#aaa62c4c32f0270a908eb20c7c7124dfc)），但未来的版本会有其他的更新（例如“设置”）。另见[Steinberg::IPlugView](https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IPlugView.html)。
+- **GUI：** 控制器可以选择自定义编辑器视图。 [Steinberg::Vst::IEditController::createView](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a1fa4ed10cc0979e5559045104c998b1a) 函数允许宿主传递一个 id字符串。目前只可定义类型 `编辑器`（[Steinberg::Vst::ViewType::kEditor](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/namespaceSteinberg_1_1Vst_1_1ViewType.html#aaa62c4c32f0270a908eb20c7c7124dfc)），但未来的版本会有其他的更新（例如 `设置`）。另见[Steinberg::IPlugView](https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IPlugView.html)。
 
 - **Parameters:**  控制器负责参数的管理。任何由插件 GUI 中的用户交互引起的参数更改都必须正确报告给[Steinberg::Vst::IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html)。宿主负责将更改传输到处理器。为了使自动化工作得到记录，有必要在列表中调用[beginEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a8456ad739430267a12dda11a53fe9223), [performEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a135d4e76355ef0ba0a4162a0546d5f93)和[endEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#ae380206486b11f000cad7c0d9b6e877c)。或者来自UI-Thread。
    使用新的接口[IComponentHandler2](https://developer.steinberg.help/classSteinberg_1_1Vst_1_1IComponentHandler2.html) (从VST 3.1开始)，插件可以分组本应该在同一时间戳被自动化写入的参数，它通过[beginEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a8456ad739430267a12dda11a53fe9223)/[performEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a135d4e76355ef0ba0a4162a0546d5f93)/[endEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#ae380206486b11f000cad7c0d9b6e877c)函数(参见 [IComponentHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html)) 和[startGroupEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler2.html#aba339113df404a6b3c557774d4aa9102) / [finishGroupEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler2.html#adbdc10ff7ecd96fa365ad4f98d57b55e) 实现
@@ -257,7 +257,7 @@ if (processorComponent && (result == kResultOk))
 
 - 创建处理器和控制器后，宿主根据处理器状态设置控制器状态。这与之前的 SDK 有所不同，之前的 SDK 假设在创建后控制器和处理器是同步的。
 
-- 当主机设置一个新的处理器状态（[Steinberg::Vst::IComponent::setState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a77ac39bcc5c4b15818b1a87de2573805)）时，这个状态总是被同时传输到控制器（[Steinberg::Vst::IEditController::setComponentState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a4c2e1cafd88143fda2767a9c7ba5d48f)）。然后控制器必须同步该状态并调整其参数。
+- 当宿主设置一个新的处理器状态（[Steinberg::Vst::IComponent::setState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a77ac39bcc5c4b15818b1a87de2573805)）时，这个状态总是被同时传输到控制器（[Steinberg::Vst::IEditController::setComponentState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a4c2e1cafd88143fda2767a9c7ba5d48f)）。然后控制器必须同步该状态并调整其参数。
 
 - 当控制器向宿主传输参数时，宿主通过将新值作为 [Steinberg::Vst::IParameterChanges](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IParameterChanges.html) 来同步进程调用。
 
@@ -481,7 +481,7 @@ public:
 };
 ```
 
-在下一个程序版本中，需要对“Shape”类进行更改，如下所示
+在下一个程序版本中，需要对 `Shape` 类进行更改，如下所示
 
 ```c++
 class Shape
@@ -520,19 +520,19 @@ public:
 
 [Steinberg::Vst::IEditController::getParameterCount](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#ab6ffbb8e3bf6f4829ab1c9c23fe935a1) 允许宿主识别插件导出的参数数量。插件必须为每个导出的参数分配一个 32 位的唯一标识符 (ID)。
 
-> 最多可以导出 2^31 个 ID 范围为 **[0, 2.147.483.648]** 的参数（范围 [2.147.483.649, 4.294.967.296] 为主机应用程序保留）
+> 最多可以导出 2^31 个 ID 范围为 **[0, 2.147.483.648]** 的参数（范围 [2.147.483.649, 4.294.967.296] 为宿主应用程序保留）
 
 请注意，任何时候都不允许更改这种分配方式。插件不得重新配置可自动化参数集，以免造成数据不一致。唯一允许的改动是在未来的插件版本中添加或删除参数。但是，请记住，删除参数后，自动化数据可能会丢失。
 
 宿主不知道参数的语义。控制器必须使用 [Steinberg::Vst::ParameterInfo::flags](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a8ffba1d4311e48ae488bc118f20d7edb) 声明一些重要的异常：
 
 - **kCanAutomate:** 这意味着该参数可以由宿主自动化其自动化轨道。**[SDK 3.0.0]** 
-- **kIsBypass:** 如果插件需要进行 bypass processing，则必须导出相应的参数并用 kIsBypass 标记。强烈建议此参数由效果插件提供。如果插件没有导出旁路参数，宿主机可以进行旁路处理，插件进程调用将中断。插件应像其他参数一样保存此旁路参数的状态（使用 getState 和 setState ）。如果插件不需要旁路（如 Instrument），则不应使用此标志。查看此[常见问题解答](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/FAQ/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)以了解 bypass processing 的工作原理。**[SDK 3.0.0]**
+- **kIsBypass:** 如果插件需要进行 bypass processing，则必须导出相应的参数并用 kIsBypass 标记。强烈建议此参数由效果插件提供。如果插件没有导出旁路参数，宿主可以进行旁路处理，插件进程调用将中断。插件应像其他参数一样保存此旁路参数的状态（使用 getState 和 setState ）。如果插件不需要旁路（如 Instrument），则不应使用此标志。查看此[常见问题解答](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/FAQ/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)以了解 bypass processing 的工作原理。**[SDK 3.0.0]**
 - **kIsReadOnly:** 这意味着不能从插件外部更改此参数，同时不能设置 kCanAutomate。**[SDK 3.0.0]**
 - **kIsWrapAround:** 当宿主为此参数创建 UI 控件，并尝试将其值设置为超出限制时，此 UI 控件将被旋转（对于 360 度旋转等参数很有用）**[SDK 3.0.2]**
 - **kIsList:** 这意味着宿主将在通用编辑器或自动编辑中会将此参数显示为列表。**[SDK 3.1.0]**
 - **kIsHidden:** 这意味着该参数将不会显示，并且不能从插件外部更改。同时不能设置 kCanAutomate 和 kIsReadOnly。**[SDK 3.7.0]**
-- **kIsProgramChange:** 如果插件支持程序列表（请参阅 [VST 3 单元](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/VST+3+Units/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)，[程序列表](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/Presets+Program+Lists/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)），插件的每个“单元”都需要导出一个程序选择器参数。当受影响的参数也被标记为可自动执行时，就不允许自动执行此类参数。宿主可以在其 GUI 的特定位置显示程序参数。**[SDK 3.0.0]**
+- **kIsProgramChange:** 如果插件支持程序列表（请参阅 [VST 3 单元](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/VST+3+Units/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)，[程序列表](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/Presets+Program+Lists/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)），插件的每个 `单元` 都需要导出一个程序选择器参数。当受影响的参数也被标记为可自动执行时，就不允许自动执行此类参数。宿主可以在其 GUI 的特定位置显示程序参数。**[SDK 3.0.0]**
 
 控制器必须支持将任何导出参数转换为字符串。转换方法 [Steinberg::Vst::IEditController::getParamStringByValue](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#aab2f0b853e75361d331b667e7893962e) 必须为任何可能的规范化参数值提供结果值
 
@@ -548,11 +548,11 @@ public:
 
 - 这是职责分离，仅此而已。处理器组件和控制器组件必须在相同的内部插件模型上工作。控制器知道该模型如何在 GUI 中呈现。处理器知道模型必须如何转换为 DSP 参数。**VST 3** 接口建议对此模型的一部分（作为参数导出的部分）使用规范化值表示，这意味着每个值都必须在 0.0 到 1.0 的范围内。
 
-### 参数样式 / '步数'
+### 参数样式 / 步长
 
-虽然值以规范化格式传输，但主机需要知道参数显示的 GUI 表示的一些细节。例如，在编辑自动化数据时，主机必须知道以其 “步数” 表示的参数的性质（参见 [Steinberg::Vst::ParameterInfo::stepCount](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#ac1efeff62e4ba9aea101c3327e0b5c4d)）
+虽然值以规范化格式传输，但宿主需要知道参数显示的 GUI 表示的一些细节。例如，在编辑自动化数据时，宿主必须知道以其 `步长` 表示的参数的性质（参见 [Steinberg::Vst::ParameterInfo::stepCount](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#ac1efeff62e4ba9aea101c3327e0b5c4d)）
 
-**步数语义** :
+**步长语义** :
 
 - **0** : 连续参数。任何规范化的值都有一个精确的映射（0 = 值之间没有阶梯）
 - **1** : 具有 2 个状态的离散参数，例如（开/关）（是/否）等（1 = 这些状态之间有一个步骤）
@@ -565,7 +565,7 @@ public:
 
 - 步骤计数 0：连续参数只需要一一对应映射
 
-- 步数 n：离散参数需要多加注意
+- 步长 n：离散参数需要多加注意
 
    - **离散值 => 归一化**
 
@@ -575,7 +575,7 @@ public:
 
 ​		`int discreteValue = min (stepCount, normalized *(stepCount + 1));`
 
-**例如:** 步数 3
+**例如:** 步长 3
 
 ![img](Image/valuerange.jpg)
 
@@ -585,11 +585,11 @@ public:
 
 任何自动化参数都不得影响另一个自动化参数！
 
-这方面的主要例子是预设更改的自动化。预设更改可能会导致所有 “正常” 参数的更改。因此，如果已经为这些参数记录了自动化数据，并且也记录了预设更改：应该偏向哪个？这个问题无法回答，只能通过回避来解决问题。这就是默认情况下不允许自动更改预设的原因。
+这方面的主要例子是预设更改的自动化。预设更改可能会导致所有 `正常` 参数的更改。因此，如果已经为这些参数记录了自动化数据，并且也记录了预设更改：应该偏向哪个？这个问题无法回答，只能通过回避来解决问题。这就是默认情况下不允许自动更改预设的原因。
 
 
 
-**自动化录制**
+#### **自动化录制**
 
 自动录制由宿主执行。这样做时，宿主必须知道操作的开始和结束。因此，插件必须在 **UI Thread** 中以如下方式操作 [Steinberg::Vst::IComponentHandler](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)
 
@@ -603,7 +603,7 @@ public:
 
 这种控件通常控制连续的参数，通常用鼠标操作。这种常见情况最容易处理：鼠标单击向下调用 beginEdit（当控件允许跳转时，随后调用 performEdit），鼠标拖动调用 performEdit，鼠标单击向上调用 endEdit。
 
-麻烦始于**鼠标滚轮**：操作滚轮时根本没有定义的开始或结束 - 每个滚轮事件 “突然” 到达。在这种情况下启用正确的自动记录的唯一方法是使用计时器。
+麻烦始于**鼠标滚轮**：操作滚轮时根本没有定义的开始或结束 - 每个滚轮事件 `突然` 到达。在这种情况下启用正确的自动记录的唯一方法是使用计时器。
 
 - 插件应在处理第一个滚轮事件时调用 beginEdit ，并启动计时器（随后是对 performEdit 的第一次调用）。使用 performEdit 报告在超时间隔内到达的更多车轮事件，并重新启动计时器。当超时期限已过且没有其他事件发生时，应调用 endEdit 并删除计时器
 
@@ -613,138 +613,114 @@ public:
 
 ##### 按钮 / 单选组 / 弹出菜单
 
-These kind of controls usually control discrete parameters and simply switch the state of something. A proper handling is to call beginEdit, performEdit and endEdit in a row. The affected parameter has to be exported to the host with the correct step count because discrete parameters are handled differently than continuous parameters in regard to automation.
+这种控件通常控制离散参数并简单地进行状态切换。正确的处理方式是连续调用 beginEdit、performEdit 和 endEdit。受影响的参数必须以正确的步长导出到宿主，因为在自动化方面，离散参数的处理方式不同于连续参数。
 
-Mouse wheel handling usually is not supported for buttons, but sometimes for pop-up menus. Discrete parameters do not require the usage of a timer in order to be recorded correctly.
+按钮通常不支持鼠标滚轮处理，弹出菜单也不支持。离散参数不需要使用计时器就可正确记录。
 
-So the plug-in should call the 3 functions in a row for each wheel event - again, the other option is to omit beginEdit and endEdit, but in this case, be sure to report the discrete nature of the parameter to the host correctly.
+所以插件应该为每个滚轮事件连续调用 3 个函数 —— 同样，另一个选项是省略 beginEdit 和 endEdit，但在这种情况下，一定要正确地向宿主报告参数的离散性质。
 
+##### 文本输入
 
-
-### Text Input
-
-For reporting the results of a text input value change for a continuous or a discrete parameter, always call beginEdit, performEdit and endEdit in a row.
+要传递连续或离散参数的文本输入值的更改结果，请持续调用 beginEdit、performEdit 和 endEdit。
 
 
 
-**Automation Playback**
+#### 自动化播放
 
-In **VST 3**, automation playback is the task of the plug-in and it is the host's task to provide the automation data. The only way for a parameter change to arrive in the processor is the processing call. Receiving parameter changes from the edit controller and playing back automation data is one and the same thing.
+在 **VST 3 **中，自动化播放是插件的任务，提供自动化数据是宿主的任务。参数更改传递给处理器的唯一方法是处理调用。从编辑控制器接收参数变化和回调自动化数据是一样的。
 
-The need to perform all transformations, from the normalized GUI representation to the DSP representation, produces some overhead. Performing sample accurate automation requires even more overhead, because the DSP value must be calculated for each single sample. While this cannot be avoided entirely, it is the choice of the plug-in implementation how much processing time to spend on automation accuracy. The host always transmits value changes in a way that allows a sample accurate reconstruction of the underlying automation curve. The plug-in is responsible for the realization.
+执行从规范化 GUI 表示到 DSP 表示的所有转换会产生一些开销。执行准确的样本自动化需要更多的开销，因为必须为每个样本计算 DSP 值。虽然这不能完全避免，但为了实现自动化的准确性就必须花费额外的处理时间。宿主始终允许以对底层自动化曲线进行样本重建的方式进行传输值更改。由插件负责实现。
 
 ![img](Image/automation.jpg)
 
-The processor gets the automation data in the processing call by using queue of parameter changes for each parameter having automation data:
-
-a [IParameterChanges](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IParameterChanges.html) has some [IParamValueQueue](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IParamValueQueue.html)s (for a specific parameter ID) which has some Automation Points.
-
-> - A parameter (ID) is present only one time in the [IParameterChanges](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IParameterChanges.html) list!
-> - Automation Points inside a [IParamValueQueue](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IParamValueQueue.html)s are sorted per offset (position inside the audio block)!
+处理器通过使用具有自动化数据的每个参数的参数更改队列来获取处理过程的自动化数据：
 
 
 
-**GUI playback**
+#### **GUI 回放**
 
-The host is responsible for updating the plug-in GUI when automation data is transmitted to the processor. This is realized by frequent calls of [Steinberg::Vst::IEditController::setParamNormalized](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#aded549c5b0f342a23dee18cc41ece6b8) in the **UI Thread**.
+当自动化数据传输到处理器时，宿主负责更新插件 GUI。这是通过在 **UI 线程中持续不断调用 **[Steinberg::Vst::IEditController::setParamNormalized](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#aded549c5b0f342a23dee18cc41ece6b8) 来实现的。
 
-See also [Steinberg::Vst::IParameterChanges](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IParameterChanges.html), [Steinberg::Vst::IParamValueQueue](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IParamValueQueue.html)
+另见 [Steinberg::Vst::IParameterChanges](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IParameterChanges.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp) , [Steinberg::Vst::IParamValueQueue](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IParamValueQueue.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)
 
 
 
-### Informing the host about changes
+### 通知宿主更改
 
-**Parameter titles, default values or flags have changed**
+**参数标题、默认值或标志已更改**
 
-If something happens, user interaction for example, which change the parameter styles ([ParameterFlags](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ae3a5143ca8d0e271dbc259645a4ae645)) or title or default value of one or multiple parameters, the plug-in must call
+如果发生某些事情，例如用户交互，它改变了参数样式（[ParameterFlags](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#ae3a5143ca8d0e271dbc259645a4ae645)）、标题或者一个或多个参数的默认值，插件必须调用
 
 ```
-`IComponentHandler::restartComponent (kParamTitlesChanged);`
+IComponentHandler::restartComponent (kParamTitlesChanged);
 ```
 
-to inform the host about this change (in the **UI Thread)**. The host rescans the [ParameterInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html)s with [getParameterInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a0ba78602ecf2f5e8d747d8b01d4cfb6c).
+通知宿主此更改（在**UI 线程**中）。宿主使用 [getParameterInfo重新扫描](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a0ba78602ecf2f5e8d747d8b01d4cfb6c)[ParameterInfos](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)。
 
-**Multiple parameter values have changed**
+**多个参数值的更改**
 
-As result of a program change for example, the plug-in must call
+例如，作为程序更改的结果，插件必须调用：
+
+```cpp
+IComponentHandler::restartComponent (kParamValuesChanged);
+```
+
+通知宿主此更改（在**UI Thread**中）。宿主使参数值的所有缓存无效，并向编辑控制器询问当前值。
+
+如果只有一些值发生了变化（小于 10），插件应该使用 [Steinberg::Vst::IComponentHandler::performEdit](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a135d4e76355ef0ba0a4162a0546d5f93) 接口（显示使用自动化时的正确用法：[Automation Recording](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/Parameters+Automation/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#automation-recording)）
+
+> 如果插件需要通知宿主有关包含参数标题、默认或标志和值（多个参数）的更改，它可以组合 restartComponent 标志：
 
 ```
-`IComponentHandler::restartComponent (kParamValuesChanged);`
-```
-
-to inform the host about this change (in the **UI Thread)**. The host invalidates all caches of parameter values and asks the edit controller for the current values.
-
-If only some values have changed (less than 10)  the plug-in should use the [Steinberg::Vst::IComponentHandler::performEdit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponentHandler.html#a135d4e76355ef0ba0a4162a0546d5f93) interface (Show the right use when automation are used: [Automation Recording](https://developer.steinberg.help/display/VST/Parameters+and+Automation#ParametersandAutomation-AutomationRecording))
-
-> If the plug-in needs to inform the host about changes containing parameter title, default or flags and values (of multiple parameters), it could combine the restartComponent flags:
-
-```
-`IComponentHandler::restartComponent (kParamValuesChanged|kParamTitlesChanged);`
+IComponentHandler::restartComponent (kParamValuesChanged|kParamTitlesChanged);
 ```
 
 
 
-## VST3单元
+## VST 3 单元
 
 ### 介绍
 
-For example, an EQ section can be a unit.
-The purposes of units are:
+例如，一个 EQ 部分可以是一个单元。设计单位的目的是：
 
-- Reveal the internal logical structure of the plug-in
-- Organize parameters by associating them with units
-- Support program lists
-- Support handling of Complex Plug-in Structures / Multi-timbral Instruments
-   - Multiple program lists (associated with a unit)
-   - Access to program list data
-   - Associations of MIDI tracks and units
-   - Synchronization of plug-in GUI and host GUI
+- 揭示插件的内部逻辑结构
+- 通过将参数与单位相关联来组织参数
+- 支持程序列表
+- 支持处理复杂的插件结构/多音色乐器
+   - 多个节目列表（与一个单元相关联）
+   - 访问节目列表数据
+   - MIDI 音轨和单元的关联
+   - 插件 GUI 和宿主 GUI 的同步
 
 
 
 ### 单元细节
 
-- The plug-in can define any number and any kind of units. The semantics of a unit is not important.
+- 该插件可以定义任何数量和任何类型的单位。单元的语义并不重要
 
+- 单位以分层方式组织。每个单元可以包含子单元。
 
+- 此层次结构的根单元始终存在（显式或隐式）并且具有 ID `0`。不定义任何其他单元的插件只包含单元 `0`。
 
-- Units are organized in a hierarchical way. Each unit can contain sub-units.
+- 插件必须为其定义的每个单元分配一个唯一的 ID，并且必须为其提供一个合适的名称以在 GUI 中显示 ( [Steinberg::Vst::UnitInfo](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp) )。
 
+- 每个单元都可以 `包含` 参数。插件的所有参数都由 [Steinberg::Vst::IEditController](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp) 管理和发布，但每个参数都可以与一个单元相关联。（[Steinberg::Vst::ParameterInfo::unitId](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a4d2e0574df0f6d36f26fae1ad759a14f)）。宿主可以在树视图中组织参数列表，将单元层次结构反映为节点。
 
+- 每个单元都可以与一个节目列表相关联。（参见 [复杂的插件结构/多音色乐器](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/Complex+Structures/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)）
 
-- The root unit of this hierarchy is always present (explicit or implicit) and has ID '**0**'. A plug-in that does not define any further units simply consist of unit '0'.
-
-
-
-- The plug-in has to assign a unique ID to each further unit it defines and must provide a suitable name for it to be shown in the GUI ([Steinberg::Vst::UnitInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html)).
-
-
-
-- Each unit can 'contain' parameters. All parameters of the plug-in are managed and published by the [Steinberg::Vst::IEditController](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html), but each parameter can be associated with a unit. ([Steinberg::Vst::ParameterInfo::unitId](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#a4d2e0574df0f6d36f26fae1ad759a14f)). A host can organize the list of parameters in a tree view reflecting the unit hierarchy as nodes.
-
-
-
-- Each unit can be associated with a program list. (See [Complex Plug-in Structures / Multi-timbral Instruments](https://developer.steinberg.help/pages/viewpage.action?pageId=9798271))
-
-
-
-- A unit can be associated with specific busses. There can be any kind of combination, but the VST 3 interfaces only define queries for special situations. (See [Units and Tracks](file:///C:/Users/YGrabit/Desktop/SDKs/VST3_SDKs/3.7/VST_SDK/VST3_SDK/vst3_doc/vstinterfaces/vst3Multitimbral.html#vst3UnitsTracks))
+- 一个单元可以与特定的总线相关联。可以有任何类型的组合，但 **VST 3** 接口只定义特殊情况的查询。（见 [单位和曲目](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/Complex+Structures/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#units-and-tracks)）
 
 ![img](Image/unit.png)
 
-Most things of interest in regard to units are GUI related, so the access interface [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html) needs to be implemented as extension of the edit controller.
+大多数与单位相关的东西都与 GUI 相关，因此访问接口 [Steinberg::Vst::IUnitInfo](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp) 需要作为编辑控制器的扩展来实现。参见 [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html), [Presets & Program Lists](https://developer.steinberg.help/pages/viewpage.action?pageId=9798267)
 
-See also [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html), [Presets & Program Lists](https://developer.steinberg.help/pages/viewpage.action?pageId=9798267)
-
-
-
-### 示例
+#### 示例
 
 - 宿主可以使用带有结构化参数列表的插件示例（来自 **Cubase** 插件集的 MultibandCompressor），在 **Cubase** 中用于选择要自动化的参数：
 
    ![img](Image/unitsexample1.jpg)
 
-- 在 [PluginTestHost](https://developer.steinberg.help/display/VST) 的“参数”选项卡中显示结构化参数列表的插件示例（来自 **Cubase** 插件集的 VST Amp Rack）/VST+3+插件+测试+主机）应用：
+- 在 [PluginTestHost](https://developer.steinberg.help/display/VST) 的 `参数` 选项卡中显示结构化参数列表的插件示例（来自 **Cubase** 插件集的 VST Amp Rack）/VST+3+插件+测试+宿主）应用：
 
    ![img](Image/unitsexample2.jpg)
 
@@ -759,157 +735,146 @@ See also [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/v
 
 ![presetsimple](Image/presetsimple.png)
 
-For a simple plug-in, the data of a preset is nothing more than its state. In this case:
+对于一个简单的插件，预设的数据无非就是它的状态。在这种情况下：
 
-- It is the job of the host to manage the preset handling for the plug-in.
+- 管理插件的预设处理是宿主的工作。
+- 插件本身根本不需要在其 GUI 中提供任何方式来加载预设，也不需要定义任何程序列表。
+- 出厂预设必须作为文件安装在所需位置（请参阅 [预设位置](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/Locations+Format/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#preset-locations)）。
 
-- The plug-in itself does not need to provide any means in its GUI for loading presets at all and it does not need to define any program lists.
+宿主必须提供用于加载和保存预设文件的 GUI。这些文件包含插件已填充到 [Steinberg::Vst::IComponent::getState](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a10db03106be8ba89d23859fa6be5d9f6) 流中的数据。**VST 3 ** 在操作系统文件系统中定义了专用位置（请参阅 [预设位置](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/Locations+Format/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#preset-locations)），因此宿主不需要显示文件选择器对话框。它知道在哪里搜索特定插件的预设文件以及在哪里创建它们。因此，它可以创建一个弹出列表，用于选择预设或它选择的任何其他 GUI。加载预设后，宿主负责重新扫描参数值（来自控制器部分）。因此，控制器必须确保它在加载预设时获得正确的参数状态（调用 [Steinberg::Vst::IEditController::setComponentState](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a4c2e1cafd88143fda2767a9c7ba5d48f)）。
 
-- Factory presets must be installed as files at the required location (See [Preset Locations](https://developer.steinberg.help/pages/viewpage.action?pageId=9798275#VST3Locations/Format-PresetLocations)).
-
-
-The host has to provide the GUI for loading and saving preset files. These files contain data that the plug-in has filled into the stream in [Steinberg::Vst::IComponent::getState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a10db03106be8ba89d23859fa6be5d9f6). **VST 3** defines dedicated locations in the OS file system (see [Preset Locations](https://developer.steinberg.help/pages/viewpage.action?pageId=9798275#VST3Locations/Format-PresetLocations)), so the host does not need to display a file selector dialog. It knows where to search for preset files of a specific plug-in and where to create them. So it can create a pop-up list for selecting a preset or any other GUI of its choice. After loading a preset, the host is responsible to rescan the parameters values (from the controller part). Therefore, the controller must be sure that it gets the correct parameter states when loading a preset (which is done with [Steinberg::Vst::IEditController::setComponentState](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html#a4c2e1cafd88143fda2767a9c7ba5d48f)).
-
-See also [Communication between the components](https://developer.steinberg.help/display/VST/VST+3+API+Documentation#VST3APIDocumentation-Communicationbetweenthecomponents) and [Persistence](https://developer.steinberg.help/display/VST/VST+3+API+Documentation#VST3APIDocumentation-Persistence).
+另请参阅 [组件之间的通信](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/API+Documentation/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#communication-between-the-components) 和 [持久性](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/API+Documentation/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#persistence)。
 
 
 
-### Program Lists
+### 节目列表（Program list）
 
-If a plug-in uses a large pool of programs that require some kind of caching or that need to be preloaded, using preset files may not be a sufficient choice. In this case, the plug-in can define a program list. For this purpose, the edit controller has to be extended by the interface [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html).
+如果插件使用大量需要某种缓存或需要预加载的程序，使用预设文件可能不是一个好选择。在这种情况下，插件可以定义节目列表。为此，编辑控制器必须通过接口 [Steinberg::Vst::IUnitInfo ](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)进行扩展。
 
-- If the plug-in defines a program list to be used as pool of factory presets, it must not allow the user to change these presets by the means of parameter editing. Instead, it should load the corresponding data into a kind of working memory and store possible modifications as component state. In addition, the user can be allowed to store the modifications as preset file.
+- 如果插件定义了一个节目列表用作出厂预设池，则不得允许用户通过参数编辑的方式更改这些预设。相反，它应该将相应的数据加载到内存中，并将可能的更改存储为组件状态。此外，可以允许用户将更改存储为预设文件。
+- 如果插件定义了一个节目列表，用作最初处于 `空` 状态的用户预设池，则可以直接对列表项应用修改。只有当程序确实需要大量需要缓存的资源以实现快速程序更改时，才应选择这种使用节目列表的方式（这方面可参阅示例的插件）。
 
-- If the plug-in defines a program list to be used as a pool of user presets that are initially in an 'empty' state, modifications can be applied to the list items directly. This way of using program lists should only be chosen if programs do require a lot of resources that need to be cached in order to achieve fast program changes (good examples for this are sample-based plug-ins).
+
 
 ![img](Image/single_program_list.jpg)
 
-- The plug-in can provide GUI for the selection of programs, but it must enable the host to display the list and the selected program as well. The index of the selected program in the list must be exported as program selection parameter. ([Steinberg::Vst::ParameterInfo::kIsProgramChange](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ae3a5143ca8d0e271dbc259645a4ae645a517665185bca1f4f3d77ce0a6468b8e3))
-
-- The plug-in can allow the host to read and write the program data of a list item. To support this, the plug-in must implement the [Steinberg::Vst::IProgramListData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IProgramListData.html) interface as an extension of the component part.
-
-
-
-**Structure of Program Lists**
-
-All programs are always transmitted as a flat list to the host. But the plug-in can assign a number of attributes to each program of the list. This enables the host to organize and filter them in a very flexible way. Attribute values are queried via [Steinberg::Vst::IUnitInfo::getProgramInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html#ac40c799f1f52837c311ac153d7a8ead7). The possible attribute identifiers are defined in namespace Steinberg::Vst::PresetAttributes. The attribute identifier specifying a program category, for example, is [Steinberg::Vst::PresetAttributes::kInstrument](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__presetAttributes.html#ga93cb7a7100ac96cfafceb6216770c42d). Although the name suggests that it should be used for instruments only, it can be used for any kind of audio plug-in. The value for an instrument category of a program is "Piano" for example. But it is possible to specify a subcategory like "Acoustic Piano" as well. In this case, the strings need to be chained like this:
-"Piano|Acoustic Piano". This allows the host to organize presets in a category tree view, for example.
+- 插件可以提供选择节目的 GUI，但必须能够让宿主显示列表和选择的节目。列表中所选节目的索引必须作为节目选择参数导出。（[Steinberg::Vst::ParameterInfo::kIsProgramChange](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#ae3a5143ca8d0e271dbc259645a4ae645a517665185bca1f4f3d77ce0a6468b8e3)）
+- 插件可以让宿主读写列表项的程序数据。为了支持这一点，插件必须实现[Steinberg::Vst::IProgramListData](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IProgramListData.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)接口作为组件部分的扩展。
 
 
 
-**Pitch Names**
+##### 节目列表的结构
 
-Pitch names are intended to be used with drum kit programs where the different drum sounds are addressed by note pitches. In order to display the name of the drum instrument assigned to a pitch in a drum editor, for example, the host calls [Steinberg::Vst::IUnitInfo::hasProgramPitchNames](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html#a63c02601259d4e8690f26eefaad53195) to determine if pitch names are supported and[Steinberg::Vst::IUnitInfo::getProgramPitchName](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html#a6126c4506f7981b5e800c6b4daa1e66b) to query the pitch name of a single note.
-
-See also [VST 3 Units Multi-timbral Program Lists](https://developer.steinberg.help/pages/viewpage.action?pageId=9798271) and check out the [pitchnames VST 3 Plug-in example](https://developer.steinberg.help/display/VST/VST+3+Plug-ins+Examples)
-
+所有节目总是作为平面数组传输到宿主。但是插件可以为列表中的每个程序分配一些属性。这使宿主能够以非常灵活的方式组织和过滤它们。通过 [Steinberg::Vst::IUnitInfo::getProgramInfo](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#ac40c799f1f52837c311ac153d7a8ead7) 查询属性值。可能的属性标识符在命名空间 [Steinberg::Vst::PresetAttributes](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/group__presetAttributes.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp) 中定义。指定程序类别的属性标识符，例如[Steinberg::Vst::PresetAttributes::kInstrument](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/group__presetAttributes.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#ga93cb7a7100ac96cfafceb6216770c42d) ，虽然顾名思义它应该只用于乐器，但它可以用于任何类型的音频插件。例如，程序的乐器类别的值为 `钢琴`。但是也可以指定一个子类别，例如 `原声钢琴`。在这种情况下，琴弦需要像这样链接起来：
+`钢琴|原声钢琴`。这允许用户在类别树视图中组织预设。
 
 
 
+**音高名称**
 
-## 复杂插件/多音带乐器
+音高名称旨在与架子鼓程序一起使用，其中不同的鼓声由音符音高表示。例如，为了在鼓编辑器中显示分配给音高的鼓乐器的名称，宿主调用 [Steinberg::Vst::IUnitInfo::hasProgramPitchNames](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a63c02601259d4e8690f26eefaad53195) 来确定是否支持音高名称和 [Steinberg::Vst::IUnitInfo ::getProgramPitchName](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a6126c4506f7981b5e800c6b4daa1e66b) 查询单个音符的音高名称。
+
+另请参阅 [VST 3 单元多音色程序列表](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/Complex+Structures/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#multi-timbral-program-lists) 并查看 [pitchnames VST 3 插件示例](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/What+is+the+VST+3+SDK/Plug-in+Examples.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#pitchnames)。
+
+ 
+
+## 复杂插件 / 多音色乐器
 
 ### 问题
 
-A simple VST effect plug-in usually does not cause the host too many problems. It has only one audio input and output bus and a defined set of parameters that control aspects of its sound. But a VST plug-in can be a lot more complex than this. When the plug-in implements a multi-timbral musical instrument, the host is confronted with a range of problems regarding the integration of this plug-in in its GUI. To mention a few of them:
+一个简单的 VST 效果器插件通常不会给宿主带来太多问题。它只有一个音频输入和输出总线，以及一组定义的参数来控制其声音特征。但是 VST 插件可能比这复杂得多。当插件实现多音色乐器时，宿主会面临一系列将该插件集成到其 GUI 中的问题。仅举其中的几个：
 
-- The plug-in can define multiple event input and multiple audio outputs. How can the host know on which output a sound will emerge when a note-event is transmitted to the plug-in?
-   -> This may be of interest for the host in order to link a MIDI track to the corresponding audio channel.
+- 该插件可以定义多个事件输入和多个音频输出。当音符事件传输到插件时，宿主如何知道声音将出现在哪个输出端？
+  - 宿主如果知道的话就方便将 MIDI 轨道链接到相应的音频通道。
+- 插件可以定义用户可以从插件 GUI 加载的节目列表。在多音色乐器中，程序只影响插件的特定部分（我们称这部分为 `单元`）。宿主如何知道这些单元以及如何知道可以加载插件定义的程序？
+  - 宿主如果知道的话就方便在自己的 GUI 中为此功能提供快捷方式。
 
+由于与硬件 MIDI 乐器不同的 VST 插件不仅仅是一个黑盒，复杂的插件应该有助于其宿主提供比硬件乐器更方便的 GUI 集成。**VST 3 **使用单元的概念来描述插件的内部结构（请参阅 [VST 3 单元](https://steinbergmedia-github-io.translate.goog/vst3_dev_portal/pages/Technical+Documentation/VST+3+Units/Index.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)），并且多音色乐器应该支持相应的接口。但 **VST 3** 中的首选解决方案是通过 `简单模式` 降低这种复杂性。
 
+### 简单模式
 
-- The plug-in can define a list of programs that the user can load from the plug-in GUI. In a multi-timbral instrument, a program only affects a certain part of the plug-in (we call this part a 'unit'). How can the host know about these parts and about the plug-in defined programs that can be loaded?
-   -> This may be of interest for a host in order to provide shortcuts for this functionality in its own GUI.
+`简单模式` 支持 Cubase 的 `简单乐器轨道`。这些轨道结合了 MIDI 轨道和 VST 音频通道（无需进行任何进一步的分配，例如选择 MIDI 输出端口或 MIDI 通道），这种模式被定义为 `只有一个输入，只有一个输出`。在 `简单模式` 下，仅使用 MIDI 通道 0。因此，乐器必须是单音色的。
 
-Since a VST plug-in unlike a hardware MIDI instrument is more than only a black box, a complex plug-in should help its host to provide a more convenient GUI integration than it is possible with hardware instruments. **VST 3** uses the concept of units to describe the internal structure of the plug-in (see [VST 3 Units](https://developer.steinberg.help/display/VST/VST+3+Units)) and a multi-timbral instrument is supposed to support the respective interfaces. But the preferred solution in **VST 3** is a reduction of this complexity with the 'simple mode'.
+宿主现在将使用插件的多个实例，而不是以包含多个同类内部部分的方式使用同一个实例。**VST-MA** 组件模型支持插件的多个实例之间共享资源，因为通常每个插件实例使用相同的模块实例 (dll/bundle)。
 
-
-
-### The Simple Mode
-
-The 'VST 3 simple mode' has the (selfish) background to support the so-called 'simple instrument tracks' of Cubase. These tracks combine a MIDI track and VST audio channel (without the need to make any further assignments such as the choice of a MIDI output port or a MIDI channel). This mode is defined as 'only one input and only one output'. In 'simple mode', only MIDI channel 0 is used. Therefore, an instrument has to be mono-timbral.
-
-The host will now work with multiple instances of the plug-in rather than using the same instance in a way that it contains multiple internal sections of the same kind. The **VST-MA** component model supports shared resources between multiple instances of a plug-in because usually the same module instance (dll/bundle) is used for each plug-in instance.
-
-Yet, a plug-in has the option to support both the simple and the advanced mode with the same implementation. The host tests the general ability to support the 'simple mode' by checking the processor's class flags ([Steinberg::PClassInfo2::classFlags](https://steinbergmedia.github.io/vst3_doc/base/structSteinberg_1_1PClassInfo2.html#ab5ab9135185421caad5ad8ae1d758409)) for the [Steinberg::Vst::kSimpleModeSupported](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/namespaceSteinberg_1_1Vst.html#a626a070dcd2e025250f41b9c3f9817cdabc2edc9bb281cebe9cc6dc00a7cac0ea) flag. If the plug-in is to be used in an instrument track (or whenever a host regards it more suitable) the [Steinberg::Vst::IComponent::setIoMode](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a4618e7358890d549f990010bea4a4137) method is called (before any other call!) to configure the plug-in. A mono-timbral plug-in should set this flag as well and does not need to take into account the [setIoMode](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#a4618e7358890d549f990010bea4a4137)call.
+然而，插件可以选择以相同的实现同时支持简单模式和高级模式。宿主通过检查处理器的类标志 ( [Steinberg::PClassInfo2::classFlags](https://steinbergmedia-github-io.translate.goog/vst3_doc/base/structSteinberg_1_1PClassInfo2.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#ab5ab9135185421caad5ad8ae1d758409) ) 的 [Steinberg::Vst::kSimpleModeSupported](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/namespaceSteinberg_1_1Vst.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a626a070dcd2e025250f41b9c3f9817cdabc2edc9bb281cebe9cc6dc00a7cac0ea) 标志来支持 `简单模式` 。如果要在乐器轨道中使用简单模式（或者当宿主认为它更合适时），[调用 Steinberg::Vst::IComponent::setIoMode](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a4618e7358890d549f990010bea4a4137) 方法来配置插件。单音色插件也应该设置这个标志并且不需要考虑 [setIoMode](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a4618e7358890d549f990010bea4a4137) 调用。
 
 
 
-### Multi-timbral Program Lists
+### 多音色节目列表
 
-For a multi-timbral instrument plug-in, preset handling can be a lot more complex. In this case:
+对于多音色乐器插件，预设处理可能要复杂得多。在这种情况下：
 
-- The plug-in can define any number of program lists.
-- Each unit can reference one program list - this reference must not change.
-- Each unit that uses a program list references one list item.
-- For each unit referencing a program list, a program selection parameter has to be exported ([Steinberg::Vst::ParameterInfo::kIsProgramChange](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html#ae3a5143ca8d0e271dbc259645a4ae645a517665185bca1f4f3d77ce0a6468b8e3)).
-- The plug-in can provide GUI for the selection of programs, but it must synchronize the corresponding program selection parameter.
-- A host may want to show the program list of the active unit in the same way as it shows the presets of a simple plug-in (usually in a separate control area at the top or the bottom of the window). The host must be able to display the correct list and the correct program name for the unit that has got the focus in the plug-in GUI.
+- 该插件可以定义任意数量的节目列表。
+- 每个单元可引用一份节目列表（此引用不得更改）。
+- 使用节目列表的每个单元引用一个列表项。
+- 对于引用节目列表的每个单元，必须导出程序选择参数（[Steinberg::Vst::ParameterInfo::kIsProgramChange](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#ae3a5143ca8d0e271dbc259645a4ae645a517665185bca1f4f3d77ce0a6468b8e3)）。
+- 插件可以提供程序选择的 GUI，但必须同步相应的程序选择参数。
+- 宿主可能希望以与显示简单插件的预设相同的方式显示活动单元的程序列表（通常在窗口顶部或底部的单独控制区域中）。宿主必须能够为在插件 GUI 中获得焦点的单元显示正确的列表和正确的程序名称。
 
+为了使这一切正常工作，插件必须提供 [Steinberg::Vst::IUnitInfo](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp) 的有效实现，并且它必须相应地操作回调接口[Steinberg::Vst::IUnitHandler](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitHandler.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp)。
 
-To make this all work correctly, the plug-in must supply a valid implementation of [Steinberg::Vst::IUnitInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html) and it must operate the callback interface [Steinberg::Vst::IUnitHandler](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitHandler.html) accordingly.
+与简单情况类似，宿主可能想要保存和加载预设文件。插件的组件状态在这里没有用。复杂插件的预设可以是：
 
-Similar to the simple case, the host may want to save and load preset files. The component state of the plug-in is not useful here. A preset of a complex plug-in can be:
+- 插件状态
+  - 为了支持这一点，插件必须在其组件部分实现 [Steinberg::Vst::IUnitData](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp) 接口。
+- 程序列表中某项的内容
+  - 为了支持这一点，插件必须在其组件部分实现 [Steinberg::Vst::IProgramListData](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp) 接口。
 
-- The state of a plug-in unit
-   -> To support this, the plug-in must implement the [Steinberg::Vst::IUnitData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html) interface in its component part.
-- The contents of an item in the program list
-   -> To support this, the plug-in must implement the[Steinberg::Vst::IProgramListData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html) interface in its component part.
-
-
-A plug-in can support unit presets and program list presets.
+插件可以支持单元预设和节目列表预设。
 ![img](Image/program_lists.jpg)
 
-See also [Presets & Program Lists](https://developer.steinberg.help/pages/viewpage.action?pageId=9798267), [Steinberg::Vst::IProgramListData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html), [Steinberg::Vst::IUnitData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html)
+参见 [Presets & Program Lists](https://developer.steinberg.help/pages/viewpage.action?pageId=9798267), [Steinberg::Vst::IProgramListData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html), [Steinberg::Vst::IUnitData](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitData.html)
 
 
 
-### Units and Tracks
+### 单元和轨道
 
-A unit can be associated with busses (or channels of busses). In particular, a unit can have a fixed and unique connection to an input MIDI channel. For a host, it might be useful to know about this connection and which unit can be associated with a specific MIDI track as a result of this. Often, the GUI of a multi-timbral plug-in does not show the settings of all similar units at the same time. Instead, there is some kind of unit selection. The idea is to be able to synchronize the selection of units in a plug-in to the selection of tracks in the host (in both ways).
+一个单元可以与总线（或总线的通道）相关联。一个单元可以与输入 MIDI 通道具有固定且唯一的连接。对于宿主来说，了解此连接以及哪个单元可以因与特定 MIDI 轨道相关联可能很有用。通常，多音色插件的 GUI 不会同时显示所有相似单元的设置。相反，有个实现叫单元选择。这个想法是为了能够将插件中的单元选择与宿主中的轨道选择同步（两种方式）。
 
-When a plug-in GUI is organized in the described way, it should support the described behavior by implementing
+当插件 GUI 以描述的方式组织时，它应该通过实现来支持描述的行为
 
-- [Steinberg::Vst::IUnitInfo::getUnitByBus](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html#a718fa905d04d7d559bc89c7ca761413b) : find out the track - unit relations
-- [Steinberg::Vst::IUnitInfo::getSelectedUnit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html#a6f1b43425ba894764f35b7d492e81c53) : let the host know which track to select
-- [Steinberg::Vst::IUnitInfo::selectUnit](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html#a2504c2bb3c57742102577f34cb58e257) : cause the plug-in to select its unit and by calling
+- [Steinberg::Vst::IUnitInfo::getUnitByBus](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a718fa905d04d7d559bc89c7ca761413b)：找出轨道 - 单元关系
+- [Steinberg::Vst::IUnitInfo::getSelectedUnit](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a6f1b43425ba894764f35b7d492e81c53)：让宿主知道选择哪个轨道
+- [Steinberg::Vst::IUnitInfo::selectUnit](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#a2504c2bb3c57742102577f34cb58e257)：使插件选择其单元
 
-- [Steinberg::Vst::IUnitHandler::notifyUnitSelection](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitHandler.html#ab05a9a8dcca888caeabdb8ed74766bc6) : trigger the host to synchronize its GUI
+并通过调用
+
+- [Steinberg::Vst::IUnitHandler::notifyUnitSelection](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IUnitHandler.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#ab05a9a8dcca888caeabdb8ed74766bc6)：触发宿主同步其 GUI
 
 
 
-### Routing
+### 路由
 
-For a host, it may be interesting to know which VSTi channel in the mixer is the output of a specific MIDI track if the plug-in defines multiple audio output busses (represented as VSTi mixer channels in the host).
-In general, the host needs to know about any input to output routing of the plug-in. So if an unambiguous relation exists between a plug-in input and an output, the following method should be implemented:
+对于宿主，如果插件定义了多个音频输出总线（在宿主中表示为 VSTi 混音器通道），那么了解混音器中的哪个 VSTi 通道是特定 MIDI 轨道的输出可能很有必要。通常，宿主需要了解插件的任何输入到输出的路由。因此，如果插件输入和输出之间存在明确的关系，则应实现以下方法：
 
-- [Steinberg::Vst::IComponent::getRoutingInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#aa0ffeccad3c44364a199ce56365a4c12) : find out the output of a given input
+- [Steinberg::Vst::IComponent::getRoutingInfo](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html#aa0ffeccad3c44364a199ce56365a4c12) : 找出给定输入的输出
 
 ![img](Image/routing.jpg)
 
 
 
-## VST3工作流程图
+## VST 3 工作流程图
 
 > 本章较多非图片文件，请到相应链接上看
 
-### Audio Processor Call Sequence
+### Audio Processor 调用顺序
 
 https://developer.steinberg.help/display/VST/Audio+Processor+Call+Sequence
 
-### Edit Controller Call Sequence
+### Edit Controller 调用顺序
 
 https://developer.steinberg.help/display/VST/Edit+Controller+Call+Sequence
 
-### Get Latency Call Sequences
+### Get Latency 调用顺序
 
 https://developer.steinberg.help/display/VST/Get+Latency+Call+Sequences
 
-### Resize View Call Sequences
+### Resize View 调用顺序
 
 https://developer.steinberg.help/display/VST/Resize+View+Call+Sequences
 
-### Bus Arrangement Setting Sequences
+### Bus Arrangement 设置顺序
 
 https://developer.steinberg.help/display/VST/Bus+Arrangement+Setting+Sequences
 
@@ -919,9 +884,9 @@ https://developer.steinberg.help/display/VST/Bus+Arrangement+Setting+Sequences
 
 ### 插件的格式结构
 
-#### MacOS系统
+#### MacOS 系统
 
-在 macOS 平台上，**VST 3 Plug-in** 是一个标准的 macOS 捆绑包，其文件扩展名为“**.vst3**”，文件夹结构如下：
+在 macOS 平台上，**VST 3 插件** 是一个标准的 macOS 捆绑包，其文件扩展名为 `.vst3`，文件夹结构如下：
 
 | 文件夹 | 说明 |
 | :-------------------------------- | :----------------------------------------------------------- |
@@ -930,9 +895,9 @@ https://developer.steinberg.help/display/VST/Bus+Arrangement+Setting+Sequences
 | MyPlugin.vst3/Contents/Info.plist | the plug-in’s property list |
 | MyPlugin.vst3/Contents/PkgInfo | specifies the type and creator codes of the bundle (optional) |
 
-#### Windows系统
+#### Windows 系统
 
-在 Windows 平台上，一个 **VST 3 Plug-in** 被组织成一个捆绑包格式（简单文件夹），它的文件扩展名为“**.vst3**”，并具有以下文件夹结构：
+在 Windows 平台上，一个 **VST 3 插件** 被组织成一个捆绑包格式，它的文件扩展名为 `.vst3` ，并具有以下文件夹结构：
 
 | 文件夹 | 说明 |
 | :---------------------------------------------- | :----------------------------------------------------------- |
@@ -944,25 +909,27 @@ https://developer.steinberg.help/display/VST/Bus+Arrangement+Setting+Sequences
 | MyPlugin.vst3/desktop.ini | used to set custom icon in Windows Explorer |
 | MyPlugin.vst3/Plugin.ico | customized plug-in icon |
 
-在以前的 SDK 中，**VST 3 Plug-in** 被定义为带有 **.vst3** 扩展名的单个 dll 文件。自 VST 3.6.10 起已弃用此功能。
+在以前的 SDK 中，**VST 3 插件** 被定义为带有 **.vst3** 扩展名的单个 dll 文件。自 VST 3.6.10 起已弃用此功能。
 
 文件 **desktop.ini** 应包含：
 
 **desktop.ini**
 
 ```
-`[.ShellClassInfo]``IconResource=Plugin.ico,``0`
+[.ShellClassInfo]
+IconResource=Plugin.ico,0
 ```
 
 然后你应该使用此命令行更改它们的属性（**s** 用于系统以确保 Windows 将其用于文件夹/捆绑包，**r** 用于只读，**h** 用于隐藏（可选的））：
 
 ```
-`attrib +s +``r` `+``h` `desktop.ini``attrib +``r` `+``h` `Plugin.ico`
+attrib +s +r +h desktop.ini
+attrib +r +h Plugin.ico
 ```
 
 #### Linux系统
 
-在 Linux 上，**VST 3 Plug-in** 被组织为类似包的包格式，其文件扩展名为“**.vst3**”，它遵循以下文件夹结构：
+在 Linux 上，**VST 3 插件** 被组织为类似包的包格式，其文件扩展名为 `.vst3`，它遵循以下文件夹结构：
 
 | 文件夹 | 说明 |
 | :---------------------------------- | :----------------------------------------------------------- |
@@ -1027,21 +994,21 @@ MyPlugin.vst3/
 
 **VST 3** 插件应安装在特定的文件夹，下表为不同操作系统指定了这些预定义的位置。
 
-> **VST 3** doesn't require a Plug-in registration like it is used with **DirectX**.
+> **VST 3** 不需要插件注册，就像使用 DirectX 一样
 
-> Links, Symbolic links or Shortcuts could be used from these predefined folders.
+> 可以在这些预定义文件夹中使用：**警告链接、符号链接或快捷方式**
 
-3 levels of folder location are defined:
+定义了 3 级文件夹位置:
 
-- **User**: available only for the current logged user
-- **Global**: available for all users of the system
-- **Application**: available only inside an specific Audio Application (local Plug-ins)
+- **User**: 仅对当前登录的用户可用
+- **Global**: 适用于系统的所有用户
+- **Application**: 仅在特定音频应用程序（本地插件）内可用
 
-> The host should scan at first higher level of priority, first found Plug-in (for a given Processor UID) has to be used.
+> 宿主应首先扫描更高优先级的插件，使用第一个找到的插件。
 
-#### On macOS platform
+#### 在 macOS 平台
 
-On the macOS platform, the host application expects **VST 3 Plug-ins** to be located in:
+在 macOS 平台, 宿主应用程序希望 **VST 3** 插件位于
 
 | Priority | Location | Path | Comment |
 | :------- | :---------- | :-------------------------------------------- | :------ |
@@ -1050,11 +1017,11 @@ On the macOS platform, the host application expects **VST 3 Plug-ins** to be loc
 | 3 | Global | /Network/Library/Audio/Plug-ins/VST3/ |         |
 | 4 | Application | $APPFOLDER/Contents/VST3/ |         |
 
-> **Note:** The host recursively scans these folders at startup in this order (User/Global/Application).
+> **注：**  宿主应在启动时按此顺序（全局/应用程序）递归扫描这些文件夹
 
-#### On Windows platform
+#### 在 Windows 平台
 
-On the Windows platform, the host application expects **VST 3 Plug-ins** to be located in:
+在 Windows 平台上，宿主应用程序希望 **VST 3** 插件位于：
 
 | Priority | Location | Path | Comment |
 | :------- | :---------- | :-------------------------------------- | :----------------------------------------------------------- |
@@ -1062,11 +1029,11 @@ On the Windows platform, the host application expects **VST 3 Plug-ins** to be l
 | 1 | Global | /Program Files (x86)/Common Files/VST3/ | 32bit Plug-ins on 64bit Windows |
 | 2 | Application | $APPFOLDER/VST3/ |                                                              |
 
-> **Note:** The host recursively scans these folders at startup in this order (Global/Application).
+> **注：**  宿主应在启动时按此顺序（全局/应用程序）递归扫描这些文件夹
 
-#### On Linux platform
+#### 在 Linux 平台
 
-On the Linux platform, the host application expects **VST 3 Plug-ins** to be located in:
+在 Linux 平台上，宿主应用程序希望 **VST 3** 插件位于：
 
 | Priority | Location | Path | Comment |
 | :------- | :---------- | :------------------- | :------ |
@@ -1075,16 +1042,16 @@ On the Linux platform, the host application expects **VST 3 Plug-ins** to be loc
 | 3 | Global | /usr/local/lib/vst3/ |         |
 | 4 | Application | $APPFOLDER/vst3/ |         |
 
-> **Note:** The host recursively scans these folders at startup in this order (User/Global/Application).
+> **注：**  宿主应在启动时按此顺序（全局/应用程序）递归扫描这些文件夹
 
 
 
 ## 预设格式
 
-文件扩展名必须是**".vstpreset"**，例如：*myBestDefault.vstpreset*，指定**VST 3** Preset 文件：
+文件扩展名必须是 `.vstpreset`，例如：*myBestDefault.vstpreset*，指定 **VST 3** Preset 文件：
 ![img](Image/preset_file_format.jpg)
 
-检查 [Steinberg::Vst::PresetFile](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1PresetFile.html#a9db1b48345e92320b0dffc446d5e3483) 源代码，它允许读取和写入此类预设。
+查看 [Steinberg::Vst::PresetFile](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1PresetFile.html#a9db1b48345e92320b0dffc446d5e3483) 源代码，它允许读取和写入此类预设。
 
 
 
@@ -1106,9 +1073,9 @@ On the Linux platform, the host application expects **VST 3 Plug-ins** to be loc
 
 > **$COMPANY** 和 **$PLUGIN-NAME** 文件夹名称仅包含文件命名允许的字符（将字符 "**\\*?/:<>|\**" 替换为 "**_** ”）。
 
-> **Note:** 下面定义的每个路径都应按给定的优先级进行扫描，提取预设并将其添加到预设列表中。
+> **注：** 下面定义的每个路径都应按给定的优先级进行扫描，提取预设并将其添加到预设列表中。
 
-#### Mac系统
+#### Mac 系统
 
 | Prio | Type | Scope | Writable | Path | Comment |
 | :--- | :------------- | :----- | :------- | :----------------------------------------------------------- | :----------------------------- |
@@ -1117,7 +1084,7 @@ On the Linux platform, the host application expects **VST 3 Plug-ins** to be loc
 | 3 | Shared_Factory | Public | - | Network/Library/Audio/Presets/$COMPANY/$PLUGIN-NAME/ | Network shared FactoryROM |
 | 4 | App_Factory | Apps | - | [$APPFOLDER]/VST3 Presets/$COMPANY/$PLUGIN-NAME/ | Host Application (Cubase, ...) |
 
-#### Windows XP/2000系统
+#### Windows XP/2000 系统
 
 | Prio | Type | Scope | Writable | Path | Comment |
 | :--- | :------------- | :----- | :------- | :----------------------------------------------------------- | :----------------------------- |
@@ -1126,7 +1093,7 @@ On the Linux platform, the host application expects **VST 3 Plug-ins** to be loc
 | 3 | Shared_Factory | Public | - | [documents and settings/$allusers/application data]/vst3 presets/$company/$plugin-name/ | csidl_common_appdata |
 | 4 | App_Factory | Apps | - | [$APPFOLDER]/VST3 Presets/$COMPANY/$PLUGIN-NAME/ | Host Application (Cubase, ...) |
 
-#### Windows Vista/7/8/10系统
+#### Windows Vista/7/8/10 系统
 
 | Prio | Type | Scope | Writable | Path | Comment |
 | :--- | :------------- | :----- | :------- | :----------------------------------------------------------- | :----------------------------- |
@@ -1135,7 +1102,7 @@ On the Linux platform, the host application expects **VST 3 Plug-ins** to be loc
 | 3 | Shared_Factory | Public | - | [ProgramData]/VST3 Presets/$COMPANY/$PLUGIN-NAME/ | FOLDERID_ProgramData |
 | 4 | App_Factory | Apps | - | [$APPFOLDER]/VST3 Presets/$COMPANY/$PLUGIN-NAME/ | Host Application (Cubase, ...) |
 
-#### Linux系统
+#### Linux 系统
 
 | Prio | Type | Scope | Writable | Path | Comment |
 | :--- | :------------- | :----- | :------- | :--------------------------------------------------- | :--------------- |
@@ -1150,7 +1117,7 @@ On the Linux platform, the host application expects **VST 3 Plug-ins** to be loc
 
 ### 介绍
 
-从 VST 3.6.10 开始，**VST 3** 包含 **VST 3** 宿主的预渲染快照图像，作为插件 UI 的可视化预览。此快照必须具有预定义的格式和文件名，以便主机能够识别它。
+从 **VST 3.6.10** 开始，**VST 3** 包含 **VST 3** 宿主的预渲染快照图像，作为插件 UI 的可视化预览。此快照必须具有预定义的格式和文件名，以便宿主能够识别它。
 
 - 图片格式必须是PNG
 - 图像需要位于文件夹 **Resources/Snapshots/** 中的捆绑目录内
@@ -1176,19 +1143,19 @@ On the Linux platform, the host application expects **VST 3 Plug-ins** to be loc
 
 
 
-## VST3里的MIDI
+## VST 3 里的 MIDI
 
 与 **VST 2** 不同，**MIDI** 不包含在 **VST 3** 中。但是 **VST 3** 提供了可以使用 [Event](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1Event.html) 与 MIDI 相互转换的方法：
 
 ![img](Image/event.png)
 
-### MIDI 和 VST3 中的相关概念
+### MIDI 和 VST 3 中的相关概念
 
 **MIDI 1.0** 到 **VST 3** 中的概念关系
 
 | MIDI 1.0 | VST 3 | Defined in |
 | :------------------------------- | :----------------------------------------------------------- | :--------------------------------------- |
-| Port | Bus of[Steinberg::Vst::MediaType](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstBus.html#ga576e5da9bdc49812cf65f803bb303ad5), [Steinberg::Vst::MediaTypes::kEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstBus.html#gga576e5da9bdc49812cf65f803bb303ad5ae6a97de99980aeac9312e818af337d6f) | *ivstcomponent.h* |
+| Port | Bus of [Steinberg::Vst::MediaType](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstBus.html#ga576e5da9bdc49812cf65f803bb303ad5), [Steinberg::Vst::MediaTypes::kEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/group__vstBus.html#gga576e5da9bdc49812cf65f803bb303ad5ae6a97de99980aeac9312e818af337d6f) | *ivstcomponent.h* |
 | Channel | Channel of a Bus, [Unit by Bus](https://developer.steinberg.help/display/VST/VST+3+Units) and Channel | *ivstcomponent.h, ivstunits.h* |
 | Note-On | [Steinberg::Vst::NoteOnEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1NoteOnEvent.html) | *ivstevents.h* |
 | Note-Off | [Steinberg::Vst::NoteOffEvent](https://steinbergmedia.github.io/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1NoteOffEvent.html) | *ivstevents.h* |
@@ -1222,7 +1189,7 @@ MIDI 2.0 (<https://www.midi.org/>) 中引入的概念与 **VST 3** 的其他关�
 
 ### 与 MIDI 1.0 相比，MIDI 2.0 增加了分辨率
 
-**MIDI 2.0** 与**MIDI 1.0** 相比，在许多重要值（例如力度、压力和控制器）的分辨率上实现了显着提高。尽管如此，**VST 3** 仍然具有比 **MIDI 2.0** 更高的分辨率。支持 **VST 3** 的插件和主机应该积极利用这些功能。
+**MIDI 2.0** 与**MIDI 1.0** 相比，在许多重要值（例如力度、压力和控制器）的分辨率上实现了显着提高。尽管如此，**VST 3** 仍然具有比 **MIDI 2.0** 更高的分辨率。支持 **VST 3** 的插件和宿主应该积极利用这些功能。
 
 下面是这三者的比较
 

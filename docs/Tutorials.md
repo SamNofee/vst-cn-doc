@@ -7,10 +7,9 @@
 它们可以加载到支持 **VST 3** 的宿主中，例如 Cubase、WaveLab、...
 
 
+### **Part 1: 获取和安装 VST 3 SDK**
 
-### **Part 1: 获取和安装 VST3 SDK**
-
-关于下载 SDK，你可以参阅这部分："[如何为VST3设置我的系统](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3)"
+关于下载 SDK，你可以参阅这部分：[如何为 VST 3 设置我的系统](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3)
 
 从以下位置下载 cmake：<https://cmake.org/download/> 或为你的操作系统使用包管理器。
 
@@ -113,19 +112,19 @@ cmake --build . --config Release
 
 ![img](Image/cmakeguipng.png)
 
-- "**Browse Source...**": 选择 VST3_SDK 文件夹
-- "***Browse Build...***": 选择一个输出文件夹。一般这个文件夹名字叫 "build"
+- `Browse Source`: 选择 VST3_SDK 文件夹
+- `Browse Build...`: 选择一个输出文件夹。一般这个文件夹名字叫 `build`
 - 你可以勾上 SMTG 选项
-- 点击 "***Configure***" 然后在新窗口中选择**生成器( generator )**，例如 "**Visual Studio 16 2019**"
+- 点击 `Configure` 然后在新窗口中选择 **生成器( generator )**，例如 `Visual Studio 16 2019`
 
 ![img](Image/setup.png)
 
-- 点击 "***Generate***" 以创建项目
+- 点击 `Generate` 以创建项目
 - 打开你喜欢的 IDE，编译生成的项目
 
 
 
-## 使用 Cmake (命令行)来构建 VST3 插件
+## 使用 Cmake (命令行)来构建 VST 3 插件
 
 ### 用于构建 VST 3 插件的 CMake
 
@@ -212,33 +211,33 @@ cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++
 
 ### 可用的 SMTG cmake 选项
 
-- **SMTG_AAX_SDK_PATH**: 指定AAX SDK路径 
-- **SMTG_ADD_VST3_HOSTING_SAMPLES**:添加Hosting Samples到项目
-- **SMTG_ADD_VST3_PLUGINS_SAMPLES**: 添加VST3 plug-in samples到项目，默认ON
-- **SMTG_ADD_VSTGUI**: 添加GUI支持，默认ON
-- **SMTG_BUILD_UNIVERSAL_BINARY**: 构建UNIVERSAL二进制文件
-- **SMTG_COREAUDIO_SDK_PATH**: 指定COREAUDIO SDK路径
-- **SMTG_CREATE_BUNDLE_FOR_WINDOWS**: 为Windows插件创建Bundle
-- **SMTG_CREATE_PLUGIN_LINK**: 为VST3创建符号链接，默认开启
-- **SMTG_CREATE_VST2_AGAIN_SAMPLE_VERSION**: 允许你创建增益插件的VST2版本，但是要确保你已经把VST2接口复制到了VST_SDK/VST3_SDK/pluginterfaces/vst2.x文件夹，默认关闭
+- **SMTG_AAX_SDK_PATH**: 指定 AAX SDK 路径 
+- **SMTG_ADD_VST3_HOSTING_SAMPLES**:添加 Hosting Samples 到项目
+- **SMTG_ADD_VST3_PLUGINS_SAMPLES**: 添加 VST 3 plug-in samples到项目，默认 ON
+- **SMTG_ADD_VSTGUI**: 添加 GUI 支持，默认 ON
+- **SMTG_BUILD_UNIVERSAL_BINARY**: 构建 UNIVERSAL 二进制文件
+- **SMTG_COREAUDIO_SDK_PATH**: 指定 COREAUDIO SDK 路径
+- **SMTG_CREATE_BUNDLE_FOR_WINDOWS**: 为 Windows 插件创建 Bundle
+- **SMTG_CREATE_PLUGIN_LINK**: 为 VST 3 创建符号链接，默认开启
+- **SMTG_CREATE_VST2_AGAIN_SAMPLE_VERSION**: 允许你创建增益插件的 VST 2 版本，但是要确保你已经把 VST 2 接口复制到了VST_SDK/VST3_SDK/pluginterfaces/vst2.x文件夹，默认关闭
 - **SMTG_CUSTOM_BINARY_LOCATION**: 为二进制文件自定义输出位置
-- **SMTG_CXX_STANDARD**: 插件的C++版本
-- **SMTG_ENABLE_ADDRESS_SANITIZER**: 打开Address Sanitizer
-- **SMTG_ENABLE_TARGET_VARS_LOG**: 在Debug时打印目标变量
-- **SMTG_ENABLE_USE_OF_JACK**: 允许使用Jack，默认OFF
-- **SMTG_MDA_VST3_VST2_COMPATIBLE**: 构建MDA示例以代替VST2 counterpart，默认ON
-- **SMTG_IOS_DEVELOPMENT_TEAM**: 需要为IOS构建InterAppAudio和AUv3
-- **SMTG_MYPLUGINS_SRC_PATH**: 你可以添加VST3插件文件夹
-- **SMTG_PLUGIN_TARGET_PATH**: 你可以重新指定VST3插件文件夹
-- **SMTG_RENAME_ASSERT**: 重命名ASSERT成SMTG_ASSERT以避免第三方带来的冲突，默认ON
-- **SMTG_RUN_VST_VALIDATOR**: 在每次构建时在VST3插件上运行VST校验器，默认ON
-- **SMTG_USE_STATIC_CRT**: 在Windows上使用Static CRuntime，默认OFF
+- **SMTG_CXX_STANDARD**: 插件的 C++ 版本
+- **SMTG_ENABLE_ADDRESS_SANITIZER**: 打开 Address Sanitizer
+- **SMTG_ENABLE_TARGET_VARS_LOG**: 在 Debug 时打印目标变量
+- **SMTG_ENABLE_USE_OF_JACK**: 允许使用 Jack，默认 OFF
+- **SMTG_MDA_VST3_VST2_COMPATIBLE**: 构建 MDA 示例以代替 VST2 counterpart，默认 ON
+- **SMTG_IOS_DEVELOPMENT_TEAM**: 需要为 IOS 构建InterAppAudio 和 AUv3
+- **SMTG_MYPLUGINS_SRC_PATH**: 你可以添加 VST 3 插件文件夹
+- **SMTG_PLUGIN_TARGET_PATH**: 你可以重新指定 VST 3 插件文件夹
+- **SMTG_RENAME_ASSERT**: 重命名 ASSERT 成 SMTG_ASSERT 以避免第三方带来的冲突，默认 ON
+- **SMTG_RUN_VST_VALIDATOR**: 在每次构建时在 VST 3 插件上运行 VST 校验器，默认 ON
+- **SMTG_USE_STATIC_CRT**: 在 Windows 上使用 Static CRuntime，默认 OFF
 
 
 
 **在 Windows 上准备**
 
-使用 SDK 中包含的 [cmake](https://cmake.org/) 生成的 VST3 Microsoft Visual Studio 项目将默认为 [官方 VST3 文件夹](https://developer.steinberg.help/display/VST/Plug-in+Locations)中的每个内置插件创建 symbolic 链接，为了在 Windows 上运行，您必须调整 Windows 的组策略。看 [这里](https://developer.steinberg.help/display/VST/Preparation+on+Windows)!
+使用 SDK 中包含的 [cmake](https://cmake.org/) 生成的 VST 3 Microsoft Visual Studio 项目将默认为 [官方 VST 3 文件夹](https://developer.steinberg.help/display/VST/Plug-in+Locations)中的每个内置插件创建 symbolic 链接，为了在 Windows 上运行，您必须调整 Windows 的组策略。看 [这里](https://developer.steinberg.help/display/VST/Preparation+on+Windows)!
 
 如果您不想创建此链接，请使用此参数调用 [cmake](https://cmake.org/)：
 
@@ -250,7 +249,7 @@ cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++
 
 ### 使用 IDE 编译示例
 
-- solution/project (vstsdk.sln/vstsdk.xcodeproj) 会被生成在 "build" 文件夹
+- solution/project (vstsdk.sln/vstsdk.xcodeproj) 会被生成在 `build` 文件夹
 - 被创建的插件会被放在build文件夹下面的 **/VST3/Release **或 ***/VST3/Debug***
 - 为了允许DAW找到这些插件你需要创建链接（参考[VST3 Locations](https://developer.steinberg.help/pages/viewpage.action?pageId=9798275))
 
@@ -260,7 +259,7 @@ cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++
 
 ### 第 1 部分：获取和安装 VST 3 SDK
 
-SDK的下载请参见“[如何为 VST 3 设置我的系统](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3)”。
+SDK的下载请参见[如何为 VST 3 设置我的系统](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3)。
 
 你可以通过以下方式开始一个新项目：
 
@@ -303,7 +302,7 @@ tresult PLUGIN_API MyPluginProcessor::initialize (FUnknown* context);
 //...
 ```
 
-并且启动一个基于调试器的 **VST 3** 主机。
+并且启动一个基于调试器的 **VST 3** 宿主。
 
 
 
@@ -319,7 +318,7 @@ tresult PLUGIN_API MyPluginProcessor::initialize (FUnknown* context);
 
 在这个基本插件示例中，我们将添加一个Gain参数，该参数可以修改传输进来的音频音量。
 
-为此，**VST 3**参数需要一个唯一的标识符（一个数字）。
+为此，**VST 3** 参数需要一个唯一的标识符（一个数字）。
 
 1. 打开文件 pluginids.h 并输入一个新的 ID *kParamGainId。* 在本例中，分配唯一编号 102。
 
@@ -547,7 +546,7 @@ tresult PLUGIN_API PlugProcessor::setState (IBStream* state)
 
 #### 添加事件输入
 
-在我们的示例中，我们希望使用“MIDI”事件 (noteOn) 来修改当前的增益系数。
+在我们的示例中，我们希望使用 `MIDI` 事件 (noteOn) 来修改当前的增益系数。
 
 1. 如果你需要在你的插件中接收音频和事件 (如 MIDI)，你需要添加一个事件输入 [addEventInput](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1AudioEffect.html#a98a16757564b1a077d82e2b2decc2ad8):
 
@@ -840,7 +839,7 @@ tresult PLUGIN_API PlugProcessor::process (ProcessData& data)
 
 ### 第 1 部分：准备
 
-如果你使用 [VST 3 Project Generator](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) 创建了你的项目并选择了 “**Use VSTGUI**”，你可以直接跳到本教程的第 2 部分。
+如果你使用 [VST 3 Project Generator](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) 创建了你的项目并选择了 **Use VST GUI**，你可以直接跳到本教程的第 2 部分。
 
 在使用内置 UI 编辑器之前，你必须确保使用 [Steinberg::Vst::EditController](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1EditController.html) 类作为编辑控制器的基础，并且你已经使用了 [Steinberg:: Vst::Parameter](https://steinbergmedia.github.io/vst3_doc/vstsdk/classSteinberg_1_1Vst_1_1Parameter.html) 类或它的任何子类作为你的参数。
 否则内置 UI 编辑器将无法正常工作。
@@ -890,7 +889,7 @@ IPlugView* PLUGIN_API MyEditController::createView (FIDString name)
 
 ### 第 2 部分：打开 VSTGUI/WYSWYG 编辑器
 
-如果你现在打开插件编辑器，你将看到一个空白的编辑器。要进入 UI 编辑器，请右键单击它并选择“**打开 UIDescription 编辑器**”。
+如果你现在打开插件编辑器，你将看到一个空白的编辑器。要进入 UI 编辑器，请右键单击它并选择 `打开 UIDescription 编辑器`。
 
 在你第一次编辑后，必须添加*uidesc*到你已保存的项目中（如果你使用[ VST 3 项目生成器](https://developer.steinberg.help/display/VST/VST+3+Project+Generator)，它会帮你完成这步)。此外你要在更改 *uidesc* 文件后才能构建你的项目。
 
@@ -900,15 +899,15 @@ IPlugView* PLUGIN_API MyEditController::createView (FIDString name)
 
 如果你使用了 **VST 3 SDK**提供的 Parameter 类，你将获得自动参数绑定，它会将编辑器控件与 VST 编辑控制器中的参数绑定起来。
 
-你唯一需要做的就是在标签编辑器中将参数的 ID 声明为标签（或使用工具栏编辑菜单中的“同步参数标签”命令）并将控件的标签设置为这些 ID。当更改控件时，你的 VST 编辑控制器会收到 beginEdit(..)/performEdit(..)/endEdit(..) 回调。如果宿主使参数自动化，则控件也会反映这些改变。
+你唯一需要做的就是在标签编辑器中将参数的 ID 声明为标签（或使用工具栏编辑菜单中的 `同步参数标签` 命令）并将控件的标签设置为这些 ID。当更改控件时，你的 VST 编辑控制器会收到 beginEdit(..)/performEdit(..)/endEdit(..) 回调。如果宿主使参数自动化，则控件也会反映这些改变。
 
-此外，你可以修改你的 VST 编辑控制器以在 getParameterObject(int32 paramID) 方法中返回特定参数，只有UI 需要这个这些参数，这些不是你 VST 音频处理器的参数。通过这种方式，你可以存储视图设置（例如当用户关闭编辑器，在用户再次打开编辑器时可以恢复它）。你可以查看包含的 “uidescription test” 项目的来源，以获取有关其工作原理的更多信息。
+此外，你可以修改你的 VST 编辑控制器以在 getParameterObject(int32 paramID) 方法中返回特定参数，只有UI 需要这个这些参数，这些不是你 VST 音频处理器的参数。通过这种方式，你可以存储视图设置（例如当用户关闭编辑器，在用户再次打开编辑器时可以恢复它）。你可以查看包含的 `uidescription test` 项目的来源，以获取有关其工作原理的更多信息。
 
 
 
 ### 第 4 部分：创建自定义视图
 
-如果需要创建自定义视图，你可以在编辑控制器类中实现 VSTGUI::VST3EditorDelegate 接口。如果你在其中的一个视图中设置了 “custom-view-name” 属性，createCustomView 方法会被调用
+如果需要创建自定义视图，你可以在编辑控制器类中实现 VSTGUI::VST3EditorDelegate 接口。如果你在其中的一个视图中设置了 `ustom-view-name` 属性，createCustomView 方法会被调用
 
 使用你自己的视图的另一种方法是在运行时使用 UIViewFactory 注册它们。这种方法需要更多工作量，但有一个优点，即视图会像内置视图一样列出，并且可以动态更改属性。参见 VSTGUI::IViewCreator。
 
@@ -1373,12 +1372,12 @@ VST3::StringConvert::convert (str, vstStr);
 
 ### 第 1 部分：获取和安装 VST 3 SDK
 
-SDK的下载请参见“[如何为 VST 3 设置我的系统](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3)”。
+SDK的下载请参见 [如何为 VST 3 设置我的系统](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3)。
 
 你可以通过以下方式开始一个新项目：
 
 - 你可以使用 **VST SDK** 中包含的 [**helloworld** 模板](https://developer.steinberg.help/display/VST/Creating+a+plug-in+from+the+Helloworld+template) 并将该文件夹复制到一个新文件夹中。修改注释中提到的每个文件。
-- 使用 **VST SDK 中包含的 VST3 Project Generator** 应用程序来开发会更简单和值得推荐。以下步骤显示了如何使用它。
+- 使用 **VST SDK 中包含的 VST 3 Project Generator** 应用程序来开发会更简单和值得推荐。以下步骤显示了如何使用它。
 
 
 
@@ -1446,10 +1445,10 @@ SDK 提供了一个 HelloWorld 示例，你可以使用它来创建一个新的*
 - 现在你可以开始编写你的效果器或插件了
 
 
-   1. 在plugcontroller.cpp中添加参数
+   1. 在 plugcontroller.cpp 中添加参数
    2. 在 plugprocessor.cpp 中调整你的过程算法
-   3.  plugprocessor.cpp 中进行持久化
-   4. 添加UI（使用[VSTGUI](file:///C:/Users/YGrabit/Desktop/SDKs/VST3_SDKs/3.7/VST_SDK/VST3_SDK/vst3_doc/vstsdk/namespaceVSTGUI.html)）
+   3. plugprocessor.cpp 中进行持久化
+   4. 添加 UI（使用 [VSTGUI](file:///C:/Users/YGrabit/Desktop/SDKs/VST3_SDKs/3.7/VST_SDK/VST3_SDK/vst3_doc/vstsdk/namespaceVSTGUI.html)）
 
 - 祝编码愉快！
 

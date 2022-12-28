@@ -2,7 +2,7 @@
 
 
 
-## 获取 VST3 SDK
+## 获取 VST 3 SDK
 
 | 组件 | [as zip package](https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-aszip) | [as GitHub repository](https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-repository) |
 | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
@@ -12,7 +12,7 @@
 | [VST 3 Plug-in Test Host](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) (exe only) | ![(滴答)](Image/check.svg) | ![(出错)](Image/error.svg) |
 | [VST 3 Licensing](https://developer.steinberg.help/display/VST/VST+3+Licensing) | ![(滴答)](Image/check.svg)Proprietary+ [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) | ![(出错)](Image/error.svg)only [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) |
 | [VST 3 API](https://developer.steinberg.help/display/VST/VST+3+API+Documentation) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
-| [VST3 Inspector](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-VST3Inspector) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
+| [VST 3 Inspector](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-VST3Inspector) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
 | [Validator command line](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-validator) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
 | [iOS Inter-App Audio support](https://developer.steinberg.help/display/VST/iOS+Inter-App+Audio+support) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
 | [Helpers classes](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-Helpersclasses) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
@@ -22,9 +22,9 @@
 
 
 
-**下载完整的 VST3 压缩包**
+**下载完整的 VST 3 压缩包**
 
-下载完整的 **VST 3 SDK** 包，其中包含构建 **VST 3** 插件或宿主所需的一切代码。使用 [VST 3 Plug-in Test Host](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) 实时并自动化测试你的VST3插件:
+下载完整的 **VST 3 SDK** 包，其中包含构建 **VST 3** 插件或宿主所需的一切代码。使用 [VST 3 Plug-in Test Host](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) 实时并自动化测试你的 VST 3 插件:
 
 <https://www.steinberg.net/vst3sdk>  (zip 文件, 101 MB)
 
@@ -144,7 +144,7 @@ sudo apt-get install qtcreator
 
 ## 在 Windows 上准备
 
-使用 SDK 中包含的 [cmake](https://cmake.org/) 生成的 VST3 Microsoft Visual Studio 项目将默认为 [官方 VST3 文件夹](https://developer.steinberg.help/display/VST/Plug-in+Locations)中的每个内置插件创建 symbolic 链接，为了在 Windows 上运行，您必须调整 Windows 的组策略。看 [这里](https://developer.steinberg.help/display/VST/Preparation+on+Windows)!
+使用 SDK 中包含的 [cmake](https://cmake.org/) 生成的 VST3 Microsoft Visual Studio 项目将默认为 [官方 VST 3 文件夹](https://developer.steinberg.help/display/VST/Plug-in+Locations)中的每个内置插件创建 symbolic 链接，为了在 Windows 上运行，您必须调整 Windows 的组策略。看 [这里](https://developer.steinberg.help/display/VST/Preparation+on+Windows)!
 
 如果您不想创建此链接，请使用此参数调用 [cmake](https://cmake.org/)：
 
@@ -168,6 +168,6 @@ sudo apt-get install qtcreator
 
 
 
-## 获取VST3宿主程序
+## 获取 VST 3 宿主程序
 
-您可以使用您最喜欢的 **VST 3** 宿主应用程序，请参阅[此处](https://developer.steinberg.help/display/VST/Use+cases#Usecases-VST3Hosts)以获得一些示例，或者您可以使用 [VST 3 插件测试主机](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) 应用程序（已包含在  **VST 3 SDK** 中）。
+您可以使用您最喜欢的 **VST 3** 宿主应用程序，请参阅[此处](https://developer.steinberg.help/display/VST/Use+cases#Usecases-VST3Hosts)以获得一些示例，或者您可以使用 [VST 3 插件测试宿主](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) 应用程序（已包含在  **VST 3 SDK** 中）。
