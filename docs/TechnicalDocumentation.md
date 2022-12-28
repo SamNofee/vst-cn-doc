@@ -1,3 +1,5 @@
+[TOC]
+
 # 技术文档
 
 > 版本更新历史不在翻译范围内：[版本更新历史链接]([Change History - VST - Steinberg Developer Help](https://developer.steinberg.help/display/VST/Change+History))
