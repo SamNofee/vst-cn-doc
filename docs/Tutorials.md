@@ -22,14 +22,14 @@
 
 - 为了构建示例，你需要新建一个文件夹，并移动到这个文件夹（使用 cd 命令）：
 
-```
+```shell
 mkdir build
 cd build
 ```
 
 - 生成解决方案/项目：指定 CMakeLists.txt 所在项目的路径：
 
-```
+```shell
 cmake.exe -G "Visual Studio 16 2019" -A x64 ../vst3sdk
 or without symbolic links
 cmake.exe -G "Visual Studio 16 2019" -A x64 ../vst3sdk -SMTG_CREATE_PLUGIN_LINK=0
@@ -39,7 +39,7 @@ cmake.exe -G "Visual Studio 16 2019" -A x64 ../vst3sdk -SMTG_CREATE_PLUGIN_LINK=
 
 - 构建插件 (你也可以使用 Visual Studio):
 
-```
+```shell
 msbuild.exe vstsdk.sln
  (or alternatively for example for release)
  
@@ -52,20 +52,20 @@ cmake --build . --config Release
 
 - 为了构建示例，你需要新建一个文件夹，并移动到这个文件夹（使用cd命令）：
 
-```
+```shell
 mkdir build
 cd build
 ```
 
 - 生成解决方案/项目：指定CMakeLists.txt所在项目的路径：使用XCode:
 
-```
+```shell
 cmake -GXcode ../vst3sdk
 ```
 
 不使用 XCode (使用 Debug 变量):
 
-```
+```shell
 cmake -DCMAKE_BUILD_TYPE=Debug ../
 ```
 
@@ -85,14 +85,14 @@ cmake --build . --config Release
 - 安装所需的软件包：[所需的包](https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3#HowtosetupmysystemforVST3-setup_linux)
 - 为了构建示例，你需要新建一个文件夹，并移动到这个文件夹（使用cd命令）：
 
-```
+```shell
 mkdir build
 cd build
 ```
 
 - 生成解决方案/项目：指定CMakeLists.txt所在项目的路径：
 
-```
+```shell
 cmake ../vst3sdk
 ```
 
@@ -157,7 +157,7 @@ cmake.exe -G "Visual Studio 16 2019" -A x64 "..\vst3sdk" -SMTG_CREATE_PLUGIN_LIN
 
 使用 Xcode 构建项目:
 
-```
+```shell
 // go in to the folder where you extracted the VST 3 SDK
 mkdir build
 cd build
@@ -170,7 +170,7 @@ cd build
 
 您可以使用 **QtCreator** 2.3.1（或更高版本）
 
-```
+```shell
 启动 QtCreator 2.3.2
 打开位于 VST 3 SDK 文件夹的 CMakeLists.txt
 点击菜单 Build->Run CMake
@@ -180,7 +180,7 @@ cd build
 
 ### cmake-gui 的使用
 
-```
+```shell
 start the CMake (cmake-gui) application
 set "Where is the source code" to the location of the "VST3_SDK" folder
 set "Where to build the binaries" to a build folder of your choice
@@ -195,14 +195,14 @@ Windows 上的 cmakegui 应用程序示例
 
 - 使用cmake命令行编译
 
-```
+```shell
 cd build
 cmake --build
 ```
 
 - 你可以在使用cmake时指定编译器，例如g++或clang++
 
-```
+```shell
 cmake -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++
 or
 cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++
@@ -242,7 +242,7 @@ cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++
 
 如果您不想创建此链接，请使用此参数调用 [cmake](https://cmake.org/)：
 
-```
+```shell
 -SMTG_CREATE_PLUGIN_LINK=0
 ```
 
@@ -295,7 +295,7 @@ SDK的下载请参见[如何为 VST 3 设置我的系统](https://developer.stei
 
 了解 **VST 3** 插件如何工作的一个好方法是在处理器和控制器文件的每个函数中添加断点：
 
-```
+```shell
 tresult PLUGIN_API MyPluginController::initialize (FUnknown* context);
 tresult PLUGIN_API MyPluginController::terminate ();
 //...
@@ -847,7 +847,7 @@ tresult PLUGIN_API PlugProcessor::process (ProcessData& data)
 
 接下来，你必须将 vstgui 添加到你的项目中。对于 *cmake* 用户，你只需将 vstgui_support 库添加到你的 target 变量：
 
-```
+```shell
 target_link_libraries(${target} PRIVATE vstgui_support)
 ```
 
@@ -863,7 +863,7 @@ target_link_libraries(${target} PRIVATE vstgui_support)
 
 如果使用 cmake：
 
-```
+```shell
 target_compile_definitions(${target} PUBLIC $<$<CONFIG:Debug>:VSTGUI_LIVE_EDITING=1>)
 ```
 
@@ -1023,7 +1023,7 @@ void MyEffect::process (ProcessData& data)
 
 首先我们看一下 `gainParameter` 变量，这是我们的下一个实体类：
 
-```
+```c++
 SampleAccurate::Parameter gainParameter;
 ```
 
@@ -1319,13 +1319,13 @@ tresult PLUGIN_API MyEffect::terminate ()
 
 现在就是这样。完整的源代码可以在这里找到：
 
-```
+```shell
 public.sdk/samples/vst/again_sampleaccurate/source/tutorial.cpp
 ```
 
 如果要使用实体类，可以在此处找到它们：
 
-```
+```shell
 public.sdk/source/vst/utility/processdataslicer.h
 public.sdk/source/vst/utility/sampleaccurate.h
 public.sdk/source/vst/utility/rttransfer.h
@@ -1358,7 +1358,7 @@ if (hostApp)
 
 ### 将 UTF-8 字符串转换为 String128 字符串
 
-```
+```c++
 #include "public.sdk/source/vst/utility/stringconvert.h"
  
 //...
@@ -1430,14 +1430,14 @@ SDK 提供了一个 HelloWorld 示例，你可以使用它来创建一个新的*
 
    3. 打开文件**version.h**并像这样调整字符串：
 
-      ```
+      ```c++
       #define stringPluginName "My First Delay"
       #define stringOriginalFilename "MyDelay.vst3"
       ```
    
       4. 重命名调整 **my_plugins/MyDelayPlugin/resource/info.plist**：
    
-         ```
+         ```c++
          <string>helloworld</string> => <string>mydelay</string>
          <string>com.steinberg.vst3.helloworld</string> => <string>com.steinberg.vst3.mydelay</string>
          ```

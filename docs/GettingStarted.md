@@ -73,7 +73,7 @@ https://developer.steinberg.help/display/VST
 
 **From GitHub:**
 
-```
+```shell
 git clone --recursive https://github.com/steinbergmedia/vst3sdk.git
 ```
 
@@ -113,13 +113,13 @@ sudo apt-get install cmake gcc "libstdc++6" libx11-xcb-dev libxcb-util-dev libxc
 
 可选的:
 
-```
+```shell
 sudo apt-get install subversion git ninja-build
 ```
 
 推荐的 IDE (可选的): **QTCreator**
 
-```
+```shell
 sudo apt-get install qtcreator
 ```
 
@@ -149,7 +149,7 @@ sudo apt-get install qtcreator
 
 如果您不想创建此链接，请使用此参数调用 [cmake](https://cmake.org/)：
 
-```
+```shell
 -SMTG_CREATE_PLUGIN_LINK=0
 ```
 

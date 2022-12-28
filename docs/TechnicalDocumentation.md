@@ -653,7 +653,7 @@ public:
 
 如果发生某些事情，例如用户交互，它改变了参数样式（[ParameterFlags](https://steinbergmedia-github-io.translate.goog/vst3_doc/vstinterfaces/structSteinberg_1_1Vst_1_1ParameterInfo.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=zh-CN&_x_tr_pto=wapp#ae3a5143ca8d0e271dbc259645a4ae645)）、标题或者一个或多个参数的默认值，插件必须调用
 
-```
+```c++
 IComponentHandler::restartComponent (kParamTitlesChanged);
 ```
 
@@ -663,7 +663,7 @@ IComponentHandler::restartComponent (kParamTitlesChanged);
 
 例如，作为程序更改的结果，插件必须调用：
 
-```cpp
+```c++
 IComponentHandler::restartComponent (kParamValuesChanged);
 ```
 
@@ -673,7 +673,7 @@ IComponentHandler::restartComponent (kParamValuesChanged);
 
 > 如果插件需要通知宿主有关包含参数标题、默认或标志和值（多个参数）的更改，它可以组合 restartComponent 标志：
 
-```
+```c++
 IComponentHandler::restartComponent (kParamValuesChanged|kParamTitlesChanged);
 ```
 
@@ -917,14 +917,14 @@ https://developer.steinberg.help/display/VST/Bus+Arrangement+Setting+Sequences
 
 **desktop.ini**
 
-```
+```shell
 [.ShellClassInfo]
 IconResource=Plugin.ico,0
 ```
 
 然后你应该使用此命令行更改它们的属性（**s** 用于系统以确保 Windows 将其用于文件夹/捆绑包，**r** 用于只读，**h** 用于隐藏（可选的））：
 
-```
+```shell
 attrib +s +r +h desktop.ini
 attrib +r +h Plugin.ico
 ```
