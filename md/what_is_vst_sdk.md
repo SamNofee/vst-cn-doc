@@ -1,4 +1,4 @@
-# 什么是 VST 3 SDK
+# VST 3 SDK
 
 
  **VST 3 SDK 解释**

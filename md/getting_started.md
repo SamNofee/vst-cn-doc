@@ -4,19 +4,19 @@
 
 | 组件 | [as zip package](https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-aszip) | [as GitHub repository](https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-repository) |
 | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
-| [VSTGUI](https://developer.steinberg.help/display/VST/VSTGUI) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
-| [VST 3 Project Generator](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) (exe only) | ![(滴答)](Image/check.svg) | ![(出错)](Image/error.svg) |
-| [VST 3 Plug-ins Examples](https://developer.steinberg.help/display/VST/VST+3+Plug-ins+Examples) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
-| [VST 3 Plug-in Test Host](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) (exe only) | ![(滴答)](Image/check.svg) | ![(出错)](Image/error.svg) |
-| [VST 3 Licensing](https://developer.steinberg.help/display/VST/VST+3+Licensing) | ![(滴答)](Image/check.svg)Proprietary+ [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) | ![(出错)](Image/error.svg)only [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) |
-| [VST 3 API](https://developer.steinberg.help/display/VST/VST+3+API+Documentation) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
-| [VST 3 Inspector](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-VST3Inspector) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
-| [Validator command line](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-validator) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
-| [iOS Inter-App Audio support](https://developer.steinberg.help/display/VST/iOS+Inter-App+Audio+support) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
-| [Helpers classes](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-Helpersclasses) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
-| [EditorHost](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-EditorHost) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
-| [AudioAudioHost](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-AudioHost) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
-| [AAX, AUv3, AU and VST 2 wrappers](https://developer.steinberg.help/display/VST/AAX%2C+AUv3%2C+AU+and+VST+2+wrappers) | ![(滴答)](Image/check.svg) | ![(滴答)](Image/check.svg) |
+| [VSTGUI](https://developer.steinberg.help/display/VST/VSTGUI) | ☑ | ☑ |
+| [VST 3 Project Generator](https://developer.steinberg.help/display/VST/VST+3+Project+Generator) (exe only) | ☑ | ☒ |
+| [VST 3 Plug-ins Examples](https://developer.steinberg.help/display/VST/VST+3+Plug-ins+Examples) | ☑ | ☑ |
+| [VST 3 Plug-in Test Host](https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host) (exe only) | ☑ | ☒ |
+| [VST 3 Licensing](https://developer.steinberg.help/display/VST/VST+3+Licensing) | ☑ Proprietary+ [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) | ☒ Only [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) |
+| [VST 3 API](https://developer.steinberg.help/display/VST/VST+3+API+Documentation) | ☑ | ☑ |
+| [VST 3 Inspector](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-VST3Inspector) | ☑ | ☑ |
+| [Validator command line](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-validator) | ☑ | ☑ |
+| [iOS Inter-App Audio support](https://developer.steinberg.help/display/VST/iOS+Inter-App+Audio+support) | ☑ | ☑ |
+| [Helpers classes](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-Helpersclasses) | ☑ | ☑ |
+| [EditorHost](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-EditorHost) | ☑ | ☑ |
+| [AudioAudioHost](https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-AudioHost) | ☑ | ☑ |
+| [AAX, AUv3, AU and VST 2 wrappers](https://developer.steinberg.help/display/VST/AAX%2C+AUv3%2C+AU+and+VST+2+wrappers) | ☑ | ☑ |
 
 
 

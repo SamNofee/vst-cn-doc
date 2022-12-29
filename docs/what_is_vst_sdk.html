@@ -85,8 +85,96 @@
 </head>
 <body onresize="controlMenu()" onload="init()" style="display: flex;width: 100%;justify-content: center;box-sizing: border-box;margin: 0px;">
   <div class="markdown-body" style="padding: 25px;max-width: 800px;width: 100%;box-sizing: border-box;">
-    <!--toc-->
+    <ul>
+<li><a href="index.html">首页</a></li>
+<li><a href="main_benefits_of_vst3.html">VST 3 的优势</a></li>
+<li><a href="what_is_vst_sdk.html">VST 3 SDK</a></li>
+<li><a href="getting_started.html">快速上手</a></li>
+<li><a href="tutorials.html">教程</a></li>
+<li><a href="technical_documentation.html">技术文档</a></li>
+<li><a href="vst3_forum.html">VST 论坛</a></li>
+<li><a href="miscellaneous.html">其他</a></li>
+</ul>
+
     <br />
-    <!--markdown-body-->
+    <h1 id="vst-3-sdk">VST 3 SDK</h1>
+<p> <strong>VST 3 SDK 解释</strong></p>
+<p>VST 软件开发工具包把 VST 开发相关的工具整合在一个包中，插件开发者可以用它开发符合 VST 3 标准的软件，开发者还可以将它整合进诸如 DAW 或音频编辑器之类的宿主软件，以让宿主软件支持加载 VST 3 插件。</p>
+<blockquote>
+<p>VST 3 API文档包含在SDK的 pluginterfaces/vst 文件夹中，它里面有关于 VST 3 C++全部接口的定义与说明，通过它你可以进一步了解 VST 3 插件和宿主之间的交互细节。</p>
+<p>注：VST 3 API文档不在此中文文档的翻译范围内</p>
+</blockquote>
+<p> <strong>VST 3 SDK 包含以下模块</strong></p>
+<ul>
+<li>AAX, AUv3, AU and VST 2 wrappers</li>
+<li>VST 3 Plug-ins Examples</li>
+<li>VST 3 Plug-in Test Host</li>
+<li>Validator command line</li>
+<li>AudioHost</li>
+<li>EditorHost</li>
+<li>VST3 Inspector</li>
+<li>VSTGUI</li>
+<li>VST 3 Project Generator</li>
+<li>iOS Inter-App Audio support</li>
+<li>VST 3 Licensing</li>
+</ul>
+<p><strong>系统配置要求</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统</th>
+<th align="left">架构</th>
+<th align="left">编译器</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows 10</td>
+<td align="left">x86, x86_64</td>
+<td align="left">MSVC 2019, MSVC 2017</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Windows 8.1</td>
+<td align="left">x86, x86_64</td>
+<td align="left">MSVC 2019, MSVC 2017</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">macOS 10.13, 10.14, 10.15, 11.0</td>
+<td align="left">x86, x86_64, Apple Silicon</td>
+<td align="left">Xcode 7, 8, 9, 10, 11, 12.2</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">iOS 13, iOS 14</td>
+<td align="left">arm64</td>
+<td align="left">Xcode 11, 12.2</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Linux - Raspberry Pi OS (Buster)</td>
+<td align="left">arm32</td>
+<td align="left">GCC 8.3 and higher</td>
+<td align="left">Visual Studio Code</td>
+</tr>
+<tr>
+<td align="left">Linux - Ubuntu 18.04 LTS</td>
+<td align="left">x86, x86_64</td>
+<td align="left">GCC 8.3 and higher</td>
+<td align="left">Visual Studio Code, Qt Creator</td>
+</tr>
+<tr>
+<td align="left">Linux - Ubuntu 20.04 LTS</td>
+<td align="left">x86, x86_64</td>
+<td align="left">GCC 8.3 and higher</td>
+<td align="left">Visual Studio Code, Qt Creator</td>
+</tr>
+</tbody></table>
+<p><strong>下载链接</strong></p>
+<p>在这个<a href="https://developer.steinberg.help/display/VST/VST+3+Links">链接</a>里你可以下载 VST 的相关资料</p>
+<p><strong>更新日志</strong></p>
+<p>在这个<a href="https://developer.steinberg.help/display/VST/Change+History">链接</a>里你可以查看 VST 3SDK 的版本变动细节</p>
+
   </div>
 </body>

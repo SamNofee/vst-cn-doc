@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<head>
+  <title>VST 中文文档</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/cpp.min.js" integrity="sha512-a/buQiyg1/3Xa0ygqNy7JJkLxec4pxQVhLnQRu2Z6VAfZoBfNQSfSseAwQGSqJ1yJAUrZl6MP62LcTsleRtDJg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" integrity="sha512-bgHRAiTjGrzHzLyKOnpFvaEpGzJet3z4tZnXGjpsCcqOnAH6VGUx9frc5bcIhKTVLEiCO6vEhNAgx5jtLUYrfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css" integrity="sha512-KUoB3bZ1XRBYj1QcH4BHCQjurAZnCO3WdrswyLDtp7BMwCw7dPZngSLqILf68SGgvnWHTD5pPaYrXi6wiRJ65g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script>hljs.highlightAll()</script>
+  <style>
+    .markdown-body {
+      --color-fg-default: #343434;
+      --color-accent-fg: #c90526;
+      --color-accent-fg-l: #f0d5da82;
+      --color-border-muted: rgba(0, 0, 0, 0);
+      font-family: Quotes, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-weight: 400;
+      letter-spacing: .2px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .markdown-body hr {
+      background: none;
+    }
+
+    .markdown-body .highlight pre, .markdown-body pre {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      padding: 16px 22px;
+      border-radius: 8px;
+      background-color: #272822;
+    }
+
+    .markdown-body blockquote, .markdown-body details, .markdown-body dl, .markdown-body ol, .markdown-body p, .markdown-body pre, .markdown-body table, .markdown-body ul {
+      margin-bottom: 1.2em;
+    }
+
+    .markdown-body img {
+      margin-left: 10%;
+      width: 80%;
+    }
+
+    .markdown-body ul>li:before {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      background-color: var(--color-accent-fg);
+      left: -20px;
+      top: 10px;
+      opacity: 0.6;
+    }
+
+    .markdown-body li {
+      position: relative;
+    }
+
+    .markdown-body ol, ul {
+      list-style: none;
+    }
+
+    .markdown-body blockquote {
+      border: 1px solid var(--color-accent-fg);
+      background-color: var(--color-accent-fg-l);
+      margin: 22px 0;
+      padding: 18px 24px;
+      position: relative;
+      border-radius: 8px;
+      overflow-x: auto;
+      box-sizing: border-box;
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 500;
+      color: var(--color-fg-default);
+    }
+
+    .hljs {
+      color: #ececec
+    }
+  </style>
+</head>
+<body onresize="controlMenu()" onload="init()" style="display: flex;width: 100%;justify-content: center;box-sizing: border-box;margin: 0px;">
+  <div class="markdown-body" style="padding: 25px;max-width: 800px;width: 100%;box-sizing: border-box;">
+    <ul>
+<li><a href="index.html">首页</a></li>
+<li><a href="main_benefits_of_vst3.html">VST 3 的优势</a></li>
+<li><a href="what_is_vst_sdk.html">VST 3 SDK</a></li>
+<li><a href="getting_started.html">快速上手</a></li>
+<li><a href="tutorials.html">教程</a></li>
+<li><a href="technical_documentation.html">技术文档</a></li>
+<li><a href="vst3_forum.html">VST 论坛</a></li>
+<li><a href="miscellaneous.html">其他</a></li>
+</ul>
+
+    <br />
+    <h1 id="快速上手">快速上手</h1>
+<h2 id="获取-vst-3-sdk">获取 VST 3 SDK</h2>
+<table>
+<thead>
+<tr>
+<th align="left">组件</th>
+<th align="left"><a href="https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-aszip">as zip package</a></th>
+<th align="left"><a href="https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-repository">as GitHub repository</a></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://developer.steinberg.help/display/VST/VSTGUI">VSTGUI</a></td>
+<td align="left">☑</td>
+<td align="left">☑</td>
+</tr>
+<tr>
+<td align="left"><a href="https://developer.steinberg.help/display/VST/VST+3+Project+Generator">VST 3 Project Generator</a> (exe only)</td>
+<td align="left">☑</td>
+<td align="left">☒</td>
+</tr>
+<tr>
+<td align="left"><a href="https://developer.steinberg.help/display/VST/VST+3+Plug-ins+Examples">VST 3 Plug-ins Examples</a></td>
+<td align="left">☑</td>
+<td align="left">☑</td>
+</tr>
+<tr>
+<td align="left"><a href="https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host">VST 3 Plug-in Test Host</a> (exe only)</td>
+<td align="left">☑</td>
+<td align="left">☒</td>
+</tr>
+<tr>
+<td align="left"><a href="https://developer.steinberg.help/display/VST/VST+3+Licensing">VST 3 Licensing</a></td>
+<td align="left">☑ Proprietary+ <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a></td>
+<td align="left">☒ Only <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://developer.steinberg.help/display/VST/VST+3+API+Documentation">VST 3 API</a></td>
+<td align="left">☑</td>
+<td align="left">☑</td>
+</tr>
+<tr>
+<td align="left"><a href="https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-VST3Inspector">VST 3 Inspector</a></td>
+<td align="left">☑</td>
+<td align="left">☑</td>
+</tr>
+<tr>
+<td align="left"><a href="https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-validator">Validator command line</a></td>
+<td align="left">☑</td>
+<td align="left">☑</td>
+</tr>
+<tr>
+<td align="left"><a href="https://developer.steinberg.help/display/VST/iOS+Inter-App+Audio+support">iOS Inter-App Audio support</a></td>
+<td align="left">☑</td>
+<td align="left">☑</td>
+</tr>
+<tr>
+<td align="left"><a href="https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-Helpersclasses">Helpers classes</a></td>
+<td align="left">☑</td>
+<td align="left">☑</td>
+</tr>
+<tr>
+<td align="left"><a href="https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-EditorHost">EditorHost</a></td>
+<td align="left">☑</td>
+<td align="left">☑</td>
+</tr>
+<tr>
+<td align="left"><a href="https://developer.steinberg.help/pages/viewpage.action?pageId=9797960#WhatistheVST3SDK?-AudioHost">AudioAudioHost</a></td>
+<td align="left">☑</td>
+<td align="left">☑</td>
+</tr>
+<tr>
+<td align="left"><a href="https://developer.steinberg.help/display/VST/AAX%2C+AUv3%2C+AU+and+VST+2+wrappers">AAX, AUv3, AU and VST 2 wrappers</a></td>
+<td align="left">☑</td>
+<td align="left">☑</td>
+</tr>
+</tbody></table>
+<p><strong>下载完整的 VST 3 压缩包</strong></p>
+<p>下载完整的 <strong>VST 3 SDK</strong> 包，其中包含构建 <strong>VST 3</strong> 插件或宿主所需的一切代码。使用 <a href="https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host">VST 3 Plug-in Test Host</a> 实时并自动化测试你的 VST 3 插件:</p>
+<p><a href="https://www.steinberg.net/vst3sdk">https://www.steinberg.net/vst3sdk</a>  (zip 文件, 101 MB)</p>
+<p><strong>从 GitHub 克隆 VST 3 存储库</strong></p>
+<p>从 <strong>GitHub</strong> 克隆 <strong>VST 3 SDK</strong> 存储库，以便轻松集成到您的工作区：</p>
+<blockquote>
+<p>请确保遵守许可协议（参考 <a href="https://developer.steinberg.help/pages/viewpage.action?pageId=9797944">VST 3 的许可选项是什么？</a>）</p>
+</blockquote>
+<h2 id="在线文档">在线文档</h2>
+<p>浏览包含 <strong>API</strong> 参考和示例代码的 VST3 SDK 在线文档：</p>
+<p><a href="https://steinbergmedia.github.io/vst3_doc">https://steinbergmedia.github.io/vst3_doc</a></p>
+<p>浏览整个文档和教程的 VST 网站：</p>
+<p><a href="https://developer.steinberg.help/display/VST">https://developer.steinberg.help/display/VST</a></p>
+<h2 id="vst-3-forum">VST 3 Forum</h2>
+<p>访问 Steinberg 的 <strong>VST 开发者论坛</strong>，以获得开发方面的帮助、提交错误报告、提交新功能请求和联系其他 <strong>VST 3</strong> 开发者：<a href="https://sdk.steinberg.net">https://sdk.steinberg.net</a></p>
+<h2 id="vstgui">VSTGUI</h2>
+<p>当你下载 <strong>VST 3 SDK</strong>时，它包含 <a href="https://developer.steinberg.help/display/VST/VSTGUI"><strong>VSTGUI</strong></a>的最后一个正式发布版本，你也可以获得它（发布和开发分支）来自 github：<a href="https://github.com/steinbergmedia/vstgui">https://github.com/steinbergmedia/vstgui</a></p>
+<h2 id="获取源代码">获取源代码</h2>
+<p><strong>From the downloaded <em>vstsdk.zip</em> file</strong></p>
+<p>下载 <strong>VST 3 SDK</strong>:  <a href="https://developer.steinberg.help/display/VST/VST+3+Links#VST3Links-VST3SDKDownload">VST 3 SDK Download</a>.</p>
+<p>解压zip文件到你电脑的开发文件夹中</p>
+<p><strong>From GitHub:</strong></p>
+<pre><code class="language-shell">git clone --recursive https://github.com/steinbergmedia/vst3sdk.git
+</code></pre>
+<h2 id="获取用于开发的-ide">获取用于开发的 IDE</h2>
+<p><strong>For Windows</strong></p>
+<p>在 <strong>Windows</strong>上，我们建议您使用 <strong>Visual Studio C++</strong> 或 <strong>Visual Studio Code，</strong> 您可以在此处免费获得： <a href="https://visualstudio.microsoft.com/free-developer-offers/">https://<strong>visualstudio</strong>.microsoft.com/free</a>.</p>
+<p><strong>For MacOS</strong></p>
+<p>在 MacOS 上，首选是 <strong>Xcode</strong>（ <a href="https://developer.apple.com/xcode/">https://developer.apple.com/xcode/</a>）。</p>
+<p><strong>For Linux</strong></p>
+<p>为了成功构建 SDK，您需要一个基于 Ubuntu 的 <strong>Linux</strong> 发行版。其他的发行版也可能生效，但未经过测试。</p>
+<ol>
+<li>下载 Linux: <a href="http://www.ubuntu.com/">http://www.ubuntu.com</a> or <a href="https://www.linuxmint.com/">https://www.linuxmint.com</a></li>
+<li>直接安装或在 Parallels 等虚拟机中安装
+教程是在 Ubuntu 20.04 LTS 上使用和测试。</li>
+</ol>
+<h2 id="package要求">Package要求</h2>
+<p>构建 SDK 示例需要安装几个包：</p>
+<p>必要的:</p>
+<pre><code class="language-shell">sudo apt-get install cmake gcc &quot;libstdc++6&quot; libx11-xcb-dev libxcb-util-dev libxcb-cursor-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev libfontconfig1-dev libcairo2-dev libgtkmm-3.0-dev libsqlite3-dev libxcb-keysyms1-dev
+</code></pre>
+<blockquote>
+<p>在 Raspbian/Debian 系统, 使用 &quot;libxcb-util0-dev&quot; 替代 &quot;libxcb-util-dev&quot;</p>
+</blockquote>
+<p>可选的:</p>
+<pre><code class="language-shell">sudo apt-get install subversion git ninja-build
+</code></pre>
+<p>推荐的 IDE (可选的): <strong>QTCreator</strong></p>
+<pre><code class="language-shell">sudo apt-get install qtcreator
+</code></pre>
+<blockquote>
+<p>你还可以使用 VST3_SDK/tools 文件夹中包含的 bash 文件 &quot;<em><strong>setup_linux_packages_for_vst3sdk.sh</strong></em>&quot;</p>
+</blockquote>
+<ul>
+<li>可使用 <a href="https://gcc.gnu.org/install/"><strong>gcc</strong></a> 编译器，也可以使用 <a href="https://clang.llvm.org/">clang</a> 编译器的最新版本</li>
+<li><a href="https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3#HowtosetupmysystemforVST3-VSTGUI">VSTGUI</a> 和 <a href="https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3#HowtosetupmysystemforVST3-editorhost">editorhost</a> 示例需要 <a href="https://www.gtkmm.org/">libgtkmm3</a></li>
+<li><a href="https://developer.steinberg.help/display/VST/How+to+set+up+my+system+for+VST+3#HowtosetupmysystemforVST3-audiohost">audiohost</a> 示例需要 <a href="http://www.jackaudio.org/">Jack Audio</a> (<a href="http://www.jackaudio.org/">http://www.jackaudio.org</a>)</li>
+</ul>
+<h2 id="获取-cmake">获取 cmake</h2>
+<p>为了控制编译过程和创建 IDE 项目，**VST 3 SDK **使用了开源跨平台工具 <a href="https://cmake.org/">cmake</a></p>
+<p>可以在此处下载 cmake：<a href="https://cmake.org/download/">https://cmake.org/download/</a> 或使用你操作系统 (Linux) 的包管理器。</p>
+<p>您可以将其用作命令行工具或带有 GUI 的 cmake 可执行文件。cmake-gui 包含在cmake包里面:</p>
+<p><img src="Image/cmake_gui.jpg" alt="img"></p>
+<h2 id="在-windows-上准备">在 Windows 上准备</h2>
+<p>使用 SDK 中包含的 <a href="https://cmake.org/">cmake</a> 生成的 VST3 Microsoft Visual Studio 项目将默认为 <a href="https://developer.steinberg.help/display/VST/Plug-in+Locations">官方 VST 3 文件夹</a>中的每个内置插件创建 symbolic 链接，为了在 Windows 上运行，您必须调整 Windows 的组策略。看 <a href="https://developer.steinberg.help/display/VST/Preparation+on+Windows">这里</a>!</p>
+<p>如果您不想创建此链接，请使用此参数调用 <a href="https://cmake.org/">cmake</a>：</p>
+<pre><code class="language-shell">-SMTG_CREATE_PLUGIN_LINK=0
+</code></pre>
+<p><strong>Windows 的注意事项</strong>：为了能够创建符号链接，您必须设置正确的组策略。进行如下操作：</p>
+<ul>
+<li>计算机配置 =&gt; Windows 设置 =&gt; 安全设置 =&gt; 本地策略 =&gt; 用户权限分配 =&gt; 创建符号链接</li>
+</ul>
+<p><img src="Image/start_local_group_policy_editor.jpg" alt="StartLocalGroupPolicyEditor"></p>
+<ul>
+<li><p>导航：</p>
+<p> 计算机配置 =&gt; Windows 设置 =&gt; 安全设置 =&gt; 本地策略 =&gt; 用户权限分配 =&gt; 创建符号链接</p>
+<p> <img src="Image/local_group_policy_editor.jpg" alt="LocalGroupPolicyEditor"></p>
+</li>
+</ul>
+<p>您可以在此处设置哪些用户可以创建符号链接。</p>
+<h2 id="获取-vst-3-宿主程序">获取 VST 3 宿主程序</h2>
+<p>您可以使用您最喜欢的 <strong>VST 3</strong> 宿主应用程序，请参阅<a href="https://developer.steinberg.help/display/VST/Use+cases#Usecases-VST3Hosts">此处</a>以获得一些示例，或者您可以使用 <a href="https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host">VST 3 插件测试宿主</a> 应用程序（已包含在  <strong>VST 3 SDK</strong> 中）。</p>
+
+  </div>
+</body>

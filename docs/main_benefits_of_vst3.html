@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<head>
+  <title>VST 中文文档</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/cpp.min.js" integrity="sha512-a/buQiyg1/3Xa0ygqNy7JJkLxec4pxQVhLnQRu2Z6VAfZoBfNQSfSseAwQGSqJ1yJAUrZl6MP62LcTsleRtDJg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" integrity="sha512-bgHRAiTjGrzHzLyKOnpFvaEpGzJet3z4tZnXGjpsCcqOnAH6VGUx9frc5bcIhKTVLEiCO6vEhNAgx5jtLUYrfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css" integrity="sha512-KUoB3bZ1XRBYj1QcH4BHCQjurAZnCO3WdrswyLDtp7BMwCw7dPZngSLqILf68SGgvnWHTD5pPaYrXi6wiRJ65g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script>hljs.highlightAll()</script>
+  <style>
+    .markdown-body {
+      --color-fg-default: #343434;
+      --color-accent-fg: #c90526;
+      --color-accent-fg-l: #f0d5da82;
+      --color-border-muted: rgba(0, 0, 0, 0);
+      font-family: Quotes, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-weight: 400;
+      letter-spacing: .2px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .markdown-body hr {
+      background: none;
+    }
+
+    .markdown-body .highlight pre, .markdown-body pre {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      padding: 16px 22px;
+      border-radius: 8px;
+      background-color: #272822;
+    }
+
+    .markdown-body blockquote, .markdown-body details, .markdown-body dl, .markdown-body ol, .markdown-body p, .markdown-body pre, .markdown-body table, .markdown-body ul {
+      margin-bottom: 1.2em;
+    }
+
+    .markdown-body img {
+      margin-left: 10%;
+      width: 80%;
+    }
+
+    .markdown-body ul>li:before {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      background-color: var(--color-accent-fg);
+      left: -20px;
+      top: 10px;
+      opacity: 0.6;
+    }
+
+    .markdown-body li {
+      position: relative;
+    }
+
+    .markdown-body ol, ul {
+      list-style: none;
+    }
+
+    .markdown-body blockquote {
+      border: 1px solid var(--color-accent-fg);
+      background-color: var(--color-accent-fg-l);
+      margin: 22px 0;
+      padding: 18px 24px;
+      position: relative;
+      border-radius: 8px;
+      overflow-x: auto;
+      box-sizing: border-box;
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 500;
+      color: var(--color-fg-default);
+    }
+
+    .hljs {
+      color: #ececec
+    }
+  </style>
+</head>
+<body onresize="controlMenu()" onload="init()" style="display: flex;width: 100%;justify-content: center;box-sizing: border-box;margin: 0px;">
+  <div class="markdown-body" style="padding: 25px;max-width: 800px;width: 100%;box-sizing: border-box;">
+    <ul>
+<li><a href="index.html">首页</a></li>
+<li><a href="main_benefits_of_vst3.html">VST 3 的优势</a></li>
+<li><a href="what_is_vst_sdk.html">VST 3 SDK</a></li>
+<li><a href="getting_started.html">快速上手</a></li>
+<li><a href="tutorials.html">教程</a></li>
+<li><a href="technical_documentation.html">技术文档</a></li>
+<li><a href="vst3_forum.html">VST 论坛</a></li>
+<li><a href="miscellaneous.html">其他</a></li>
+</ul>
+
+    <br />
+    <h1 id="vst-3-的优势">VST 3 的优势</h1>
+<p>通过这一章您可以知道 <strong>VST 3</strong> 的好处。</p>
+<p><strong>VST 3</strong> 是围绕 <strong>VST</strong> 长服务插件接口的一般重构（VST 1 &amp; VST 2）。它与旧的 VST (1 &amp; 2) 版本不兼容，但它包含了一些新功能和可能性。我们重新设计了 API，不仅让开发人员使用起来更轻松、感到更可靠，而且还为插件提供了全新的可能性。这包括</p>
+<ol>
+<li><p><strong>使用 Slience Flag 改进性能</strong></p>
+<p>由于 CPU 性能限制，在一般的计算机系统上管理大型插件集和多个虚拟乐器通常很困难。<strong>VST 3</strong> 仅当音频信号出现在相应的输入端时才进行处理，从而有助于提高整体性能。而不是一直等待处理输入信号，<strong>VST 3</strong> 插件只在需要时处理各项任务。</p>
+</li>
+<li><p><strong>多路动态 I/Os</strong></p>
+<p><strong>VST 3</strong> 插件不再局限于固定数量的输入和输出，它们的 I/O 配置可以动态适应通道配置。<a href="https://developer.steinberg.help/display/VST/Frequently+Asked+Questions#FrequentlyAskedQuestions-WhatisaSide-chain">侧链</a>也很容易实现。这包括可以在加载后停用未使用的总线，并在需要时重新激活它们，这会进一步减少 CPU 负载。</p>
+</li>
+<li><p><strong>自动的采样精确化</strong></p>
+<p><strong>VST 3</strong> 还进行了参数自动化方面的极大改进，具有样本准确性，提供了对 ramped automation data 的支持，允许非常快速而准确的自动化参数更改。</p>
+</li>
+<li><p><strong>逻辑参数组织</strong></p>
+<p><strong>VST 3</strong> 插件参数以树状结构显示。插件可以出于测试或实现功能的目的，与它们的内部结构进行交互（例如程序列表）。诸如 <code>Cutoff</code> 和 <code>Resonance</code> 之类的参数会被分组到名为 <code>Filter</code> 的部分中。这使得搜索特定参数更容易，例如在自动化轨道上。这也允许将一组参数分配给特定的 <em>MIDI</em> 通道输入和音频输出总线。</p>
+</li>
+<li><p><strong>可改变大小的界面编辑器</strong></p>
+<p><strong>VST 3</strong> 可通过调整窗口大小来调整 GUI，这允许用户极其灵活地使用宝贵的屏幕空间。</p>
+</li>
+<li><p><strong>对鼠标的支持</strong></p>
+<p>宿主可以获取插件里鼠标的各类参数。</p>
+</li>
+<li><p><strong>菜单上下文支持</strong></p>
+<p><strong>VST 3</strong> 定义了一种方法，允许宿主在特定参数的插件菜单上下文中添加自己的条目。</p>
+</li>
+<li><p><strong>通道菜单支持</strong></p>
+<p><strong>VST 3</strong> 插件可以在实例化的地方访问通道信息，例如：名称、颜色</p>
+</li>
+<li><p><strong>音符表达式</strong></p>
+<p><strong>VST 3</strong> 定义<a href="https://developer.steinberg.help/display/VST/%5B3.5.0%5D+Note+Expression+Support">音符表达式</a>为一种新的事件控制器编辑方式。插件通过提供一个可以访问 <strong>VST 3</strong> 控制器事件的新功能来摆脱 MIDI 控制器事件的限制，它绕过 MIDI 规则并根据其音符 ID 为复音排列中的每个单独的音符（事件）提供清晰明了的信息。</p>
+</li>
+<li><p><strong>3D 音频支持</strong></p>
+</li>
+</ol>
+<p>   <strong>VST 3</strong> 支持新的扬声器配置，如 Ambisonic、Atmos、Auro 3D 或 22.2。</p>
+<ol start="11">
+<li><strong>工厂概念</strong></li>
+</ol>
+<p>   <strong>VST 3</strong> 插件库可以导出多个插件，从而替代了 <strong>VST 2</strong> 的 shell 概念。</p>
+<ol start="12">
+<li><strong>远程控制表现</strong></li>
+</ol>
+<p>   用于音频和 MIDI 软件应用程序的遥控器越来越受欢迎。<strong>VST 3</strong> 提供了更灵活的遥控器控制 VST 插件。使用控制界面上的旋钮和推子，可以通过多种方式记录、重命名和编辑参数。无法编辑的参数可以出于显示目的路由到控制界面，例如，显示压缩器上的 Gain Reduction。</p>
+<ol start="13">
+<li><strong>其他</strong></li>
+</ol>
+<p>   在设计 <strong>VST 3</strong>时，我们仔细分析了 <strong>VST</strong> 的现有功能，并从头开始重新编写接口。为此，我们非常注重提供清晰的界面及其文档，以避免最深层次的使用错误。专门为开发人员实现的更多功能包括：</p>
+<ul>
+<li>更稳定的宿主/插件环境</li>
+<li>标准的高级技术定义</li>
+<li>模块化方法</li>
+<li>UI 和处理分离</li>
+<li>UTF16 用于本地化参数命名</li>
+<li>先进的预设系统</li>
+<li>单库多插件</li>
+<li><strong>VST 3 SDK</strong>包：<ul>
+<li><a href="https://developer.steinberg.help/display/VST/VST+3+Plug-in+Test+Host">测试宿主</a>包括</li>
+<li>自动化测试环境</li>
+<li>Validator（小型的命令行测试宿主）</li>
+<li><a href="https://developer.steinberg.help/display/VST/VST+3+Plug-ins+Examples">插件和宿主示例</a>代码</li>
+<li><a href="https://developer.steinberg.help/display/VST/VST+3+Project+Generator">项目生成器</a></li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</body>

@@ -5,13 +5,13 @@
 
 ## 链接
 
-VST 3 中文文档链接：[https://github.com/SamNofee/vst-cn-doc](https://github.com/SamNofee/vst-cn-doc)
+**VST 中文文档链接**：[https://samnofee.github.io/vst-cn-doc/](https://samnofee.github.io/vst-cn-doc/)
 
-VST 3 官方英文文档链接：https://developer.steinberg.help/display/VST/
+VST 官方英文文档链接：https://developer.steinberg.help/display/VST/
 
 SDK 下载链接：<https://www.steinberg.net/vst3sdk>
 
-VST 3 SDK Github 链接：https://github.com/steinbergmedia/vst3sdk
+VST SDK Github 链接：https://github.com/steinbergmedia/vst3sdk
 
 
 ## 说明
