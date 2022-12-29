@@ -1,0 +1,34 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": [ "esnext" ],
+    "moduleResolution": "node",
+    "charset": "utf8",
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowJs": false,
+    "pretty": true,
+    "esModuleInterop": true,
+    "noEmitOnError": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "strictPropertyInitialization": false,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "preserveSymlinks": true,
+    "resolveJsonModule": true
+  },
+  "exclude": [
+    "node_modules*"
+  ],
+  "include": [
+    "*.ts",
+    "**/*.ts"
+  ]
+}
