@@ -1,18 +1,91 @@
 <!DOCTYPE html>
 <head>
   <title>VST 中文文档</title>
-  <meta http-equiv="Content-Type"content="text/html;charset=utf-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css" integrity="sha512-hasIneQUHlh06VNBe7f6ZcHmeRTLIaQWFd43YriJ0UND19bvYRauxthDg8E4eVNPm9bRUhr5JGeqH7FRFXQu5g==" crossorigin="anonymous" referrerpolicy="no-referrer" /><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/shell.min.js" integrity="sha512-X2JngetHwVsp0j3n6lo8HGdXQKLpz2hwFfQkG996OfanpFaQJFgjKJlmzsdefWsHTQIwY539tD09JF48kCPMXw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/cpp.min.js" integrity="sha512-a/buQiyg1/3Xa0ygqNy7JJkLxec4pxQVhLnQRu2Z6VAfZoBfNQSfSseAwQGSqJ1yJAUrZl6MP62LcTsleRtDJg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" integrity="sha512-bgHRAiTjGrzHzLyKOnpFvaEpGzJet3z4tZnXGjpsCcqOnAH6VGUx9frc5bcIhKTVLEiCO6vEhNAgx5jtLUYrfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css" integrity="sha512-KUoB3bZ1XRBYj1QcH4BHCQjurAZnCO3WdrswyLDtp7BMwCw7dPZngSLqILf68SGgvnWHTD5pPaYrXi6wiRJ65g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script>hljs.highlightAll()</script>
+  <style>
+    .markdown-body {
+      --color-fg-default: #343434;
+      --color-accent-fg: #c90526;
+      --color-accent-fg-l: #f0d5da82;
+      --color-border-muted: rgba(0, 0, 0, 0);
+      font-family: Quotes, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-weight: 400;
+      letter-spacing: .2px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .markdown-body hr {
+      background: none;
+    }
+
+    .markdown-body .highlight pre, .markdown-body pre {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      padding: 16px 22px;
+      border-radius: 8px;
+      background-color: #272822;
+    }
+
+    .markdown-body blockquote, .markdown-body details, .markdown-body dl, .markdown-body ol, .markdown-body p, .markdown-body pre, .markdown-body table, .markdown-body ul {
+      margin-bottom: 1.2em;
+    }
+
+    .markdown-body img {
+      margin-left: 10%;
+      width: 80%;
+    }
+
+    .markdown-body ul>li:before {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      background-color: var(--color-accent-fg);
+      left: -20px;
+      top: 10px;
+      opacity: 0.6;
+    }
+
+    .markdown-body li {
+      position: relative;
+    }
+
+    .markdown-body ol, ul {
+      list-style: none;
+    }
+
+    .markdown-body blockquote {
+      border: 1px solid var(--color-accent-fg);
+      background-color: var(--color-accent-fg-l);
+      margin: 22px 0;
+      padding: 18px 24px;
+      position: relative;
+      border-radius: 8px;
+      overflow-x: auto;
+      box-sizing: border-box;
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 500;
+      color: var(--color-fg-default);
+    }
+
+    .hljs {
+      color: #ececec
+    }
+  </style>
 </head>
 <body onresize="controlMenu()" onload="init()" style="display: flex;width: 100%;justify-content: center;box-sizing: border-box;">
   <div class="markdown-body" style="padding: 20px;max-width: 700px;width: 100%;box-sizing: border-box;">
-    <p>[TOC]</p>
-<h1 id="技术文档">技术文档</h1>
+    <h1 id="技术文档">技术文档</h1>
 <blockquote>
 <p>版本更新历史不在翻译范围内：[版本更新历史链接](<a href="https://developer.steinberg.help/display/VST/Change+History">Change History - VST - Steinberg Developer Help</a>)</p>
 </blockquote>

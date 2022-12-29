@@ -1,8 +1,11 @@
-[TOC]
+# VST 中文文档
 
-下面的开发文档涉及到全部你在开发 VST 3 插件过程中的方方面面。
 
-# 什么是 VST
+> **该中文文档主要由 [Sam Nofee](https://github.com/SamNofee) 翻译并开源在 [Github](https://github.com/SamNofee/vst-cn-doc)，方便中文母语者学习 VST 开发。对于文档翻译有错漏或有补充的地方欢迎指出或提交修复 MR。**
+
+---
+
+## 什么是 VST
 
 
 **VST 3：虚拟工作室技术的一种新标准**
