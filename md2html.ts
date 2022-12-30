@@ -28,19 +28,20 @@ export interface File {
   mdName: string,
   tocName?: string
 }
-export class Md2docs {
 
-  constructor(mdPath: string, docsPath: string, files: File[], options?: {
+export class Md2html {
+
+  constructor(mdPath: string, htmlPath: string, files: File[], options?: {
     cpPaths?: string[],
     template?: string
   }) {
     this.mdPath = mdPath
-    this.docsPath = docsPath
+    this.htmlPath = htmlPath
     this.files = files
 
-    mkdirSync(docsPath, { recursive: true })
+    mkdirSync(htmlPath, { recursive: true })
 
-    options?.cpPaths?.length && this.cpPathsFromMdToDocs(options.cpPaths)
+    options?.cpPaths?.length && this.cpPathsFromMdToHtml(options.cpPaths)
     options?.template && (this.template = options.template)
   }
 
@@ -48,14 +49,14 @@ export class Md2docs {
   private readonly markdownBodyReplacement = '<!--markdown-body-->'
 
   private mdPath: string
-  private docsPath: string
+  private htmlPath: string
   private files: File[]
   private template: string = `${this.tocReplacement}${this.markdownBodyReplacement}`
 
-  private cpPathsFromMdToDocs(cpPaths: string[]) {
+  private cpPathsFromMdToHtml(cpPaths: string[]) {
     cpPaths.forEach(cpPath => cpSync(
       join(this.mdPath, cpPath),
-      join(this.docsPath, cpPath),
+      join(this.htmlPath, cpPath),
       { force: true, recursive: true }
     ))
   }
@@ -87,7 +88,7 @@ export class Md2docs {
         .replace(this.tocReplacement, toc)
 
       lifecycle?.beforeWriteHtml && (html = lifecycle.beforeWriteHtml(html, file))
-      writeFileSync(join(this.docsPath, `${mdName}.html`), html)
+      writeFileSync(join(this.htmlPath, `${mdName}.html`), html)
     })
   }
 

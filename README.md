@@ -18,7 +18,7 @@ VST SDK Github 链接：https://github.com/steinbergmedia/vst3sdk
 
 - 这三部分不做翻译：Licensing、API Reference、Q & A。
 - 翻译力求准确，但有些地方为了让句间逻辑更符合中文习惯而对原文档做了一定的修改，如有不当请指出，谢谢。
-- Markdown 生成静态 Html 使用 md2docs.ts 脚本：`npm install && npm run md2docs`
+- Markdown 生成静态 Html 命令（依赖 Node.js）：`npm install && npm run build`
 
 
 ## 专有名词

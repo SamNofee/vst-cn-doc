@@ -1,13 +1,13 @@
 # 技术文档
 
-> 版本更新历史不在翻译范围内：[版本更新历史链接]([Change History - VST - Steinberg Developer Help](https://developer.steinberg.help/display/VST/Change+History))
+> 版本更新历史不在翻译范围内：[版本更新历史链接](https://developer.steinberg.help/display/VST/Change+History)
 
 
 
 ## API文档
 
 **VST 3 API** 是为实时音频处理组件设计的接口集。例如音频效果或音频乐器。
-**VST 3** 基于一种称为 [VST 模块架构](https://developer.steinberg.help/display/VST/VST+Module+Architecture) (**VST-MA**) 的技术。请参考[VST-MA 文档](https://developer.steinberg.help/display/VST/VST+Module+Architecture)了解更多关于插件系统常规工作的细节信息。
+**VST 3** 基于一种称为 [VST 模块架构](https://developer.steinberg.help/display/VST/VST+Module+Architecture) (**VST-MA**) 的技术。请参考 [VST-MA 文档](https://developer.steinberg.help/display/VST/VST+Module+Architecture)了解更多关于插件系统常规工作的细节信息。
 API 文档文件 **VST 3** 位于文件夹 `pluginterfaces/vst`。
 
 
@@ -24,7 +24,7 @@ API 文档文件 **VST 3** 位于文件夹 `pluginterfaces/vst`。
 
 ![processorcontroller](Image/processorcontroller.png)
 
-**VST 3**插件开发可以通过实现两个组件来完全解耦处理器和编辑控制器。分开成这两部分需要一些额外的开发工作。
+**VST 3** 插件开发可以通过实现两个组件来完全解耦处理器和编辑控制器。分开成这两部分需要一些额外的开发工作。
 但是，这种分离使宿主能够在不同的上下文与计算机中更好地运行每个组件。另一个好处是，在自动化方面，参数更改可以分离。虽然进行这些更改需要以精确样本传输为代价，但 GUI 可以以很低的频率进行更新，并且可以根据任何延迟补偿或其他的量进行移动。
 
 
@@ -35,7 +35,6 @@ API 文档文件 **VST 3** 位于文件夹 `pluginterfaces/vst`。
 
 
 > 宿主不需要实例化插件的控制器部分来处理它。
->
 > 插件应准备好被处理，而无需实例化控制器部分。
 
 

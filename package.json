@@ -2,13 +2,13 @@
   "name": "vst-cn-doc",
   "version": "1.0.0",
   "description": "The documentation of VST/VST3 of Chinese",
-  "exports": "./md2docs.ts",
+  "exports": "./md2html.ts",
   "author": "SamNofee",
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "build": "npx mocha --grep 'Build vst docs'",
-    "test": "npx mocha --grep 'Md2docs unit test'",
+    "build": "npx mocha --grep 'Build vst html'",
+    "test": "npx mocha --grep 'Md2html unit test'",
     "lint": "npx eslint . --ext .ts"
   },
   "engines": {
