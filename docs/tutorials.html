@@ -7,7 +7,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/cpp.min.js" integrity="sha512-a/buQiyg1/3Xa0ygqNy7JJkLxec4pxQVhLnQRu2Z6VAfZoBfNQSfSseAwQGSqJ1yJAUrZl6MP62LcTsleRtDJg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" integrity="sha512-bgHRAiTjGrzHzLyKOnpFvaEpGzJet3z4tZnXGjpsCcqOnAH6VGUx9frc5bcIhKTVLEiCO6vEhNAgx5jtLUYrfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css" integrity="sha512-KUoB3bZ1XRBYj1QcH4BHCQjurAZnCO3WdrswyLDtp7BMwCw7dPZngSLqILf68SGgvnWHTD5pPaYrXi6wiRJ65g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script>hljs.highlightAll()</script>
+  <script>
+    hljs.highlightAll()
+  </script>
   <style>
     .markdown-body {
       --color-fg-default: #343434;
@@ -19,6 +21,10 @@
       letter-spacing: .2px;
       font-size: 16px;
       line-height: 1.7;
+      padding: 25px;
+      max-width: 800px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .markdown-body hr {
@@ -81,10 +87,18 @@
     .hljs {
       color: #ececec
     }
+
+    body {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+      margin: 0px;
+    }
   </style>
 </head>
-<body onresize="controlMenu()" onload="init()" style="display: flex;width: 100%;justify-content: center;box-sizing: border-box;margin: 0px;">
-  <div class="markdown-body" style="padding: 25px;max-width: 800px;width: 100%;box-sizing: border-box;">
+<body>
+  <div class="markdown-body">
     <ul>
 <li><a href="index.html">首页</a></li>
 <li><a href="main_benefits_of_vst3.html">VST 3 的优势</a></li>

@@ -1,0 +1,70 @@
+env:
+  es6: true
+  node: true
+parser: '@typescript-eslint/parser'
+ignorePatterns:
+  - coverage
+  - '*.js'
+plugins:
+  - '@typescript-eslint'
+parserOptions:
+  project: "./tsconfig.json"
+extends:
+  - 'plugin:@typescript-eslint/recommended'
+rules:
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - never
+  func-style:
+    - off
+  no-plusplus:
+    - error
+    - allowForLoopAfterthoughts: true
+  no-return-await:
+    - error
+  object-curly-spacing:
+    - error
+    - always
+    - objectsInObjects: true
+  space-infix-ops:
+    - error
+  space-in-parens:
+    - error
+    - never
+  switch-colon-spacing:
+    - error
+  curly:
+    - error
+    - all
+  brace-style:
+    - error
+    - 1tbs
+    - allowSingleLine: true
+  '@typescript-eslint/no-unused-vars':
+    - warn
+  '@typescript-eslint/no-empty-function':
+    - warn
+  '@typescript-eslint/no-explicit-any':
+    - off
+  '@typescript-eslint/no-non-null-assertion':
+    - off
+  '@typescript-eslint/no-inferrable-types':
+    - off
+  no-bitwise: off
+  no-constant-condition:
+    - error
+    - checkLoops: false
+  '@typescript-eslint/semi':
+    - off
+  prefer-const:
+    - error
+    - destructuring: any
+  max-len:
+    - error
+    - code: 150
+      ignoreStrings: true
+      ignoreRegExpLiterals: true
+      ignoreTemplateLiterals: true

@@ -17,7 +17,6 @@ VST SDK Github 链接：https://github.com/steinbergmedia/vst3sdk
 ## 说明
 
 - 这三部分不做翻译：Licensing、API Reference、Q & A。
-- 文档开源，遵循 [**GPL3.0**](www.gnu.org/licenses/gpl-3.0.html)。
 - 翻译力求准确，但有些地方为了让句间逻辑更符合中文习惯而对原文档做了一定的修改，如有不当请指出，谢谢。
 - Markdown 生成静态 Html 使用 md2docs.ts 脚本：`npm install && npm run md2docs`
 
@@ -29,3 +28,7 @@ VST SDK Github 链接：https://github.com/steinbergmedia/vst3sdk
 - dll：动态链接库
 - gain：增益
 - unit：单元
+
+## LICENSE
+
+See [LICENSE](https://github.com/SamNofee/vst-cn-doc/blob/main/LICENSE)
