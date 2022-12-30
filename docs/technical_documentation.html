@@ -113,11 +113,11 @@
     <br />
     <h1 id="技术文档">技术文档</h1>
 <blockquote>
-<p>版本更新历史不在翻译范围内：[版本更新历史链接](<a href="https://developer.steinberg.help/display/VST/Change+History">Change History - VST - Steinberg Developer Help</a>)</p>
+<p>版本更新历史不在翻译范围内：<a href="https://developer.steinberg.help/display/VST/Change+History">版本更新历史链接</a></p>
 </blockquote>
 <h2 id="api文档">API文档</h2>
 <p><strong>VST 3 API</strong> 是为实时音频处理组件设计的接口集。例如音频效果或音频乐器。
-<strong>VST 3</strong> 基于一种称为 <a href="https://developer.steinberg.help/display/VST/VST+Module+Architecture">VST 模块架构</a> (<strong>VST-MA</strong>) 的技术。请参考<a href="https://developer.steinberg.help/display/VST/VST+Module+Architecture">VST-MA 文档</a>了解更多关于插件系统常规工作的细节信息。
+<strong>VST 3</strong> 基于一种称为 <a href="https://developer.steinberg.help/display/VST/VST+Module+Architecture">VST 模块架构</a> (<strong>VST-MA</strong>) 的技术。请参考 <a href="https://developer.steinberg.help/display/VST/VST+Module+Architecture">VST-MA 文档</a>了解更多关于插件系统常规工作的细节信息。
 API 文档文件 <strong>VST 3</strong> 位于文件夹 <code>pluginterfaces/vst</code>。</p>
 <h3 id="基础概念">基础概念</h3>
 <p>一个 <strong>VST 3</strong> 音效或乐器基本上由两部分组成：处理部分和编辑控制器部分。
@@ -128,13 +128,13 @@ API 文档文件 <strong>VST 3</strong> 位于文件夹 <code>pluginterfaces/vst
 </ul>
 <p><img src="Image/basic_structure.jpg" alt="基本结构"></p>
 <p><img src="Image/processorcontroller.png" alt="processorcontroller"></p>
-<p><strong>VST 3</strong>插件开发可以通过实现两个组件来完全解耦处理器和编辑控制器。分开成这两部分需要一些额外的开发工作。
+<p><strong>VST 3</strong> 插件开发可以通过实现两个组件来完全解耦处理器和编辑控制器。分开成这两部分需要一些额外的开发工作。
 但是，这种分离使宿主能够在不同的上下文与计算机中更好地运行每个组件。另一个好处是，在自动化方面，参数更改可以分离。虽然进行这些更改需要以精确样本传输为代价，但 GUI 可以以很低的频率进行更新，并且可以根据任何延迟补偿或其他的量进行移动。</p>
 <p>支持这种分离的插件必须在处理器组件的类中设置 <a href="https://steinbergmedia.github.io/vst3_doc/vstinterfaces/namespaceSteinberg_1_1Vst.html#a626a070dcd2e025250f41b9c3f9817cda3185111648c1599241528f1a7f523396">Steinberg::Vst::kDistributable</a> 标志（<a href="https://steinbergmedia.github.io/vst3_doc/base/structSteinberg_1_1PClassInfo2.html#ab5ab9135185421caad5ad8ae1d758409">Steinberg::PClassInfo2::classFlags</a>）。当然不是每个插件都能做到这一点，例如，如果它非常依赖某一台特定计算机的资源。因此，当未设置此标志时，宿主不得以任何方式分离组件。
 虽然不推荐，但可以在一个组件类中同时实现处理部分和控制器部分。宿主在创建 <a href="https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IAudioProcessor.html">Steinberg::Vst::IAudioProcessor</a> 后尝试查询 <a href="https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html">Steinberg::Vst::IEditController</a> 接口，并在成功时将其用作控制器。</p>
 <blockquote>
-<p>宿主不需要实例化插件的控制器部分来处理它。</p>
-<p>插件应准备好被处理，而无需实例化控制器部分。</p>
+<p>宿主不需要实例化插件的控制器部分来处理它。
+插件应准备好被处理，而无需实例化控制器部分。</p>
 </blockquote>
 <h4 id="初始化">初始化</h4>
 <p><a href="https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IComponent.html">Steinberg::Vst::IComponent</a> 和 <a href="https://steinbergmedia.github.io/vst3_doc/vstinterfaces/classSteinberg_1_1Vst_1_1IEditController.html">Steinberg::Vst::IEditController</a> 都派生自 <a href="https://steinbergmedia.github.io/vst3_doc/base/classSteinberg_1_1IPluginBase.html">Steinberg::IPluginBase</a>。这个基本接口的目的是初始化组件并在它被销毁之前终止它。</p>
